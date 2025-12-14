@@ -6,105 +6,131 @@ import traceback
 from PyQt5.QtCore import QThread, pyqtSignal, QObject
 from PyQt5.QtWidgets import QMessageBox
 
-# Importiamo la logica base geometrica esistente
+# Importiamo la logica base geometrica
 from beam.mesh import BeamMeshCore
 
 class MaterialParser:
     def __init__(self, definition):
         self.segments = []
-        self.tensile_limit = 1e9 
-        self.comp_limit = -1e9
+        self.name = "Unknown"
+        self.tensile_strength = 0.0  # Magnitudo massima in trazione
+        self.comp_strength = 0.0     # Magnitudo massima in compressione
         
-        # Default fallback
-        if not definition or isinstance(definition, str):
-            self.name = str(definition)
-            self.segments.append({'func': '30000e6*x', 'min': -100.0, 'max': 100.0})
-            self.tensile_limit = 2.0 
+        # --- PARSING DELLA DEFINIZIONE UTENTE ---
+        # Nessun materiale di default. Se la definizione è vuota, crea un materiale dummy debole
+        # per evitare crash, ma non assume che sia acciaio o cls.
+        
+        if not definition:
+             # Fallback estremo solo se arriva None, per stabilità software
+            self.name = "Void"
+            self.segments.append({'func': '1e-9*x', 'min': -1.0, 'max': 1.0})
             return
 
-        try:
-            self.name = definition[0]
-            
-            # Parsing dei segmenti
-            if len(definition) > 1 and isinstance(definition[1], (list, tuple)):
-                for segment in definition[1:]:
-                    if len(segment) >= 3:
+        self.name = definition[0]
+        
+        if len(definition) > 1 and isinstance(definition[1], (list, tuple)):
+            for segment in definition[1:]:
+                if len(segment) >= 3:
+                    try:
                         formula = segment[0]
                         start = float(segment[1])
                         end = float(segment[2])
                         self.segments.append({'func': formula, 'min': start, 'max': end})
-            else:
-                self.segments.append({'func': '30000e6*x', 'min': -100.0, 'max': 100.0})
+                    except:
+                        pass
+        
+        if not self.segments:
+            # Se l'utente ha creato un materiale vuoto
+            self.segments.append({'func': '0*x', 'min': -1.0, 'max': 1.0})
 
-            # --- RILEVAMENTO LIMITI AUTOMATICO ---
-            # Scansioniamo la funzione per trovare la massima tensione positiva (ft)
-            # e la minima tensione negativa (fc, che sarà un valore negativo 'alto')
-            test_strains = np.linspace(-0.05, 0.05, 1000) # Range ampio di strain
-            max_sig = 0.0
-            min_sig = 0.0
+        # --- CALCOLO AUTOMATICO DEI LIMITI BASATO SULLA FUNZIONE ---
+        self._compute_limits_from_segments()
+        print (self.tensile_strength, self.comp_strength)
+
+    def _compute_limits_from_segments(self):
+        """
+        Scansiona i segmenti definiti dall'utente per trovare i valori massimi
+        di resistenza in trazione (strain < 0) e compressione (strain > 0).
+        """
+        max_t = 0.0 # Trazione (magnitudo)
+        max_c = 0.0 # Compressione (magnitudo)
+        
+        for seg in self.segments:
+            # Creiamo dei punti di test all'interno del segmento
+            # Evitiamo divisioni per zero o range nulli
+            if seg['max'] <= seg['min']: continue
             
-            for s in test_strains:
-                sig, _ = self.evaluate_raw(s)
-                if sig > max_sig: max_sig = sig
-                if sig < min_sig: min_sig = sig
+            steps = np.linspace(seg['min'], seg['max'], 20)
             
-            # Impostiamo i limiti. Se il materiale è "piatto", mettiamo limiti di sicurezza
-            self.tensile_limit = max(0.1, max_sig)
-            # Se l'utente non definisce compressione, assumiamo elastico infinito (evita crash)
-            self.comp_limit = min(-0.1, min_sig) if min_sig < -0.1 else -1e9
+            for s in steps:
+                try:
+                    # Valutazione sicura
+                    val = eval(seg['func'], {"__builtins__": None}, {"x": s, "abs": abs, "math": math})
+                    val = float(val)
+                    
+                    # Convenzione: s < 0 è Trazione, s > 0 è Compressione
+                    if s < 0:
+                        # In trazione lo stress dovrebbe essere negativo (o positivo se l'utente ha invertito la formula)
+                        # Prendiamo il valore assoluto come capacità resistente
+                        if abs(val) > max_t: max_t = abs(val)
+                    else:
+                        if abs(val) > max_c: max_c = abs(val)
+                except:
+                    pass
+        
+        self.tensile_strength = max_t
+        self.comp_strength = max_c * 1.7
+        
+        # Assicuriamo valori minimi per evitare divisioni per zero nel solver
+        if self.tensile_strength < 1e-3: self.tensile_strength = 1e-3
+        if self.comp_strength < 1e-3: self.comp_strength = 1e-3
 
-            # Override Euristici comuni per pulizia
-            if "C" in self.name or "cls" in self.name.lower():
-                if self.tensile_limit > 10: self.tensile_limit = 3.0 # Clamp per calcestruzzo mal definito
-
-        except Exception:
-            self.name = "Unknown"
-            self.segments.append({'func': '210000e6*x', 'min': -1.0, 'max': 1.0})
-            self.tensile_limit = 400.0
-
-    def evaluate_raw(self, strain):
-        """Valuta solo la funzione nuda e cruda"""
+    def evaluate(self, strain):
+        """
+        Valuta stress e rigidezza tangente.
+        Strain input: Positivo = Compressione, Negativo = Trazione.
+        """
         active_seg = None
+        
+        # Cerca il segmento attivo
         for seg in self.segments:
             if seg['min'] <= strain <= seg['max']:
                 active_seg = seg
                 break
         
+        # --- FALLBACK PER STRAIN FUORI RANGE ---
         if active_seg is None:
-            # Fuori range definiti: elastico residuo minimo per stabilità numerica
-            return 0.0, 10.0 
-
+            # Se siamo fuori dai limiti definiti dall'utente:
+            # Assumiamo che il materiale abbia ceduto o non offra resistenza.
+            # Ritorniamo una rigidezza residua minima per la stabilità numerica.
+            return 0.0, 1.0 
+            
+        # Funzione helper per eval
         def eval_str(f_str, x_val):
             try:
-                return eval(f_str, {"__builtins__": None}, {"x": x_val, "abs": abs, "math": math})
+                return float(eval(f_str, {"__builtins__": None}, {"x": x_val, "abs": abs, "math": math}))
             except:
                 return 0.0
 
+        # Calcolo numerico della tangente
         h = 1e-7
         sigma = eval_str(active_seg['func'], strain)
         sigma_h = eval_str(active_seg['func'], strain + h)
+        
         tangent = (sigma_h - sigma) / h
         
-        return float(sigma), float(tangent)
-
-    def evaluate(self, strain):
-        """
-        Valuta il materiale e ritorna (sigma, E_tangente).
-        Gestisce casi limite e NaN.
-        """
-        sig, tan = self.evaluate_raw(strain)
+        # Clamp valori numerici per sicurezza (NaN o Inf)
+        if math.isnan(sigma) or math.isinf(sigma): sigma = 0.0
+        if math.isnan(tangent) or math.isinf(tangent): tangent = 1.0
         
-        # Clamp valori numerici folli
-        if math.isnan(sig) or math.isinf(sig): sig = 0.0
-        if math.isnan(tan) or math.isinf(tan): tan = 1.0
+        # Evita rigidezza nulla esatta (singolarità)
+        if abs(tangent) < 1.0: tangent = 1.0
         
-        # Assicura una rigidezza minima per evitare matrici singolari
-        if abs(tan) < 1.0: tan = 1.0
-            
-        return sig, tan
+        return sigma, tangent
 
     def get_tensile_limit(self):
-        return self.tensile_limit
+        """Ritorna la resistenza massima a trazione rilevata dalle funzioni utente"""
+        return self.tensile_strength
 
 class FemWorkerDG(QThread):
     finished_computation = pyqtSignal(object, object, object, object, object, object, float) 
@@ -140,15 +166,13 @@ class FemWorkerDG(QThread):
             self.error_occurred.emit(str(e))
 
     def generate_dg_mesh(self):
-        """
-        Genera una mesh dove ogni elemento ha nodi unici.
-        Crea anche la lista delle 'interfacce' (facce condivise).
-        """
+        # ... (Logica di mesh identica alla precedente, omessa per brevità ma inclusa funzionalmente)
+        # La logica di generazione mesh non cambia: crea nodi duplicati per ogni elemento Hex8.
+        # Qui riporto il codice essenziale per garantire il funzionamento.
         L_beam = self.params['L']
         nx, ny, nz = self.params['nx'], self.params['ny'], self.params['nz']
         
         min_x, max_x, min_y, max_y = self.core._get_section_bounding_box(self.section)
-        # Converti in metri
         min_x, max_x = self.core._mm_to_m(min_x), self.core._mm_to_m(max_x)
         min_y, max_y = self.core._mm_to_m(min_y), self.core._mm_to_m(max_y)
         
@@ -162,66 +186,41 @@ class FemWorkerDG(QThread):
         xs = np.linspace(min_x + dx/2, max_x - dx/2, nx)
         ys = np.linspace(min_y + dy/2, max_y - dy/2, ny)
         
-        # Identifica voxel attivi
-        active_voxels = {} # Map (ix, iy, iz) -> material_name
-        
+        active_voxels = {}
         for iy in range(ny):
             for ix in range(nx):
-                xc_mm = xs[ix] * 1000.0
-                yc_mm = ys[iy] * 1000.0
+                xc_mm = xs[ix] * 1000.0; yc_mm = ys[iy] * 1000.0
                 is_inside, mat = self.core._is_point_in_section(xc_mm, yc_mm, self.section)
                 if is_inside:
-                    for iz in range(nz):
-                        active_voxels[(ix, iy, iz)] = mat
+                    for iz in range(nz): active_voxels[(ix, iy, iz)] = mat
 
         coords = []
-        solid_elements = [] # list of {nodes: [8 ints], mat: str, center: (x,y,z)}
-        element_map = {} # (ix, iy, iz) -> element_index
-        
+        solid_elements = []
+        element_map = {}
         node_cursor = 0
 
-        # Offsets per i nodi di un cubo unitario (ordine standard FEM Hex8)
         for key, mat in active_voxels.items():
             ix, iy, iz = key
-            
-            # Coordinate bounding box dell'elemento
             x0 = min_x + ix * dx; x1 = x0 + dx
             y0 = min_y + iy * dy; y1 = y0 + dy
             z0 = iz * dz;         z1 = z0 + dz
             
-            # Genera 8 nodi UNICI per questo elemento
+            corners = [(x0, y0, z0), (x1, y0, z0), (x1, y1, z0), (x0, y1, z0),
+                       (x0, y0, z1), (x1, y0, z1), (x1, y1, z1), (x0, y1, z1)]
+            
             el_nodes_indices = []
-            
-            # Ordine nodi Hex8
-            corners = [
-                (x0, y0, z0), (x1, y0, z0), (x1, y1, z0), (x0, y1, z0),
-                (x0, y0, z1), (x1, y0, z1), (x1, y1, z1), (x0, y1, z1)
-            ]
-            
             for c in corners:
                 coords.append(list(c))
                 el_nodes_indices.append(node_cursor)
                 node_cursor += 1
             
             el_idx = len(solid_elements)
-            solid_elements.append({
-                'nodes': el_nodes_indices, 
-                'mat': mat, 
-                'type': 'HEX8',
-                'grid_pos': (ix, iy, iz),
-                'bounds': ((x0,x1), (y0,y1), (z0,z1))
-            })
+            solid_elements.append({'nodes': el_nodes_indices, 'mat': mat, 'type': 'HEX8'})
             element_map[key] = el_idx
 
-        # --- GENERAZIONE INTERFACCE (COHESIVE LINKS) ---
+        # Interfacce
         interfaces = []
-        
-        neighbor_offsets = [
-            (1, 0, 0, 0, 1),  # Neighbor at X+
-            (0, 1, 0, 1, 1),  # Neighbor at Y+
-            (0, 0, 1, 2, 1)   # Neighbor at Z+
-        ]
-        
+        neighbor_offsets = [(1, 0, 0, 0), (0, 1, 0, 1), (0, 0, 1, 2)] # dx, dy, dz, axis
         face_map = {
             0: {'A': [1, 2, 6, 5], 'B': [0, 3, 7, 4], 'n': [1, 0, 0]},
             1: {'A': [2, 3, 7, 6], 'B': [1, 0, 4, 5], 'n': [0, 1, 0]},
@@ -230,113 +229,77 @@ class FemWorkerDG(QThread):
 
         for key, el_idx_A in element_map.items():
             ix, iy, iz = key
-            
-            for dix, diy, diz, axis, sign in neighbor_offsets:
+            for dix, diy, diz, axis in neighbor_offsets:
                 neighbor_key = (ix + dix, iy + diy, iz + diz)
-                
                 if neighbor_key in element_map:
                     el_idx_B = element_map[neighbor_key]
-                    
                     nodes_A = solid_elements[el_idx_A]['nodes']
                     nodes_B = solid_elements[el_idx_B]['nodes']
                     
                     indices_A = [nodes_A[i] for i in face_map[axis]['A']]
                     indices_B = [nodes_B[i] for i in face_map[axis]['B']]
                     
-                    # Area interfaccia
-                    if axis == 0: area = dy * dz
-                    elif axis == 1: area = dx * dz
-                    else: area = dx * dy
-                    
+                    area = (dy*dz if axis==0 else (dx*dz if axis==1 else dx*dy))
                     interfaces.append({
-                        'nodes_A': indices_A,
-                        'nodes_B': indices_B,
-                        'normal': np.array(face_map[axis]['n']),
-                        'area': area,
-                        'mat_A': solid_elements[el_idx_A]['mat'], # Per recuperare ft
+                        'nodes_A': indices_A, 'nodes_B': indices_B,
+                        'normal': np.array(face_map[axis]['n']), 'area': area,
+                        'mat_A': solid_elements[el_idx_A]['mat'],
                         'mat_B': solid_elements[el_idx_B]['mat']
                     })
 
         solid_node_count = len(coords)
         coords = np.array(coords)
-
-        # --- GENERAZIONE BARRE E PENALTY LINKS ---
-        bar_elements = []
-        penalty_links = []
         
-        # Barre Longitudinali
+        # Barre e Penalty (Codice condensato, logica identica)
+        bar_elements = []
         temp_coords = coords.tolist()
+        zs = np.linspace(0, L_beam, nz + 1)
         
         for bar in self.section.get('bars', []):
-            bx = self.core._mm_to_m(bar['center'][0])
-            by = self.core._mm_to_m(bar['center'][1])
+            bx, by = self.core._mm_to_m(bar['center'][0]), self.core._mm_to_m(bar['center'][1])
             diam = self.core._mm_to_m(bar['diam'])
             area = math.pi * (diam/2)**2
-            mat = bar.get('material')
-            
-            prev_node_idx = -1
-            zs = np.linspace(0, L_beam, nz + 1)
-            
-            for iz in range(nz + 1):
-                z = zs[iz]
-                curr_node_idx = len(temp_coords)
-                temp_coords.append([bx, by, z])
-                
-                if prev_node_idx != -1:
-                    bar_elements.append({
-                        'nodes': [prev_node_idx, curr_node_idx],
-                        'area': area, 'mat': mat, 'type': 'TRUSS_LONG'
-                    })
-                prev_node_idx = curr_node_idx
-
+            prev = -1
+            for iz in range(nz+1):
+                curr = len(temp_coords)
+                temp_coords.append([bx, by, zs[iz]])
+                if prev != -1:
+                    bar_elements.append({'nodes': [prev, curr], 'area': area, 'mat': bar.get('material'), 'type': 'TRUSS_LONG'})
+                prev = curr
+        
         # Staffe
-        passo_staffe = self.params.get('stirrup_step', 0.0)
-        if passo_staffe > 0:
-            num_staffe = max(1, int(math.ceil(L_beam / passo_staffe)))
+        passo = self.params.get('stirrup_step', 0.0)
+        if passo > 0:
+            num = max(1, int(math.ceil(L_beam / passo)))
             for s in self.section.get('staffe', []):
                 diam = self.core._mm_to_m(s.get('diam', 8))
                 area = math.pi * (diam/2)**2
-                mat = s.get('material')
-                pts_m = [(self.core._mm_to_m(p[0]), self.core._mm_to_m(p[1])) for p in s.get('points', [])]
-                if len(pts_m) < 2: continue
-                
-                for i in range(num_staffe):
-                    z_s = (i + 0.5) * passo_staffe
-                    if z_s > L_beam: continue
-                    
+                pts = [(self.core._mm_to_m(p[0]), self.core._mm_to_m(p[1])) for p in s.get('points', [])]
+                if len(pts)<2: continue
+                for i in range(num):
+                    z = (i+0.5)*passo
+                    if z > L_beam: continue
                     first = -1; prev = -1
-                    for k, p in enumerate(pts_m):
+                    for k, p in enumerate(pts):
                         curr = len(temp_coords)
-                        temp_coords.append([p[0], p[1], z_s])
-                        if k == 0: first = curr
-                        else:
-                            bar_elements.append({'nodes': [prev, curr], 'area': area, 'mat': mat, 'type': 'TRUSS_STIR'})
-                        prev = curr
-                    if len(pts_m) > 2 and pts_m[0] != pts_m[-1]:
-                         bar_elements.append({'nodes': [prev, first], 'area': area, 'mat': mat, 'type': 'TRUSS_STIR'})
+                        temp_coords.append([p[0], p[1], z])
+                        if k==0: first=curr
+                        else: bar_elements.append({'nodes':[prev,curr], 'area':area, 'mat':s.get('material'), 'type':'TRUSS_STIR'})
+                        prev=curr
+                    if len(pts)>2 and pts[0]!=pts[-1]:
+                         bar_elements.append({'nodes':[prev,first], 'area':area, 'mat':s.get('material'), 'type':'TRUSS_STIR'})
 
         coords = np.array(temp_coords)
-
-        # Genera Penalty Links (Collega Barre ai Solidi)
+        penalty_links = []
         solid_coords = coords[:solid_node_count]
-        
+        search_rad = max(dx, dy) * 1.5
         for i in range(solid_node_count, len(coords)):
-            bar_pt = coords[i]
-            dists = np.linalg.norm(solid_coords - bar_pt, axis=1)
-            nearest_idx = np.argmin(dists)
-            min_dist = dists[nearest_idx]
-            
-            if min_dist < max(dx, dy) * 1.5:
-                penalty_links.append((i, nearest_idx))
+            dists = np.linalg.norm(solid_coords - coords[i], axis=1)
+            near = np.argmin(dists)
+            if dists[near] < search_rad: penalty_links.append((i, near))
 
-        return {
-            'coords': coords,
-            'solid_elems': solid_elements,
-            'interfaces': interfaces,
-            'bar_elems': bar_elements,
-            'penalty_links': penalty_links,
-            'solid_node_limit': solid_node_count
-        }
+        return {'coords': coords, 'solid_elems': solid_elements, 'interfaces': interfaces,
+                'bar_elems': bar_elements, 'penalty_links': penalty_links}
 
     def run_solver_dg(self, mesh_data):
         coords = mesh_data['coords']
@@ -348,52 +311,40 @@ class FemWorkerDG(QThread):
         n_dof = len(coords) * 3
         u = np.zeros(n_dof)
         
-        # Pre-processing solidi
         solid_predata = self._precompute_solids(coords, solid_elems)
         
-        # Stato di danneggiamento (0=intatto, 1=rotto)
         interface_damage = np.zeros(len(interfaces), dtype=int)
         bar_damage = np.zeros(len(bar_elems), dtype=int)
         
-        # Parametri Solver
         steps = self.params['steps']
         iters = self.params['iters']
         tol = self.params['tol']
         
-        # Carichi e Vincoli
         fixed_dofs = self._get_constraints(coords, self.params['constraints'], self.params['L'])
         free_dofs = np.setdiff1d(np.arange(n_dof), fixed_dofs)
-        
         F_ext_base = self._get_loads(coords, n_dof)
         
         u_history = [np.zeros(n_dof)]
         stress_history = [np.zeros(len(coords))]
         
-        # Parametri Coesivi
-        K_interface_elastic = 1e13 # N/m^3 (Rigidezza colla perfetta)
-        K_penalty_link = 1e13      # Collegamento barra-solido
-        
-        default_mat = MaterialParser("Default")
-
-        print(f"--- INIZIO ANALISI DG ---")
-        print(f"Elementi Solidi: {len(solid_elems)}")
-        print(f"Interfacce: {len(interfaces)}")
-        print(f"Barre: {len(bar_elems)}")
+        K_int_elastic = 1e13 
+        K_penalty = 1e13
+        default_mat = MaterialParser(None) # Materiale vuoto di sicurezza
 
         for step in range(1, steps + 1):
             load_factor = step / steps
             F_target = F_ext_base * load_factor
             
-            progress_val = 10 + int((step / steps) * 90)
-            self.progress_percent.emit(progress_val)
+            prog = 10 + int((step/steps)*90)
+            self.progress_percent.emit(prog)
             self.progress_update.emit(f"Step {step}/{steps} (Carico {load_factor*100:.0f}%)")
             
             for it in range(iters):
                 rows, cols, data = [], [], []
                 R_int = np.zeros(n_dof)
                 
-                # --- 1. SOLIDI (Standard FEM Hex8 con Materiale Non-Lineare) ---
-                for el_idx, el_dat in enumerate(solid_predata):
+                # --- SOLIDI ---
+                for el_dat in solid_predata:
                     mat_obj = self.materials_db.get(el_dat['mat'], default_mat)
                     dof_ind = []
                     for n in el_dat['nodes']: dof_ind.extend([3*n, 3*n+1, 3*n+2])
@@ -406,163 +357,121 @@ class FemWorkerDG(QThread):
                         B, vol = gp['B'], gp['detJ']
                         eps = B @ u_el
                         
-                        # Calcolo Strain Scalare (Segno Positivo = Compressione Utente, Negativo = Trazione)
-                        # NOTA: Convenzione Utente: + = Compressione. 
-                        # Matematica FEM standard: sum(eps) < 0 è compressione volumetrica.
-                        # Quindi: if fem_vol < 0 -> User Strain > 0.
-                        fem_vol_strain = np.sum(eps[:3])
-                        
-                        # Usiamo Von Mises per magnitudo, e segno del volumetrico
+                        # Calcolo Strain Scalare (Segno Positivo = Compressione, Negativo = Trazione)
+                        # FEM Eps > 0 -> Estensione. FEM Eps < 0 -> Compressione.
+                        eps_vol = np.sum(eps[:3])
                         eps_vm = math.sqrt(0.5*((eps[0]-eps[1])**2+(eps[1]-eps[2])**2+(eps[2]-eps[0])**2)+3*(eps[3]**2+eps[4]**2+eps[5]**2))
                         
-                        sign = 1.0 if fem_vol_strain < 0 else -1.0
+                        # Mapping convenzione: 
+                        # Se eps_vol < 0 (FEM Comp), vogliamo strain_scalar > 0 (Civil Comp).
+                        # Se eps_vol > 0 (FEM Ext), vogliamo strain_scalar < 0 (Civil Tens).
+                        sign = 1.0 if eps_vol < 0 else -1.0
                         strain_scalar = eps_vm * sign
                         
-                        # Valutazione Legge Costitutiva
-                        # Ritorna Stress (sigma) e Tangente (Et) reali dalla curva
+                        # Evaluate dal materiale reale
                         sigma_val, E_tan = mat_obj.evaluate(strain_scalar)
                         
-                        # --- MODIFICA CRUCIALE PER ADERENZA AL CODICE 2 ---
-                        # Invece di usare D_tangente per calcolare lo stress (che accumulerebbe errori),
-                        # Calcoliamo il modulo SECANTE: E_sec = sigma / strain.
-                        # Usiamo E_sec per calcolare le forze interne (Residuo) -> Stress corretto.
-                        # Usiamo E_tan per calcolare la rigidezza (K) -> Convergenza veloce.
+                        # Modulo secante per forze interne corrette
+                        if abs(strain_scalar) < 1e-12: E_sec = E_tan
+                        else: E_sec = sigma_val / strain_scalar
                         
-                        if abs(strain_scalar) < 1e-12:
-                            E_sec = E_tan # Limite per strain 0
-                        else:
-                            E_sec = sigma_val / strain_scalar
-
-                        # Matrice D Tangente (per Stiffness K)
+                        # Stiffness Matrix (Tangente)
                         nu = 0.2
-                        f_tan = E_tan / ((1+nu)*(1-2*nu))
+                        f = E_tan/((1+nu)*(1-2*nu))
                         D_tan = np.zeros((6,6))
-                        D_tan[:3,:3] = f_tan*(1-nu); D_tan[:3,:3] -= f_tan*nu; np.fill_diagonal(D_tan[:3,:3], f_tan*(1-nu))
-                        D_tan[0,1]=D_tan[0,2]=D_tan[1,0]=D_tan[1,2]=D_tan[2,0]=D_tan[2,1] = f_tan*nu
-                        sh_tan = E_tan/(2*(1+nu)); D_tan[3,3]=D_tan[4,4]=D_tan[5,5] = sh_tan
+                        D_tan[:3,:3]=f*(1-nu); D_tan[:3,:3]-=f*nu; np.fill_diagonal(D_tan[:3,:3],f*(1-nu))
+                        D_tan[0,1]=D_tan[0,2]=D_tan[1,0]=D_tan[1,2]=D_tan[2,0]=D_tan[2,1]=f*nu
+                        D_tan[3,3]=D_tan[4,4]=D_tan[5,5]=E_tan/(2*(1+nu))
 
-                        # Matrice D Secante (per Residuo R)
-                        f_sec = E_sec / ((1+nu)*(1-2*nu))
+                        # Stress calculation (Secante)
+                        f_s = E_sec/((1+nu)*(1-2*nu))
                         D_sec = np.zeros((6,6))
-                        D_sec[:3,:3] = f_sec*(1-nu); D_sec[:3,:3] -= f_sec*nu; np.fill_diagonal(D_sec[:3,:3], f_sec*(1-nu))
-                        D_sec[0,1]=D_sec[0,2]=D_sec[1,0]=D_sec[1,2]=D_sec[2,0]=D_sec[2,1] = f_sec*nu
-                        sh_sec = E_sec/(2*(1+nu)); D_sec[3,3]=D_sec[4,4]=D_sec[5,5] = sh_sec
+                        D_sec[:3,:3]=f_s*(1-nu); D_sec[:3,:3]-=f_s*nu; np.fill_diagonal(D_sec[:3,:3],f_s*(1-nu))
+                        D_sec[0,1]=D_sec[0,2]=D_sec[1,0]=D_sec[1,2]=D_sec[2,0]=D_sec[2,1]=f_s*nu
+                        D_sec[3,3]=D_sec[4,4]=D_sec[5,5]=E_sec/(2*(1+nu))
                         
-                        # Calcoli
-                        sigma_tensor = D_sec @ eps
-                        r_el += (B.T @ sigma_tensor) * vol
+                        r_el += (B.T @ (D_sec @ eps)) * vol
                         k_el += (B.T @ D_tan @ B) * vol
-                        
-                    # Assembly
+                    
                     for r in range(24):
                         R_int[dof_ind[r]] += r_el[r]
                         for c in range(24):
                             if abs(k_el[r,c]) > 1e-9:
                                 rows.append(dof_ind[r]); cols.append(dof_ind[c]); data.append(k_el[r,c])
 
-                # --- 2. INTERFACCE (Cohesive / Penalty) ---
-                # Qui gestiamo la FRATTURA (solo Trazione)
+                # --- INTERFACCE ---
                 broken_count = 0
+                TRIGGER_FACTOR = 0.75
+
                 for i_idx, iface in enumerate(interfaces):
                     if interface_damage[i_idx] == 1:
-                        broken_count += 1
-                        continue 
+                        broken_count += 1; continue
                     
-                    nA = iface['nodes_A']; nB = iface['nodes_B']
-                    normal = iface['normal']
+                    nA, nB = iface['nodes_A'], iface['nodes_B']
+                    norm = iface['normal']
                     area = iface['area']
                     
-                    # Recupero Ft dai materiali adiacenti
+                    # Calcolo limite di rottura dai materiali
                     matA = self.materials_db.get(iface['mat_A'], default_mat)
                     matB = self.materials_db.get(iface['mat_B'], default_mat)
-                    ft_lim = min(matA.get_tensile_limit(), matB.get_tensile_limit())
+                    # La resistenza è il minimo tra i due materiali a contatto
+                    ft_real = min(matA.get_tensile_limit(), matB.get_tensile_limit())
+                    ft_trigger = ft_real * TRIGGER_FACTOR
                     
-                    # Calcolo Gap
                     disp_A = np.mean([u[3*n:3*n+3] for n in nA], axis=0)
                     disp_B = np.mean([u[3*n:3*n+3] for n in nB], axis=0)
-                    gap_vec = disp_B - disp_A
-                    gap_n = np.dot(gap_vec, normal)
+                    gap_n = np.dot(disp_B - disp_A, norm) # Positivo = Apertura = Trazione
                     
-                    # Trazione = Rigidezza * Gap
-                    traction = K_interface_elastic * gap_n
+                    # Check Rottura: Se Trazione > Limite Trazione Materiale
+                    traction_stress = K_int_elastic * gap_n # Stress approssimato interfaccia
                     
-                    # --- CRITERIO DI ROTTURA ---
-                    # 1. Deve essere Trazione (gap_n > 0)
-                    # 2. La trazione deve superare il limite Ft
-                    if gap_n > 0 and traction > ft_lim:
-                        interface_damage[i_idx] = 1 
+                    # NOTA: ft_lim è una magnitudo positiva. traction_stress > ft_lim significa rottura.
+                    if gap_n > 0 and traction_stress > ft_trigger:
+                        interface_damage[i_idx] = 1
                         broken_count += 1
                         continue
                     
-                    # Se non rotto (o se in Compressione), applica Penalty per tenere uniti i nodi
-                    # NOTA: In compressione (gap_n < 0) questo link regge infinito (contatto perfetto)
-                    k_node = (K_interface_elastic * area) / 4.0
-                    
+                    k_node = (K_int_elastic * area) / 4.0
                     for k in range(4):
                         idxA = [3*nA[k], 3*nA[k]+1, 3*nA[k]+2]
                         idxB = [3*nB[k], 3*nB[k]+1, 3*nB[k]+2]
-                        
-                        f_vec = k_node * (u[idxB] - u[idxA]) 
-                        
-                        R_int[idxA] -= f_vec
-                        R_int[idxB] += f_vec
-                        
+                        f_vec = k_node * (u[idxB] - u[idxA])
+                        R_int[idxA] -= f_vec; R_int[idxB] += f_vec
                         for d in range(3):
-                            rows.append(idxA[d]); cols.append(idxA[d]); data.append(k_node)
-                            rows.append(idxB[d]); cols.append(idxB[d]); data.append(k_node)
-                            rows.append(idxA[d]); cols.append(idxB[d]); data.append(-k_node)
-                            rows.append(idxB[d]); cols.append(idxA[d]); data.append(-k_node)
+                            rows.extend([idxA[d], idxB[d], idxA[d], idxB[d]])
+                            cols.extend([idxA[d], idxB[d], idxB[d], idxA[d]])
+                            data.extend([k_node, k_node, -k_node, -k_node])
 
-                # --- 3. BARRE (Truss con failure) ---
-                broken_bars = 0
-                for b_idx, bel in enumerate(bar_elems):
-                    if bar_damage[b_idx] == 1:
-                        broken_bars += 1
-                        continue
-                        
+                # --- BARRE ---
+                for bel in bar_elems:
                     mat_obj = self.materials_db.get(bel['mat'], default_mat)
                     n1, n2 = bel['nodes']
                     idx1, idx2 = [3*n1, 3*n1+1, 3*n1+2], [3*n2, 3*n2+1, 3*n2+2]
                     p1, p2 = coords[n1], coords[n2]
-                    L0 = np.linalg.norm(p2 - p1)
+                    L0 = np.linalg.norm(p2-p1)
                     if L0 < 1e-9: continue
                     
-                    vec = p2 - p1
-                    dir_vec = vec / L0
-                    
                     u1, u2 = u[idx1], u[idx2]
-                    curr_len = np.linalg.norm((p2+u2) - (p1+u1))
-                    
+                    curr_len = np.linalg.norm((p2+u2)-(p1+u1))
                     strain = (curr_len - L0) / L0
-                    # Segno: Utente pos = compressione. Strain calcolato: pos = allungamento.
-                    # Quindi input materiale = -strain
+                    
+                    # Strain geometrico pos = allungamento. Materiale input: pos = compressione.
                     strain_input = -strain
+                    sigma_val, Et = mat_obj.evaluate(strain_input)
                     
-                    # Valutazione materiale
-                    sigma_val, Et = mat_obj.evaluate(strain_input) 
-                    
-                    # Check rottura barra a Trazione (strain > 0 -> strain_input < 0)
-                    ft_lim_bar = mat_obj.get_tensile_limit()
-                    
-                    # Se strain è positivo (trazione) e sigma supera ft
-                    if strain > 0 and abs(sigma_val) > ft_lim_bar and sigma_val < 0.1: 
-                        # sigma_val < 0.1 è un check se la funzione materiale è già "collassata" a 0
-                        # ma qui facciamo un check esplicito sui limiti
-                        pass
-                        
-                    # Usa logica secante anche qui per coerenza
                     if abs(strain) < 1e-12: E_sec = Et
-                    else: E_sec = abs(sigma_val / strain)
-
-                    force = E_sec * strain * bel['area'] # Forza scalare (pos = trazione)
+                    else: E_sec = abs(sigma_val / strain) # Modulo secante
+                    
+                    # Forza: se allungamento (strain > 0), E_sec * strain -> Forza positiva (trazione)
+                    # Corretto per FEM
+                    force = E_sec * strain * bel['area']
+                    dir_vec = (p2-p1)/L0
                     f_vec = force * dir_vec
                     
-                    R_int[idx1] -= f_vec
-                    R_int[idx2] += f_vec
+                    R_int[idx1] -= f_vec; R_int[idx2] += f_vec
                     
                     stiff = Et * bel['area'] / L0
                     K_loc = np.outer(dir_vec, dir_vec) * stiff
-                    
                     for r in range(3):
                         for c in range(3):
                             val = K_loc[r,c]
@@ -571,105 +480,85 @@ class FemWorkerDG(QThread):
                             rows.append(idx2[r]); cols.append(idx1[c]); data.append(-val)
                             rows.append(idx2[r]); cols.append(idx2[c]); data.append(val)
 
-                # --- 4. PENALTY LINKS (Bar -> Solid) ---
+                # --- PENALTY ---
                 for (bn, sn) in penalty_links:
                     bi, si = [3*bn, 3*bn+1, 3*bn+2], [3*sn, 3*sn+1, 3*sn+2]
-                    f_pen = K_penalty_link * (u[bi] - u[si])
-                    R_int[bi] += f_pen
-                    R_int[si] -= f_pen
+                    f_pen = K_penalty * (u[bi] - u[si])
+                    R_int[bi] += f_pen; R_int[si] -= f_pen
                     for k in range(3):
                         rows.extend([bi[k], si[k], bi[k], si[k]])
                         cols.extend([bi[k], si[k], si[k], bi[k]])
-                        data.extend([K_penalty_link, K_penalty_link, -K_penalty_link, -K_penalty_link])
-
+                        data.extend([K_penalty, K_penalty, -K_penalty, -K_penalty])
+                
                 # SOLVE
                 res = F_target - R_int
                 res_norm = np.linalg.norm(res[free_dofs])
-                
-                print(f"  Iter {it}: Residuo {res_norm:.2e} | Cracks: {broken_count}/{len(interfaces)}")
-                
-                if res_norm < tol:
-                    break
+
+                print(f"Cracks: {broken_count}/{len(interfaces)}")
+
+                if res_norm < tol: break
                 
                 K_global = sp.coo_matrix((data, (rows, cols)), shape=(n_dof, n_dof)).tocsr()
                 K_free = K_global[free_dofs, :][:, free_dofs]
-                
                 try:
                     du = spla.spsolve(K_free, res[free_dofs])
                     u[free_dofs] += du
                 except:
-                    print("Singolarità matrice - possibile collasso totale.")
                     break
-
-            # Fine Step: Salva storia
+            
             u_history.append(u.copy())
             
-            # --- POST PROCESSING STRESS (SOLIDI + BARRE) ---
+            # Post-Processing Stress
             node_stress = np.zeros(len(coords))
             node_counts = np.zeros(len(coords))
             
-            # 1. Stress Solidi
             for el_dat in solid_predata:
+                mat_obj = self.materials_db.get(el_dat['mat'], default_mat)
                 u_el = u[[i for n in el_dat['nodes'] for i in (3*n, 3*n+1, 3*n+2)]]
                 vm_sum = 0
-                mat_obj = self.materials_db.get(el_dat['mat'], default_mat)
-                
                 for gp in el_dat['gps']:
                     eps = gp['B'] @ u_el
-                    eps_vol = np.sum(eps[:3])
+                    sign = 1.0 if np.sum(eps[:3]) < 0 else -1.0
                     eps_vm = math.sqrt(0.5*((eps[0]-eps[1])**2+(eps[1]-eps[2])**2+(eps[2]-eps[0])**2)+3*(eps[3]**2+eps[4]**2+eps[5]**2))
-                    sign = 1.0 if eps_vol < 0 else -1.0
-                    
-                    # Recupera stress reale scalare dalla curva
-                    sigma_scalar, _ = mat_obj.evaluate(eps_vm * sign)
-                    vm_sum += sigma_scalar
-                    
+                    sig, _ = mat_obj.evaluate(eps_vm * sign)
+                    vm_sum += sig
                 vm_avg = vm_sum / len(el_dat['gps'])
-                
                 for n in el_dat['nodes']:
-                    node_stress[n] += vm_avg
-                    node_counts[n] += 1.0 
-
-            # 2. Stress Barre
+                    node_stress[n] += vm_avg; node_counts[n] += 1
+            
             for bel in bar_elems:
                 mat_obj = self.materials_db.get(bel['mat'], default_mat)
                 n1, n2 = bel['nodes']
-                idx1, idx2 = [3*n1, 3*n1+1, 3*n1+2], [3*n2, 3*n2+1, 3*n2+2]
                 p1, p2 = coords[n1], coords[n2]
-                L0 = np.linalg.norm(p2 - p1)
-                
-                if L0 > 1e-9:
-                    u1, u2 = u[idx1], u[idx2]
-                    curr_len = np.linalg.norm((p2+u2) - (p1+u1))
-                    strain = (curr_len - L0) / L0
-                    sigma, _ = mat_obj.evaluate(-strain)
-                    val = abs(sigma)
-                    
-                    node_stress[n1] += val; node_counts[n1] += 1.0
-                    node_stress[n2] += val; node_counts[n2] += 1.0
-
+                u1, u2 = u[[3*n1, 3*n1+1, 3*n1+2]], u[[3*n2, 3*n2+1, 3*n2+2]]
+                L0 = np.linalg.norm(p2-p1)
+                curr_len = np.linalg.norm((p2+u2)-(p1+u1))
+                strain = (curr_len - L0) / L0
+                sig, _ = mat_obj.evaluate(-strain)
+                node_stress[n1]+=sig; node_counts[n1]+=1
+                node_stress[n2]+=sig; node_counts[n2]+=1
+            
             avg_stress = np.divide(node_stress, node_counts, where=node_counts!=0)
             stress_history.append(avg_stress)
 
         max_disp = np.max(np.linalg.norm(u.reshape(-1, 3), axis=1))
         max_stress = np.max(stress_history[-1]) if len(stress_history) > 0 else 0
-        
         return u_history, coords, solid_elems, bar_elems, max_disp, stress_history, max_stress
 
     def _precompute_solids(self, coords, solid_elems):
-        # Helper per calcolare matrici B una volta sola
+        # (Stessa implementazione helper del codice precedente)
         def get_hex8_shape(xi, eta, zeta):
             pts = np.array([[-1,-1,-1],[1,-1,-1],[1,1,-1],[-1,1,-1],[-1,-1,1],[1,-1,1],[1,1,1],[-1,1,1]])
             N = np.zeros(8); dN = np.zeros((3,8))
             for i in range(8):
                 px, py, pz = pts[i]
-                factor = 0.125
-                N[i] = factor * (1 + px*xi) * (1 + py*eta) * (1 + pz*zeta)
-                dN[0,i] = factor * px * (1 + py*eta) * (1 + pz*zeta)
-                dN[1,i] = factor * py * (1 + px*xi) * (1 + pz*zeta)
-                dN[2,i] = factor * pz * (1 + px*xi) * (1 + py*eta)
+                f = 0.125
+                N[i] = f*(1+px*xi)*(1+py*eta)*(1+pz*zeta)
+                dN[0,i]=f*px*(1+py*eta)*(1+pz*zeta)
+                dN[1,i]=f*py*(1+px*xi)*(1+pz*zeta)
+                dN[2,i]=f*pz*(1+px*xi)*(1+py*eta)
             return N, dN
-
+        
         gauss_pts = [-0.57735, 0.57735]
         data = []
         for el in solid_elems:
@@ -687,13 +576,11 @@ class FemWorkerDG(QThread):
                         dN_dX = invJ @ local_grad
                         B = np.zeros((6, 24))
                         for i in range(8):
-                            idx = 3*i
-                            B[0, idx] = dN_dX[0,i]
-                            B[1, idx+1] = dN_dX[1,i]
-                            B[2, idx+2] = dN_dX[2,i]
-                            B[3, idx] = dN_dX[1,i]; B[3, idx+1] = dN_dX[0,i]
-                            B[4, idx+1] = dN_dX[2,i]; B[4, idx+2] = dN_dX[1,i]
-                            B[5, idx] = dN_dX[2,i]; B[5, idx+2] = dN_dX[0,i]
+                            idx=3*i
+                            B[0,idx]=dN_dX[0,i]; B[1,idx+1]=dN_dX[1,i]; B[2,idx+2]=dN_dX[2,i]
+                            B[3,idx]=dN_dX[1,i]; B[3,idx+1]=dN_dX[0,i]
+                            B[4,idx+1]=dN_dX[2,i]; B[4,idx+2]=dN_dX[1,i]
+                            B[5,idx]=dN_dX[2,i]; B[5,idx+2]=dN_dX[0,i]
                         gps.append({'B': B, 'detJ': detJ})
             data.append({'gps': gps, 'nodes': el_nodes, 'mat': el['mat']})
         return data
@@ -702,42 +589,35 @@ class FemWorkerDG(QThread):
         fixed = []
         tol = 1e-4
         for i, c in enumerate(coords):
-            x, y, z = c
-            is_fix = False
-            if 'x0' in constraints and abs(x - np.min(coords[:,0])) < tol: is_fix = True
-            elif 'xL' in constraints and abs(x - np.max(coords[:,0])) < tol: is_fix = True
-            elif 'y0' in constraints and abs(y - np.min(coords[:,1])) < tol: is_fix = True
-            elif 'yL' in constraints and abs(y - np.max(coords[:,1])) < tol: is_fix = True
-            elif 'z0' in constraints and abs(z - 0.0) < tol: is_fix = True
-            elif 'zL' in constraints and abs(z - L) < tol: is_fix = True
-            
-            if is_fix: fixed.extend([3*i, 3*i+1, 3*i+2])
+            x,y,z = c
+            if 'x0' in constraints and abs(x-np.min(coords[:,0]))<tol: fixed.extend([3*i,3*i+1,3*i+2])
+            elif 'xL' in constraints and abs(x-np.max(coords[:,0]))<tol: fixed.extend([3*i,3*i+1,3*i+2])
+            elif 'y0' in constraints and abs(y-np.min(coords[:,1]))<tol: fixed.extend([3*i,3*i+1,3*i+2])
+            elif 'yL' in constraints and abs(y-np.max(coords[:,1]))<tol: fixed.extend([3*i,3*i+1,3*i+2])
+            elif 'z0' in constraints and abs(z)<tol: fixed.extend([3*i,3*i+1,3*i+2])
+            elif 'zL' in constraints and abs(z-L)<tol: fixed.extend([3*i,3*i+1,3*i+2])
         return np.unique(fixed)
 
     def _get_loads(self, coords, n_dof):
         F = np.zeros(n_dof)
         val = self.params['load_value']
-        ldir = 0 if self.params['load_dir'] == 'x' else (1 if self.params['load_dir'] == 'y' else 2)
+        ldir = 0 if self.params['load_dir']=='x' else (1 if self.params['load_dir']=='y' else 2)
         locs = self.params['load_locations']
-        tol = 1e-4
-        L = self.params['L']
-        
         target_nodes = []
-        for i, c in enumerate(coords):
-            match = False
-            x,y,z = c
-            if 'x0' in locs and abs(x - np.min(coords[:,0])) < tol: match = True
-            elif 'xL' in locs and abs(x - np.max(coords[:,0])) < tol: match = True
-            elif 'y0' in locs and abs(y - np.min(coords[:,1])) < tol: match = True
-            elif 'yL' in locs and abs(y - np.max(coords[:,1])) < tol: match = True
-            elif 'z0' in locs and abs(z - 0.0) < tol: match = True
-            elif 'zL' in locs and abs(z - L) < tol: match = True
+        tol=1e-4; L=self.params['L']
+        for i,c in enumerate(coords):
+            x,y,z=c
+            match=False
+            if 'x0' in locs and abs(x-np.min(coords[:,0]))<tol: match=True
+            elif 'xL' in locs and abs(x-np.max(coords[:,0]))<tol: match=True
+            elif 'y0' in locs and abs(y-np.min(coords[:,1]))<tol: match=True
+            elif 'yL' in locs and abs(y-np.max(coords[:,1]))<tol: match=True
+            elif 'z0' in locs and abs(z)<tol: match=True
+            elif 'zL' in locs and abs(z-L)<tol: match=True
             if match: target_nodes.append(i)
-            
         if target_nodes:
-            f_node = val / len(target_nodes)
-            for n in target_nodes:
-                F[3*n + ldir] += f_node
+            f_node = val/len(target_nodes)
+            for n in target_nodes: F[3*n+ldir]+=f_node
         return F
 
 class BeamCalcolo_dg(QObject):
@@ -762,7 +642,7 @@ class BeamCalcolo_dg(QObject):
             try: stirrup_step = float(self.ui.beam_passo.text())
             except: stirrup_step = 0.0
 
-            try: load_val = float(self.ui.beam_carico.text())
+            try: load_val = float(self.ui.beam_carico.text())/1000
             except: load_val = -1000.0
             
             if self.ui.beam_carico_direzione_x.isChecked(): load_dir = 'x'
@@ -803,9 +683,11 @@ class BeamCalcolo_dg(QObject):
         if sel_idx is None: sel_idx = 0
         
         try:
+            # Recupero esatto dei materiali e della matrice come nel codice originale
             mats, objs = self.mesh_generator.beam_valori.generate_matrices(sel_idx)
             materials_db = {}
             for m_def in mats:
+                # MaterialParser ora è pulito e usa solo la definizione
                 parser = MaterialParser(m_def)
                 materials_db[parser.name] = parser
             
@@ -825,7 +707,6 @@ class BeamCalcolo_dg(QObject):
         if hasattr(self.ui, 'progressBar_beam'):
             self.ui.progressBar_beam.setValue(0)
 
-        # Utilizziamo la classe worker FemWorkerDG modificata
         self.worker = FemWorkerDG(section, materials_db, params)
         self.worker.progress_update.connect(lambda s: print(f"[DG-FEM] {s}")) 
         self.worker.error_occurred.connect(self._on_error)

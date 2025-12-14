@@ -497,7 +497,7 @@ class FemWorker(QThread):
                 strain_input = -strain
                 sigma_scalar, _ = mat_obj.evaluate(strain_input)
                 
-                val = abs(sigma_scalar)
+                val = sigma_scalar
                 step_node_stress[n1] += val; step_node_count[n1] += 1.0
                 step_node_stress[n2] += val; step_node_count[n2] += 1.0
 
@@ -530,7 +530,7 @@ class BeamCalcolo(QObject):
             try: stirrup_step = float(self.ui.beam_passo.text())
             except: stirrup_step = 0.0
 
-            try: load_val = float(self.ui.beam_carico.text())
+            try: load_val = float(self.ui.beam_carico.text())/1000.0  # kN to N
             except: load_val = -1000.0
             
             if self.ui.beam_carico_direzione_x.isChecked(): load_dir = 'x'
