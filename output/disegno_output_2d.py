@@ -10,23 +10,28 @@ class Domain2DWidget(QOpenGLWidget):
     def __init__(self, ui, parent=None):
         super().__init__(parent)
         self.ui = ui
-        # 3D data
-        self.points = None
-        # 2D-projection data (must exist before any view-mode logic)
-        self.points_2d = None
-        self.hull_2d   = None
-        self.view_mode = "3D"
-        # 2D view settings
+        
+        # Dati
+        self.points_3d = None          # Nuvola di punti 3D completa
+        self.slice_polygon = None      # Poligono 2D calcolato (sezione)
+        self.slice_n_vals = None       # Valori N per colorazione (se serve)
+        
+        # Impostazioni Vista
+        self.view_mode = "N_Mx"        # Default
         self.pan_2d = [0.0, 0.0]
         self.zoom_2d = 1.0
         self.last_mouse_pos = None
+        
+        # Range dati (per scala iniziale e griglia)
         self.data_range_x = 10.0
         self.data_range_y = 10.0
+        
+        # Cursore
         self.cursor_pos = QPoint(0, 0)
         self.setMouseTracking(True)
-        self.font = QFont("Arial", 10)
+        self.font = QFont("Arial", 9)
 
-        # Axis labels
+        # Configurazioni Grafiche (Stile Esempio)
         self.axis_labels = {
             "N_Mx": ("Mx [kNm]", "N [kN]"),
             "N_My": ("My [kNm]", "N [kN]"),
@@ -34,293 +39,199 @@ class Domain2DWidget(QOpenGLWidget):
         }
 
         self.axis_colors = {
-            "N": QColor(0, 200, 255),   # Cyan/blue for N
-            "Mx": QColor(255, 0, 0),     # Red for Mx
-            "My": QColor(0, 255, 0)      # Green for My
+            "N": QColor(0, 200, 255),   # Ciano
+            "Mx": QColor(255, 0, 0), # Rosso chiaro
+            "My": QColor(0, 255, 0)  # Verde chiaro
         }
 
-        # Color settings
-        self.min_N = 0.0
-        self.max_N = 0.0
-
-        # Verification point
         self.verification_point = [0.0, 0.0, 0.0]  # Mx, My, N
-        self.verification_color = QColor(255, 0, 0)  # Rosso di default
+        self.verification_color = QColor(255, 0, 0)
+        self.is_inside = False
 
-        # Plane intersection results:
-        # plane_intersection_2d: Nx2 array with coordinates in the 2D view (e.g. Mx,N)
-        # plane_intersection_n: N-array with the corresponding N values (useful per-vertex color)
-        # plane_intersection_3d: Nx3 array with original 3D points of intersection
-        self.plane_intersection_2d = None
-        self.plane_intersection_n = None
-        self.plane_intersection_3d = None
-
-        # UI connections
+        # Connessioni UI
         try:
             self.ui.out_Mx.textChanged.connect(self.update_verification_point)
             self.ui.out_My.textChanged.connect(self.update_verification_point)
             self.ui.out_N.textChanged.connect(self.update_verification_point)
-        except Exception:
-            pass
-
-        try:
             self.ui.btn_out_verifica.clicked.connect(self.update_verification_point)
         except Exception:
             pass
 
-    def update_verification_point(self):
-        """Aggiorna il punto di verifica in base ai valori nell'UI"""
-        try:
-            Mx = float(self.ui.out_Mx.text() or "0")
-            My = float(self.ui.out_My.text() or "0")
-            N = float(self.ui.out_N.text() or "0")
-            self.verification_point = [Mx, My, N]
-
-            # Ricalcola l'intersezione piano/dominio in funzione del nuovo punto di verifica
-            self._compute_plane_intersection()
-
-            # Determina se il punto è interno al dominio (usa l'intersezione 2D)
-            self._update_verification_status()
-
-        except ValueError:
-            # Valori non validi
-            self.verification_color = QColor(255, 0, 0)
-            try:
-                self.ui.out_testo_punto.setText("Valori non validi")
-            except Exception:
-                pass
-
-        self.update()
-
-    def _update_verification_status(self):
-        """Determina se il punto di verifica è interno al dominio"""
-        Mx, My, N = self.verification_point
-
-        if self.plane_intersection_2d is None or len(self.plane_intersection_2d) < 3:
-            self.verification_color = QColor(255, 0, 0)
-            try:
-                self.ui.out_testo_punto.setText("Dominio non definito")
-            except Exception:
-                pass
-            return
-
-        # Proietta il punto nella vista corrente
-        if self.view_mode == "N_Mx":
-            point_2d = [Mx, N]
-        elif self.view_mode == "N_My":
-            point_2d = [My, N]
-        elif self.view_mode == "Mx_My":
-            point_2d = [Mx, My]
-        else:
-            return
-
-        # Controlla se il punto è dentro l'inviluppo convesso dell'intersezione
-        try:
-            tri = Delaunay(self.plane_intersection_2d)
-            inside = tri.find_simplex([point_2d]) >= 0
-
-            if inside:
-                self.verification_color = QColor(0, 255, 0)  # Verde
-                try:
-                    self.ui.out_testo_punto.setText("Verifica soddisfatta")
-                except Exception:
-                    pass
-            else:
-                self.verification_color = QColor(255, 0, 0)  # Rosso
-                try:
-                    self.ui.out_testo_punto.setText("Verifica non soddisfatta")
-                except Exception:
-                    pass
-
-        except Exception as e:
-            self.verification_color = QColor(255, 0, 0)
-            try:
-                self.ui.out_testo_punto.setText(f"Errore: {str(e)}")
-            except Exception:
-                pass
-
-    def set_view_mode(self, mode):
-        self.view_mode = mode
-        if mode != "3D":
-            self._update_2d_data()
-            # Recompute plane intersection because projection axes changed
-            self._compute_plane_intersection()
-            self._update_verification_status()
-        self.update()
-
     def set_points(self, points):
-        """points: numpy array shape (N,3) with columns [Mx, My, N]"""
-        self.points = points
-        if points is not None and len(points) > 0:
-            self.min_N = float(np.min(points[:, 2]))
-            self.max_N = float(np.max(points[:, 2]))
-        if self.view_mode != "3D":
-            self._update_2d_data()
-        # ricomputiamo l'intersezione piano/dominio
+        """Riceve la matrice punti 3D (n_thetas, n_steps, 3) o lista piatta."""
+        if points is None or len(points) == 0:
+            self.points_3d = None
+            self.update()
+            return
+
+        # Assicuriamoci che sia una lista piatta Nx3 per il ConvexHull
+        if len(points.shape) > 2:
+            self.points_3d = points.reshape(-1, 3)
+        else:
+            self.points_3d = points
+
+        # Calcolo range globali per il primo adattamento vista
+        if len(self.points_3d) > 0:
+            # Calcoliamo i massimi assoluti per centrare bene
+            mx_max = np.max(np.abs(self.points_3d[:, 0]))
+            my_max = np.max(np.abs(self.points_3d[:, 1]))
+            n_max = np.max(np.abs(self.points_3d[:, 2]))
+            
+            self.global_ranges = {
+                'Mx': mx_max if mx_max > 1 else 10.0,
+                'My': my_max if my_max > 1 else 10.0,
+                'N': n_max if n_max > 1 else 100.0
+            }
+            # Aggiorna range correnti
+            self._update_ranges_for_view()
+            
+        # Calcola intersezione iniziale
         self._compute_plane_intersection()
         self.update()
 
-    def _update_2d_data(self):
-        if self.points is None:
-            self.points_2d = None
-            self.hull_2d = None
-            return
+    def set_view_mode(self, mode):
+        """Cambia vista ortogonale: N_Mx, N_My, Mx_My"""
+        if mode not in ["N_Mx", "N_My", "Mx_My"]: return
+        self.view_mode = mode
+        
+        self._update_ranges_for_view()
+        self.pan_2d = [0.0, 0.0]
+        self.zoom_2d = 1.0
+        
+        self._compute_plane_intersection()
+        self.update()
 
-        # Project 3D points to 2D based on view mode
+    def _update_ranges_for_view(self):
+        """Imposta data_range_x/y in base alla vista corrente"""
+        if not hasattr(self, 'global_ranges'): return
+        
         if self.view_mode == "N_Mx":
-            points_2d = self.points[:, [0, 2]]  # Mx orizzontale, N verticale
+            self.data_range_x = self.global_ranges['Mx'] * 1.2
+            self.data_range_y = self.global_ranges['N'] * 1.2
         elif self.view_mode == "N_My":
-            points_2d = self.points[:, [1, 2]]  # My orizzontale, N verticale
+            self.data_range_x = self.global_ranges['My'] * 1.2
+            self.data_range_y = self.global_ranges['N'] * 1.2
         elif self.view_mode == "Mx_My":
-            points_2d = self.points[:, [0, 1]]  # Mx orizzontale, My verticale
-        else:
-            return
+            self.data_range_x = self.global_ranges['Mx'] * 1.2
+            self.data_range_y = self.global_ranges['My'] * 1.2
 
-        self.points_2d = points_2d
-
-        # Calculate data range for 2D view
-        if len(points_2d) > 0:
-            min_vals = np.min(points_2d, axis=0)
-            max_vals = np.max(points_2d, axis=0)
-            # Use symmetric range around 0 to keep view centered
-            self.data_range_x = max(abs(min_vals[0]), abs(max_vals[0])) or 1.0
-            self.data_range_y = max(abs(min_vals[1]), abs(max_vals[1])) or 1.0
-
-            # Reset view to fit all points
-            self.pan_2d = [0.0, 0.0]
-            self.zoom_2d = 1.0
-
-            # Calculate convex hull for projected points (optional)
-            try:
-                self.hull_2d = ConvexHull(points_2d)
-            except Exception:
-                self.hull_2d = None
+    def update_verification_point(self):
+        """Legge UI, aggiorna punto verifica e ricalcola slice se cambia il piano"""
+        try:
+            def p(t): return float(t.replace(',', '.') or 0)
+            mx = p(self.ui.out_Mx.text())
+            my = p(self.ui.out_My.text())
+            n  = p(self.ui.out_N.text())
+            
+            old = self.verification_point
+            self.verification_point = [mx, my, n]
+            
+            # Controlla se è cambiata la coordinata che definisce il piano di taglio
+            # N_Mx -> Taglio su My
+            # N_My -> Taglio su Mx
+            # Mx_My -> Taglio su N
+            recalc = False
+            if self.view_mode == "N_Mx" and abs(my - old[1]) > 1e-3: recalc = True
+            elif self.view_mode == "N_My" and abs(mx - old[0]) > 1e-3: recalc = True
+            elif self.view_mode == "Mx_My" and abs(n - old[2]) > 1e-3: recalc = True
+            
+            if recalc or self.slice_polygon is None:
+                self._compute_plane_intersection()
+                
+            self._check_inside()
+            self.update()
+        except: pass
 
     def _compute_plane_intersection(self):
-        """Compute intersection polygon (in world 2D coords of current view) between 3D convex hull and plane
-        defined by verification_point. Stores:
-            - self.plane_intersection_3d : (M,3) intersection points in 3D
-            - self.plane_intersection_2d : (M,2) projected to current 2D view coords
-            - self.plane_intersection_n  : (M,) corresponding N-values for each vertex
         """
-        # reset
-        self.plane_intersection_2d = None
-        self.plane_intersection_3d = None
-        self.plane_intersection_n = None
+        Taglia il ConvexHull 3D con il piano definito dal punto di verifica.
+        Genera self.slice_polygon (Nx2)
+        """
+        self.slice_polygon = None
+        if self.points_3d is None or len(self.points_3d) < 4: return
 
-        if self.points is None or len(self.points) < 2:
-            return
-
-        # Choose plane coordinate (index) and projection axes according to view_mode
-        if self.view_mode == "N_Mx":
-            plane_idx = 1      # My = const
-            plane_val = float(self.verification_point[1])
-            proj_idx = (0, 2)  # project to (Mx, N)
-            n_idx = 2
-        elif self.view_mode == "N_My":
-            plane_idx = 0      # Mx = const
-            plane_val = float(self.verification_point[0])
-            proj_idx = (1, 2)  # project to (My, N)
-            n_idx = 2
-        elif self.view_mode == "Mx_My":
-            plane_idx = 2      # N = const
-            plane_val = float(self.verification_point[2])
-            proj_idx = (0, 1)  # project to (Mx, My)
-            n_idx = 2
-        else:
-            return
-
-        pts = self.points
+        # Indici assi: 0=Mx, 1=My, 2=N
+        if self.view_mode == "N_Mx":   ix, iy, icut = 0, 2, 1
+        elif self.view_mode == "N_My": ix, iy, icut = 1, 2, 0
+        else:                          ix, iy, icut = 0, 1, 2 # Mx_My
+        
+        cut_val = self.verification_point[icut]
+        
         try:
-            hull3 = ConvexHull(pts)  # may raise if degenerate
+            hull = ConvexHull(self.points_3d)
+            segments = []
+            
+            # Itera facce del convex hull
+            for simplex in hull.simplices:
+                pts = self.points_3d[simplex] # (3, 3)
+                dists = pts[:, icut] - cut_val
+                
+                # Se i segni sono misti, c'è intersezione
+                if not (np.all(dists > 0) or np.all(dists < 0)):
+                    inters = []
+                    # Itera lati del triangolo
+                    for i in range(3):
+                        j = (i + 1) % 3
+                        if (dists[i] > 0 and dists[j] < 0) or (dists[i] < 0 and dists[j] > 0):
+                            t = dists[i] / (dists[i] - dists[j])
+                            # Interpola coordinate X e Y vista
+                            px = pts[i, ix] + t * (pts[j, ix] - pts[i, ix])
+                            py = pts[i, iy] + t * (pts[j, iy] - pts[i, iy])
+                            inters.append([px, py])
+                        elif dists[i] == 0:
+                            inters.append([pts[i, ix], pts[i, iy]])
+                    
+                    # Rimuovi duplicati vicini
+                    unique_int = []
+                    for p in inters:
+                        if not any(np.linalg.norm(np.array(p)-np.array(u)) < 1e-6 for u in unique_int):
+                            unique_int.append(p)
+                            
+                    if len(unique_int) == 2:
+                        segments.append(unique_int)
+            
+            if not segments: return
+
+            # Unisci segmenti in un poligono ordinato (ConvexHull 2D)
+            all_pts = np.array([p for s in segments for p in s])
+            if len(all_pts) > 2:
+                hull2 = ConvexHull(all_pts)
+                self.slice_polygon = all_pts[hull2.vertices]
+                
+            self._check_inside()
+                
         except Exception:
+            self.slice_polygon = None
+
+    def _check_inside(self):
+        """Controlla se il punto è dentro la slice attuale"""
+        if self.slice_polygon is None:
+            self.is_inside = False
+            self.verification_color = QColor(255, 0, 0)
             return
 
-        eps = 1e-9
-        inter_pts = []
+        # Coordinate punto vista
+        if self.view_mode == "N_Mx":   px, py = self.verification_point[0], self.verification_point[2]
+        elif self.view_mode == "N_My": px, py = self.verification_point[1], self.verification_point[2]
+        else:                          px, py = self.verification_point[0], self.verification_point[1]
+        
+        try:
+            tri = Delaunay(self.slice_polygon)
+            if tri.find_simplex([px, py]) >= 0:
+                self.is_inside = True
+                self.verification_color = QColor(0, 255, 0) # Verde
+                self.ui.out_testo_punto.setText("Verifica soddisfatta")
+            else:
+                self.is_inside = False
+                self.verification_color = QColor(255, 0, 0) # Rosso
+                self.ui.out_testo_punto.setText("Verifica non soddisfatta")
+        except:
+            pass
 
-        # For each triangular facet of the 3D hull intersect its edges with the plane
-        for simplex in hull3.simplices:
-            tri_idx = simplex  # three indices
-            tri = pts[tri_idx]  # shape (3,3)
-            # edges: (0,1), (1,2), (2,0)
-            for a, b in ((0,1),(1,2),(2,0)):
-                p1 = tri[a]
-                p2 = tri[b]
-                v1 = p1[plane_idx] - plane_val
-                v2 = p2[plane_idx] - plane_val
-
-                # both on plane -> add both endpoints (they will be deduped later)
-                if abs(v1) < eps and abs(v2) < eps:
-                    inter_pts.append(p1.copy()); inter_pts.append(p2.copy())
-                    continue
-                # one endpoint on plane
-                if abs(v1) < eps:
-                    inter_pts.append(p1.copy()); continue
-                if abs(v2) < eps:
-                    inter_pts.append(p2.copy()); continue
-                # opposite signs -> interior intersection
-                if v1 * v2 < 0:
-                    t = (plane_val - p1[plane_idx]) / (p2[plane_idx] - p1[plane_idx])
-                    p = p1 + t * (p2 - p1)
-                    inter_pts.append(p)
-
-        if len(inter_pts) == 0:
-            return
-
-        inter_pts = np.array(inter_pts)  # (M,3)
-
-        # Project to view 2D coordinates
-        pts2d = inter_pts[:, proj_idx]  # (M,2)
-        n_vals = inter_pts[:, n_idx]    # corresponding N values
-
-        # Deduplicate approximately identical points: round to tolerance then unique rows
-        if pts2d.shape[0] > 0:
-            pts2d_rounded = np.round(pts2d, decimals=9)
-            uniq_idx = np.unique(pts2d_rounded, axis=0, return_index=True)[1]
-            uniq_pts2d = pts2d[sorted(uniq_idx)]
-            uniq_n = n_vals[sorted(uniq_idx)]
-        else:
-            return
-
-        # If we have >=3 points compute 2D convex hull to get ordered polygon
-        if len(uniq_pts2d) >= 3:
-            try:
-                hull2 = ConvexHull(uniq_pts2d)
-                poly2d = uniq_pts2d[hull2.vertices]
-                poly_n = uniq_n[hull2.vertices]
-            except Exception:
-                # fallback: sort points by angle around centroid
-                centroid = np.mean(uniq_pts2d, axis=0)
-                angles = np.arctan2(uniq_pts2d[:,1] - centroid[1], uniq_pts2d[:,0] - centroid[0])
-                order = np.argsort(angles)
-                poly2d = uniq_pts2d[order]
-                poly_n = uniq_n[order]
-        else:
-            poly2d = uniq_pts2d
-            poly_n = uniq_n
-
-        # store
-        self.plane_intersection_2d = np.array(poly2d)
-        self.plane_intersection_n = np.array(poly_n)
-        # reconstruct 3d points for completeness (only if needed)
-        # We try to reconstruct 3D intersection points by solving for the missing coordinate:
-        # use plane index to set plane_val.
-        pts3d = []
-        for p2, nval in zip(poly2d, poly_n):
-            if self.view_mode == "N_Mx":
-                # p2 = (Mx, N), plane: My = plane_val
-                pts3d.append([p2[0], plane_val, p2[1]])
-            elif self.view_mode == "N_My":
-                # p2 = (My, N), plane: Mx = plane_val
-                pts3d.append([plane_val, p2[0], p2[1]])
-            elif self.view_mode == "Mx_My":
-                # p2 = (Mx, My), plane: N = plane_val
-                pts3d.append([p2[0], p2[1], plane_val])
-        self.plane_intersection_3d = np.array(pts3d) if len(pts3d) > 0 else None
+    # --- RENDERING ---
 
     def initializeGL(self):
-        glClearColor(40/255, 40/255, 40/255, 1.0)
+        glClearColor(40/255, 40/255, 40/255, 1.0) # Sfondo Grigio Scuro (Esempio)
         glEnable(GL_LINE_SMOOTH)
         glEnable(GL_BLEND)
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
@@ -331,11 +242,9 @@ class Domain2DWidget(QOpenGLWidget):
 
     def paintGL(self):
         glClear(GL_COLOR_BUFFER_BIT)
-        if self.view_mode == "3D":
-            return
-        # set projection
-        glMatrixMode(GL_PROJECTION)
-        glLoadIdentity()
+        
+        # Setup Proiezione Ortogonale
+        glMatrixMode(GL_PROJECTION); glLoadIdentity()
         glOrtho(
             -self.data_range_x * self.zoom_2d + self.pan_2d[0],
              self.data_range_x * self.zoom_2d + self.pan_2d[0],
@@ -343,289 +252,222 @@ class Domain2DWidget(QOpenGLWidget):
              self.data_range_y * self.zoom_2d + self.pan_2d[1],
             -1.0, 1.0
         )
-        glMatrixMode(GL_MODELVIEW)
-        glLoadIdentity()
+        glMatrixMode(GL_MODELVIEW); glLoadIdentity()
 
+        # 1. Griglia (Sfondo)
         self._draw_grid()
-        self._draw_domain()            # ora disegna fill trasparente + bordo bianco
-        self._draw_verification_point()
-        # Draw world axes and ticks on screen
+        
+        # 2. Dominio (Con trasparenza per vedere la griglia sotto)
+        self._draw_domain()
+        
+        # 3. Assi (Sopra il dominio per chiarezza, o sotto se preferisci)
+        # L'esempio li disegna sopra la griglia. 
+        # Disegniamo qui solo il riempimento dominio trasparente, poi gli assi?
+        # L'ordine migliore per visibilità tecnica: Griglia -> Assi -> Dominio(Trasp) -> Punto -> Testi
+        
+        # 4. Punto Verifica
+        self._draw_verification_point_gl()
+        
+        # 5. Overlay Testi e Assi Schermo (QPainter)
         self._draw_screen_axes_and_labels()
         self._draw_tracker_with_coords()
 
-    def _draw_verification_point(self):
-        """Disegna un punto di verifica come quadrato nella vista corrente"""
-        Mx, My, N = self.verification_point
+    def _draw_domain(self):
+        """Disegna il poligono di sezione con trasparenza forzata"""
+        if self.slice_polygon is None: return
+        
+        # --- 1. RIEMPIMENTO TRASPARENTE ---
+        # Abilita il blending SOLO per questa fase
+        glEnable(GL_BLEND)
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+        
+        # Colore Grigio Chiaro con Alpha 0.3 (30% visibile, 70% trasparente)
+        # Se lo vedi ancora troppo pieno, abbassa l'ultimo valore (es. 0.15)
+        glColor4f(1, 1, 1, 0.1) 
+        
+        glBegin(GL_POLYGON)
+        for p in self.slice_polygon:
+            glVertex2f(p[0], p[1])
+        glEnd()
+        
+        # Disabilita il blending per il resto (linee, bordi) che devono essere netti
+        glDisable(GL_BLEND)
+        
+        # --- 2. BORDO BIANCO SOLIDO ---
+        glLineWidth(1.0)
+        glColor4f(1.0, 1.0, 1.0, 1.0) # Alpha 1.0 = Opaco
+        glBegin(GL_LINE_LOOP)
+        for p in self.slice_polygon:
+            glVertex2f(p[0], p[1])
+        glEnd()
 
-        # Proiezione del punto in base alla vista selezionata
-        if self.view_mode == "N_Mx":
-            point_2d = [Mx, N]
-        elif self.view_mode == "N_My":
-            point_2d = [My, N]
-        elif self.view_mode == "Mx_My":
-            point_2d = [Mx, My]
-        else:
-            return  # Vista non valida
-
-        # Conversione in coordinate schermo
-        sx, sy = self._world_to_screen(point_2d[0], point_2d[1])
-
-        # Disegno del quadrato con QPainter
-        painter = QPainter(self)
-        painter.setRenderHint(QPainter.Antialiasing)
-        painter.setBrush(self.verification_color)
-        painter.setPen(self.verification_color)
-
-        size = 10  # Dimensione del quadrato (lato)
-        half = size // 2
-        painter.drawRect(sx - half, sy - half, size, size)
-
-        painter.end()
+    def _draw_verification_point_gl(self):
+        """Disegna punto GL"""
+        if self.view_mode == "N_Mx":   x, y = self.verification_point[0], self.verification_point[2]
+        elif self.view_mode == "N_My": x, y = self.verification_point[1], self.verification_point[2]
+        else:                          x, y = self.verification_point[0], self.verification_point[1]
+        
+        # Quadrato colorato
+        col = self.verification_color
+        glColor3f(col.redF(), col.greenF(), col.blueF())
+        
+        glPointSize(10.0)
+        glBegin(GL_POINTS)
+        glVertex2f(x, y)
+        glEnd()
 
     def _draw_grid(self):
-        # Calculate world coordinates
-        world_min_x = -self.data_range_x * self.zoom_2d + self.pan_2d[0]
-        world_max_x = self.data_range_x * self.zoom_2d + self.pan_2d[0]
-        world_min_y = -self.data_range_y * self.zoom_2d + self.pan_2d[1]
-        world_max_y = self.data_range_y * self.zoom_2d + self.pan_2d[1]
+        # Limiti vista world
+        wx_min = -self.data_range_x * self.zoom_2d + self.pan_2d[0]
+        wx_max =  self.data_range_x * self.zoom_2d + self.pan_2d[0]
+        wy_min = -self.data_range_y * self.zoom_2d + self.pan_2d[1]
+        wy_max =  self.data_range_y * self.zoom_2d + self.pan_2d[1]
 
-        # Calculate tick sizes
-        tx = self._tick(world_max_x - world_min_x)
-        ty = self._tick(world_max_y - world_min_y)
+        tx = self._tick(wx_max - wx_min)
+        ty = self._tick(wy_max - wy_min)
 
-        # Draw grid lines
         glColor3f(0.2, 0.2, 0.2)
         glLineWidth(1)
 
-        # Vertical lines
-        x = np.floor(world_min_x / tx) * tx
-        while x <= world_max_x + 1e-12:
-            glBegin(GL_LINES)
-            glVertex2f(x, world_min_y)
-            glVertex2f(x, world_max_y)
-            glEnd()
+        glBegin(GL_LINES)
+        # Verticali
+        x = np.floor(wx_min / tx) * tx
+        while x <= wx_max + 1e-12:
+            glVertex2f(x, wy_min); glVertex2f(x, wy_max)
             x += tx
-
-        # Horizontal lines
-        y = np.floor(world_min_y / ty) * ty
-        while y <= world_max_y + 1e-12:
-            glBegin(GL_LINES)
-            glVertex2f(world_min_x, y)
-            glVertex2f(world_max_x, y)
-            glEnd()
+        # Orizzontali
+        y = np.floor(wy_min / ty) * ty
+        while y <= wy_max + 1e-12:
+            glVertex2f(wx_min, y); glVertex2f(wx_max, y)
             y += ty
+        glEnd()
 
     def _draw_screen_axes_and_labels(self):
         painter = QPainter(self)
         painter.setRenderHint(QPainter.Antialiasing)
-        font = QFont("Arial", 10)
-        painter.setFont(font)
+        painter.setFont(self.font)
         metrics = painter.fontMetrics()
         w, h = self.width(), self.height()
 
-        # Convert world->screen
+        # Colori Assi
+        if self.view_mode == "N_Mx":
+            c_x = self.axis_colors["Mx"]; lab_x = "Mx [kNm]"
+            c_y = self.axis_colors["N"];  lab_y = "N [kN]"
+        elif self.view_mode == "N_My":
+            c_x = self.axis_colors["My"]; lab_x = "My [kNm]"
+            c_y = self.axis_colors["N"];  lab_y = "N [kN]"
+        else:
+            c_x = self.axis_colors["Mx"]; lab_x = "Mx [kNm]"
+            c_y = self.axis_colors["My"]; lab_y = "My [kNm]"
+
+        # Helper
         def to_screen(wx, wy):
             nx = (wx - (-self.data_range_x * self.zoom_2d + self.pan_2d[0])) / (2 * self.data_range_x * self.zoom_2d)
             ny = (wy - (-self.data_range_y * self.zoom_2d + self.pan_2d[1])) / (2 * self.data_range_y * self.zoom_2d)
             return int(nx * w), int((1 - ny) * h)
 
-        # Determine axis colors based on view mode
-        if self.view_mode == "N_Mx":
-            x_color = self.axis_colors["Mx"]  # Red
-            y_color = self.axis_colors["N"]   # Cyan
-        elif self.view_mode == "N_My":
-            x_color = self.axis_colors["My"]  # Green
-            y_color = self.axis_colors["N"]   # Cyan
-        elif self.view_mode == "Mx_My":
-            x_color = self.axis_colors["Mx"]  # Red
-            y_color = self.axis_colors["My"]  # Green
+        # 1. Disegna Linee Assi (X e Y passanti per origine)
+        sx0, sy0 = to_screen(0, 0)
+        
+        # Asse X
+        pen = painter.pen(); pen.setColor(c_x); pen.setWidth(1); painter.setPen(pen)
+        painter.drawLine(0, sy0, w, sy0)
+        
+        # Asse Y
+        pen.setColor(c_y); painter.setPen(pen)
+        painter.drawLine(sx0, 0, sx0, h)
 
-        # Draw horizontal axis (X)
-        pen = painter.pen()
-        pen.setColor(x_color)
-        pen.setWidth(1)
-        painter.setPen(pen)
-        # world origin y=0 line across
-        ox0, oy = to_screen(0, 0)
-        painter.drawLine(0, oy, w, oy)
+        # 2. Ticks e Valori
+        wx_min = -self.data_range_x * self.zoom_2d + self.pan_2d[0]
+        wx_max =  self.data_range_x * self.zoom_2d + self.pan_2d[0]
+        wy_min = -self.data_range_y * self.zoom_2d + self.pan_2d[1]
+        wy_max =  self.data_range_y * self.zoom_2d + self.pan_2d[1]
+        
+        tx = self._tick(wx_max - wx_min)
+        ty = self._tick(wy_max - wy_min)
 
-        # Draw vertical axis (Y)
-        pen.setColor(y_color)
-        painter.setPen(pen)
-        ox, oy0 = to_screen(0, 0)
-        painter.drawLine(ox, 0, ox, h)
-
-        # Tick calculation
-        world_min_x = -self.data_range_x * self.zoom_2d + self.pan_2d[0]
-        world_max_x = self.data_range_x * self.zoom_2d + self.pan_2d[0]
-        world_min_y = -self.data_range_y * self.zoom_2d + self.pan_2d[1]
-        world_max_y = self.data_range_y * self.zoom_2d + self.pan_2d[1]
-        tx = self._tick(world_max_x - world_min_x)
-        ty = self._tick(world_max_y - world_min_y)
-
-        # X ticks and labels (using X-axis color)
-        painter.setPen(x_color)
-        x = np.floor(world_min_x / tx) * tx
-        while x <= world_max_x:
-            if abs(x) > 1e-8:
+        # X Ticks
+        painter.setPen(c_x)
+        x = np.floor(wx_min / tx) * tx
+        while x <= wx_max:
+            if abs(x) > 1e-9:
                 sx, sy = to_screen(x, 0)
                 painter.drawLine(sx, sy-4, sx, sy+4)
-                label = f"{x:.1f}"
+                label = f"{x:.3g}"
                 tw = metrics.horizontalAdvance(label)
-                painter.drawText(sx - tw//2, sy + metrics.height() + 2, label)
+                # Se asse X esce schermo vert, clamp label
+                txt_y = sy + metrics.height() + 2
+                if txt_y > h - 5: txt_y = h - 5
+                if txt_y < 15: txt_y = 15
+                painter.drawText(sx - tw//2, txt_y, label)
             x += tx
 
-        # Y ticks and labels (using Y-axis color)
-        painter.setPen(y_color)
-        y = np.floor(world_min_y / ty) * ty
-        while y <= world_max_y:
-            if abs(y) > 1e-8:
+        # Y Ticks
+        painter.setPen(c_y)
+        y = np.floor(wy_min / ty) * ty
+        while y <= wy_max:
+            if abs(y) > 1e-9:
                 sx, sy = to_screen(0, y)
                 painter.drawLine(sx-4, sy, sx+4, sy)
-                label = f"{y:.1f}"
+                label = f"{y:.3g}"
                 tw = metrics.horizontalAdvance(label)
-                painter.drawText(sx - tw - 6, sy + metrics.height()//2 - 2, label)
+                # Se asse Y esce schermo orizz, clamp label
+                txt_x = sx - tw - 6
+                if txt_x < 5: txt_x = 5
+                if txt_x > w - tw - 5: txt_x = w - tw - 5
+                painter.drawText(txt_x, sy + metrics.height()//2 - 2, label)
             y += ty
 
-        # Axis titles (using corresponding axis colors)
-        x_label, y_label = self.axis_labels.get(self.view_mode, ("X", "Y"))
+        # 3. Titoli Assi (Angoli)
+        painter.setPen(c_x)
+        tw = metrics.horizontalAdvance(lab_x)
+        painter.drawText(w - tw - 10, h - 10, lab_x)
 
-        # X-axis title
-        painter.setPen(x_color)
-        tw = metrics.horizontalAdvance(x_label)
-        painter.drawText(w - tw - 10, h - 10, x_label)
-
-        # Y-axis title
-        painter.setPen(y_color)
+        painter.setPen(c_y)
         painter.save()
         painter.translate(20, 110)
         painter.rotate(-90)
-        painter.drawText(0, 0, y_label)
+        painter.drawText(0, 0, lab_y)
         painter.restore()
 
         painter.end()
 
-    def _draw_domain(self):
-        """Disegna il riempimento (trasparente) e il bordo bianco del poligono risultante dall'intersezione."""
-        if self.plane_intersection_2d is None:
-            return
-
-        pts = self.plane_intersection_2d
-        n_vals = self.plane_intersection_n if self.plane_intersection_n is not None else np.full(len(pts), self.verification_point[2])
-
-        if pts.shape[0] == 1:
-            # disegnare un piccolo marker (punto) come crocetta
-            x, y = pts[0]
-            glColor3f(1.0, 1.0, 1.0)
-            glPointSize(6.0)
-            glBegin(GL_POINTS)
-            glVertex2f(x, y)
-            glEnd()
-            return
-        elif pts.shape[0] == 2:
-            # disegnare segmento (linea)
-            glColor3f(1.0, 1.0, 1.0)
-            glLineWidth(2.0)
-            glBegin(GL_LINES)
-            glVertex2f(pts[0,0], pts[0,1])
-            glVertex2f(pts[1,0], pts[1,1])
-            glEnd()
-            return
-
-        # DRAW FILL
-        # For N_Mx and N_My: color varies per-vertex according to N value
-        # For Mx_My: homogeneous color based on verification N
-        alpha_fill = 0.40  # forte trasparenza
-
-        if self.view_mode in ["N_Mx", "N_My"]:
-            # Draw filled polygon with per-vertex colors (interpolated by OpenGL)
-            glEnable(GL_BLEND)
-            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
-            glBegin(GL_POLYGON)
-            for (x, y), n_val in zip(pts, n_vals):
-                # Normalize n_val
-                if self.max_N != self.min_N:
-                    t = (n_val - self.min_N) / (self.max_N - self.min_N)
-                else:
-                    t = 0.5
-                t = np.clip(t, 0.0, 1.0)
-                # palette mapping (same formula usata prima)
-                r = 1.0 - 0.5 * t
-                g = 1.0 - t
-                b = 0.5 + 0.5 * t
-                glColor4f(r, g, b, alpha_fill)
-                glVertex2f(x, y)
-            glEnd()
-            glDisable(GL_BLEND)
-
-        elif self.view_mode == "Mx_My":
-            # homogeneous color based on verification N
-            Nval = float(self.verification_point[2])
-            if self.max_N != self.min_N:
-                t = (Nval - self.min_N) / (self.max_N - self.min_N)
-            else:
-                t = 0.5
-            t = np.clip(t, 0.0, 1.0)
-            r = 1.0 - 0.5 * t
-            g = 1.0 - t
-            b = 0.5 + 0.5 * t
-
-            glEnable(GL_BLEND)
-            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
-            glColor4f(r, g, b, alpha_fill)
-            glBegin(GL_POLYGON)
-            for x, y in pts:
-                glVertex2f(x, y)
-            glEnd()
-            glDisable(GL_BLEND)
-
-        # Draw border in white
-        glColor3f(1.0, 1.0, 1.0)
-        glLineWidth(2.0)
-        glBegin(GL_LINE_LOOP)
-        for x, y in pts:
-            glVertex2f(x, y)
-        glEnd()
-
     def _draw_tracker_with_coords(self):
+        """Coordinate cursore"""
         painter = QPainter(self)
         painter.setRenderHint(QPainter.Antialiasing)
         painter.setFont(self.font)
         metrics = painter.fontMetrics()
         w, h = self.width(), self.height()
         x, y = self.cursor_pos.x(), self.cursor_pos.y()
+        
         # Croce bianca
-        pen = painter.pen(); pen.setColor(QColor(255,255,255)); painter.setPen(pen)
-        size = 10
-        painter.drawLine(x-size, y, x+size, y)
-        painter.drawLine(x, y-size, x, y+size)
-        # Linee guida scure
-        pen.setColor(QColor(100,100,100,150)); painter.setPen(pen)
-        painter.drawLine(x,0,x,h)
-        painter.drawLine(0,y,w,y)
-        # Coordinate in world
+        painter.setPen(QColor(255, 255, 255))
+        painter.drawLine(x-10, y, x+10, y)
+        painter.drawLine(x, y-10, x, y+10)
+        
+        # Coordinate
         wx, wy = self._screen_to_world(x, y)
-        # Testo ai margini fissi
-        pen.setColor(QColor(255,255,255,200)); painter.setPen(pen)
-        # X: sempre in basso, centrato a cursor x
-        text_x = f"{wx:.1f}"
-        tw = metrics.horizontalAdvance(text_x)
-        painter.drawText(x - tw//2+20, h - 5, text_x)
-        # Y: sempre a sinistra, centrato a cursor y
-        text_y = f"{wy:.1f}"
-        th = metrics.height()
-        painter.drawText(5, y + th//2-20, text_y)
+        
+        painter.setPen(QColor(255, 255, 255, 200))
+        lbl_x = f"{wx:.2f}"
+        lbl_y = f"{wy:.2f}"
+        
+        painter.drawText(x + 10, h - 5, lbl_x)
+        painter.drawText(5, y - 10, lbl_y)
         painter.end()
 
-    def _world_to_screen(self, wx, wy):
-        """Convert world coordinates to screen coordinates"""
-        w, h = self.width(), self.height()
-        nx = (wx - (-self.data_range_x * self.zoom_2d + self.pan_2d[0])) / (2 * self.data_range_x * self.zoom_2d)
-        ny = (wy - (-self.data_range_y * self.zoom_2d + self.pan_2d[1])) / (2 * self.data_range_y * self.zoom_2d)
-        return int(nx * w), int(h - ny * h)
+    # --- Utils Math ---
+    def _tick(self, rng):
+        rough = rng / 10
+        if rough <= 0: return 1.0
+        mag = 10 ** np.floor(np.log10(rough))
+        res = rough / mag
+        if res >= 5: return 5 * mag
+        elif res >= 2: return 2 * mag
+        return mag
 
     def _screen_to_world(self, sx, sy):
-        """Convert screen coordinates to world coordinates"""
         w, h = self.width(), self.height()
         nx = sx / w
         ny = 1.0 - (sy / h)
@@ -633,16 +475,7 @@ class Domain2DWidget(QOpenGLWidget):
         wy = (-self.data_range_y * self.zoom_2d + self.pan_2d[1]) + ny * (2 * self.data_range_y * self.zoom_2d)
         return wx, wy
 
-    def _tick(self, rng):
-        """Calculate appropriate tick size for grid"""
-        rough = rng / 10
-        if rough <= 0:
-            return 1.0
-        mag = 10 ** np.floor(np.log10(rough))
-        res = rough / mag
-        return 5 * mag if res >= 5 else 2 * mag if res >= 2 else mag
-
-    # Mouse interaction for 2D view
+    # --- Mouse ---
     def mousePressEvent(self, e):
         if e.button() == Qt.LeftButton:
             self.last_mouse_pos = e.pos()
@@ -654,50 +487,32 @@ class Domain2DWidget(QOpenGLWidget):
         if self.last_mouse_pos:
             dx = e.x() - self.last_mouse_pos.x()
             dy = e.y() - self.last_mouse_pos.y()
+            
+            # Pan in world units
             self.pan_2d[0] -= dx * (2 * self.data_range_x * self.zoom_2d) / self.width()
             self.pan_2d[1] += dy * (2 * self.data_range_y * self.zoom_2d) / self.height()
+            
             self.last_mouse_pos = e.pos()
         self.update()
 
     def mouseReleaseEvent(self, e):
         self.last_mouse_pos = None
-        self.cursor_pos = e.pos()
         self.update()
 
     def wheelEvent(self, e):
-        """Zoom centered on cursor"""
-        # delta for PyQt5 QWheelEvent: angleDelta().y()
-        delta = 0
-        try:
-            delta = e.angleDelta().y()
-        except Exception:
-            try:
-                delta = e.delta()
-            except Exception:
-                delta = 0
-        if delta == 0:
-            return
-        # zoom factor
-        factor = 1.0 - np.sign(delta) * 0.1
-        # limit zoom
-        new_zoom = self.zoom_2d * factor
-        new_zoom = max(0.05, min(10.0, new_zoom))
-
-        # To zoom around cursor, adjust pan accordingly
+        delta = e.angleDelta().y()
+        if delta == 0: return
+        
+        # Zoom verso cursore
         sx, sy = e.pos().x(), e.pos().y()
-        wx_before, wy_before = self._screen_to_world(sx, sy)
-        self.zoom_2d = new_zoom
-        wx_after, wy_after = self._screen_to_world(sx, sy)
-        # shift pan to keep same world point under cursor
-        self.pan_2d[0] += (wx_before - wx_after)
-        self.pan_2d[1] += (wy_before - wy_after)
-        self.update()
-
-        delta = e.angleDelta().y() / 120
-        factor = 1.15
-        if delta > 0:
-            self.zoom_2d /= factor
-        else:
-            self.zoom_2d *= factor
-        self.zoom_2d = max(0.1, min(self.zoom_2d, 10.0))
+        wx0, wy0 = self._screen_to_world(sx, sy)
+        
+        factor = 1.0 - np.sign(delta) * 0.1
+        self.zoom_2d *= factor
+        self.zoom_2d = max(0.001, min(100.0, self.zoom_2d))
+        
+        wx1, wy1 = self._screen_to_world(sx, sy)
+        self.pan_2d[0] += (wx0 - wx1)
+        self.pan_2d[1] += (wy0 - wy1)
+        
         self.update()

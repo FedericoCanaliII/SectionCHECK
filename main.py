@@ -99,7 +99,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.btn_main_materiali.clicked.connect(lambda: self.ui.stackedWidget_main.setCurrentIndex(1))
         self.ui.btn_main_input.clicked.connect(lambda: self.ui.stackedWidget_main.setCurrentIndex(2))
         self.ui.btn_main_output.clicked.connect(lambda: self.ui.stackedWidget_main.setCurrentIndex(3))
-        self.ui.btn_main_beam.clicked.connect(lambda: self.ui.stackedWidget_main.setCurrentIndex(4))
+        self.ui.btn_main_momentocurvatura.clicked.connect(lambda: self.ui.stackedWidget_main.setCurrentIndex(4))
+        self.ui.btn_main_beam.clicked.connect(lambda: self.ui.stackedWidget_main.setCurrentIndex(5))
 
         # BTN GRUPPI MAIN
         btn_group_main = QButtonGroup(self)
@@ -109,6 +110,7 @@ class MainWindow(QtWidgets.QMainWindow):
         btn_group_main.addButton(self.ui.btn_main_materiali)
         btn_group_main.addButton(self.ui.btn_main_input)
         btn_group_main.addButton(self.ui.btn_main_output)
+        btn_group_main.addButton(self.ui.btn_main_momentocurvatura)
         btn_group_main.addButton(self.ui.btn_main_beam)
 
         #comportamento esclusivo
@@ -119,6 +121,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.btn_main_materiali.setCheckable(True)
         self.ui.btn_main_input.setCheckable(True)
         self.ui.btn_main_output.setCheckable(True)
+        self.ui.btn_main_momentocurvatura.setCheckable(True)
         self.ui.btn_main_beam.setCheckable(True)
 
         # GESTIONE SEZIONI

@@ -34,6 +34,8 @@ class GestioneSezioni:
         QtCore.QTimer.singleShot(0, self.ui.btn_sezioni_barre.click)
         QtCore.QTimer.singleShot(0, self.ui.btn_sezioni_staffe.click)
         QtCore.QTimer.singleShot(0, self.ui.btn_sezioni_rinforzi.click)
+        QtCore.QTimer.singleShot(0, self.ui.btn_sezioni_rinforzi.click)
+
 
         # crea una singola istanza Valori
         self.valori_printer = Valori(self.section_manager, self.ui, gestione_materiali=self.gestione_materiali)
