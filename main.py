@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import QApplication, QButtonGroup, QVBoxLayout, QTextEdit
 from interfaccia.main_interfaccia import Ui_MainWindow
 from sezione.gestione_sezione import GestioneSezioni 
 from output.gestione_output import GestioneOutput
+from momentocurvatura.gestione_momentocurvatura import GestioneMomentocurvatura
 from beam.gestione_beam import GestioneBeam
 
 # --- CLASSE PER CATTURARE L'OUTPUT DEL TERMINALE ---
@@ -90,7 +91,6 @@ class MainWindow(QtWidgets.QMainWindow):
         print(">> Benvenuto in SectionCHECK")
         # ---------------------------------------------------------
 
-
         # PULSANTI AUTOMATICI
         QtCore.QTimer.singleShot(0, self.ui.btn_main_sc.click)
 
@@ -127,8 +127,8 @@ class MainWindow(QtWidgets.QMainWindow):
         # GESTIONE SEZIONI
         self.sezioni = GestioneSezioni(self.ui)
         self.output = GestioneOutput(self.ui, self.sezioni, self.sezioni.gestione_materiali)
+        self.momentocurvatura = GestioneMomentocurvatura(self.ui, self.sezioni, self.sezioni.gestione_materiali)
         self.beam = GestioneBeam(self, self.ui, self.sezioni, self.sezioni.gestione_materiali)
-
 
         # TOOLTIP
         self.ui.btn_main_sc.setToolTip("SectionCHECK")
@@ -139,6 +139,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.btn_main_stampa.setToolTip("Stampa")
 
         self.ui.progressBar_verifica.setValue(0)
+        self.ui.progressBar_verifica_MC.setValue(0)
 
     def append_terminal_text(self, text):
         """Funzione chiamata ogni volta che c'è un print()"""

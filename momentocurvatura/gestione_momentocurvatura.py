@@ -1,4 +1,3 @@
-# gestione_output.py
 from PyQt5.QtWidgets import QVBoxLayout, QButtonGroup
 from PyQt5.QtWidgets import QWidget, QComboBox
 from PyQt5.QtCore import Qt, QTimer
@@ -6,12 +5,10 @@ import traceback
 import numpy as np
 
 # importa i moduli domain/verifica dal tuo progetto (come già facevi)
-from output.disegno_output_sezione import OpenGLOutputSezioneWidget
 from output.verifica import Verifica
-from output.calcolo import SezioneRinforzata, Materiale, DomainCalculator
+from momentocurvatura.calcolo import Materiale, SezioneRinforzata, MomentCurvatureCalculator
 
-
-class GestioneOutput:
+class GestioneMomentocurvatura:
     def __init__(self, ui, gestione_sezioni, gestione_materiali):
         """
         ui: oggetto UI (contenitore widget e controlli)
@@ -27,41 +24,41 @@ class GestioneOutput:
         self.punti = None
 
         # mapping combobox -> indice reale sezione
-        self._output_section_map = []   # list: combobox index -> section_index
+        self._momentocurvatura_section_map = []   # list: combobox index -> section_index
         self.selected_section_index = None
-
-        self.widgetOutputSezione = None
-        #visualizzatore della sezione selezionata nel momento-curvatura
-        from output.disegno_output_sezione import OpenGLOutputSezioneWidget
-        self.widgetOutputSezione = OpenGLOutputSezioneWidget(self.ui, parent=getattr(self.ui, 'widget_output_sezione', None))
-        containerSezione = getattr(self.ui, 'widget_output_sezione', None)
-        layout = QVBoxLayout(containerSezione)
-        layout.setContentsMargins(1, 1, 1, 1)
-        layout.addWidget(self.widgetOutputSezione)
 
         # TRY creare widgets di visualizzazione (3D e 2D). Se fallisce lascialo None ma non crashare.
         self.widget3d = None
         self.widget2d = None
         try:
-            from output.disegno_output import OpenGLDomainWidget
-            self.widget3d = OpenGLDomainWidget(self.ui, parent=getattr(self.ui, 'widget_out', None))
+            from momentocurvatura.disegno_momentocurvatura import OpenGLMomentocurvaturaWidget
+            self.widget3d = OpenGLMomentocurvaturaWidget(self.ui, parent=getattr(self.ui, 'widget_momentocurvatura', None))
         except Exception:
             self.widget3d = None
             # optional: print error for debugging
-            print("Warning: non è stato possibile creare OpenGLDomainWidget.")
+            print("Warning: non è stato possibile creare OpenGLMomentocurvaturaWidget.")
             traceback.print_exc()
 
         try:
-            from output.disegno_output_2d import Domain2DWidget
-            self.widget2d = Domain2DWidget(self.ui, parent=getattr(self.ui, 'widget_out', None))
+            from momentocurvatura.disegno_momentocurvatura_2d import Momentocurvatura2DWidget
+            self.widget2d = Momentocurvatura2DWidget(self.ui, parent=getattr(self.ui, 'widget_momentocurvatura', None))
         except Exception:
             self.widget2d = None
-            print("Warning: non è stato possibile creare Domain2DWidget.")
+            print("Warning: non è stato possibile creare Momentocurvatura2DWidget.")
             traceback.print_exc()
+
+        self.widgetMomentocurvaturaSezione = None
+        #visualizzatore della sezione selezionata nel momento-curvatura
+        from momentocurvatura.disegno_momentocurvatura_sezione import OpenGLMomentocurvaturaSezioneWidget
+        self.widgetMomentocurvaturaSezione = OpenGLMomentocurvaturaSezioneWidget(self.ui, parent=getattr(self.ui, 'widget_momentocurvatura_sezione', None))
+        containerSezione = getattr(self.ui, 'widget_momentocurvatura_sezione', None)
+        layout = QVBoxLayout(containerSezione)
+        layout.setContentsMargins(1, 1, 1, 1)
+        layout.addWidget(self.widgetMomentocurvaturaSezione)
 
         # layout: aggiungi i widget se esistono
         try:
-            container = getattr(self.ui, 'widget_out', None)
+            container = getattr(self.ui, 'widget_momentocurvatura', None)
             if container is not None:
                 layout = QVBoxLayout(container)
                 layout.setContentsMargins(1, 1, 1, 1)
@@ -83,7 +80,7 @@ class GestioneOutput:
 
         # pulsante verifica -> avvia verifica completa
         try:
-            btn_ver = getattr(self.ui, 'btn_out_verifica', None)
+            btn_ver = getattr(self.ui, 'btn_momentocurvatura_verifica', None)
             if btn_ver is not None:
                 btn_ver.clicked.connect(self.verifica_completa)
         except Exception:
@@ -92,10 +89,8 @@ class GestioneOutput:
         # Group di bottoni per scelta view (se presenti in UI)
         try:
             btns = (
-                getattr(self.ui, 'btn_out_N_Mx', None),
-                getattr(self.ui, 'btn_out_N_My', None),
-                getattr(self.ui, 'btn_out_Mx_My', None),
-                getattr(self.ui, 'btn_out_3d', None),
+                getattr(self.ui, 'btn_momentocurvatura_2d', None),
+                getattr(self.ui, 'btn_momentocurvatura_3d', None),
             )
             for btn in btns:
                 if btn is not None:
@@ -111,37 +106,33 @@ class GestioneOutput:
                     self.btn_group.addButton(btn)
 
             # connect buttons to view selection
-            if getattr(self.ui, 'btn_out_N_Mx', None) is not None:
-                self.ui.btn_out_N_Mx.clicked.connect(lambda: self.select_view("N_Mx"))
-            if getattr(self.ui, 'btn_out_N_My', None) is not None:
-                self.ui.btn_out_N_My.clicked.connect(lambda: self.select_view("N_My"))
-            if getattr(self.ui, 'btn_out_Mx_My', None) is not None:
-                self.ui.btn_out_Mx_My.clicked.connect(lambda: self.select_view("Mx_My"))
-            if getattr(self.ui, 'btn_out_3d', None) is not None:
-                self.ui.btn_out_3d.clicked.connect(lambda: self.select_view("3D"))
+            if getattr(self.ui, 'btn_momentocurvatura_2d', None) is not None:
+                self.ui.btn_momentocurvatura_2d.clicked.connect(lambda: self.select_view("2D"))
+            if getattr(self.ui, 'btn_momentocurvatura_3d', None) is not None:
+                self.ui.btn_momentocurvatura_3d.clicked.connect(lambda: self.select_view("3D"))
 
             # default checked 3D se presente (postpone to next loop)
-            if getattr(self.ui, 'btn_out_3d', None) is not None:
-                QTimer.singleShot(0, lambda: self.ui.btn_out_3d.setChecked(True))
+            if getattr(self.ui, 'btn_momentocurvatura_3d', None) is not None:
+                QTimer.singleShot(0, lambda: self.ui.btn_momentocurvatura_3d.setChecked(True))
         except Exception:
             traceback.print_exc()
 
         # thread di calcolo (DomainCalculator)
         self.calc_thread = None
 
-        # collega il pulsante che popola la combobox per l'output
+        # collega il pulsante che popola la combobox per l'momento-curvatura
         try:
-            btn_main = getattr(self.ui, 'btn_main_output', None)
+            btn_main = getattr(self.ui, 'btn_main_momentocurvatura', None)
             if btn_main is not None:
-                btn_main.clicked.connect(self.populate_output_combobox)
+                btn_main.clicked.connect(self.populate_momentocurvatura_combobox)
         except Exception:
             traceback.print_exc()
 
-        # collega la combobox per tracciare la selezioneS
+        # collega la combobox per tracciare la selezione
         try:
-            combo = getattr(self.ui, 'combobox_output_sezioni', None)
+            combo = getattr(self.ui, 'combobox_momentocurvatura_sezioni', None)
             if combo is not None and isinstance(combo, QComboBox):
-                combo.currentIndexChanged.connect(self._on_output_combo_changed)
+                combo.currentIndexChanged.connect(self._on_momentocurvatura_combo_changed)
         except Exception:
             traceback.print_exc()
 
@@ -149,12 +140,12 @@ class GestioneOutput:
         """
         Recupera i dati della sezione selezionata e li invia al widget OpenGL.
         """
-        if self.widgetOutputSezione is None:
+        if self.widgetMomentocurvaturaSezione is None:
             return
             
         idx = getattr(self, 'selected_section_index', None)
         if idx is None:
-             self.widgetOutputSezione.set_section_data(None)
+             self.widgetMomentocurvaturaSezione.set_section_data(None)
              return
 
         # Recupera dati grezzi dalla verifica
@@ -162,50 +153,45 @@ class GestioneOutput:
             tutte_sezioni = self.verifica.get_tutte_matrici_sezioni()
             if 0 <= idx < len(tutte_sezioni):
                 dati_sezione = tutte_sezioni[idx]
-                self.widgetOutputSezione.set_section_data(dati_sezione)
+                self.widgetMomentocurvaturaSezione.set_section_data(dati_sezione)
             else:
-                self.widgetOutputSezione.set_section_data(None)
+                self.widgetMomentocurvaturaSezione.set_section_data(None)
         except Exception:
-            self.widgetOutputSezione.set_section_data(None)
+            self.widgetMomentocurvaturaSezione.set_section_data(None)
 
-    # ---------------- View switching ----------------
     def select_view(self, mode):
         """
-        Switch fra widget 3D e 2D e setta la modalità di visione.
+        Gestisce lo switch tra la vista 3D e la vista 2D (sezione).
+        mode: stringa "2D" o "3D"
         """
-        try:
-            if mode == "3D":
-                if self.widget3d is not None:
-                    self.widget3d.show()
-                if self.widget2d is not None:
-                    self.widget2d.hide()
-                if self.widget3d is not None and hasattr(self.widget3d, 'set_view_mode'):
-                    try: self.widget3d.set_view_mode(mode)
-                    except Exception: pass
-                if self.punti is not None and self.widget3d is not None and hasattr(self.widget3d, 'set_points'):
-                    try: self.widget3d.set_points(self.punti)
-                    except Exception: pass
-            else:
-                if self.widget3d is not None:
-                    self.widget3d.hide()
-                if self.widget2d is not None:
-                    self.widget2d.show()
-                if self.widget2d is not None and hasattr(self.widget2d, 'set_view_mode'):
-                    try: self.widget2d.set_view_mode(mode)
-                    except Exception: pass
-                if self.punti is not None and self.widget2d is not None and hasattr(self.widget2d, 'set_points'):
-                    try: self.widget2d.set_points(self.punti)
-                    except Exception: pass
-        except Exception:
-            traceback.print_exc()
+        # Selettore 3D
+        if mode == "3D":
+            if self.widget3d is not None:
+                self.widget3d.show()
+                # Assicuriamoci che abbia i dati aggiornati
+                if self.punti is not None:
+                    self.widget3d.set_points(self.punti)
+            
+            if self.widget2d is not None:
+                self.widget2d.hide()
 
-    # ---------------- Combobox population & mapping ----------------
-    def populate_output_combobox(self):
+        # Selettore 2D
+        elif mode == "2D":
+            if self.widget2d is not None:
+                self.widget2d.show()
+                # Assicuriamoci che abbia i dati aggiornati
+                if self.punti is not None:
+                    self.widget2d.set_points(self.punti)
+            
+            if self.widget3d is not None:
+                self.widget3d.hide()
+
+    def populate_momentocurvatura_combobox(self):
         """
-        Popola combobox_output_sezioni mappando ciascun item all'indice reale
+        Popola combobox_momentocurvatura_sezioni mappando ciascun item all'indice reale
         della sezione (UserRole). Mantiene la selezione precedente se possibile.
         """
-        combo = getattr(self.ui, 'combobox_output_sezioni', None)
+        combo = getattr(self.ui, 'combobox_momentocurvatura_sezioni', None)
         if combo is None:
             return
             
@@ -218,10 +204,10 @@ class GestioneOutput:
 
             combo.blockSignals(True)
             combo.clear()
-            self._output_section_map = []
+            self._momentocurvatura_section_map = []
             self.selected_section_index = None
 
-            # --- RECUPERO SEZIONI ---
+            # --- RECUPERO SEZIONI (Logica esistente) ---
             sm = None
             if hasattr(self.gestione_sezioni, 'section_manager'):
                 sm = getattr(self.gestione_sezioni, 'section_manager')
@@ -237,9 +223,7 @@ class GestioneOutput:
                     combo.addItem("Nessuna sezione")
                     combo.setEnabled(False)
                     combo.blockSignals(False)
-                    # Se esiste un metodo di aggiornamento visualizzazione, chiamalo qui
-                    if hasattr(self, '_aggiorna_visualizzazione_sezione'):
-                        self._aggiorna_visualizzazione_sezione()
+                    self._aggiorna_visualizzazione_sezione()
                     return
                 
                 combo.setEnabled(True)
@@ -256,46 +240,43 @@ class GestioneOutput:
                     items_to_add.append((str(name), section_index))
 
             else:
-                # Fallback nomi dai pulsanti
+                # Fallback pulsanti
                 names = self.get_section_names_from_buttons()
                 if not names:
                     combo.addItem("Nessuna sezione")
                     combo.setEnabled(False)
                     combo.blockSignals(False)
-                    if hasattr(self, '_aggiorna_visualizzazione_sezione'):
-                        self._aggiorna_visualizzazione_sezione()
+                    self._aggiorna_visualizzazione_sezione()
                     return
                 combo.setEnabled(True)
                 for i, name in enumerate(names):
                     items_to_add.append((str(name), i))
 
             # --- POPOLAMENTO E RIPRISTINO SELEZIONE ---
-            target_index = 0 # Default al primo item
+            target_index = 0 # Default al primo
             
             for i, (name, real_idx) in enumerate(items_to_add):
                 combo.addItem(name)
                 combo.setItemData(i, real_idx, Qt.UserRole)
-                self._output_section_map.append(real_idx)
+                self._momentocurvatura_section_map.append(real_idx)
 
                 # Se questo item corrisponde a quello che avevamo selezionato prima
                 if previous_data is not None and real_idx == previous_data:
                     target_index = i
 
-            # Imposta l'indice (O quello ritrovato, o 0)
+            # Imposta l'indice (O quello ritrovato, o 0 se non esiste più o era la prima volta)
             combo.setCurrentIndex(target_index)
             
             # Aggiorna la variabile interna di selezione
-            if 0 <= target_index < len(self._output_section_map):
-                self.selected_section_index = self._output_section_map[target_index]
+            if 0 <= target_index < len(self._momentocurvatura_section_map):
+                self.selected_section_index = self._momentocurvatura_section_map[target_index]
             else:
                 self.selected_section_index = None
 
             combo.blockSignals(False)
 
-            # --- AGGIORNAMENTO VISUALE ---
-            # Se la tua classe GestioneOutput ha un metodo per aggiornare i grafici/tabelle, chiamalo qui
-            if hasattr(self, '_aggiorna_visualizzazione_sezione'):
-                self._aggiorna_visualizzazione_sezione()
+            # Aggiorna il disegno
+            self._aggiorna_visualizzazione_sezione()
 
         except Exception:
             traceback.print_exc()
@@ -304,11 +285,11 @@ class GestioneOutput:
             except Exception:
                 pass
 
-    def _on_output_combo_changed(self, comb_idx: int):
+    def _on_momentocurvatura_combo_changed(self, comb_idx: int):
         """
         Aggiorna selected_section_index leggendo itemData (UserRole) o fallback sulla mappa.
         """
-        combo = getattr(self.ui, 'combobox_output_sezioni', None)
+        combo = getattr(self.ui, 'combobox_momentocurvatura_sezioni', None)
         if combo is None:
             self.selected_section_index = None
             return
@@ -316,8 +297,8 @@ class GestioneOutput:
             data = combo.itemData(comb_idx, Qt.UserRole)
             if data is None:
                 # fallback: usa lista mappata
-                if 0 <= comb_idx < len(self._output_section_map):
-                    self.selected_section_index = self._output_section_map[comb_idx]
+                if 0 <= comb_idx < len(self._momentocurvatura_section_map):
+                    self.selected_section_index = self._momentocurvatura_section_map[comb_idx]
                 else:
                     # ultima risorsa: usa comb_idx come indice
                     try:
@@ -335,21 +316,17 @@ class GestioneOutput:
                 self.selected_section_index = int(comb_idx)
             except Exception:
                 self.selected_section_index = None
-        
-        # --- RIGA MANCANTE AGGIUNTA QUI ---
+
         self._aggiorna_visualizzazione_sezione()
 
-    # ---------------- Verifica / avvio calcolo ----------------
     def verifica_completa(self):
-
-        pbar = getattr(self.ui, 'progressBar_verifica', None)
-        if pbar is not None:
-            pbar.setValue(0)
-            
         """
         Esegue la preparazione e parte il DomainCalculator sulla sezione scelta
         nella combobox (non sulla sezione corrente dell'editor).
         """
+        pbar = getattr(self.ui, 'progressBar_verifica_MC', None)
+        if pbar is not None:
+            pbar.setValue(0)
         try:
             tutte_sezioni = self.verifica.get_tutte_matrici_sezioni()
             tutte_materiali = self.verifica.get_tutte_matrici_materiali()
@@ -366,7 +343,7 @@ class GestioneOutput:
 
             # determina indice selezionato (preferisci selected_section_index)
             sel_idx = getattr(self, 'selected_section_index', None)
-            combo = getattr(self.ui, 'combobox_output_sezioni', None)
+            combo = getattr(self.ui, 'combobox_momentocurvatura_sezioni', None)
             # se non impostato, prova a leggere dalla combobox
             if sel_idx is None and combo is not None:
                 try:
@@ -420,7 +397,7 @@ class GestioneOutput:
 
             # crea e avvia nuovo thread di calcolo
             try:
-                self.calc_thread = DomainCalculator(sezione_rc, self.ui)
+                self.calc_thread = MomentCurvatureCalculator(sezione_rc, self.ui)
                 # connessioni: assicurati che update_points esista
                 try:
                     self.calc_thread.calculation_done.connect(self.update_points)
@@ -433,8 +410,8 @@ class GestioneOutput:
 
                 # connect progress bar se presente
                 try:
-                    if hasattr(self.calc_thread, 'progress') and getattr(self.ui, 'progressBar_verifica', None) is not None:
-                        self.calc_thread.progress.connect(self.ui.progressBar_verifica.setValue)
+                    if hasattr(self.calc_thread, 'progress') and getattr(self.ui, 'progressBar_verifica_MC', None) is not None:
+                        self.calc_thread.progress.connect(self.ui.progressBar_verifica_MC.setValue)
                 except Exception:
                     pass
 
@@ -456,24 +433,33 @@ class GestioneOutput:
     # signal handler: aggiorna i punti e ripple ai widget
     def update_points(self, punti):
         """
-        punti: lista di punti o numpy array (come emesso da DomainCalculator)
+        Callback chiamata quando il thread di calcolo finisce.
+        Aggiorna TUTTI i widget (3D e 2D) indipendentemente da chi è visibile,
+        così i dati sono sempre pronti.
         """
         try:
+            # 1. Salva i dati nella gestione
             if punti is None:
                 self.punti = None
             else:
                 self.punti = np.array(punti)
 
-            # aggiorna il widget attualmente visibile
-            try:
-                if getattr(self.ui, 'btn_out_3d', None) is not None and getattr(self.ui, 'btn_out_3d', None).isChecked():
-                    if self.widget3d is not None and hasattr(self.widget3d, 'set_points'):
-                        self.widget3d.set_points(self.punti)
-                else:
-                    if self.widget2d is not None and hasattr(self.widget2d, 'set_points'):
-                        self.widget2d.set_points(self.punti)
-            except Exception:
-                traceback.print_exc()
+            # 2. Aggiorna il widget 3D (se esiste)
+            if self.widget3d is not None:
+                # Passa i dati anche se è nascosto
+                self.widget3d.set_points(self.punti)
+                # Se è visibile, forza il ricalcolo grafico immediato
+                if self.widget3d.isVisible():
+                    self.widget3d.update()
+
+            # 3. Aggiorna il widget 2D (se esiste)
+            if self.widget2d is not None:
+                # Passa i dati anche se è nascosto (così ricalcola la slice corretta)
+                self.widget2d.set_points(self.punti)
+                # Se è visibile, forza il ricalcolo grafico immediato
+                if self.widget2d.isVisible():
+                    self.widget2d.update()
+
         except Exception:
             traceback.print_exc()
 
@@ -595,3 +581,6 @@ class GestioneOutput:
                 seen.add(n)
                 out.append(n)
         return out
+
+
+    

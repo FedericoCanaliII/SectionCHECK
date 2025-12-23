@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1993, 1441)
+        MainWindow.resize(2157, 1441)
         MainWindow.setStyleSheet("background-color: rgb(50,50,50);\n"
 "color: rgb(255, 255, 255);")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -63,14 +63,57 @@ class Ui_MainWindow(object):
 "border-radius:3px")
         self.widget_3.setObjectName("widget_3")
         self.horizontalLayout.addWidget(self.widget_3)
+        self.label_229 = QtWidgets.QLabel(self.frame)
+        self.label_229.setMinimumSize(QtCore.QSize(140, 32))
+        self.label_229.setMaximumSize(QtCore.QSize(140, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_229.setFont(font)
+        self.label_229.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_229.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);\n"
+"padding-bottom: 4px;")
+        self.label_229.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.label_229.setObjectName("label_229")
+        self.horizontalLayout.addWidget(self.label_229)
+        self.btn_main_materiali = QtWidgets.QPushButton(self.frame)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.btn_main_materiali.sizePolicy().hasHeightForWidth())
+        self.btn_main_materiali.setSizePolicy(sizePolicy)
+        self.btn_main_materiali.setMinimumSize(QtCore.QSize(100, 32))
+        self.btn_main_materiali.setMaximumSize(QtCore.QSize(100, 32))
+        self.btn_main_materiali.setStyleSheet("QPushButton{\n"
+"    background-color: rgb(70,70,70);\n"
+"    font:400 12pt \"Segoe UI\";\n"
+"    color: rgb(255,255,255);\n"
+"    padding-bottom: 4px;\n"
+"    border-radius:4px\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(40,40,40);\n"
+"    border: 1px solid rgb(120,120,120);\n"
+"}\n"
+"QPushButton:checked {\n"
+"    background-color: rgb(30,30,30);\n"
+"}\n"
+"\n"
+"")
+        self.btn_main_materiali.setObjectName("btn_main_materiali")
+        self.horizontalLayout.addWidget(self.btn_main_materiali)
         self.btn_main_input = QtWidgets.QPushButton(self.frame)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.btn_main_input.sizePolicy().hasHeightForWidth())
         self.btn_main_input.setSizePolicy(sizePolicy)
-        self.btn_main_input.setMinimumSize(QtCore.QSize(90, 32))
-        self.btn_main_input.setMaximumSize(QtCore.QSize(90, 32))
+        self.btn_main_input.setMinimumSize(QtCore.QSize(115, 32))
+        self.btn_main_input.setMaximumSize(QtCore.QSize(115, 32))
         self.btn_main_input.setStyleSheet("QPushButton{\n"
 "    background-color: rgb(70,70,70);\n"
 "    font:400 12pt \"Segoe UI\";\n"
@@ -207,32 +250,6 @@ class Ui_MainWindow(object):
 "border-radius:3px")
         self.widget_19.setObjectName("widget_19")
         self.horizontalLayout.addWidget(self.widget_19)
-        self.btn_main_materiali = QtWidgets.QPushButton(self.frame)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.btn_main_materiali.sizePolicy().hasHeightForWidth())
-        self.btn_main_materiali.setSizePolicy(sizePolicy)
-        self.btn_main_materiali.setMinimumSize(QtCore.QSize(100, 32))
-        self.btn_main_materiali.setMaximumSize(QtCore.QSize(100, 32))
-        self.btn_main_materiali.setStyleSheet("QPushButton{\n"
-"    background-color: rgb(70,70,70);\n"
-"    font:400 12pt \"Segoe UI\";\n"
-"    color: rgb(255,255,255);\n"
-"    padding-bottom: 4px;\n"
-"    border-radius:4px\n"
-"}\n"
-"QPushButton:hover {\n"
-"    background-color: rgb(40,40,40);\n"
-"    border: 1px solid rgb(120,120,120);\n"
-"}\n"
-"QPushButton:checked {\n"
-"    background-color: rgb(30,30,30);\n"
-"}\n"
-"\n"
-"")
-        self.btn_main_materiali.setObjectName("btn_main_materiali")
-        self.horizontalLayout.addWidget(self.btn_main_materiali)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
         self.btn_main_lingua = QtWidgets.QPushButton(self.frame)
@@ -4021,22 +4038,49 @@ class Ui_MainWindow(object):
         self.out_testo_punto.setObjectName("out_testo_punto")
         self.verticalLayout_17.addWidget(self.out_testo_punto)
         self.verticalLayout_28.addWidget(self.frame_output)
-        self.widget_sezione = QtWidgets.QWidget(self.output_page)
+        self.widget_26 = QtWidgets.QWidget(self.output_page)
+        self.widget_26.setMinimumSize(QtCore.QSize(500, 35))
+        self.widget_26.setMaximumSize(QtCore.QSize(500, 35))
+        self.widget_26.setStyleSheet("background-color: rgb(50,50,50);")
+        self.widget_26.setObjectName("widget_26")
+        self.verticalLayout_41 = QtWidgets.QVBoxLayout(self.widget_26)
+        self.verticalLayout_41.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_41.setSpacing(0)
+        self.verticalLayout_41.setObjectName("verticalLayout_41")
+        self.label_232 = QtWidgets.QLabel(self.widget_26)
+        self.label_232.setMinimumSize(QtCore.QSize(150, 32))
+        self.label_232.setMaximumSize(QtCore.QSize(150, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_232.setFont(font)
+        self.label_232.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_232.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);\n"
+"padding-bottom: 4px;")
+        self.label_232.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.label_232.setObjectName("label_232")
+        self.verticalLayout_41.addWidget(self.label_232)
+        self.verticalLayout_28.addWidget(self.widget_26)
+        self.widget_output_sezione = QtWidgets.QWidget(self.output_page)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.widget_sezione.sizePolicy().hasHeightForWidth())
-        self.widget_sezione.setSizePolicy(sizePolicy)
-        self.widget_sezione.setMinimumSize(QtCore.QSize(500, 200))
-        self.widget_sezione.setMaximumSize(QtCore.QSize(500, 16777215))
-        self.widget_sezione.setStyleSheet("border: 1px solid rgb(50,50,50);\n"
+        sizePolicy.setHeightForWidth(self.widget_output_sezione.sizePolicy().hasHeightForWidth())
+        self.widget_output_sezione.setSizePolicy(sizePolicy)
+        self.widget_output_sezione.setMinimumSize(QtCore.QSize(500, 200))
+        self.widget_output_sezione.setMaximumSize(QtCore.QSize(500, 16777215))
+        self.widget_output_sezione.setStyleSheet("border: 1px solid rgb(50,50,50);\n"
 "background-color: rgb(40,40,40);\n"
 "border-top: none; /* opzionale se vuoi solo il bordo in basso */\n"
 "border-bottom-left-radius: 4px;\n"
 "border-bottom-right-radius: 4px;\n"
 "")
-        self.widget_sezione.setObjectName("widget_sezione")
-        self.verticalLayout_28.addWidget(self.widget_sezione)
+        self.widget_output_sezione.setObjectName("widget_output_sezione")
+        self.verticalLayout_28.addWidget(self.widget_output_sezione)
         self.horizontalLayout_16.addLayout(self.verticalLayout_28)
         spacerItem56 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_16.addItem(spacerItem56)
@@ -4291,15 +4335,15 @@ class Ui_MainWindow(object):
         spacerItem58 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_16.addItem(spacerItem58)
         self.stackedWidget_main.addWidget(self.output_page)
-        self.page_2 = QtWidgets.QWidget()
-        self.page_2.setObjectName("page_2")
-        self.horizontalLayout_38 = QtWidgets.QHBoxLayout(self.page_2)
+        self.momentocurvatura_page = QtWidgets.QWidget()
+        self.momentocurvatura_page.setObjectName("momentocurvatura_page")
+        self.horizontalLayout_38 = QtWidgets.QHBoxLayout(self.momentocurvatura_page)
         self.horizontalLayout_38.setSpacing(0)
         self.horizontalLayout_38.setObjectName("horizontalLayout_38")
         self.verticalLayout_36 = QtWidgets.QVBoxLayout()
         self.verticalLayout_36.setSpacing(0)
         self.verticalLayout_36.setObjectName("verticalLayout_36")
-        self.frame_output_2 = QtWidgets.QFrame(self.page_2)
+        self.frame_output_2 = QtWidgets.QFrame(self.momentocurvatura_page)
         self.frame_output_2.setMinimumSize(QtCore.QSize(500, 572))
         self.frame_output_2.setMaximumSize(QtCore.QSize(500, 700))
         self.frame_output_2.setStyleSheet("background-color: rgb(30,30,30);\n"
@@ -4657,29 +4701,56 @@ class Ui_MainWindow(object):
         self.btn_momentocurvatura_verifica.setObjectName("btn_momentocurvatura_verifica")
         self.verticalLayout_40.addWidget(self.btn_momentocurvatura_verifica)
         self.verticalLayout_36.addWidget(self.frame_output_2)
-        self.widget_sezione_2 = QtWidgets.QWidget(self.page_2)
+        self.widget_27 = QtWidgets.QWidget(self.momentocurvatura_page)
+        self.widget_27.setMinimumSize(QtCore.QSize(500, 35))
+        self.widget_27.setMaximumSize(QtCore.QSize(500, 35))
+        self.widget_27.setStyleSheet("background-color: rgb(50,50,50);")
+        self.widget_27.setObjectName("widget_27")
+        self.verticalLayout_42 = QtWidgets.QVBoxLayout(self.widget_27)
+        self.verticalLayout_42.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_42.setSpacing(0)
+        self.verticalLayout_42.setObjectName("verticalLayout_42")
+        self.label_235 = QtWidgets.QLabel(self.widget_27)
+        self.label_235.setMinimumSize(QtCore.QSize(150, 32))
+        self.label_235.setMaximumSize(QtCore.QSize(150, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_235.setFont(font)
+        self.label_235.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_235.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);\n"
+"padding-bottom: 4px;")
+        self.label_235.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.label_235.setObjectName("label_235")
+        self.verticalLayout_42.addWidget(self.label_235)
+        self.verticalLayout_36.addWidget(self.widget_27)
+        self.widget_momentocurvatura_sezione = QtWidgets.QWidget(self.momentocurvatura_page)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.widget_sezione_2.sizePolicy().hasHeightForWidth())
-        self.widget_sezione_2.setSizePolicy(sizePolicy)
-        self.widget_sezione_2.setMinimumSize(QtCore.QSize(500, 200))
-        self.widget_sezione_2.setMaximumSize(QtCore.QSize(500, 16777215))
-        self.widget_sezione_2.setStyleSheet("border: 1px solid rgb(50,50,50);\n"
+        sizePolicy.setHeightForWidth(self.widget_momentocurvatura_sezione.sizePolicy().hasHeightForWidth())
+        self.widget_momentocurvatura_sezione.setSizePolicy(sizePolicy)
+        self.widget_momentocurvatura_sezione.setMinimumSize(QtCore.QSize(500, 200))
+        self.widget_momentocurvatura_sezione.setMaximumSize(QtCore.QSize(500, 16777215))
+        self.widget_momentocurvatura_sezione.setStyleSheet("border: 1px solid rgb(50,50,50);\n"
 "background-color: rgb(40,40,40);\n"
 "border-top: none; /* opzionale se vuoi solo il bordo in basso */\n"
 "border-bottom-left-radius: 4px;\n"
 "border-bottom-right-radius: 4px;\n"
 "")
-        self.widget_sezione_2.setObjectName("widget_sezione_2")
-        self.verticalLayout_36.addWidget(self.widget_sezione_2)
+        self.widget_momentocurvatura_sezione.setObjectName("widget_momentocurvatura_sezione")
+        self.verticalLayout_36.addWidget(self.widget_momentocurvatura_sezione)
         self.horizontalLayout_38.addLayout(self.verticalLayout_36)
         spacerItem66 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_38.addItem(spacerItem66)
         self.verticalLayout_34 = QtWidgets.QVBoxLayout()
         self.verticalLayout_34.setSpacing(0)
         self.verticalLayout_34.setObjectName("verticalLayout_34")
-        self.frame_17 = QtWidgets.QFrame(self.page_2)
+        self.frame_17 = QtWidgets.QFrame(self.momentocurvatura_page)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -4771,6 +4842,80 @@ class Ui_MainWindow(object):
         self.btn_momentocurvatura_2d.setObjectName("btn_momentocurvatura_2d")
         self.horizontalLayout_36.addWidget(self.btn_momentocurvatura_2d)
         self.horizontalLayout_34.addWidget(self.widget_24)
+        self.widget_42 = QtWidgets.QWidget(self.frame_17)
+        self.widget_42.setMinimumSize(QtCore.QSize(6, 32))
+        self.widget_42.setMaximumSize(QtCore.QSize(6, 32))
+        self.widget_42.setStyleSheet("background-color: rgb(80,80,80);\n"
+"border-radius:3px")
+        self.widget_42.setObjectName("widget_42")
+        self.horizontalLayout_34.addWidget(self.widget_42)
+        self.label_230 = QtWidgets.QLabel(self.frame_17)
+        self.label_230.setMinimumSize(QtCore.QSize(135, 32))
+        self.label_230.setMaximumSize(QtCore.QSize(135, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_230.setFont(font)
+        self.label_230.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_230.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);\n"
+"padding-bottom: 4px;")
+        self.label_230.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.label_230.setObjectName("label_230")
+        self.horizontalLayout_34.addWidget(self.label_230)
+        self.widget_25 = QtWidgets.QWidget(self.frame_17)
+        self.widget_25.setMinimumSize(QtCore.QSize(200, 0))
+        self.widget_25.setMaximumSize(QtCore.QSize(200, 16777215))
+        self.widget_25.setStyleSheet("background-color: rgb(30,30,30);\n"
+"border-radius: 4px")
+        self.widget_25.setObjectName("widget_25")
+        self.horizontalLayout_39 = QtWidgets.QHBoxLayout(self.widget_25)
+        self.horizontalLayout_39.setContentsMargins(4, 4, 4, 4)
+        self.horizontalLayout_39.setObjectName("horizontalLayout_39")
+        self.horizontalSlider_momentocurvatura = QtWidgets.QSlider(self.widget_25)
+        self.horizontalSlider_momentocurvatura.setMinimumSize(QtCore.QSize(160, 0))
+        self.horizontalSlider_momentocurvatura.setMaximumSize(QtCore.QSize(160, 16777215))
+        self.horizontalSlider_momentocurvatura.setStyleSheet("QSlider::groove:horizontal {\n"
+"    height: 8px;\n"
+"    background: #d0d0d0;\n"
+"    border-radius: 4px;\n"
+"}\n"
+"\n"
+"QSlider::sub-page:horizontal {\n"
+"    background: #9a9a9a;\n"
+"    border-radius: 4px;\n"
+"}\n"
+"\n"
+"QSlider::add-page:horizontal {\n"
+"    background: #d0d0d0;\n"
+"    border-radius: 4px;\n"
+"}\n"
+"\n"
+"QSlider::handle:horizontal {\n"
+"    background: #f5f5f5;\n"
+"    border: 2px solid #7a7a7a;\n"
+"    width: 18px;\n"
+"    height: 18px;\n"
+"    margin: -6px 0;\n"
+"    border-radius: 9px;\n"
+"}\n"
+"\n"
+"QSlider::handle:horizontal:hover {\n"
+"    background: #ffffff;\n"
+"    border: 2px solid #5a5a5a;\n"
+"}\n"
+"\n"
+"QSlider::handle:horizontal:pressed {\n"
+"    background: #b0b0b0;\n"
+"}\n"
+"")
+        self.horizontalSlider_momentocurvatura.setOrientation(QtCore.Qt.Horizontal)
+        self.horizontalSlider_momentocurvatura.setObjectName("horizontalSlider_momentocurvatura")
+        self.horizontalLayout_39.addWidget(self.horizontalSlider_momentocurvatura)
+        self.horizontalLayout_34.addWidget(self.widget_25)
         spacerItem67 = QtWidgets.QSpacerItem(20000, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_34.addItem(spacerItem67)
         self.widget_13 = QtWidgets.QWidget(self.frame_17)
@@ -4825,18 +4970,18 @@ class Ui_MainWindow(object):
         self.btn_out_rigenera_2.setObjectName("btn_out_rigenera_2")
         self.horizontalLayout_34.addWidget(self.btn_out_rigenera_2)
         self.verticalLayout_34.addWidget(self.frame_17)
-        self.widget_out_2 = QtWidgets.QWidget(self.page_2)
+        self.widget_momentocurvatura = QtWidgets.QWidget(self.momentocurvatura_page)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.widget_out_2.sizePolicy().hasHeightForWidth())
-        self.widget_out_2.setSizePolicy(sizePolicy)
-        self.widget_out_2.setMinimumSize(QtCore.QSize(0, 100))
-        self.widget_out_2.setStyleSheet("border: 1px solid rgb(50,50,50);\n"
+        sizePolicy.setHeightForWidth(self.widget_momentocurvatura.sizePolicy().hasHeightForWidth())
+        self.widget_momentocurvatura.setSizePolicy(sizePolicy)
+        self.widget_momentocurvatura.setMinimumSize(QtCore.QSize(0, 100))
+        self.widget_momentocurvatura.setStyleSheet("border: 1px solid rgb(50,50,50);\n"
 "")
-        self.widget_out_2.setObjectName("widget_out_2")
-        self.verticalLayout_34.addWidget(self.widget_out_2)
-        self.frame_sezioni_impostazioni_4 = QtWidgets.QFrame(self.page_2)
+        self.widget_momentocurvatura.setObjectName("widget_momentocurvatura")
+        self.verticalLayout_34.addWidget(self.widget_momentocurvatura)
+        self.frame_sezioni_impostazioni_4 = QtWidgets.QFrame(self.momentocurvatura_page)
         self.frame_sezioni_impostazioni_4.setMinimumSize(QtCore.QSize(0, 0))
         self.frame_sezioni_impostazioni_4.setMaximumSize(QtCore.QSize(16777215, 55))
         self.frame_sezioni_impostazioni_4.setStyleSheet("border: 1px solid rgb(50,50,50);\n"
@@ -4851,10 +4996,10 @@ class Ui_MainWindow(object):
         self.verticalLayout_35 = QtWidgets.QVBoxLayout(self.frame_sezioni_impostazioni_4)
         self.verticalLayout_35.setContentsMargins(5, 5, 5, 5)
         self.verticalLayout_35.setObjectName("verticalLayout_35")
-        self.progressBar_verifica_2 = QtWidgets.QProgressBar(self.frame_sezioni_impostazioni_4)
-        self.progressBar_verifica_2.setMinimumSize(QtCore.QSize(300, 25))
-        self.progressBar_verifica_2.setMaximumSize(QtCore.QSize(16777215, 25))
-        self.progressBar_verifica_2.setStyleSheet("QProgressBar {\n"
+        self.progressBar_verifica_MC = QtWidgets.QProgressBar(self.frame_sezioni_impostazioni_4)
+        self.progressBar_verifica_MC.setMinimumSize(QtCore.QSize(300, 25))
+        self.progressBar_verifica_MC.setMaximumSize(QtCore.QSize(16777215, 25))
+        self.progressBar_verifica_MC.setStyleSheet("QProgressBar {\n"
 "    background-color: rgb(30, 30, 30);\n"
 "    border: 1px solid rgb(70,70,70);\n"
 "    border-radius: 4px;\n"
@@ -4869,14 +5014,14 @@ class Ui_MainWindow(object):
 "    border-radius: 4px;\n"
 "}\n"
 "")
-        self.progressBar_verifica_2.setProperty("value", 24)
-        self.progressBar_verifica_2.setObjectName("progressBar_verifica_2")
-        self.verticalLayout_35.addWidget(self.progressBar_verifica_2)
+        self.progressBar_verifica_MC.setProperty("value", 24)
+        self.progressBar_verifica_MC.setObjectName("progressBar_verifica_MC")
+        self.verticalLayout_35.addWidget(self.progressBar_verifica_MC)
         self.verticalLayout_34.addWidget(self.frame_sezioni_impostazioni_4)
         self.horizontalLayout_38.addLayout(self.verticalLayout_34)
         spacerItem68 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_38.addItem(spacerItem68)
-        self.stackedWidget_main.addWidget(self.page_2)
+        self.stackedWidget_main.addWidget(self.momentocurvatura_page)
         self.beam_page = QtWidgets.QWidget()
         self.beam_page.setObjectName("beam_page")
         self.horizontalLayout_30 = QtWidgets.QHBoxLayout(self.beam_page)
@@ -6360,12 +6505,13 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.btn_main_sc.setText(_translate("MainWindow", "SC"))
-        self.btn_main_input.setText(_translate("MainWindow", "Sezione"))
+        self.label_229.setText(_translate("MainWindow", "Progettazione:"))
+        self.btn_main_materiali.setText(_translate("MainWindow", "Materiali"))
+        self.btn_main_input.setText(_translate("MainWindow", "Geometria"))
         self.label_202.setText(_translate("MainWindow", "Analisi:"))
         self.btn_main_output.setText(_translate("MainWindow", "Dominio N-M"))
         self.btn_main_momentocurvatura.setText(_translate("MainWindow", "Momento-Curvatura"))
         self.btn_main_beam.setText(_translate("MainWindow", "Analisi FEM"))
-        self.btn_main_materiali.setText(_translate("MainWindow", "Materiali"))
         self.label_171.setText(_translate("MainWindow", "SectionCHECK"))
         self.label_157.setText(_translate("MainWindow", "Structural Analysis App\n"
 "Version 0.1"))
@@ -6404,7 +6550,7 @@ class Ui_MainWindow(object):
         self.calcestruzzo_sigma_1.setText(_translate("MainWindow", "9.06 * (1 - (1 - x / 0.002)**2)"))
         self.calcestruzzo_sigma_2.setText(_translate("MainWindow", "9.06"))
         self.label_174.setText(_translate("MainWindow", "ε min:"))
-        self.calcestruzzo_epsilon_min_1.setText(_translate("MainWindow", "-0.0004"))
+        self.calcestruzzo_epsilon_min_1.setText(_translate("MainWindow", "0"))
         self.calcestruzzo_epsilon_min_2.setText(_translate("MainWindow", "0.002"))
         self.label_175.setText(_translate("MainWindow", "ε max:"))
         self.calcestruzzo_epsilon_max_1.setText(_translate("MainWindow", "0.002"))
@@ -6507,6 +6653,7 @@ class Ui_MainWindow(object):
         self.label_212.setText(_translate("MainWindow", "My = Flessione sull\'asse y:"))
         self.label_215.setText(_translate("MainWindow", "[kN]"))
         self.btn_out_verifica.setText(_translate("MainWindow", "VERIFICA"))
+        self.label_232.setText(_translate("MainWindow", "Sezione:"))
         self.label_195.setText(_translate("MainWindow", "Dominio M-N:"))
         self.btn_out_3d.setText(_translate("MainWindow", "3D"))
         self.btn_out_N_Mx.setText(_translate("MainWindow", "N-Mx"))
@@ -6515,9 +6662,9 @@ class Ui_MainWindow(object):
         self.label_209.setText(_translate("MainWindow", "MOMENTO - CURVATURA"))
         self.label_222.setText(_translate("MainWindow", "Sezione:"))
         self.label_223.setText(_translate("MainWindow", "Step rotazione:"))
-        self.momentocurvatura_angoli.setText(_translate("MainWindow", "18"))
+        self.momentocurvatura_angoli.setText(_translate("MainWindow", "36"))
         self.label_224.setText(_translate("MainWindow", "Numero punti:"))
-        self.momentocurvatura_step.setText(_translate("MainWindow", "20"))
+        self.momentocurvatura_step.setText(_translate("MainWindow", "100"))
         self.label_225.setText(_translate("MainWindow", "PARAMETRI DEL DOMINIO"))
         self.label_226.setText(_translate("MainWindow", "Precisione sezione:"))
         self.momentocurvatura_precisione.setText(_translate("MainWindow", "4"))
@@ -6526,9 +6673,11 @@ class Ui_MainWindow(object):
         self.label_236.setText(_translate("MainWindow", "[kN]"))
         self.label_228.setText(_translate("MainWindow", "SOLLECITAZIONI"))
         self.btn_momentocurvatura_verifica.setText(_translate("MainWindow", "VERIFICA"))
+        self.label_235.setText(_translate("MainWindow", "Sezione:"))
         self.label_208.setText(_translate("MainWindow", "Momento - Curvatura:"))
         self.btn_momentocurvatura_3d.setText(_translate("MainWindow", "3D"))
         self.btn_momentocurvatura_2d.setText(_translate("MainWindow", "N-M"))
+        self.label_230.setText(_translate("MainWindow", "Rotazione 2D:"))
         self.beam_lunghezza.setText(_translate("MainWindow", "4"))
         self.beam_passo.setText(_translate("MainWindow", "0.4"))
         self.label_242.setText(_translate("MainWindow", "[m]"))

@@ -30,7 +30,7 @@ class CircleTool:
     def __init__(self,
                  line_width: float = 2.0,
                  line_color: QColor = QColor(255, 255, 255, 255),
-                 fill_color: QColor = QColor(0, 0, 0, 60),
+                 fill_color: QColor = QColor(255,255,255, 26),
                  preview_line_color: QColor = QColor(150, 200, 255, 200),
                  preview_fill_color: QColor = QColor(135, 206, 235, 120),
                  snap_to_grid: bool = False,

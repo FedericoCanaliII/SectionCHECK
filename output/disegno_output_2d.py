@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QOpenGLWidget
-from PyQt5.QtGui import QPainter, QColor, QFont
+from PyQt5.QtGui import QPainter, QColor, QFont, QPen
 from PyQt5.QtCore import Qt, QPoint
 from OpenGL.GL import *
 from OpenGL.GLU import *
@@ -433,28 +433,50 @@ class Domain2DWidget(QOpenGLWidget):
         painter.end()
 
     def _draw_tracker_with_coords(self):
-        """Coordinate cursore"""
+        """Disegna cursore, linee di tracciamento e coordinate (Stile Reference)"""
         painter = QPainter(self)
         painter.setRenderHint(QPainter.Antialiasing)
-        painter.setFont(self.font)
-        metrics = painter.fontMetrics()
+        
+        # Usa il font impostato nel widget
+        if hasattr(self, 'font_obj'):
+            painter.setFont(self.font_obj)
+        elif hasattr(self, 'font'):
+            painter.setFont(self.font)
+
         w, h = self.width(), self.height()
         x, y = self.cursor_pos.x(), self.cursor_pos.y()
+
+        # --- 1. DISEGNO LINEE MIRINO (FULL SCREEN) ---
+        # Impostiamo un colore grigio discreto e semitrasparente
+        tracking_pen = QPen(QColor(150, 150, 150, 100), 1, Qt.SolidLine)
+        painter.setPen(tracking_pen)
         
-        # Croce bianca
-        painter.setPen(QColor(255, 255, 255))
-        painter.drawLine(x-10, y, x+10, y)
-        painter.drawLine(x, y-10, x, y+10)
-        
-        # Coordinate
+        # Linea Verticale (da cima a fondo)
+        painter.drawLine(x, 0, x, h)
+        # Linea Orizzontale (da sinistra a destra)
+        painter.drawLine(0, y, w, y)
+
+        # --- 2. DISEGNO CROCE CENTRALE (PICCOLA) ---
+        # Bianca e solida per indicare il punto esatto
+        cross_pen = QPen(QColor(255, 255, 255, 255), 1)
+        painter.setPen(cross_pen)
+        size = 10
+        painter.drawLine(x - size, y, x + size, y)
+        painter.drawLine(x, y - size, x, y + size)
+
+        # --- 3. CALCOLO E DISEGNO COORDINATE MONDO ---
+        # Trasformiamo la posizione pixel in valori fisici
         wx, wy = self._screen_to_world(x, y)
         
-        painter.setPen(QColor(255, 255, 255, 200))
-        lbl_x = f"{wx:.2f}"
-        lbl_y = f"{wy:.2f}"
-        
-        painter.drawText(x + 10, h - 5, lbl_x)
-        painter.drawText(5, y - 10, lbl_y)
+        painter.setPen(QColor(255, 255, 255, 180)) # Testo bianco morbido
+        lbl_x = f"{wx:.4g}"
+        lbl_y = f"{wy:.4g}"
+
+        # Posizionamento etichette (Stile professionale ai bordi)
+        # X vicino al bordo inferiore, Y vicino al bordo sinistro
+        painter.drawText(x + 10, h - 10, lbl_x)
+        painter.drawText(10, y - 10, lbl_y)
+
         painter.end()
 
     # --- Utils Math ---

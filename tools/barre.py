@@ -27,7 +27,7 @@ class BarTool:
             super().focusOutEvent(ev)
 
     def __init__(self,
-                 diameter: float = 12.0,
+                 diameter: float = 16.0,
                  line_width: float = 2.0,
                  line_color: QColor = QColor(255, 0, 0, 255),
                  fill_color: QColor = QColor(255, 0, 0, 120),
