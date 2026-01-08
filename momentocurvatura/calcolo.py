@@ -16,6 +16,7 @@ class Materiale:
     """
     Gestisce le leggi costitutive. 
     Accetta array NumPy per calcoli paralleli su tutte le fibre.
+    Identico al Secondo Codice.
     """
     def __init__(self, matrice: List[Tuple[str, float, float]], nome: str = "") -> None:
         self.nome = nome
@@ -26,10 +27,7 @@ class Materiale:
             low = float(min(a, b))
             high = float(max(a, b))
             
-            # Normalizzazione espressione per Python
             expr_str = expr_raw.replace('^', '**')
-            
-            # Pre-compilazione per velocità
             compiled = compile(expr_str, f'<mat_{nome}_{i}>', 'eval')
             
             self.intervalli.append({
@@ -40,50 +38,39 @@ class Materiale:
             })
             all_strains.extend([low, high])
 
-        # Definizione limiti ultimi (rottura) per il calcolo dei ratio
         if all_strains:
-            self.ult_compression = min(all_strains) # es. -0.0035
-            self.ult_tension = max(all_strains)     # es. 0.01
+            self.ult_compression = min(all_strains)
+            self.ult_tension = max(all_strains)
         else:
-            # Fallback per materiali fittizi/infiniti
             self.ult_compression = -1e9
             self.ult_tension = 1e9
 
     def get_sigma_vectorized(self, eps_array: np.ndarray) -> np.ndarray:
-        """
-        Calcola le tensioni per un intero array di deformazioni (eps_array).
-        Molto più veloce del ciclo for element-wise.
-        """
         sigma_out = np.zeros_like(eps_array)
-        
-        # Per ogni intervallo definito nel materiale
         for intervallo in self.intervalli:
-            # Maschera booleana: true dove eps è dentro l'intervallo
             mask = (eps_array >= intervallo['low']) & (eps_array <= intervallo['high'])
-            
             if np.any(mask):
-                # Estraiamo i valori di x per i punti validi
                 x = eps_array[mask]
-                # Valutiamo l'espressione in ambiente sicuro con NumPy disponibile
                 try:
                     res = eval(intervallo['expr_code'], {'__builtins__': None, 'np': np}, {'x': x})
                     sigma_out[mask] = res
                 except Exception:
                     pass
-
         return sigma_out
 
 # ======================================================================
 # SEZIONE RINFORZATA (Gestione Geometria e Mesh)
 # ======================================================================
 class SezioneRinforzata:
+    """
+    Identica al Secondo Codice.
+    """
     def __init__(self, elementi: List[Tuple], materiali_dict: Dict[str, Materiale]) -> None:
         self.geometria = []
         self.barre = []
         self.rinforzi = []
         self.materiali = materiali_dict
 
-        # Parsing Elementi
         for elem in elementi:
             tipo = elem[0]
             if tipo == 'shape':
@@ -117,7 +104,6 @@ class SezioneRinforzata:
         self._calcola_limiti_box()
         self.area_totale = self._calcola_area_totale()
 
-        # Cache per i dati mesh (Arrays Numpy)
         self.mesh_x: Optional[np.ndarray] = None
         self.mesh_y: Optional[np.ndarray] = None
         self.mesh_area: Optional[np.ndarray] = None
@@ -136,11 +122,9 @@ class SezioneRinforzata:
             coords.extend(p.exterior.coords)
         for b in self.barre:
             coords.append((b['x'], b['y']))
-        
         if not coords:
             self.min_x = self.max_x = self.min_y = self.max_y = 0
             return
-
         pts = np.array(coords)
         self.min_x, self.min_y = np.min(pts, axis=0)
         self.max_x, self.max_y = np.max(pts, axis=0)
@@ -161,7 +145,6 @@ class SezioneRinforzata:
             Ax += b['x'] * area
             Ay += b['y'] * area
             A_tot += area
-        
         if A_tot == 0: return 0,0
         return Ax/A_tot, Ay/A_tot
 
@@ -184,7 +167,6 @@ class SezioneRinforzata:
         aree = []
         mat_idx = []
         
-        # Identifica tutti i materiali unici usati e crea una lista
         self.materiali_list = list({m for _, m in self.geometria} | 
                                    {m for _, m in self.rinforzi} | 
                                    {b['mat'] for b in self.barre})
@@ -200,7 +182,6 @@ class SezioneRinforzata:
         ys = np.linspace(self.min_y, self.max_y, ny)
         dA = (w/max(1, nx-1)) * (h/max(1, ny-1))
 
-        # 1. Aggiunta Barre (Priorità Alta)
         for b in self.barre:
             if b['mat'] in mat_to_id:
                 punti_x.append(b['x'])
@@ -208,25 +189,19 @@ class SezioneRinforzata:
                 aree.append(math.pi * (b['diam']/2)**2)
                 mat_idx.append(mat_to_id[b['mat']])
 
-        # 2. Aggiunta Mesh Continua
         for y in ys:
             for x in xs:
                 p = Point(x,y)
                 found_mat = None
-                
-                # Check Rinforzi
                 for poly, mat in self.rinforzi:
                     if poly.contains(p):
                         found_mat = mat
                         break
-                
-                # Check Geometria Base
                 if found_mat is None:
                     for poly, mat in self.geometria:
                         if poly.contains(p):
                             found_mat = mat
                             break
-                
                 if found_mat and found_mat in mat_to_id:
                     punti_x.append(x)
                     punti_y.append(y)
@@ -237,11 +212,10 @@ class SezioneRinforzata:
         self.mesh_y = np.array(punti_y, dtype=np.float64)
         self.mesh_area = np.array(aree, dtype=np.float64)
         self.mesh_mat_indices = np.array(mat_idx, dtype=np.int32)
-        
         print(f"Mesh generata: {len(self.mesh_x)} fibre.")
 
 # ======================================================================
-# THREAD CALCOLATORE (Moment-Curvature con Strain-Ratio Check)
+# THREAD CALCOLATORE (Moment-Curvature Biassiale con Strain-Ratio Check)
 # ======================================================================
 class MomentCurvatureCalculator(QThread):
     calculation_done = pyqtSignal(np.ndarray)
@@ -257,14 +231,15 @@ class MomentCurvatureCalculator(QThread):
         self._stop = True
 
     def run(self):
-        # ---------------- INPUT UTENTE ----------------
+        # ---------------- INPUT UTENTE (Struttura Secondo Codice) ----------------
         try:
             grid_step = float(self._get_ui_val('momentocurvatura_precisione', 5.0))
             n_angoli = int(self._get_ui_val('momentocurvatura_angoli', 18))
             n_step_curv = int(self._get_ui_val('momentocurvatura_step', 50))
             
-            N_input_kN = - float(self._get_ui_val('momentocurvatura_N', 0))
-            N_target = -N_input_kN * 1000.0 
+            # Convenzione del Secondo Codice: Input Positivo = Compressione
+            N_input_kN = float(self._get_ui_val('momentocurvatura_N', 0))
+            N_target = N_input_kN * 1000.0 
             
         except Exception as e:
             print(f"Errore lettura UI: {e}")
@@ -280,8 +255,7 @@ class MomentCurvatureCalculator(QThread):
         fib_mat_idx = self.sezione.mesh_mat_indices
         materials = self.sezione.materiali_list
 
-        # Pre-calcolo vettori limiti per ogni fibra (Ottimizzazione)
-        # Creiamo array lunghi quanto la mesh che contengono il limite di quel materiale in quel punto
+        # Ottimizzazione Strain Ratio (dal Secondo Codice)
         lim_comp_expanded = np.zeros_like(fib_x)
         lim_tens_expanded = np.zeros_like(fib_x)
         
@@ -291,19 +265,19 @@ class MomentCurvatureCalculator(QThread):
                 lim_comp_expanded[mask] = mat.ult_compression
                 lim_tens_expanded[mask] = mat.ult_tension
 
-        thetas = np.linspace(0, 2*math.pi, n_angoli, endpoint=False)
+        load_angles = np.linspace(0, 2*math.pi, n_angoli, endpoint=False)
         results = np.zeros((n_angoli, n_step_curv, 3))
         total_iter = n_angoli * n_step_curv
         count = 0
 
-        # ---------------- CALCOLO PARALLELO (Multithreading sugli angoli) ----------------
+        # ---------------- CALCOLO PARALLELO ----------------
         with concurrent.futures.ThreadPoolExecutor() as executor:
             future_to_idx = {}
             
-            for i, theta in enumerate(thetas):
+            for i, angle in enumerate(load_angles):
                 future = executor.submit(
                     self._calcola_ramo_robusto,
-                    theta, n_step_curv, N_target,
+                    angle, n_step_curv, N_target,
                     fib_x, fib_y, fib_A, fib_mat_idx, materials,
                     lim_comp_expanded, lim_tens_expanded
                 )
@@ -334,167 +308,135 @@ class MomentCurvatureCalculator(QThread):
         except:
             return default
 
-    # ---------------- NUOVO CORE: STRAIN-RATIO DRIVEN ----------------
-    def _calcola_ramo_robusto(self, theta, n_steps, N_target, 
+    # ---------------- CORE INTEGRATO (STRUTTURA COD. 2 + MATEMATICA COD. 1) ----------------
+    def _calcola_ramo_robusto(self, load_angle_rad, n_steps, N_target, 
                               x_arr, y_arr, A_arr, mat_idx_arr, 
                               materials, lim_comp_expanded, lim_tens_expanded):
         """
-        Calcola la curva M-Chi controllando rigorosamente i limiti di deformazione.
-        Adatto sia per materiali duttili che fragili.
+        Struttura esterna: Strain-Ratio Driven (Secondo Codice).
+        Motore interno: Biaxial Solver (Primo Codice).
         """
         
-        # Coordinate ruotate
-        cx = math.cos(theta)
-        cy = math.sin(theta)
-        d_arr = x_arr * cx + y_arr * cy
+        # 1. Stima Curvatura Massima (Logica Ratio)
+        D_proj = (np.max(x_arr) - np.min(x_arr)) * abs(math.cos(load_angle_rad)) + \
+                 (np.max(y_arr) - np.min(y_arr)) * abs(math.sin(load_angle_rad))
         
-        # Stima curvatura massima fisica (molto abbondante, il limitatore ratio farà il resto)
-        d_range = np.max(d_arr) - np.min(d_arr)
-        max_strain = max(np.max(np.abs(lim_comp_expanded)), np.max(lim_tens_expanded))
-        chi_max_theoretical = (max_strain * 3.0) / (d_range * 0.1) # 3x per sicurezza
+        max_limit = max(np.max(np.abs(lim_comp_expanded)), np.max(lim_tens_expanded))
+        chi_max_theoretical = (max_limit * 0.8) / (D_proj * 0.1) 
         
-        # Distribuzione quadratica delle curvature per risoluzione fine all'inizio
         t = np.linspace(0, 1.0, n_steps)
         chis_target = chi_max_theoretical * (t ** 2)
         
-        branch_data = np.zeros((n_steps, 3)) # M, Chi, Theta
-        last_eps0 = 0.0
+        branch_data = np.zeros((n_steps, 3)) 
         
-        # Variabile per tracciare se abbiamo raggiunto la rottura
+        # Variabili di stato (inclusa beta_na per il solver del Primo Codice)
+        state_guess = {'eps0': 0.0, 'beta_na': load_angle_rad}
+        
         rupture_reached = False
         
         for k, chi in enumerate(chis_target):
             if rupture_reached:
-                # Se rotto, manteniamo l'ultimo valore (plateau grafico) o zero
-                # Copiamo il valore precedente per continuità visiva (perfettamente plastico fittizio)
+                branch_data[k] = branch_data[k-1]
+                continue
+            
+            if chi == 0:
+                branch_data[k] = [0.0, 0.0, load_angle_rad]
+                continue
+
+            # A. SOLVER BIASSIALE (Iniezione logica Primo Codice)
+            try:
+                eps0, beta_na, M_res, strains = self._solve_biaxial_state(
+                    chi, load_angle_rad, N_target, 
+                    state_guess['eps0'], state_guess['beta_na'],
+                    x_arr, y_arr, A_arr, mat_idx_arr, materials
+                )
+                state_guess['eps0'] = eps0
+                state_guess['beta_na'] = beta_na
+                
+            except RuntimeError:
+                rupture_reached = True
                 branch_data[k] = branch_data[k-1]
                 continue
 
-            # 1. Risolvi eq. assiale per curvatura corrente
-            eps0 = self._solve_equilibrium(chi, d_arr, A_arr, mat_idx_arr, materials, N_target, last_eps0)
-            last_eps0 = eps0
+            # B. CHECK ROTTURA (Logica Secondo Codice)
+            ratio_val, is_rupture = self._check_rupture(strains, lim_comp_expanded, lim_tens_expanded)
             
-            # 2. Calcola deformazioni
-            strains = eps0 - chi * d_arr
-            
-            # 3. Calcolo "Utilization Ratio" (Rapporto Sfruttamento)
-            # R = eps / lim. Se R >= 1.0, rottura.
-            # Gestione segni: Compressione su Compressione, Trazione su Trazione.
-            
-            # Maschere
-            mask_tens = strains > 0
-            mask_comp = strains < 0
-            
-            # Init ratios a -1 (sicuro)
-            ratios = np.full_like(strains, -1.0)
-            
-            # Calcolo Trazione (dove limite > 0 e strain > 0)
-            # Evita div/0 se limite è enorme o nullo (ma gestito in Materiale)
-            valid_t = mask_tens & (lim_tens_expanded > 1e-6)
-            if np.any(valid_t):
-                ratios[valid_t] = strains[valid_t] / lim_tens_expanded[valid_t]
-                
-            # Calcolo Compressione (dove limite < 0 e strain < 0)
-            valid_c = mask_comp & (lim_comp_expanded < -1e-6)
-            if np.any(valid_c):
-                # Entrambi negativi, divisione positiva
-                ratios[valid_c] = strains[valid_c] / lim_comp_expanded[valid_c]
-
-            max_ratio = np.max(ratios)
-            
-            # 4. LOGICA DI CONTROLLO
-            if max_ratio < 1.0:
-                # --- STATO SICURO ---
-                # Calcola Momento normalmente
-                M_val = self._calculate_moment(strains, A_arr, d_arr, mat_idx_arr, materials)
-                branch_data[k] = [M_val, chi * 1000.0, theta]
-                
+            if not is_rupture:
+                branch_data[k] = [M_res, chi * 1000.0, load_angle_rad]
                 prev_chi = chi
-                prev_eps0 = eps0
-                
+                prev_state = {'eps0': eps0, 'beta_na': beta_na}
             else:
                 # --- ROTTURA RILEVATA ---
-                # La rottura è avvenuta tra prev_chi e chi corrente.
-                # DOBBIAMO TROVARE ESATTAMENTE CHI_ULT TALE CHE max_ratio == 1.0
                 rupture_reached = True
+                # Bisezione (Usando il solver biassiale per precisione)
+                final_res = self._bisect_failure_point(
+                    prev_chi, chi, load_angle_rad, N_target, 
+                    prev_state, 
+                    x_arr, y_arr, A_arr, mat_idx_arr, materials,
+                    lim_comp_expanded, lim_tens_expanded
+                )
+                branch_data[k] = [final_res['M'], final_res['chi'] * 1000.0, load_angle_rad]
                 
-                # Bisezione per trovare chi_limit
-                chi_low = prev_chi if k > 0 else 0.0
-                chi_high = chi
-                eps0_search = prev_eps0 if k > 0 else 0.0
-                
-                final_chi = chi_low
-                final_eps0 = eps0_search
-                
-                for _ in range(15): # 15 iterazioni bastano per altissima precisione
-                    chi_mid = (chi_low + chi_high) / 2.0
-                    eps0_mid = self._solve_equilibrium(chi_mid, d_arr, A_arr, mat_idx_arr, materials, N_target, eps0_search)
-                    strains_mid = eps0_mid - chi_mid * d_arr
-                    
-                    # Ricalcolo max ratio al punto medio
-                    r_mid = -1.0
-                    
-                    # Rapido calcolo ratio max (copia logica sopra)
-                    m_tens = strains_mid > 0
-                    m_comp = strains_mid < 0
-                    curr_max = 0.0
-                    
-                    # Check veloce max (ottimizzato senza array completo se possibile, ma qui usiamo numpy fast)
-                    # Trazione
-                    vt = m_tens & (lim_tens_expanded > 1e-6)
-                    if np.any(vt):
-                        curr_max = np.max(strains_mid[vt] / lim_tens_expanded[vt])
-                    
-                    # Compressione
-                    if curr_max < 1.0: # Solo se non abbiamo già trovato un breach
-                        vc = m_comp & (lim_comp_expanded < -1e-6)
-                        if np.any(vc):
-                            c_ratios = strains_mid[vc] / lim_comp_expanded[vc]
-                            curr_max = max(curr_max, np.max(c_ratios))
-                            
-                    if curr_max < 1.0:
-                        # Siamo ancora sicuri, alziamo il target
-                        chi_low = chi_mid
-                        final_chi = chi_mid
-                        final_eps0 = eps0_mid
-                        eps0_search = eps0_mid
-                    else:
-                        # Siamo rotti, abbassiamo
-                        chi_high = chi_mid
-                
-                # Calcoliamo il momento al punto esatto di rottura
-                strains_lim = final_eps0 - final_chi * d_arr
-                M_lim = self._calculate_moment(strains_lim, A_arr, d_arr, mat_idx_arr, materials)
-                
-                # Salviamo in k
-                branch_data[k] = [M_lim, final_chi * 1000.0, theta]
-                
-                # Riempiamo il resto dell'array con questo valore (plateau finale)
                 if k + 1 < n_steps:
                     branch_data[k+1:] = branch_data[k]
-                
-                break # Esce dal ciclo curvature
+                break
 
         return branch_data
 
-    def _calculate_moment(self, strains, A_arr, d_arr, mat_idx_arr, materials):
-        """Helper per calcolare il momento date le deformazioni"""
-        sigmas = np.zeros_like(strains)
-        for m_id, mat in enumerate(materials):
-            mask = (mat_idx_arr == m_id)
-            if np.any(mask):
-                sigmas[mask] = mat.get_sigma_vectorized(strains[mask])
-        
-        forces = sigmas * A_arr
-        M_int = -np.sum(forces * d_arr)
-        return abs(M_int) / 1e6
+    def _solve_biaxial_state(self, chi, target_angle, N_target, guess_eps0, guess_beta,
+                             x_arr, y_arr, A_arr, mat_idx_arr, materials):
+        """
+        (Nuovo) Solver che itera sull'angolo beta (Asse neutro) finché il momento
+        risultante non è parallelo al carico esterno.
+        """
+        def compute_moment_error(beta_trial):
+            cx = math.cos(beta_trial)
+            cy = math.sin(beta_trial)
+            d_arr_rotated = x_arr * cx + y_arr * cy
+            
+            eps0_equil = self._solve_axial_equilibrium(
+                chi, d_arr_rotated, N_target, guess_eps0, 
+                A_arr, mat_idx_arr, materials
+            )
+            
+            strains = eps0_equil - chi * d_arr_rotated
+            Mx, My = self._calculate_Mx_My(strains, x_arr, y_arr, A_arr, mat_idx_arr, materials)
+            
+            # Errore direzionale
+            t_sin = math.sin(target_angle)
+            t_cos = math.cos(target_angle)
+            error_perp = -Mx * t_sin + My * t_cos
+            
+            return error_perp, eps0_equil, strains, math.sqrt(Mx**2 + My**2)
 
-    def _solve_equilibrium(self, chi, d_arr, A_arr, mat_idx_arr, materials, N_target, guess_eps0):
-        """
-        Trova eps0 tale che sum(sigma(eps0 - chi*d)*A) - N_target = 0
-        Usa Newton-Raphson combinato con Bisezione Safe.
-        """
+        # Solver tipo Secante per l'angolo beta
+        beta_curr = guess_beta
+        err_curr, e0_curr, strains_curr, M_curr = compute_moment_error(beta_curr)
         
+        if abs(err_curr) < 1e-3: 
+            return e0_curr, beta_curr, M_curr / 1e6, strains_curr
+
+        beta_prev = beta_curr - 0.01 
+        err_prev, _, _, _ = compute_moment_error(beta_prev)
+        
+        for _ in range(24): 
+            if abs(err_curr - err_prev) < 1e-9: break
+            
+            beta_new = beta_curr - err_curr * (beta_curr - beta_prev) / (err_curr - err_prev)
+            err_new, e0_new, s_new, M_new = compute_moment_error(beta_new)
+            
+            if abs(err_new) < 1e-3:
+                return e0_new, beta_new, M_new / 1e6, s_new
+            
+            beta_prev, err_prev = beta_curr, err_curr
+            beta_curr, err_curr = beta_new, err_new
+            e0_curr, strains_curr, M_curr = e0_new, s_new, M_new
+
+        return e0_curr, beta_curr, M_curr / 1e6, strains_curr
+
+    def _solve_axial_equilibrium(self, chi, d_arr, N_target, guess_eps0, 
+                                 A_arr, mat_idx_arr, materials):
+        """Newton-Raphson per equilibrio assiale (Adattato per input biassiale)"""
         def residual(e0):
             strains = e0 - chi * d_arr
             N_calc = 0.0
@@ -505,51 +447,91 @@ class MomentCurvatureCalculator(QThread):
                     N_calc += np.sum(sigs * A_arr[mask])
             return N_calc - N_target
 
-        # 1. Tentativo Newton-Raphson (Veloce)
         e_curr = guess_eps0
-        for _ in range(10): 
+        for _ in range(16): 
             res = residual(e_curr)
-            if abs(res) < 5.0:  # Tolleranza N (Newton)
-                return e_curr
+            if abs(res) < 10.0: return e_curr
             
             delta = 1e-6
-            res_delta = residual(e_curr + delta)
-            stiffness = (res_delta - res) / delta
-            
-            if abs(stiffness) < 1e-3: break # Singolarità
-            
-            e_next = e_curr - res / stiffness
-            if abs(e_next - e_curr) < 1e-7:
-                return e_next
-            e_curr = e_next
+            stiff = (residual(e_curr + delta) - res) / delta
+            if abs(stiff) < 1e-3: break 
+            e_curr = e_curr - res / stiff
+            if abs(residual(e_curr)) < 10.0: return e_curr
 
-        # 2. Fallback Bisezione (Robusta)
-        low, high = -0.1, 0.1 # Range molto ampio
-        # Ottimizzazione range dinamico basata sul guess
-        if guess_eps0 != 0:
-            low = guess_eps0 - 0.05
-            high = guess_eps0 + 0.05
-            
-        f_low = residual(low)
-        f_high = residual(high)
-        
-        # Espansione range se necessario
+        # Fallback Bisezione
+        low, high = guess_eps0 - 0.1, guess_eps0 + 0.1
+        f_low, f_high = residual(low), residual(high)
         if f_low * f_high > 0:
-            low, high = -0.5, 0.5 # Extrema ratio
-            f_low = residual(low)
-            f_high = residual(high)
-
-        for _ in range(50):
+            low, high = -0.5, 0.5 
+            f_low, f_high = residual(low), residual(high)
+        
+        for _ in range(40):
             mid = (low + high) / 2
             f_mid = residual(mid)
-            
-            if abs(f_mid) < 5.0 or (high - low) < 1e-7:
-                return mid
-            
-            if f_low * f_mid < 0:
-                high = mid
-            else:
-                low = mid
-                f_low = f_mid
-                
+            if abs(f_mid) < 10.0 or (high - low) < 1e-7: return mid
+            if f_low * f_mid < 0: high = mid
+            else: low, f_low = mid, f_mid
         return (low + high) / 2
+
+    def _calculate_Mx_My(self, strains, x_arr, y_arr, A_arr, mat_idx_arr, materials):
+        """Helper per momenti vettoriali"""
+        sigmas = np.zeros_like(strains)
+        for m_id, mat in enumerate(materials):
+            mask = (mat_idx_arr == m_id)
+            if np.any(mask):
+                sigmas[mask] = mat.get_sigma_vectorized(strains[mask])
+        
+        forces = sigmas * A_arr
+        Mx = np.sum(forces * y_arr)
+        My = np.sum(forces * x_arr)
+        return Mx, My
+
+    def _check_rupture(self, strains, lim_comp, lim_tens):
+        """Identico al Secondo Codice"""
+        mask_tens = strains > 0
+        mask_comp = strains < 0
+        max_ratio = 0.0
+        
+        valid_t = mask_tens & (lim_tens > 1e-6)
+        if np.any(valid_t):
+            max_ratio = max(max_ratio, np.max(strains[valid_t] / lim_tens[valid_t]))
+            
+        valid_c = mask_comp & (lim_comp < -1e-6)
+        if np.any(valid_c):
+            max_ratio = max(max_ratio, np.max(strains[valid_c] / lim_comp[valid_c]))
+            
+        return max_ratio, (max_ratio >= 1.0)
+
+    def _bisect_failure_point(self, chi_start, chi_end, load_angle, N_target, 
+                              state_start, x_arr, y_arr, A_arr, mat_idx, mats, l_comp, l_tens):
+        """
+        Bisezione precisa del punto di rottura (Struttura Secondo Codice, 
+        ma chiama il solver Biassiale del Primo Codice).
+        """
+        low = chi_start
+        high = chi_end
+        best_M = 0.0
+        best_chi = low
+        
+        curr_eps0 = state_start['eps0']
+        curr_beta = state_start['beta_na']
+        
+        for _ in range(20):
+            mid_chi = (low + high) / 2.0
+            
+            e0, beta, M_val, strs = self._solve_biaxial_state(
+                mid_chi, load_angle, N_target, curr_eps0, curr_beta,
+                x_arr, y_arr, A_arr, mat_idx, mats
+            )
+            curr_eps0, curr_beta = e0, beta
+            
+            _, broken = self._check_rupture(strs, l_comp, l_tens)
+            
+            if broken:
+                high = mid_chi 
+            else:
+                low = mid_chi
+                best_M = M_val
+                best_chi = mid_chi
+                
+        return {'M': best_M, 'chi': best_chi}
