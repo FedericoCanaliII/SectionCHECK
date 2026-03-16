@@ -8,6 +8,7 @@ from sezione.gestione_sezione import GestioneSezioni
 from output.gestione_output import GestioneOutput
 from momentocurvatura.gestione_momentocurvatura import GestioneMomentocurvatura
 from beam.gestione_beam import GestioneBeam
+from telaio.gestione_telaio import GestioneTelaio
 
 # --- CLASSE PER CATTURARE L'OUTPUT DEL TERMINALE ---
 class EmittingStream(QtCore.QObject):
@@ -38,6 +39,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # ---------------------------------------------------------
         # INTEGRAZIONE TERMINALE IN widget_terminale
         # ---------------------------------------------------------
+
         # 1. Creiamo un layout per il widget contenitore (se non ne ha già uno nel .ui)
         if self.ui.widget_terminale.layout() is None:
             self.terminal_layout = QVBoxLayout(self.ui.widget_terminale)
@@ -89,7 +91,8 @@ class MainWindow(QtWidgets.QMainWindow):
         
         print(">> Terminale Inizializzato correttamente...")
         print(">> Benvenuto in SectionCHECK")
-        # ---------------------------------------------------------
+
+        #-----------------------------------------------------------
 
         # PULSANTI AUTOMATICI
         QtCore.QTimer.singleShot(0, self.ui.btn_main_sc.click)
@@ -101,6 +104,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.btn_main_output.clicked.connect(lambda: self.ui.stackedWidget_main.setCurrentIndex(3))
         self.ui.btn_main_momentocurvatura.clicked.connect(lambda: self.ui.stackedWidget_main.setCurrentIndex(4))
         self.ui.btn_main_beam.clicked.connect(lambda: self.ui.stackedWidget_main.setCurrentIndex(5))
+        self.ui.btn_main_struttura.clicked.connect(lambda: self.ui.stackedWidget_main.setCurrentIndex(6))
 
         # BTN GRUPPI MAIN
         btn_group_main = QButtonGroup(self)
@@ -112,6 +116,7 @@ class MainWindow(QtWidgets.QMainWindow):
         btn_group_main.addButton(self.ui.btn_main_output)
         btn_group_main.addButton(self.ui.btn_main_momentocurvatura)
         btn_group_main.addButton(self.ui.btn_main_beam)
+        btn_group_main.addButton(self.ui.btn_main_struttura)
 
         #comportamento esclusivo
         btn_group_main.setExclusive(True)
@@ -123,12 +128,14 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.btn_main_output.setCheckable(True)
         self.ui.btn_main_momentocurvatura.setCheckable(True)
         self.ui.btn_main_beam.setCheckable(True)
+        self.ui.btn_main_struttura.setCheckable(True)
 
         # GESTIONE SEZIONI
         self.sezioni = GestioneSezioni(self.ui)
         self.output = GestioneOutput(self.ui, self.sezioni, self.sezioni.gestione_materiali)
         self.momentocurvatura = GestioneMomentocurvatura(self.ui, self.sezioni, self.sezioni.gestione_materiali)
         self.beam = GestioneBeam(self, self.ui, self.sezioni, self.sezioni.gestione_materiali)
+        self.telaio = GestioneTelaio(self.ui)
 
         # TOOLTIP
         self.ui.btn_main_sc.setToolTip("SectionCHECK")
@@ -140,6 +147,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.ui.progressBar_verifica.setValue(0)
         self.ui.progressBar_verifica_MC.setValue(0)
+        self.ui.progressBar_telaio.setValue(0)
 
         # COLLEGAMENTO TASTO STAMPA
         self.ui.btn_main_stampa.clicked.connect(self.salva_screenshot)

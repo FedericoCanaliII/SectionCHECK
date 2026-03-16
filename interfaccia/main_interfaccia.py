@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(2157, 1441)
+        MainWindow.resize(2163, 1303)
         MainWindow.setStyleSheet("background-color: rgb(50,50,50);\n"
 "color: rgb(255, 255, 255);")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -250,6 +250,56 @@ class Ui_MainWindow(object):
 "border-radius:3px")
         self.widget_19.setObjectName("widget_19")
         self.horizontalLayout.addWidget(self.widget_19)
+        self.label_257 = QtWidgets.QLabel(self.frame)
+        self.label_257.setMinimumSize(QtCore.QSize(70, 32))
+        self.label_257.setMaximumSize(QtCore.QSize(70, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_257.setFont(font)
+        self.label_257.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_257.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);\n"
+"padding-bottom: 4px;")
+        self.label_257.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.label_257.setObjectName("label_257")
+        self.horizontalLayout.addWidget(self.label_257)
+        self.btn_main_struttura = QtWidgets.QPushButton(self.frame)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.btn_main_struttura.sizePolicy().hasHeightForWidth())
+        self.btn_main_struttura.setSizePolicy(sizePolicy)
+        self.btn_main_struttura.setMinimumSize(QtCore.QSize(100, 32))
+        self.btn_main_struttura.setMaximumSize(QtCore.QSize(100, 32))
+        self.btn_main_struttura.setStyleSheet("QPushButton{\n"
+"    background-color: rgb(70,70,70);\n"
+"    font:400 12pt \"Segoe UI\";\n"
+"    color: rgb(255,255,255);\n"
+"    padding-bottom: 4px;\n"
+"    border-radius:4px\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(40,40,40);\n"
+"    border: 1px solid rgb(120,120,120);\n"
+"}\n"
+"QPushButton:checked {\n"
+"    background-color: rgb(30,30,30);\n"
+"}\n"
+"\n"
+"")
+        self.btn_main_struttura.setObjectName("btn_main_struttura")
+        self.horizontalLayout.addWidget(self.btn_main_struttura)
+        self.widget_28 = QtWidgets.QWidget(self.frame)
+        self.widget_28.setMinimumSize(QtCore.QSize(6, 32))
+        self.widget_28.setMaximumSize(QtCore.QSize(6, 32))
+        self.widget_28.setStyleSheet("background-color: rgb(80,80,80);\n"
+"border-radius:3px")
+        self.widget_28.setObjectName("widget_28")
+        self.horizontalLayout.addWidget(self.widget_28)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
         self.btn_main_lingua = QtWidgets.QPushButton(self.frame)
@@ -6493,12 +6543,3253 @@ class Ui_MainWindow(object):
         spacerItem95 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_30.addItem(spacerItem95)
         self.stackedWidget_main.addWidget(self.beam_page)
+        self.struttura_page = QtWidgets.QWidget()
+        self.struttura_page.setObjectName("struttura_page")
+        self.horizontalLayout_71 = QtWidgets.QHBoxLayout(self.struttura_page)
+        self.horizontalLayout_71.setObjectName("horizontalLayout_71")
+        self.verticalLayout_48 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_48.setSpacing(0)
+        self.verticalLayout_48.setObjectName("verticalLayout_48")
+        self.frame_29 = QtWidgets.QFrame(self.struttura_page)
+        self.frame_29.setMinimumSize(QtCore.QSize(0, 54))
+        self.frame_29.setStyleSheet("background-color: rgb(50,50,50);\n"
+"border-top-right-radius: 4px;\n"
+"border-top-left-radius: 4px;")
+        self.frame_29.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_29.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_29.setObjectName("frame_29")
+        self.horizontalLayout_42 = QtWidgets.QHBoxLayout(self.frame_29)
+        self.horizontalLayout_42.setContentsMargins(7, 7, 7, 7)
+        self.horizontalLayout_42.setObjectName("horizontalLayout_42")
+        self.btn_telaio_sezioni = QtWidgets.QPushButton(self.frame_29)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.btn_telaio_sezioni.sizePolicy().hasHeightForWidth())
+        self.btn_telaio_sezioni.setSizePolicy(sizePolicy)
+        self.btn_telaio_sezioni.setMinimumSize(QtCore.QSize(120, 32))
+        self.btn_telaio_sezioni.setMaximumSize(QtCore.QSize(100000, 32))
+        self.btn_telaio_sezioni.setStyleSheet("QPushButton{\n"
+"    background-color: rgb(70,70,70);\n"
+"    font:400 12pt \"Segoe UI\";\n"
+"    color: rgb(255,255,255);\n"
+"    padding-bottom: 4px;\n"
+"    border-radius:4px\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(40,40,40);\n"
+"    border: 1px solid rgb(120,120,120);\n"
+"}\n"
+"QPushButton:checked {\n"
+"    background-color: rgb(30,30,30);\n"
+"}\n"
+"\n"
+"")
+        self.btn_telaio_sezioni.setObjectName("btn_telaio_sezioni")
+        self.horizontalLayout_42.addWidget(self.btn_telaio_sezioni)
+        self.btn_telaio_modello = QtWidgets.QPushButton(self.frame_29)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.btn_telaio_modello.sizePolicy().hasHeightForWidth())
+        self.btn_telaio_modello.setSizePolicy(sizePolicy)
+        self.btn_telaio_modello.setMinimumSize(QtCore.QSize(120, 32))
+        self.btn_telaio_modello.setMaximumSize(QtCore.QSize(10000000, 32))
+        self.btn_telaio_modello.setStyleSheet("QPushButton{\n"
+"    background-color: rgb(70,70,70);\n"
+"    font:400 12pt \"Segoe UI\";\n"
+"    color: rgb(255,255,255);\n"
+"    padding-bottom: 4px;\n"
+"    border-radius:4px\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(40,40,40);\n"
+"    border: 1px solid rgb(120,120,120);\n"
+"}\n"
+"QPushButton:checked {\n"
+"    background-color: rgb(30,30,30);\n"
+"}\n"
+"\n"
+"")
+        self.btn_telaio_modello.setObjectName("btn_telaio_modello")
+        self.horizontalLayout_42.addWidget(self.btn_telaio_modello)
+        self.verticalLayout_48.addWidget(self.frame_29)
+        self.stackedWidget_struttura = QtWidgets.QStackedWidget(self.struttura_page)
+        self.stackedWidget_struttura.setMinimumSize(QtCore.QSize(620, 0))
+        self.stackedWidget_struttura.setStyleSheet("background-color: rgb(40,40,40);\n"
+"border: 1px solid rgb(50,50,50);\n"
+"border-bottom-right-radius: 4px;\n"
+"border-bottom-left-radius: 4px;")
+        self.stackedWidget_struttura.setObjectName("stackedWidget_struttura")
+        self.sezioni_page = QtWidgets.QWidget()
+        self.sezioni_page.setObjectName("sezioni_page")
+        self.verticalLayout_47 = QtWidgets.QVBoxLayout(self.sezioni_page)
+        self.verticalLayout_47.setContentsMargins(-1, 20, -1, -1)
+        self.verticalLayout_47.setSpacing(16)
+        self.verticalLayout_47.setObjectName("verticalLayout_47")
+        self.horizontalLayout_41 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_41.setSpacing(0)
+        self.horizontalLayout_41.setObjectName("horizontalLayout_41")
+        self.frame_sezioni_3 = QtWidgets.QFrame(self.sezioni_page)
+        self.frame_sezioni_3.setMaximumSize(QtCore.QSize(244, 16777215))
+        self.frame_sezioni_3.setStyleSheet("background-color: rgb(50,50,50);\n"
+"border: none;\n"
+"border-radius: 4px;\n"
+"border-top-right-radius: no;\n"
+"border-bottom-right-radius: no;")
+        self.frame_sezioni_3.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_sezioni_3.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_sezioni_3.setObjectName("frame_sezioni_3")
+        self.verticalLayout_43 = QtWidgets.QVBoxLayout(self.frame_sezioni_3)
+        self.verticalLayout_43.setObjectName("verticalLayout_43")
+        self.layout_telaio_sezioni = QtWidgets.QVBoxLayout()
+        self.layout_telaio_sezioni.setObjectName("layout_telaio_sezioni")
+        self.label_259 = QtWidgets.QLabel(self.frame_sezioni_3)
+        self.label_259.setMinimumSize(QtCore.QSize(70, 32))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(57)
+        self.label_259.setFont(font)
+        self.label_259.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_259.setStyleSheet("font:460 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_259.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_259.setObjectName("label_259")
+        self.layout_telaio_sezioni.addWidget(self.label_259)
+        self.btn_aggiungi_sezioni = QtWidgets.QPushButton(self.frame_sezioni_3)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.btn_aggiungi_sezioni.sizePolicy().hasHeightForWidth())
+        self.btn_aggiungi_sezioni.setSizePolicy(sizePolicy)
+        self.btn_aggiungi_sezioni.setMinimumSize(QtCore.QSize(150, 34))
+        self.btn_aggiungi_sezioni.setMaximumSize(QtCore.QSize(16777215, 34))
+        self.btn_aggiungi_sezioni.setStyleSheet("QPushButton{\n"
+"    background-color: rgb(80,80,80);\n"
+"    font:400 12pt \"Segoe UI\";\n"
+"    color: rgb(255,255,255);\n"
+"    padding-bottom: 4px;\n"
+"    border-radius:4px\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(40,40,40);\n"
+"    border: 1px solid rgb(120,120,120);\n"
+"}")
+        self.btn_aggiungi_sezioni.setObjectName("btn_aggiungi_sezioni")
+        self.layout_telaio_sezioni.addWidget(self.btn_aggiungi_sezioni)
+        spacerItem96 = QtWidgets.QSpacerItem(17, 13, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.layout_telaio_sezioni.addItem(spacerItem96)
+        spacerItem97 = QtWidgets.QSpacerItem(17, 37, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.layout_telaio_sezioni.addItem(spacerItem97)
+        self.verticalLayout_43.addLayout(self.layout_telaio_sezioni)
+        self.horizontalLayout_41.addWidget(self.frame_sezioni_3)
+        self.frame_associazione_2 = QtWidgets.QFrame(self.sezioni_page)
+        self.frame_associazione_2.setMinimumSize(QtCore.QSize(350, 0))
+        self.frame_associazione_2.setMaximumSize(QtCore.QSize(10000000, 16777215))
+        self.frame_associazione_2.setStyleSheet("background-color: rgb(30, 30, 30);\n"
+"border: none;\n"
+"border-radius: 4px;\n"
+"border-top-left-radius: no;\n"
+"border-bottom-left-radius: no;")
+        self.frame_associazione_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_associazione_2.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_associazione_2.setObjectName("frame_associazione_2")
+        self.verticalLayout_44 = QtWidgets.QVBoxLayout(self.frame_associazione_2)
+        self.verticalLayout_44.setObjectName("verticalLayout_44")
+        self.label_276 = QtWidgets.QLabel(self.frame_associazione_2)
+        self.label_276.setMinimumSize(QtCore.QSize(70, 32))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(57)
+        self.label_276.setFont(font)
+        self.label_276.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_276.setStyleSheet("font:460 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_276.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_276.setObjectName("label_276")
+        self.verticalLayout_44.addWidget(self.label_276)
+        self.gridLayout_17 = QtWidgets.QGridLayout()
+        self.gridLayout_17.setObjectName("gridLayout_17")
+        self.label_260 = QtWidgets.QLabel(self.frame_associazione_2)
+        self.label_260.setMinimumSize(QtCore.QSize(120, 32))
+        self.label_260.setMaximumSize(QtCore.QSize(120, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_260.setFont(font)
+        self.label_260.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_260.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_260.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.label_260.setObjectName("label_260")
+        self.gridLayout_17.addWidget(self.label_260, 1, 0, 1, 1)
+        self.label_263 = QtWidgets.QLabel(self.frame_associazione_2)
+        self.label_263.setMinimumSize(QtCore.QSize(120, 32))
+        self.label_263.setMaximumSize(QtCore.QSize(120, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_263.setFont(font)
+        self.label_263.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_263.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_263.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.label_263.setObjectName("label_263")
+        self.gridLayout_17.addWidget(self.label_263, 2, 0, 1, 1)
+        self.telaio_sezione_inerzia_y = QtWidgets.QLineEdit(self.frame_associazione_2)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.telaio_sezione_inerzia_y.sizePolicy().hasHeightForWidth())
+        self.telaio_sezione_inerzia_y.setSizePolicy(sizePolicy)
+        self.telaio_sezione_inerzia_y.setMinimumSize(QtCore.QSize(120, 32))
+        self.telaio_sezione_inerzia_y.setMaximumSize(QtCore.QSize(120, 32))
+        self.telaio_sezione_inerzia_y.setStyleSheet("background-color: rgb(50,50,50);\n"
+"font: 10pt \"Segoe UI\";\n"
+"color: rgb(255, 255, 255);\n"
+"padding-left: 5px;\n"
+"border-radius:4px")
+        self.telaio_sezione_inerzia_y.setObjectName("telaio_sezione_inerzia_y")
+        self.gridLayout_17.addWidget(self.telaio_sezione_inerzia_y, 2, 1, 1, 1)
+        self.label_261 = QtWidgets.QLabel(self.frame_associazione_2)
+        self.label_261.setMinimumSize(QtCore.QSize(50, 32))
+        self.label_261.setMaximumSize(QtCore.QSize(50, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_261.setFont(font)
+        self.label_261.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_261.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_261.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.label_261.setObjectName("label_261")
+        self.gridLayout_17.addWidget(self.label_261, 1, 2, 1, 1)
+        self.telaio_sezione_area = QtWidgets.QLineEdit(self.frame_associazione_2)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.telaio_sezione_area.sizePolicy().hasHeightForWidth())
+        self.telaio_sezione_area.setSizePolicy(sizePolicy)
+        self.telaio_sezione_area.setMinimumSize(QtCore.QSize(120, 32))
+        self.telaio_sezione_area.setMaximumSize(QtCore.QSize(120, 32))
+        self.telaio_sezione_area.setStyleSheet("background-color: rgb(50,50,50);\n"
+"font: 10pt \"Segoe UI\";\n"
+"color: rgb(255, 255, 255);\n"
+"padding-left: 5px;\n"
+"border-radius:4px")
+        self.telaio_sezione_area.setObjectName("telaio_sezione_area")
+        self.gridLayout_17.addWidget(self.telaio_sezione_area, 1, 1, 1, 1)
+        self.label_264 = QtWidgets.QLabel(self.frame_associazione_2)
+        self.label_264.setMinimumSize(QtCore.QSize(120, 32))
+        self.label_264.setMaximumSize(QtCore.QSize(120, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_264.setFont(font)
+        self.label_264.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_264.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_264.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.label_264.setObjectName("label_264")
+        self.gridLayout_17.addWidget(self.label_264, 3, 0, 1, 1)
+        self.telaio_sezione_inerzia_z = QtWidgets.QLineEdit(self.frame_associazione_2)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.telaio_sezione_inerzia_z.sizePolicy().hasHeightForWidth())
+        self.telaio_sezione_inerzia_z.setSizePolicy(sizePolicy)
+        self.telaio_sezione_inerzia_z.setMinimumSize(QtCore.QSize(120, 32))
+        self.telaio_sezione_inerzia_z.setMaximumSize(QtCore.QSize(120, 32))
+        self.telaio_sezione_inerzia_z.setStyleSheet("background-color: rgb(50,50,50);\n"
+"font: 10pt \"Segoe UI\";\n"
+"color: rgb(255, 255, 255);\n"
+"padding-left: 5px;\n"
+"border-radius:4px")
+        self.telaio_sezione_inerzia_z.setObjectName("telaio_sezione_inerzia_z")
+        self.gridLayout_17.addWidget(self.telaio_sezione_inerzia_z, 3, 1, 1, 1)
+        self.label_262 = QtWidgets.QLabel(self.frame_associazione_2)
+        self.label_262.setMinimumSize(QtCore.QSize(50, 32))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_262.setFont(font)
+        self.label_262.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_262.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_262.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.label_262.setObjectName("label_262")
+        self.gridLayout_17.addWidget(self.label_262, 2, 2, 1, 1)
+        self.label_267 = QtWidgets.QLabel(self.frame_associazione_2)
+        self.label_267.setMinimumSize(QtCore.QSize(50, 32))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_267.setFont(font)
+        self.label_267.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_267.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_267.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.label_267.setObjectName("label_267")
+        self.gridLayout_17.addWidget(self.label_267, 4, 2, 1, 1)
+        self.label_265 = QtWidgets.QLabel(self.frame_associazione_2)
+        self.label_265.setMinimumSize(QtCore.QSize(50, 32))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_265.setFont(font)
+        self.label_265.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_265.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_265.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.label_265.setObjectName("label_265")
+        self.gridLayout_17.addWidget(self.label_265, 3, 2, 1, 1)
+        self.telaio_sezione_torsione = QtWidgets.QLineEdit(self.frame_associazione_2)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.telaio_sezione_torsione.sizePolicy().hasHeightForWidth())
+        self.telaio_sezione_torsione.setSizePolicy(sizePolicy)
+        self.telaio_sezione_torsione.setMinimumSize(QtCore.QSize(120, 32))
+        self.telaio_sezione_torsione.setMaximumSize(QtCore.QSize(120, 32))
+        self.telaio_sezione_torsione.setStyleSheet("background-color: rgb(50,50,50);\n"
+"font: 10pt \"Segoe UI\";\n"
+"color: rgb(255, 255, 255);\n"
+"padding-left: 5px;\n"
+"border-radius:4px")
+        self.telaio_sezione_torsione.setObjectName("telaio_sezione_torsione")
+        self.gridLayout_17.addWidget(self.telaio_sezione_torsione, 4, 1, 1, 1)
+        self.label_266 = QtWidgets.QLabel(self.frame_associazione_2)
+        self.label_266.setMinimumSize(QtCore.QSize(120, 32))
+        self.label_266.setMaximumSize(QtCore.QSize(120, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_266.setFont(font)
+        self.label_266.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_266.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_266.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.label_266.setObjectName("label_266")
+        self.gridLayout_17.addWidget(self.label_266, 4, 0, 1, 1)
+        self.combobox_teliaio_materiali = QtWidgets.QComboBox(self.frame_associazione_2)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.combobox_teliaio_materiali.sizePolicy().hasHeightForWidth())
+        self.combobox_teliaio_materiali.setSizePolicy(sizePolicy)
+        self.combobox_teliaio_materiali.setMinimumSize(QtCore.QSize(160, 32))
+        self.combobox_teliaio_materiali.setMaximumSize(QtCore.QSize(16777215, 32))
+        self.combobox_teliaio_materiali.setMouseTracking(False)
+        self.combobox_teliaio_materiali.setStyleSheet("QComboBox {\n"
+"    font: 400 10pt \"Segoe UI\";\n"
+"    color: rgb(255, 255, 255);\n"
+"    background-color: rgb(30, 30, 30);\n"
+"    border: 1px solid rgb(100, 100, 100);\n"
+"    border-radius: 4px;\n"
+"    padding: 4px 6px;\n"
+"    padding-right: 20px; /* spazio per la freccia */\n"
+"}\n"
+"\n"
+"QComboBox:hover {\n"
+"    background-color: rgb(40, 40, 40);\n"
+"    border: 1px solid rgb(120, 120, 120);\n"
+"}\n"
+"\n"
+"QComboBox::drop-down {\n"
+"    subcontrol-origin: padding;\n"
+"    subcontrol-position: top right;\n"
+"    width: 20px;\n"
+"    border-left: 1px solid rgb(80, 80, 80);\n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border-top-right-radius: 4px;\n"
+"    border-bottom-right-radius: 4px;\n"
+"}\n"
+"\n"
+"QComboBox::down-arrow {\n"
+"    image: url(:/icons/arrow-down-white.png); /* Assicurati di avere un\'icona bianca */\n"
+"    width: 12px;\n"
+"    height: 12px;\n"
+"}\n"
+"\n"
+"QComboBox QAbstractItemView {\n"
+"    background-color: rgb(30, 30, 30);\n"
+"    color: white;\n"
+"    border: 1px solid rgb(90, 90, 90);\n"
+"    selection-background-color: rgb(60, 60, 60);\n"
+"    selection-color: white;\n"
+"    outline: 0;\n"
+"}\n"
+"")
+        self.combobox_teliaio_materiali.setInsertPolicy(QtWidgets.QComboBox.InsertAtBottom)
+        self.combobox_teliaio_materiali.setObjectName("combobox_teliaio_materiali")
+        self.gridLayout_17.addWidget(self.combobox_teliaio_materiali, 6, 1, 1, 2)
+        self.label_270 = QtWidgets.QLabel(self.frame_associazione_2)
+        self.label_270.setMinimumSize(QtCore.QSize(120, 32))
+        self.label_270.setMaximumSize(QtCore.QSize(120, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_270.setFont(font)
+        self.label_270.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_270.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_270.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.label_270.setObjectName("label_270")
+        self.gridLayout_17.addWidget(self.label_270, 6, 0, 1, 1)
+        spacerItem98 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.gridLayout_17.addItem(spacerItem98, 5, 0, 1, 3)
+        spacerItem99 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.gridLayout_17.addItem(spacerItem99, 0, 0, 1, 3)
+        self.verticalLayout_44.addLayout(self.gridLayout_17)
+        spacerItem100 = QtWidgets.QSpacerItem(20, 310, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_44.addItem(spacerItem100)
+        self.horizontalLayout_41.addWidget(self.frame_associazione_2)
+        self.verticalLayout_47.addLayout(self.horizontalLayout_41)
+        self.horizontalLayout_40 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_40.setSpacing(0)
+        self.horizontalLayout_40.setObjectName("horizontalLayout_40")
+        self.frame_sezioni_6 = QtWidgets.QFrame(self.sezioni_page)
+        self.frame_sezioni_6.setMaximumSize(QtCore.QSize(244, 16777215))
+        self.frame_sezioni_6.setStyleSheet("background-color: rgb(50,50,50);\n"
+"border: none;\n"
+"border-radius: 4px;\n"
+"border-top-right-radius: no;\n"
+"border-bottom-right-radius: no;")
+        self.frame_sezioni_6.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_sezioni_6.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_sezioni_6.setObjectName("frame_sezioni_6")
+        self.verticalLayout_46 = QtWidgets.QVBoxLayout(self.frame_sezioni_6)
+        self.verticalLayout_46.setObjectName("verticalLayout_46")
+        self.layout_telaio_materiali = QtWidgets.QVBoxLayout()
+        self.layout_telaio_materiali.setObjectName("layout_telaio_materiali")
+        self.label_286 = QtWidgets.QLabel(self.frame_sezioni_6)
+        self.label_286.setMinimumSize(QtCore.QSize(70, 32))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(57)
+        self.label_286.setFont(font)
+        self.label_286.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_286.setStyleSheet("font:460 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_286.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_286.setObjectName("label_286")
+        self.layout_telaio_materiali.addWidget(self.label_286)
+        self.btn_aggiungi_materiali = QtWidgets.QPushButton(self.frame_sezioni_6)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.btn_aggiungi_materiali.sizePolicy().hasHeightForWidth())
+        self.btn_aggiungi_materiali.setSizePolicy(sizePolicy)
+        self.btn_aggiungi_materiali.setMinimumSize(QtCore.QSize(150, 34))
+        self.btn_aggiungi_materiali.setMaximumSize(QtCore.QSize(16777215, 34))
+        self.btn_aggiungi_materiali.setStyleSheet("QPushButton{\n"
+"    background-color: rgb(80,80,80);\n"
+"    font:400 12pt \"Segoe UI\";\n"
+"    color: rgb(255,255,255);\n"
+"    padding-bottom: 4px;\n"
+"    border-radius:4px\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(40,40,40);\n"
+"    border: 1px solid rgb(120,120,120);\n"
+"}")
+        self.btn_aggiungi_materiali.setObjectName("btn_aggiungi_materiali")
+        self.layout_telaio_materiali.addWidget(self.btn_aggiungi_materiali)
+        spacerItem101 = QtWidgets.QSpacerItem(17, 13, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.layout_telaio_materiali.addItem(spacerItem101)
+        spacerItem102 = QtWidgets.QSpacerItem(17, 37, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.layout_telaio_materiali.addItem(spacerItem102)
+        self.verticalLayout_46.addLayout(self.layout_telaio_materiali)
+        self.horizontalLayout_40.addWidget(self.frame_sezioni_6)
+        self.frame_associazione_3 = QtWidgets.QFrame(self.sezioni_page)
+        self.frame_associazione_3.setMinimumSize(QtCore.QSize(350, 0))
+        self.frame_associazione_3.setMaximumSize(QtCore.QSize(10000000, 16777215))
+        self.frame_associazione_3.setStyleSheet("background-color: rgb(30, 30, 30);\n"
+"border: none;\n"
+"border-radius: 4px;\n"
+"border-top-left-radius: no;\n"
+"border-bottom-left-radius: no;")
+        self.frame_associazione_3.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_associazione_3.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_associazione_3.setObjectName("frame_associazione_3")
+        self.verticalLayout_45 = QtWidgets.QVBoxLayout(self.frame_associazione_3)
+        self.verticalLayout_45.setObjectName("verticalLayout_45")
+        self.label_277 = QtWidgets.QLabel(self.frame_associazione_3)
+        self.label_277.setMinimumSize(QtCore.QSize(70, 32))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(57)
+        self.label_277.setFont(font)
+        self.label_277.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_277.setStyleSheet("font:460 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_277.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_277.setObjectName("label_277")
+        self.verticalLayout_45.addWidget(self.label_277)
+        self.gridLayout_18 = QtWidgets.QGridLayout()
+        self.gridLayout_18.setObjectName("gridLayout_18")
+        self.label_279 = QtWidgets.QLabel(self.frame_associazione_3)
+        self.label_279.setMinimumSize(QtCore.QSize(50, 32))
+        self.label_279.setMaximumSize(QtCore.QSize(50, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_279.setFont(font)
+        self.label_279.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_279.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_279.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.label_279.setObjectName("label_279")
+        self.gridLayout_18.addWidget(self.label_279, 0, 2, 1, 1)
+        self.label_278 = QtWidgets.QLabel(self.frame_associazione_3)
+        self.label_278.setMinimumSize(QtCore.QSize(120, 32))
+        self.label_278.setMaximumSize(QtCore.QSize(120, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_278.setFont(font)
+        self.label_278.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_278.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_278.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.label_278.setObjectName("label_278")
+        self.gridLayout_18.addWidget(self.label_278, 0, 0, 1, 1)
+        self.telaio_materiali_elastico = QtWidgets.QLineEdit(self.frame_associazione_3)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.telaio_materiali_elastico.sizePolicy().hasHeightForWidth())
+        self.telaio_materiali_elastico.setSizePolicy(sizePolicy)
+        self.telaio_materiali_elastico.setMinimumSize(QtCore.QSize(120, 32))
+        self.telaio_materiali_elastico.setMaximumSize(QtCore.QSize(120, 32))
+        self.telaio_materiali_elastico.setStyleSheet("background-color: rgb(50,50,50);\n"
+"font: 10pt \"Segoe UI\";\n"
+"color: rgb(255, 255, 255);\n"
+"padding-left: 5px;\n"
+"border-radius:4px")
+        self.telaio_materiali_elastico.setObjectName("telaio_materiali_elastico")
+        self.gridLayout_18.addWidget(self.telaio_materiali_elastico, 0, 1, 1, 1)
+        self.label_280 = QtWidgets.QLabel(self.frame_associazione_3)
+        self.label_280.setMinimumSize(QtCore.QSize(120, 32))
+        self.label_280.setMaximumSize(QtCore.QSize(120, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_280.setFont(font)
+        self.label_280.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_280.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_280.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.label_280.setObjectName("label_280")
+        self.gridLayout_18.addWidget(self.label_280, 1, 0, 1, 1)
+        self.telaio_materiali_taglio = QtWidgets.QLineEdit(self.frame_associazione_3)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.telaio_materiali_taglio.sizePolicy().hasHeightForWidth())
+        self.telaio_materiali_taglio.setSizePolicy(sizePolicy)
+        self.telaio_materiali_taglio.setMinimumSize(QtCore.QSize(120, 32))
+        self.telaio_materiali_taglio.setMaximumSize(QtCore.QSize(120, 32))
+        self.telaio_materiali_taglio.setStyleSheet("background-color: rgb(50,50,50);\n"
+"font: 10pt \"Segoe UI\";\n"
+"color: rgb(255, 255, 255);\n"
+"padding-left: 5px;\n"
+"border-radius:4px")
+        self.telaio_materiali_taglio.setObjectName("telaio_materiali_taglio")
+        self.gridLayout_18.addWidget(self.telaio_materiali_taglio, 1, 1, 1, 1)
+        self.label_281 = QtWidgets.QLabel(self.frame_associazione_3)
+        self.label_281.setMinimumSize(QtCore.QSize(50, 32))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_281.setFont(font)
+        self.label_281.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_281.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_281.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.label_281.setObjectName("label_281")
+        self.gridLayout_18.addWidget(self.label_281, 1, 2, 1, 1)
+        self.label_298 = QtWidgets.QLabel(self.frame_associazione_3)
+        self.label_298.setMinimumSize(QtCore.QSize(120, 32))
+        self.label_298.setMaximumSize(QtCore.QSize(120, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_298.setFont(font)
+        self.label_298.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_298.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_298.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.label_298.setObjectName("label_298")
+        self.gridLayout_18.addWidget(self.label_298, 2, 0, 1, 1)
+        self.telaio_materiali_densita = QtWidgets.QLineEdit(self.frame_associazione_3)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.telaio_materiali_densita.sizePolicy().hasHeightForWidth())
+        self.telaio_materiali_densita.setSizePolicy(sizePolicy)
+        self.telaio_materiali_densita.setMinimumSize(QtCore.QSize(120, 32))
+        self.telaio_materiali_densita.setMaximumSize(QtCore.QSize(120, 32))
+        self.telaio_materiali_densita.setStyleSheet("background-color: rgb(50,50,50);\n"
+"font: 10pt \"Segoe UI\";\n"
+"color: rgb(255, 255, 255);\n"
+"padding-left: 5px;\n"
+"border-radius:4px")
+        self.telaio_materiali_densita.setObjectName("telaio_materiali_densita")
+        self.gridLayout_18.addWidget(self.telaio_materiali_densita, 2, 1, 1, 1)
+        self.label_300 = QtWidgets.QLabel(self.frame_associazione_3)
+        self.label_300.setMinimumSize(QtCore.QSize(50, 32))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_300.setFont(font)
+        self.label_300.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_300.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_300.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.label_300.setObjectName("label_300")
+        self.gridLayout_18.addWidget(self.label_300, 2, 2, 1, 1)
+        self.verticalLayout_45.addLayout(self.gridLayout_18)
+        spacerItem103 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_45.addItem(spacerItem103)
+        self.horizontalLayout_40.addWidget(self.frame_associazione_3)
+        self.verticalLayout_47.addLayout(self.horizontalLayout_40)
+        self.stackedWidget_struttura.addWidget(self.sezioni_page)
+        self.modello_page = QtWidgets.QWidget()
+        self.modello_page.setObjectName("modello_page")
+        self.verticalLayout_49 = QtWidgets.QVBoxLayout(self.modello_page)
+        self.verticalLayout_49.setObjectName("verticalLayout_49")
+        self.horizontalLayout_44 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_44.setObjectName("horizontalLayout_44")
+        spacerItem104 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_44.addItem(spacerItem104)
+        self.frame_28 = QtWidgets.QFrame(self.modello_page)
+        self.frame_28.setMinimumSize(QtCore.QSize(0, 0))
+        self.frame_28.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.frame_28.setStyleSheet("background-color: rgb(50,50,50);\n"
+"border: none;\n"
+"border-radius: 4px;")
+        self.frame_28.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_28.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_28.setObjectName("frame_28")
+        self.horizontalLayout_43 = QtWidgets.QHBoxLayout(self.frame_28)
+        self.horizontalLayout_43.setContentsMargins(5, 5, 5, 5)
+        self.horizontalLayout_43.setSpacing(5)
+        self.horizontalLayout_43.setObjectName("horizontalLayout_43")
+        self.btn_telaio_nodi = QtWidgets.QPushButton(self.frame_28)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.btn_telaio_nodi.sizePolicy().hasHeightForWidth())
+        self.btn_telaio_nodi.setSizePolicy(sizePolicy)
+        self.btn_telaio_nodi.setMinimumSize(QtCore.QSize(80, 32))
+        self.btn_telaio_nodi.setMaximumSize(QtCore.QSize(80, 32))
+        self.btn_telaio_nodi.setStyleSheet("QPushButton{\n"
+"    background-color: rgb(70,70,70);\n"
+"    font:400 12pt \"Segoe UI\";\n"
+"    color: rgb(255,255,255);\n"
+"    padding-bottom: 4px;\n"
+"    border-radius:4px\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(40,40,40);\n"
+"    border: 1px solid rgb(120,120,120);\n"
+"}\n"
+"QPushButton:checked {\n"
+"    background-color: rgb(30,30,30);\n"
+"}\n"
+"\n"
+"")
+        self.btn_telaio_nodi.setObjectName("btn_telaio_nodi")
+        self.horizontalLayout_43.addWidget(self.btn_telaio_nodi)
+        self.btn_telaio_aste = QtWidgets.QPushButton(self.frame_28)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.btn_telaio_aste.sizePolicy().hasHeightForWidth())
+        self.btn_telaio_aste.setSizePolicy(sizePolicy)
+        self.btn_telaio_aste.setMinimumSize(QtCore.QSize(80, 32))
+        self.btn_telaio_aste.setMaximumSize(QtCore.QSize(80, 32))
+        self.btn_telaio_aste.setStyleSheet("QPushButton{\n"
+"    background-color: rgb(70,70,70);\n"
+"    font:400 12pt \"Segoe UI\";\n"
+"    color: rgb(255,255,255);\n"
+"    padding-bottom: 4px;\n"
+"    border-radius:4px\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(40,40,40);\n"
+"    border: 1px solid rgb(120,120,120);\n"
+"}\n"
+"QPushButton:checked {\n"
+"    background-color: rgb(30,30,30);\n"
+"}\n"
+"\n"
+"")
+        self.btn_telaio_aste.setObjectName("btn_telaio_aste")
+        self.horizontalLayout_43.addWidget(self.btn_telaio_aste)
+        self.btn_telaio_vincoli = QtWidgets.QPushButton(self.frame_28)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.btn_telaio_vincoli.sizePolicy().hasHeightForWidth())
+        self.btn_telaio_vincoli.setSizePolicy(sizePolicy)
+        self.btn_telaio_vincoli.setMinimumSize(QtCore.QSize(80, 32))
+        self.btn_telaio_vincoli.setMaximumSize(QtCore.QSize(80, 32))
+        self.btn_telaio_vincoli.setStyleSheet("QPushButton{\n"
+"    background-color: rgb(70,70,70);\n"
+"    font:400 12pt \"Segoe UI\";\n"
+"    color: rgb(255,255,255);\n"
+"    padding-bottom: 4px;\n"
+"    border-radius:4px\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(40,40,40);\n"
+"    border: 1px solid rgb(120,120,120);\n"
+"}\n"
+"QPushButton:checked {\n"
+"    background-color: rgb(30,30,30);\n"
+"}\n"
+"\n"
+"")
+        self.btn_telaio_vincoli.setObjectName("btn_telaio_vincoli")
+        self.horizontalLayout_43.addWidget(self.btn_telaio_vincoli)
+        self.btn_telaio_carichi = QtWidgets.QPushButton(self.frame_28)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.btn_telaio_carichi.sizePolicy().hasHeightForWidth())
+        self.btn_telaio_carichi.setSizePolicy(sizePolicy)
+        self.btn_telaio_carichi.setMinimumSize(QtCore.QSize(80, 32))
+        self.btn_telaio_carichi.setMaximumSize(QtCore.QSize(80, 32))
+        self.btn_telaio_carichi.setStyleSheet("QPushButton{\n"
+"    background-color: rgb(70,70,70);\n"
+"    font:400 12pt \"Segoe UI\";\n"
+"    color: rgb(255,255,255);\n"
+"    padding-bottom: 4px;\n"
+"    border-radius:4px\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(40,40,40);\n"
+"    border: 1px solid rgb(120,120,120);\n"
+"}\n"
+"QPushButton:checked {\n"
+"    background-color: rgb(30,30,30);\n"
+"}\n"
+"\n"
+"")
+        self.btn_telaio_carichi.setObjectName("btn_telaio_carichi")
+        self.horizontalLayout_43.addWidget(self.btn_telaio_carichi)
+        self.horizontalLayout_44.addWidget(self.frame_28)
+        spacerItem105 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_44.addItem(spacerItem105)
+        self.verticalLayout_49.addLayout(self.horizontalLayout_44)
+        self.stackedWidget_modello = QtWidgets.QStackedWidget(self.modello_page)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.stackedWidget_modello.sizePolicy().hasHeightForWidth())
+        self.stackedWidget_modello.setSizePolicy(sizePolicy)
+        self.stackedWidget_modello.setMinimumSize(QtCore.QSize(0, 0))
+        self.stackedWidget_modello.setStyleSheet("background-color: rgb(30,30,30);\n"
+"border-radius: 4px;\n"
+"border: none;")
+        self.stackedWidget_modello.setObjectName("stackedWidget_modello")
+        self.nodi_page = QtWidgets.QWidget()
+        self.nodi_page.setObjectName("nodi_page")
+        self.verticalLayout_51 = QtWidgets.QVBoxLayout(self.nodi_page)
+        self.verticalLayout_51.setObjectName("verticalLayout_51")
+        spacerItem106 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.verticalLayout_51.addItem(spacerItem106)
+        self.frame_2 = QtWidgets.QFrame(self.nodi_page)
+        self.frame_2.setStyleSheet("background-color: rgb(40,40,40);")
+        self.frame_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_2.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_2.setObjectName("frame_2")
+        self.verticalLayout_50 = QtWidgets.QVBoxLayout(self.frame_2)
+        self.verticalLayout_50.setObjectName("verticalLayout_50")
+        self.horizontalLayout_45 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_45.setObjectName("horizontalLayout_45")
+        self.frame_associazione_4 = QtWidgets.QFrame(self.frame_2)
+        self.frame_associazione_4.setMinimumSize(QtCore.QSize(120, 0))
+        self.frame_associazione_4.setMaximumSize(QtCore.QSize(10000000, 16777215))
+        self.frame_associazione_4.setStyleSheet("background-color: rgb(50,50,50);")
+        self.frame_associazione_4.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_associazione_4.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_associazione_4.setObjectName("frame_associazione_4")
+        self.gridLayout_19 = QtWidgets.QGridLayout(self.frame_associazione_4)
+        self.gridLayout_19.setObjectName("gridLayout_19")
+        self.nodo_posizione_x = QtWidgets.QLineEdit(self.frame_associazione_4)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.nodo_posizione_x.sizePolicy().hasHeightForWidth())
+        self.nodo_posizione_x.setSizePolicy(sizePolicy)
+        self.nodo_posizione_x.setMinimumSize(QtCore.QSize(100, 32))
+        self.nodo_posizione_x.setMaximumSize(QtCore.QSize(16777215, 32))
+        self.nodo_posizione_x.setStyleSheet("background-color: rgb(50,50,50);\n"
+"border: 1px solid rgb(90,90,90);\n"
+"font: 10pt \"Segoe UI\";\n"
+"color: rgb(255, 255, 255);\n"
+"padding-left: 5px;\n"
+"border-radius:4px")
+        self.nodo_posizione_x.setObjectName("nodo_posizione_x")
+        self.gridLayout_19.addWidget(self.nodo_posizione_x, 1, 0, 1, 1)
+        self.label_272 = QtWidgets.QLabel(self.frame_associazione_4)
+        self.label_272.setMinimumSize(QtCore.QSize(20, 32))
+        self.label_272.setMaximumSize(QtCore.QSize(20, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_272.setFont(font)
+        self.label_272.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_272.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_272.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.label_272.setObjectName("label_272")
+        self.gridLayout_19.addWidget(self.label_272, 1, 1, 1, 1)
+        self.label_268 = QtWidgets.QLabel(self.frame_associazione_4)
+        self.label_268.setMinimumSize(QtCore.QSize(120, 32))
+        self.label_268.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_268.setFont(font)
+        self.label_268.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_268.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_268.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_268.setObjectName("label_268")
+        self.gridLayout_19.addWidget(self.label_268, 0, 0, 1, 2)
+        self.horizontalLayout_45.addWidget(self.frame_associazione_4)
+        self.frame_associazione_5 = QtWidgets.QFrame(self.frame_2)
+        self.frame_associazione_5.setMinimumSize(QtCore.QSize(120, 0))
+        self.frame_associazione_5.setMaximumSize(QtCore.QSize(10000000, 16777215))
+        self.frame_associazione_5.setStyleSheet("background-color: rgb(50,50,50);")
+        self.frame_associazione_5.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_associazione_5.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_associazione_5.setObjectName("frame_associazione_5")
+        self.gridLayout_20 = QtWidgets.QGridLayout(self.frame_associazione_5)
+        self.gridLayout_20.setObjectName("gridLayout_20")
+        self.label_282 = QtWidgets.QLabel(self.frame_associazione_5)
+        self.label_282.setMinimumSize(QtCore.QSize(120, 32))
+        self.label_282.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_282.setFont(font)
+        self.label_282.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_282.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_282.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_282.setObjectName("label_282")
+        self.gridLayout_20.addWidget(self.label_282, 0, 0, 1, 2)
+        self.nodo_posizione_y = QtWidgets.QLineEdit(self.frame_associazione_5)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.nodo_posizione_y.sizePolicy().hasHeightForWidth())
+        self.nodo_posizione_y.setSizePolicy(sizePolicy)
+        self.nodo_posizione_y.setMinimumSize(QtCore.QSize(100, 32))
+        self.nodo_posizione_y.setMaximumSize(QtCore.QSize(16777215, 32))
+        self.nodo_posizione_y.setStyleSheet("background-color: rgb(50,50,50);\n"
+"border: 1px solid rgb(90,90,90);\n"
+"font: 10pt \"Segoe UI\";\n"
+"color: rgb(255, 255, 255);\n"
+"padding-left: 5px;\n"
+"border-radius:4px")
+        self.nodo_posizione_y.setObjectName("nodo_posizione_y")
+        self.gridLayout_20.addWidget(self.nodo_posizione_y, 1, 0, 1, 1)
+        self.label_275 = QtWidgets.QLabel(self.frame_associazione_5)
+        self.label_275.setMinimumSize(QtCore.QSize(20, 32))
+        self.label_275.setMaximumSize(QtCore.QSize(20, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_275.setFont(font)
+        self.label_275.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_275.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_275.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.label_275.setObjectName("label_275")
+        self.gridLayout_20.addWidget(self.label_275, 1, 1, 1, 1)
+        self.horizontalLayout_45.addWidget(self.frame_associazione_5)
+        self.frame_associazione_6 = QtWidgets.QFrame(self.frame_2)
+        self.frame_associazione_6.setMinimumSize(QtCore.QSize(120, 0))
+        self.frame_associazione_6.setMaximumSize(QtCore.QSize(10000000, 16777215))
+        self.frame_associazione_6.setStyleSheet("background-color: rgb(50,50,50);\n"
+"")
+        self.frame_associazione_6.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_associazione_6.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_associazione_6.setObjectName("frame_associazione_6")
+        self.gridLayout_21 = QtWidgets.QGridLayout(self.frame_associazione_6)
+        self.gridLayout_21.setObjectName("gridLayout_21")
+        self.nodo_posizione_z = QtWidgets.QLineEdit(self.frame_associazione_6)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.nodo_posizione_z.sizePolicy().hasHeightForWidth())
+        self.nodo_posizione_z.setSizePolicy(sizePolicy)
+        self.nodo_posizione_z.setMinimumSize(QtCore.QSize(100, 32))
+        self.nodo_posizione_z.setMaximumSize(QtCore.QSize(16777215, 32))
+        self.nodo_posizione_z.setStyleSheet("background-color: rgb(50,50,50);\n"
+"border: 1px solid rgb(90,90,90);\n"
+"font: 10pt \"Segoe UI\";\n"
+"color: rgb(255, 255, 255);\n"
+"padding-left: 5px;\n"
+"border-radius:4px")
+        self.nodo_posizione_z.setObjectName("nodo_posizione_z")
+        self.gridLayout_21.addWidget(self.nodo_posizione_z, 1, 0, 1, 1)
+        self.label_284 = QtWidgets.QLabel(self.frame_associazione_6)
+        self.label_284.setMinimumSize(QtCore.QSize(120, 32))
+        self.label_284.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_284.setFont(font)
+        self.label_284.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_284.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_284.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_284.setObjectName("label_284")
+        self.gridLayout_21.addWidget(self.label_284, 0, 0, 1, 2)
+        self.label_283 = QtWidgets.QLabel(self.frame_associazione_6)
+        self.label_283.setMinimumSize(QtCore.QSize(20, 32))
+        self.label_283.setMaximumSize(QtCore.QSize(20, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_283.setFont(font)
+        self.label_283.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_283.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_283.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.label_283.setObjectName("label_283")
+        self.gridLayout_21.addWidget(self.label_283, 1, 1, 1, 1)
+        self.horizontalLayout_45.addWidget(self.frame_associazione_6)
+        self.verticalLayout_50.addLayout(self.horizontalLayout_45)
+        spacerItem107 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.verticalLayout_50.addItem(spacerItem107)
+        self.horizontalLayout_47 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_47.setObjectName("horizontalLayout_47")
+        spacerItem108 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_47.addItem(spacerItem108)
+        self.telaio_aggiungi_nodo = QtWidgets.QPushButton(self.frame_2)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.telaio_aggiungi_nodo.sizePolicy().hasHeightForWidth())
+        self.telaio_aggiungi_nodo.setSizePolicy(sizePolicy)
+        self.telaio_aggiungi_nodo.setMinimumSize(QtCore.QSize(160, 34))
+        self.telaio_aggiungi_nodo.setMaximumSize(QtCore.QSize(10000000, 34))
+        self.telaio_aggiungi_nodo.setStyleSheet("QPushButton{\n"
+"    background-color: rgb(70,70,70);\n"
+"    font:400 12pt \"Segoe UI\";\n"
+"    color: rgb(255,255,255);\n"
+"    padding-bottom: 4px;\n"
+"    border-radius:4px\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(40,40,40);\n"
+"    border: 1px solid rgb(120,120,120);\n"
+"}\n"
+"QPushButton:checked {\n"
+"    background-color: rgb(30,30,30);\n"
+"}\n"
+"\n"
+"")
+        self.telaio_aggiungi_nodo.setObjectName("telaio_aggiungi_nodo")
+        self.horizontalLayout_47.addWidget(self.telaio_aggiungi_nodo)
+        spacerItem109 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_47.addItem(spacerItem109)
+        self.verticalLayout_50.addLayout(self.horizontalLayout_47)
+        self.verticalLayout_51.addWidget(self.frame_2)
+        spacerItem110 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.verticalLayout_51.addItem(spacerItem110)
+        self.horizontalLayout_46 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_46.setObjectName("horizontalLayout_46")
+        self.widget_31 = QtWidgets.QWidget(self.nodi_page)
+        self.widget_31.setMinimumSize(QtCore.QSize(0, 6))
+        self.widget_31.setMaximumSize(QtCore.QSize(16777215, 6))
+        self.widget_31.setStyleSheet("background-color: rgb(80,80,80);\n"
+"border-radius:3px")
+        self.widget_31.setObjectName("widget_31")
+        self.horizontalLayout_46.addWidget(self.widget_31)
+        self.label_274 = QtWidgets.QLabel(self.nodi_page)
+        self.label_274.setMinimumSize(QtCore.QSize(70, 32))
+        self.label_274.setMaximumSize(QtCore.QSize(70, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(57)
+        self.label_274.setFont(font)
+        self.label_274.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_274.setStyleSheet("font:460 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_274.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
+        self.label_274.setObjectName("label_274")
+        self.horizontalLayout_46.addWidget(self.label_274)
+        self.widget_30 = QtWidgets.QWidget(self.nodi_page)
+        self.widget_30.setMinimumSize(QtCore.QSize(0, 6))
+        self.widget_30.setMaximumSize(QtCore.QSize(16777215, 6))
+        self.widget_30.setStyleSheet("background-color: rgb(80,80,80);\n"
+"border-radius:3px")
+        self.widget_30.setObjectName("widget_30")
+        self.horizontalLayout_46.addWidget(self.widget_30)
+        self.verticalLayout_51.addLayout(self.horizontalLayout_46)
+        self.tableView_nodi = QtWidgets.QTableView(self.nodi_page)
+        self.tableView_nodi.setStyleSheet("/* ---------- Variante B: Vertical header nascosto (nessuna colonna 0 visibile, niente quadratino) ---------- */\n"
+"\n"
+"QTableView {\n"
+"    background-color: rgb(40,40,40);\n"
+"    border-radius: 4px;\n"
+"    color: rgb(255,255,255);\n"
+"    gridline-color: rgb(70,70,70);\n"
+"    font: 400 10pt \"Segoe UI\";\n"
+"    selection-background-color: rgb(50, 50, 50);\n"
+"    selection-color: rgb(255, 255, 255);\n"
+"}\n"
+"\n"
+"/* Intestazioni colonne (orizzontali) */\n"
+"QHeaderView::section {\n"
+"    background-color: rgb(45,45,45);\n"
+"    color: rgb(255,255,255);\n"
+"    font: 400 10pt \"Segoe UI\";\n"
+"    padding: 4px;\n"
+"    border: 1px solid rgb(60,60,60);   /* bordo uniforme */\n"
+"}\n"
+"\n"
+"/* Prima sezione dell’header (colonna 0) con angolo in alto a sinistra stondato */\n"
+"QHeaderView::section:first {\n"
+"    border-top-left-radius: 4px;\n"
+"}\n"
+"\n"
+"/* Ultima sezione dell’header (ultima colonna) con angolo in alto a destra stondato */\n"
+"QHeaderView::section:last {\n"
+"    border-top-right-radius: 4px;\n"
+"}\n"
+"\n"
+"/* Rendo la vertical header (colonna 0) visivamente assente impostandone larghezza a 0 */\n"
+"QTableView::verticalHeader {\n"
+"    background: transparent;\n"
+"    width: 0px;       /* nasconde la colonna dei numeri */\n"
+"    margin: 0px;\n"
+"}\n"
+"\n"
+"/* Assicuro che le singole sezioni verticali non occupino spazio */\n"
+"QTableView QHeaderView::section:vertical {\n"
+"    background: transparent;\n"
+"    min-width: 0px;\n"
+"    max-width: 0px;\n"
+"    padding: 0px;\n"
+"    border: none;\n"
+"}\n"
+"\n"
+"/* Rimuovo / faccio sparire il corner button */\n"
+"QTableCornerButton::section {\n"
+"    background: transparent;\n"
+"    width: 0px;\n"
+"    height: 0px;\n"
+"    border: none;\n"
+"    margin: 0px;\n"
+"    padding: 0px;\n"
+"}\n"
+"\n"
+"/* Scrollbar verticale nascosta visivamente (scroll con rotellina rimane) */\n"
+"QScrollBar:vertical {\n"
+"    background: transparent;\n"
+"    width: 0px;\n"
+"    margin: 0px;\n"
+"    border: none;\n"
+"}\n"
+"QScrollBar::handle:vertical,\n"
+"QScrollBar::sub-line:vertical,\n"
+"QScrollBar::add-line:vertical,\n"
+"QScrollBar::up-arrow:vertical,\n"
+"QScrollBar::down-arrow:vertical,\n"
+"QScrollBar::add-page:vertical,\n"
+"QScrollBar::sub-page:vertical {\n"
+"    background: none;\n"
+"    border: none;\n"
+"    height: 0px;\n"
+"    min-height: 0px;\n"
+"}\n"
+"\n"
+"/* ComboBox (invariato) */\n"
+"QComboBox {\n"
+"    font: 400 10pt \"Segoe UI\";\n"
+"    color: rgb(255, 255, 255);\n"
+"    background-color: rgb(30, 30, 30);\n"
+"    border: 1px solid rgb(100, 100, 100);\n"
+"    border-radius: 4px;\n"
+"    padding: 4px 6px;\n"
+"    padding-right: 20px;\n"
+"}\n"
+"QComboBox:hover { background-color: rgb(40,40,40); border: 1px solid rgb(120,120,120); }\n"
+"QComboBox::drop-down { subcontrol-origin: padding; subcontrol-position: top right; width: 20px; border-left: 1px solid rgb(80,80,80); background-color: rgb(50,50,50); border-top-right-radius: 4px; border-bottom-right-radius: 4px; }\n"
+"QComboBox::down-arrow { image: url(:/icons/arrow-down-white.png); width: 12px; height: 12px; }\n"
+"QComboBox QAbstractItemView { background-color: rgb(30,30,30); color: white; border: 1px solid rgb(90,90,90); selection-background-color: rgb(60,60,60); selection-color: white; outline: 0; }\n"
+"")
+        self.tableView_nodi.setObjectName("tableView_nodi")
+        self.verticalLayout_51.addWidget(self.tableView_nodi)
+        self.stackedWidget_modello.addWidget(self.nodi_page)
+        self.aste_page = QtWidgets.QWidget()
+        self.aste_page.setObjectName("aste_page")
+        self.verticalLayout_54 = QtWidgets.QVBoxLayout(self.aste_page)
+        self.verticalLayout_54.setObjectName("verticalLayout_54")
+        spacerItem111 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.verticalLayout_54.addItem(spacerItem111)
+        self.frame_30 = QtWidgets.QFrame(self.aste_page)
+        self.frame_30.setStyleSheet("background-color: rgb(40,40,40);")
+        self.frame_30.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_30.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_30.setObjectName("frame_30")
+        self.verticalLayout_52 = QtWidgets.QVBoxLayout(self.frame_30)
+        self.verticalLayout_52.setObjectName("verticalLayout_52")
+        self.horizontalLayout_48 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_48.setObjectName("horizontalLayout_48")
+        self.frame_associazione_7 = QtWidgets.QFrame(self.frame_30)
+        self.frame_associazione_7.setMinimumSize(QtCore.QSize(120, 0))
+        self.frame_associazione_7.setMaximumSize(QtCore.QSize(10000000, 16777215))
+        self.frame_associazione_7.setStyleSheet("background-color: rgb(50,50,50);")
+        self.frame_associazione_7.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_associazione_7.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_associazione_7.setObjectName("frame_associazione_7")
+        self.verticalLayout_56 = QtWidgets.QVBoxLayout(self.frame_associazione_7)
+        self.verticalLayout_56.setObjectName("verticalLayout_56")
+        self.label_269 = QtWidgets.QLabel(self.frame_associazione_7)
+        self.label_269.setMinimumSize(QtCore.QSize(120, 32))
+        self.label_269.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_269.setFont(font)
+        self.label_269.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_269.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_269.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_269.setObjectName("label_269")
+        self.verticalLayout_56.addWidget(self.label_269)
+        self.asta_nodo_a = QtWidgets.QLineEdit(self.frame_associazione_7)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.asta_nodo_a.sizePolicy().hasHeightForWidth())
+        self.asta_nodo_a.setSizePolicy(sizePolicy)
+        self.asta_nodo_a.setMinimumSize(QtCore.QSize(100, 32))
+        self.asta_nodo_a.setMaximumSize(QtCore.QSize(16777215, 32))
+        self.asta_nodo_a.setStyleSheet("background-color: rgb(50,50,50);\n"
+"border: 1px solid rgb(90,90,90);\n"
+"font: 10pt \"Segoe UI\";\n"
+"color: rgb(255, 255, 255);\n"
+"padding-left: 5px;\n"
+"border-radius:4px")
+        self.asta_nodo_a.setObjectName("asta_nodo_a")
+        self.verticalLayout_56.addWidget(self.asta_nodo_a)
+        self.horizontalLayout_48.addWidget(self.frame_associazione_7)
+        self.frame_associazione_8 = QtWidgets.QFrame(self.frame_30)
+        self.frame_associazione_8.setMinimumSize(QtCore.QSize(120, 0))
+        self.frame_associazione_8.setMaximumSize(QtCore.QSize(10000000, 16777215))
+        self.frame_associazione_8.setStyleSheet("background-color: rgb(50,50,50);")
+        self.frame_associazione_8.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_associazione_8.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_associazione_8.setObjectName("frame_associazione_8")
+        self.verticalLayout_55 = QtWidgets.QVBoxLayout(self.frame_associazione_8)
+        self.verticalLayout_55.setObjectName("verticalLayout_55")
+        self.label_285 = QtWidgets.QLabel(self.frame_associazione_8)
+        self.label_285.setMinimumSize(QtCore.QSize(120, 32))
+        self.label_285.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_285.setFont(font)
+        self.label_285.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_285.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_285.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_285.setObjectName("label_285")
+        self.verticalLayout_55.addWidget(self.label_285)
+        self.asta_nodo_b = QtWidgets.QLineEdit(self.frame_associazione_8)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.asta_nodo_b.sizePolicy().hasHeightForWidth())
+        self.asta_nodo_b.setSizePolicy(sizePolicy)
+        self.asta_nodo_b.setMinimumSize(QtCore.QSize(100, 32))
+        self.asta_nodo_b.setMaximumSize(QtCore.QSize(16777215, 32))
+        self.asta_nodo_b.setStyleSheet("background-color: rgb(50,50,50);\n"
+"border: 1px solid rgb(90,90,90);\n"
+"font: 10pt \"Segoe UI\";\n"
+"color: rgb(255, 255, 255);\n"
+"padding-left: 5px;\n"
+"border-radius:4px")
+        self.asta_nodo_b.setObjectName("asta_nodo_b")
+        self.verticalLayout_55.addWidget(self.asta_nodo_b)
+        self.horizontalLayout_48.addWidget(self.frame_associazione_8)
+        self.frame_associazione_9 = QtWidgets.QFrame(self.frame_30)
+        self.frame_associazione_9.setMinimumSize(QtCore.QSize(120, 0))
+        self.frame_associazione_9.setMaximumSize(QtCore.QSize(10000000, 16777215))
+        self.frame_associazione_9.setStyleSheet("background-color: rgb(50,50,50);\n"
+"")
+        self.frame_associazione_9.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_associazione_9.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_associazione_9.setObjectName("frame_associazione_9")
+        self.verticalLayout_53 = QtWidgets.QVBoxLayout(self.frame_associazione_9)
+        self.verticalLayout_53.setObjectName("verticalLayout_53")
+        self.label_288 = QtWidgets.QLabel(self.frame_associazione_9)
+        self.label_288.setMinimumSize(QtCore.QSize(120, 32))
+        self.label_288.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_288.setFont(font)
+        self.label_288.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_288.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_288.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_288.setObjectName("label_288")
+        self.verticalLayout_53.addWidget(self.label_288)
+        self.telaio_asta_suddivisione = QtWidgets.QLineEdit(self.frame_associazione_9)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.telaio_asta_suddivisione.sizePolicy().hasHeightForWidth())
+        self.telaio_asta_suddivisione.setSizePolicy(sizePolicy)
+        self.telaio_asta_suddivisione.setMinimumSize(QtCore.QSize(100, 32))
+        self.telaio_asta_suddivisione.setMaximumSize(QtCore.QSize(16777215, 32))
+        self.telaio_asta_suddivisione.setStyleSheet("background-color: rgb(50,50,50);\n"
+"border: 1px solid rgb(90,90,90);\n"
+"font: 10pt \"Segoe UI\";\n"
+"color: rgb(255, 255, 255);\n"
+"padding-left: 5px;\n"
+"border-radius:4px")
+        self.telaio_asta_suddivisione.setObjectName("telaio_asta_suddivisione")
+        self.verticalLayout_53.addWidget(self.telaio_asta_suddivisione)
+        self.horizontalLayout_48.addWidget(self.frame_associazione_9)
+        self.verticalLayout_52.addLayout(self.horizontalLayout_48)
+        spacerItem112 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.verticalLayout_52.addItem(spacerItem112)
+        self.horizontalLayout_49 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_49.setObjectName("horizontalLayout_49")
+        spacerItem113 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_49.addItem(spacerItem113)
+        self.telaio_asta_aggiungi = QtWidgets.QPushButton(self.frame_30)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.telaio_asta_aggiungi.sizePolicy().hasHeightForWidth())
+        self.telaio_asta_aggiungi.setSizePolicy(sizePolicy)
+        self.telaio_asta_aggiungi.setMinimumSize(QtCore.QSize(160, 34))
+        self.telaio_asta_aggiungi.setMaximumSize(QtCore.QSize(10000000, 34))
+        self.telaio_asta_aggiungi.setStyleSheet("QPushButton{\n"
+"    background-color: rgb(70,70,70);\n"
+"    font:400 12pt \"Segoe UI\";\n"
+"    color: rgb(255,255,255);\n"
+"    padding-bottom: 4px;\n"
+"    border-radius:4px\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(40,40,40);\n"
+"    border: 1px solid rgb(120,120,120);\n"
+"}\n"
+"QPushButton:checked {\n"
+"    background-color: rgb(30,30,30);\n"
+"}\n"
+"\n"
+"")
+        self.telaio_asta_aggiungi.setObjectName("telaio_asta_aggiungi")
+        self.horizontalLayout_49.addWidget(self.telaio_asta_aggiungi)
+        spacerItem114 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_49.addItem(spacerItem114)
+        self.verticalLayout_52.addLayout(self.horizontalLayout_49)
+        self.verticalLayout_54.addWidget(self.frame_30)
+        spacerItem115 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.verticalLayout_54.addItem(spacerItem115)
+        self.horizontalLayout_50 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_50.setObjectName("horizontalLayout_50")
+        self.widget_32 = QtWidgets.QWidget(self.aste_page)
+        self.widget_32.setMinimumSize(QtCore.QSize(0, 6))
+        self.widget_32.setMaximumSize(QtCore.QSize(16777215, 6))
+        self.widget_32.setStyleSheet("background-color: rgb(80,80,80);\n"
+"border-radius:3px")
+        self.widget_32.setObjectName("widget_32")
+        self.horizontalLayout_50.addWidget(self.widget_32)
+        self.label_290 = QtWidgets.QLabel(self.aste_page)
+        self.label_290.setMinimumSize(QtCore.QSize(70, 32))
+        self.label_290.setMaximumSize(QtCore.QSize(70, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(57)
+        self.label_290.setFont(font)
+        self.label_290.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_290.setStyleSheet("font:460 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_290.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
+        self.label_290.setObjectName("label_290")
+        self.horizontalLayout_50.addWidget(self.label_290)
+        self.widget_33 = QtWidgets.QWidget(self.aste_page)
+        self.widget_33.setMinimumSize(QtCore.QSize(0, 6))
+        self.widget_33.setMaximumSize(QtCore.QSize(16777215, 6))
+        self.widget_33.setStyleSheet("background-color: rgb(80,80,80);\n"
+"border-radius:3px")
+        self.widget_33.setObjectName("widget_33")
+        self.horizontalLayout_50.addWidget(self.widget_33)
+        self.verticalLayout_54.addLayout(self.horizontalLayout_50)
+        self.tableView_aste = QtWidgets.QTableView(self.aste_page)
+        self.tableView_aste.setStyleSheet("/* ---------- Variante B: Vertical header nascosto (nessuna colonna 0 visibile, niente quadratino) ---------- */\n"
+"\n"
+"QTableView {\n"
+"    background-color: rgb(40,40,40);\n"
+"    border-radius: 4px;\n"
+"    color: rgb(255,255,255);\n"
+"    gridline-color: rgb(70,70,70);\n"
+"    font: 400 10pt \"Segoe UI\";\n"
+"    selection-background-color: rgb(50, 50, 50);\n"
+"    selection-color: rgb(255, 255, 255);\n"
+"}\n"
+"\n"
+"/* Intestazioni colonne (orizzontali) */\n"
+"QHeaderView::section {\n"
+"    background-color: rgb(45,45,45);\n"
+"    color: rgb(255,255,255);\n"
+"    font: 400 10pt \"Segoe UI\";\n"
+"    padding: 4px;\n"
+"    border: 1px solid rgb(60,60,60);   /* bordo uniforme */\n"
+"}\n"
+"\n"
+"/* Prima sezione dell’header (colonna 0) con angolo in alto a sinistra stondato */\n"
+"QHeaderView::section:first {\n"
+"    border-top-left-radius: 4px;\n"
+"}\n"
+"\n"
+"/* Ultima sezione dell’header (ultima colonna) con angolo in alto a destra stondato */\n"
+"QHeaderView::section:last {\n"
+"    border-top-right-radius: 4px;\n"
+"}\n"
+"\n"
+"/* Rendo la vertical header (colonna 0) visivamente assente impostandone larghezza a 0 */\n"
+"QTableView::verticalHeader {\n"
+"    background: transparent;\n"
+"    width: 0px;       /* nasconde la colonna dei numeri */\n"
+"    margin: 0px;\n"
+"}\n"
+"\n"
+"/* Assicuro che le singole sezioni verticali non occupino spazio */\n"
+"QTableView QHeaderView::section:vertical {\n"
+"    background: transparent;\n"
+"    min-width: 0px;\n"
+"    max-width: 0px;\n"
+"    padding: 0px;\n"
+"    border: none;\n"
+"}\n"
+"\n"
+"/* Rimuovo / faccio sparire il corner button */\n"
+"QTableCornerButton::section {\n"
+"    background: transparent;\n"
+"    width: 0px;\n"
+"    height: 0px;\n"
+"    border: none;\n"
+"    margin: 0px;\n"
+"    padding: 0px;\n"
+"}\n"
+"\n"
+"/* Scrollbar verticale nascosta visivamente (scroll con rotellina rimane) */\n"
+"QScrollBar:vertical {\n"
+"    background: transparent;\n"
+"    width: 0px;\n"
+"    margin: 0px;\n"
+"    border: none;\n"
+"}\n"
+"QScrollBar::handle:vertical,\n"
+"QScrollBar::sub-line:vertical,\n"
+"QScrollBar::add-line:vertical,\n"
+"QScrollBar::up-arrow:vertical,\n"
+"QScrollBar::down-arrow:vertical,\n"
+"QScrollBar::add-page:vertical,\n"
+"QScrollBar::sub-page:vertical {\n"
+"    background: none;\n"
+"    border: none;\n"
+"    height: 0px;\n"
+"    min-height: 0px;\n"
+"}\n"
+"\n"
+"/* ComboBox (invariato) */\n"
+"QComboBox {\n"
+"    font: 400 10pt \"Segoe UI\";\n"
+"    color: rgb(255, 255, 255);\n"
+"    background-color: rgb(30, 30, 30);\n"
+"    border: 1px solid rgb(100, 100, 100);\n"
+"    border-radius: 4px;\n"
+"    padding: 4px 6px;\n"
+"    padding-right: 20px;\n"
+"}\n"
+"QComboBox:hover { background-color: rgb(40,40,40); border: 1px solid rgb(120,120,120); }\n"
+"QComboBox::drop-down { subcontrol-origin: padding; subcontrol-position: top right; width: 20px; border-left: 1px solid rgb(80,80,80); background-color: rgb(50,50,50); border-top-right-radius: 4px; border-bottom-right-radius: 4px; }\n"
+"QComboBox::down-arrow { image: url(:/icons/arrow-down-white.png); width: 12px; height: 12px; }\n"
+"QComboBox QAbstractItemView { background-color: rgb(30,30,30); color: white; border: 1px solid rgb(90,90,90); selection-background-color: rgb(60,60,60); selection-color: white; outline: 0; }\n"
+"")
+        self.tableView_aste.setObjectName("tableView_aste")
+        self.verticalLayout_54.addWidget(self.tableView_aste)
+        self.stackedWidget_modello.addWidget(self.aste_page)
+        self.vincoli_page = QtWidgets.QWidget()
+        self.vincoli_page.setObjectName("vincoli_page")
+        self.verticalLayout_58 = QtWidgets.QVBoxLayout(self.vincoli_page)
+        self.verticalLayout_58.setObjectName("verticalLayout_58")
+        spacerItem116 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.verticalLayout_58.addItem(spacerItem116)
+        self.verticalLayout_65 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_65.setSpacing(0)
+        self.verticalLayout_65.setObjectName("verticalLayout_65")
+        self.frame_associazione_22 = QtWidgets.QFrame(self.vincoli_page)
+        self.frame_associazione_22.setMinimumSize(QtCore.QSize(120, 0))
+        self.frame_associazione_22.setMaximumSize(QtCore.QSize(10000000, 16777215))
+        self.frame_associazione_22.setStyleSheet("background-color: rgb(50,50,50);\n"
+"border-bottom-right-radius: no;\n"
+"border-bottom-left-radius: no;\n"
+"")
+        self.frame_associazione_22.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_associazione_22.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_associazione_22.setObjectName("frame_associazione_22")
+        self.horizontalLayout_76 = QtWidgets.QHBoxLayout(self.frame_associazione_22)
+        self.horizontalLayout_76.setContentsMargins(-1, 5, -1, 5)
+        self.horizontalLayout_76.setObjectName("horizontalLayout_76")
+        spacerItem117 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_76.addItem(spacerItem117)
+        self.label_294 = QtWidgets.QLabel(self.frame_associazione_22)
+        self.label_294.setMinimumSize(QtCore.QSize(60, 27))
+        self.label_294.setMaximumSize(QtCore.QSize(60, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_294.setFont(font)
+        self.label_294.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_294.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_294.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_294.setObjectName("label_294")
+        self.horizontalLayout_76.addWidget(self.label_294)
+        self.vincolo_nodo = QtWidgets.QLineEdit(self.frame_associazione_22)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.vincolo_nodo.sizePolicy().hasHeightForWidth())
+        self.vincolo_nodo.setSizePolicy(sizePolicy)
+        self.vincolo_nodo.setMinimumSize(QtCore.QSize(60, 32))
+        self.vincolo_nodo.setMaximumSize(QtCore.QSize(80, 32))
+        self.vincolo_nodo.setStyleSheet("background-color: rgb(50,50,50);\n"
+"border: 1px solid rgb(90,90,90);\n"
+"font: 10pt \"Segoe UI\";\n"
+"color: rgb(255, 255, 255);\n"
+"padding-left: 5px;\n"
+"border-radius:4px")
+        self.vincolo_nodo.setObjectName("vincolo_nodo")
+        self.horizontalLayout_76.addWidget(self.vincolo_nodo)
+        spacerItem118 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_76.addItem(spacerItem118)
+        self.verticalLayout_65.addWidget(self.frame_associazione_22)
+        self.frame_34 = QtWidgets.QFrame(self.vincoli_page)
+        self.frame_34.setStyleSheet("background-color: rgb(40,40,40);\n"
+"border-top-right-radius: no;\n"
+"border-top-left-radius: no;\n"
+"")
+        self.frame_34.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_34.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_34.setObjectName("frame_34")
+        self.verticalLayout_64 = QtWidgets.QVBoxLayout(self.frame_34)
+        self.verticalLayout_64.setObjectName("verticalLayout_64")
+        spacerItem119 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.verticalLayout_64.addItem(spacerItem119)
+        self.gridLayout_25 = QtWidgets.QGridLayout()
+        self.gridLayout_25.setObjectName("gridLayout_25")
+        self.vincolo_tx = QtWidgets.QCheckBox(self.frame_34)
+        self.vincolo_tx.setMinimumSize(QtCore.QSize(80, 32))
+        self.vincolo_tx.setStyleSheet("QCheckBox {\n"
+"    font: 400 12pt \"Segoe UI\";\n"
+"    color: rgb(255,255,255);\n"
+"    padding-left: 10px;\n"
+"    border-radius: 4px; /* opzionale */\n"
+"}\n"
+"\n"
+"QCheckBox:checked {\n"
+"    background-color: rgb(30,30,30); /* cambia sfondo quando premuto */\n"
+"}\n"
+"")
+        self.vincolo_tx.setChecked(True)
+        self.vincolo_tx.setObjectName("vincolo_tx")
+        self.gridLayout_25.addWidget(self.vincolo_tx, 0, 1, 1, 1)
+        spacerItem120 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.gridLayout_25.addItem(spacerItem120, 0, 0, 2, 1)
+        self.vincolo_ty = QtWidgets.QCheckBox(self.frame_34)
+        self.vincolo_ty.setMinimumSize(QtCore.QSize(80, 32))
+        self.vincolo_ty.setStyleSheet("QCheckBox {\n"
+"    font: 400 12pt \"Segoe UI\";\n"
+"    color: rgb(255,255,255);\n"
+"    padding-left: 10px;\n"
+"    border-radius: 4px; /* opzionale */\n"
+"}\n"
+"\n"
+"QCheckBox:checked {\n"
+"    background-color: rgb(30,30,30); /* cambia sfondo quando premuto */\n"
+"}\n"
+"")
+        self.vincolo_ty.setChecked(True)
+        self.vincolo_ty.setObjectName("vincolo_ty")
+        self.gridLayout_25.addWidget(self.vincolo_ty, 0, 2, 1, 1)
+        spacerItem121 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.gridLayout_25.addItem(spacerItem121, 0, 4, 2, 1)
+        self.vincolo_ry = QtWidgets.QCheckBox(self.frame_34)
+        self.vincolo_ry.setMinimumSize(QtCore.QSize(80, 32))
+        self.vincolo_ry.setStyleSheet("QCheckBox {\n"
+"    font: 400 12pt \"Segoe UI\";\n"
+"    color: rgb(255,255,255);\n"
+"    padding-left: 10px;\n"
+"    border-radius: 4px; /* opzionale */\n"
+"}\n"
+"\n"
+"QCheckBox:checked {\n"
+"    background-color: rgb(30,30,30); /* cambia sfondo quando premuto */\n"
+"}\n"
+"\n"
+"")
+        self.vincolo_ry.setChecked(True)
+        self.vincolo_ry.setObjectName("vincolo_ry")
+        self.gridLayout_25.addWidget(self.vincolo_ry, 1, 2, 1, 1)
+        self.vincolo_rx = QtWidgets.QCheckBox(self.frame_34)
+        self.vincolo_rx.setMinimumSize(QtCore.QSize(80, 32))
+        self.vincolo_rx.setStyleSheet("QCheckBox {\n"
+"    font: 400 12pt \"Segoe UI\";\n"
+"    color: rgb(255,255,255);\n"
+"    padding-left: 10px;\n"
+"    border-radius: 4px; /* opzionale */\n"
+"}\n"
+"\n"
+"QCheckBox:checked {\n"
+"    background-color: rgb(30,30,30); /* cambia sfondo quando premuto */\n"
+"}\n"
+"")
+        self.vincolo_rx.setChecked(True)
+        self.vincolo_rx.setObjectName("vincolo_rx")
+        self.gridLayout_25.addWidget(self.vincolo_rx, 1, 1, 1, 1)
+        self.vincolo_tz = QtWidgets.QCheckBox(self.frame_34)
+        self.vincolo_tz.setMinimumSize(QtCore.QSize(80, 32))
+        self.vincolo_tz.setStyleSheet("QCheckBox {\n"
+"    font: 400 12pt \"Segoe UI\";\n"
+"    color: rgb(255,255,255);\n"
+"    padding-left: 10px;\n"
+"    border-radius: 4px; /* opzionale */\n"
+"}\n"
+"\n"
+"QCheckBox:checked {\n"
+"    background-color: rgb(30,30,30); /* cambia sfondo quando premuto */\n"
+"}\n"
+"")
+        self.vincolo_tz.setChecked(True)
+        self.vincolo_tz.setObjectName("vincolo_tz")
+        self.gridLayout_25.addWidget(self.vincolo_tz, 0, 3, 1, 1)
+        self.vincolo_rz = QtWidgets.QCheckBox(self.frame_34)
+        self.vincolo_rz.setMinimumSize(QtCore.QSize(80, 32))
+        self.vincolo_rz.setStyleSheet("QCheckBox {\n"
+"    font: 400 12pt \"Segoe UI\";\n"
+"    color: rgb(255,255,255);\n"
+"    padding-left: 10px;\n"
+"    border-radius: 4px; /* opzionale */\n"
+"}\n"
+"\n"
+"QCheckBox:checked {\n"
+"    background-color: rgb(30,30,30); /* cambia sfondo quando premuto */\n"
+"}\n"
+"\n"
+"")
+        self.vincolo_rz.setChecked(True)
+        self.vincolo_rz.setObjectName("vincolo_rz")
+        self.gridLayout_25.addWidget(self.vincolo_rz, 1, 3, 1, 1)
+        self.verticalLayout_64.addLayout(self.gridLayout_25)
+        spacerItem122 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.verticalLayout_64.addItem(spacerItem122)
+        self.horizontalLayout_64 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_64.setObjectName("horizontalLayout_64")
+        spacerItem123 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_64.addItem(spacerItem123)
+        self.telaio_vincolo_aggiungi = QtWidgets.QPushButton(self.frame_34)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.telaio_vincolo_aggiungi.sizePolicy().hasHeightForWidth())
+        self.telaio_vincolo_aggiungi.setSizePolicy(sizePolicy)
+        self.telaio_vincolo_aggiungi.setMinimumSize(QtCore.QSize(180, 34))
+        self.telaio_vincolo_aggiungi.setMaximumSize(QtCore.QSize(10000000, 34))
+        self.telaio_vincolo_aggiungi.setStyleSheet("QPushButton{\n"
+"    background-color: rgb(70,70,70);\n"
+"    font:400 12pt \"Segoe UI\";\n"
+"    color: rgb(255,255,255);\n"
+"    padding-bottom: 4px;\n"
+"    border-radius:4px\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(40,40,40);\n"
+"    border: 1px solid rgb(120,120,120);\n"
+"}\n"
+"QPushButton:checked {\n"
+"    background-color: rgb(30,30,30);\n"
+"}\n"
+"\n"
+"")
+        self.telaio_vincolo_aggiungi.setObjectName("telaio_vincolo_aggiungi")
+        self.horizontalLayout_64.addWidget(self.telaio_vincolo_aggiungi)
+        spacerItem124 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_64.addItem(spacerItem124)
+        self.verticalLayout_64.addLayout(self.horizontalLayout_64)
+        self.verticalLayout_65.addWidget(self.frame_34)
+        self.verticalLayout_58.addLayout(self.verticalLayout_65)
+        spacerItem125 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.verticalLayout_58.addItem(spacerItem125)
+        self.horizontalLayout_53 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_53.setObjectName("horizontalLayout_53")
+        self.widget_34 = QtWidgets.QWidget(self.vincoli_page)
+        self.widget_34.setMinimumSize(QtCore.QSize(0, 6))
+        self.widget_34.setMaximumSize(QtCore.QSize(16777215, 6))
+        self.widget_34.setStyleSheet("background-color: rgb(80,80,80);\n"
+"border-radius:3px")
+        self.widget_34.setObjectName("widget_34")
+        self.horizontalLayout_53.addWidget(self.widget_34)
+        self.label_291 = QtWidgets.QLabel(self.vincoli_page)
+        self.label_291.setMinimumSize(QtCore.QSize(90, 32))
+        self.label_291.setMaximumSize(QtCore.QSize(90, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(57)
+        self.label_291.setFont(font)
+        self.label_291.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_291.setStyleSheet("font:460 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_291.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
+        self.label_291.setObjectName("label_291")
+        self.horizontalLayout_53.addWidget(self.label_291)
+        self.widget_35 = QtWidgets.QWidget(self.vincoli_page)
+        self.widget_35.setMinimumSize(QtCore.QSize(0, 6))
+        self.widget_35.setMaximumSize(QtCore.QSize(16777215, 6))
+        self.widget_35.setStyleSheet("background-color: rgb(80,80,80);\n"
+"border-radius:3px")
+        self.widget_35.setObjectName("widget_35")
+        self.horizontalLayout_53.addWidget(self.widget_35)
+        self.verticalLayout_58.addLayout(self.horizontalLayout_53)
+        self.tableView_vincoli = QtWidgets.QTableView(self.vincoli_page)
+        self.tableView_vincoli.setStyleSheet("/* ---------- Variante B: Vertical header nascosto (nessuna colonna 0 visibile, niente quadratino) ---------- */\n"
+"\n"
+"QTableView {\n"
+"    background-color: rgb(40,40,40);\n"
+"    border-radius: 4px;\n"
+"    color: rgb(255,255,255);\n"
+"    gridline-color: rgb(70,70,70);\n"
+"    font: 400 10pt \"Segoe UI\";\n"
+"    selection-background-color: rgb(50, 50, 50);\n"
+"    selection-color: rgb(255, 255, 255);\n"
+"}\n"
+"\n"
+"/* Intestazioni colonne (orizzontali) */\n"
+"QHeaderView::section {\n"
+"    background-color: rgb(45,45,45);\n"
+"    color: rgb(255,255,255);\n"
+"    font: 400 10pt \"Segoe UI\";\n"
+"    padding: 4px;\n"
+"    border: 1px solid rgb(60,60,60);   /* bordo uniforme */\n"
+"}\n"
+"\n"
+"/* Prima sezione dell’header (colonna 0) con angolo in alto a sinistra stondato */\n"
+"QHeaderView::section:first {\n"
+"    border-top-left-radius: 4px;\n"
+"}\n"
+"\n"
+"/* Ultima sezione dell’header (ultima colonna) con angolo in alto a destra stondato */\n"
+"QHeaderView::section:last {\n"
+"    border-top-right-radius: 4px;\n"
+"}\n"
+"\n"
+"/* Rendo la vertical header (colonna 0) visivamente assente impostandone larghezza a 0 */\n"
+"QTableView::verticalHeader {\n"
+"    background: transparent;\n"
+"    width: 0px;       /* nasconde la colonna dei numeri */\n"
+"    margin: 0px;\n"
+"}\n"
+"\n"
+"/* Assicuro che le singole sezioni verticali non occupino spazio */\n"
+"QTableView QHeaderView::section:vertical {\n"
+"    background: transparent;\n"
+"    min-width: 0px;\n"
+"    max-width: 0px;\n"
+"    padding: 0px;\n"
+"    border: none;\n"
+"}\n"
+"\n"
+"/* Rimuovo / faccio sparire il corner button */\n"
+"QTableCornerButton::section {\n"
+"    background: transparent;\n"
+"    width: 0px;\n"
+"    height: 0px;\n"
+"    border: none;\n"
+"    margin: 0px;\n"
+"    padding: 0px;\n"
+"}\n"
+"\n"
+"/* Scrollbar verticale nascosta visivamente (scroll con rotellina rimane) */\n"
+"QScrollBar:vertical {\n"
+"    background: transparent;\n"
+"    width: 0px;\n"
+"    margin: 0px;\n"
+"    border: none;\n"
+"}\n"
+"QScrollBar::handle:vertical,\n"
+"QScrollBar::sub-line:vertical,\n"
+"QScrollBar::add-line:vertical,\n"
+"QScrollBar::up-arrow:vertical,\n"
+"QScrollBar::down-arrow:vertical,\n"
+"QScrollBar::add-page:vertical,\n"
+"QScrollBar::sub-page:vertical {\n"
+"    background: none;\n"
+"    border: none;\n"
+"    height: 0px;\n"
+"    min-height: 0px;\n"
+"}\n"
+"\n"
+"/* ComboBox (invariato) */\n"
+"QComboBox {\n"
+"    font: 400 10pt \"Segoe UI\";\n"
+"    color: rgb(255, 255, 255);\n"
+"    background-color: rgb(30, 30, 30);\n"
+"    border: 1px solid rgb(100, 100, 100);\n"
+"    border-radius: 4px;\n"
+"    padding: 4px 6px;\n"
+"    padding-right: 20px;\n"
+"}\n"
+"QComboBox:hover { background-color: rgb(40,40,40); border: 1px solid rgb(120,120,120); }\n"
+"QComboBox::drop-down { subcontrol-origin: padding; subcontrol-position: top right; width: 20px; border-left: 1px solid rgb(80,80,80); background-color: rgb(50,50,50); border-top-right-radius: 4px; border-bottom-right-radius: 4px; }\n"
+"QComboBox::down-arrow { image: url(:/icons/arrow-down-white.png); width: 12px; height: 12px; }\n"
+"QComboBox QAbstractItemView { background-color: rgb(30,30,30); color: white; border: 1px solid rgb(90,90,90); selection-background-color: rgb(60,60,60); selection-color: white; outline: 0; }\n"
+"")
+        self.tableView_vincoli.setObjectName("tableView_vincoli")
+        self.verticalLayout_58.addWidget(self.tableView_vincoli)
+        self.stackedWidget_modello.addWidget(self.vincoli_page)
+        self.carichi_page = QtWidgets.QWidget()
+        self.carichi_page.setObjectName("carichi_page")
+        self.verticalLayout_60 = QtWidgets.QVBoxLayout(self.carichi_page)
+        self.verticalLayout_60.setObjectName("verticalLayout_60")
+        spacerItem126 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.verticalLayout_60.addItem(spacerItem126)
+        self.label_301 = QtWidgets.QLabel(self.carichi_page)
+        self.label_301.setMinimumSize(QtCore.QSize(90, 32))
+        self.label_301.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(57)
+        self.label_301.setFont(font)
+        self.label_301.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_301.setStyleSheet("font:460 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_301.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
+        self.label_301.setObjectName("label_301")
+        self.verticalLayout_60.addWidget(self.label_301)
+        self.verticalLayout_59 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_59.setSpacing(0)
+        self.verticalLayout_59.setObjectName("verticalLayout_59")
+        self.frame_associazione_13 = QtWidgets.QFrame(self.carichi_page)
+        self.frame_associazione_13.setMinimumSize(QtCore.QSize(120, 0))
+        self.frame_associazione_13.setMaximumSize(QtCore.QSize(10000000, 16777215))
+        self.frame_associazione_13.setStyleSheet("background-color: rgb(50,50,50);\n"
+"border-bottom-right-radius: no;\n"
+"border-bottom-left-radius: no;\n"
+"")
+        self.frame_associazione_13.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_associazione_13.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_associazione_13.setObjectName("frame_associazione_13")
+        self.horizontalLayout_74 = QtWidgets.QHBoxLayout(self.frame_associazione_13)
+        self.horizontalLayout_74.setContentsMargins(-1, 5, -1, 5)
+        self.horizontalLayout_74.setObjectName("horizontalLayout_74")
+        spacerItem127 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_74.addItem(spacerItem127)
+        self.label_271 = QtWidgets.QLabel(self.frame_associazione_13)
+        self.label_271.setMinimumSize(QtCore.QSize(60, 27))
+        self.label_271.setMaximumSize(QtCore.QSize(60, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_271.setFont(font)
+        self.label_271.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_271.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_271.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_271.setObjectName("label_271")
+        self.horizontalLayout_74.addWidget(self.label_271)
+        self.carico_concentrato_nodo = QtWidgets.QLineEdit(self.frame_associazione_13)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.carico_concentrato_nodo.sizePolicy().hasHeightForWidth())
+        self.carico_concentrato_nodo.setSizePolicy(sizePolicy)
+        self.carico_concentrato_nodo.setMinimumSize(QtCore.QSize(60, 32))
+        self.carico_concentrato_nodo.setMaximumSize(QtCore.QSize(80, 32))
+        self.carico_concentrato_nodo.setStyleSheet("background-color: rgb(50,50,50);\n"
+"border: 1px solid rgb(90,90,90);\n"
+"font: 10pt \"Segoe UI\";\n"
+"color: rgb(255, 255, 255);\n"
+"padding-left: 5px;\n"
+"border-radius:4px")
+        self.carico_concentrato_nodo.setObjectName("carico_concentrato_nodo")
+        self.horizontalLayout_74.addWidget(self.carico_concentrato_nodo)
+        spacerItem128 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_74.addItem(spacerItem128)
+        self.verticalLayout_59.addWidget(self.frame_associazione_13)
+        self.frame_32 = QtWidgets.QFrame(self.carichi_page)
+        self.frame_32.setStyleSheet("background-color: rgb(40,40,40);\n"
+"border-top-right-radius: no;\n"
+"border-top-left-radius: no;\n"
+"")
+        self.frame_32.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_32.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_32.setObjectName("frame_32")
+        self.verticalLayout_62 = QtWidgets.QVBoxLayout(self.frame_32)
+        self.verticalLayout_62.setObjectName("verticalLayout_62")
+        spacerItem129 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.verticalLayout_62.addItem(spacerItem129)
+        self.gridLayout_22 = QtWidgets.QGridLayout()
+        self.gridLayout_22.setObjectName("gridLayout_22")
+        self.frame_associazione_10 = QtWidgets.QFrame(self.frame_32)
+        self.frame_associazione_10.setMinimumSize(QtCore.QSize(120, 0))
+        self.frame_associazione_10.setMaximumSize(QtCore.QSize(10000000, 16777215))
+        self.frame_associazione_10.setStyleSheet("background-color: rgb(40,40,40);\n"
+"")
+        self.frame_associazione_10.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_associazione_10.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_associazione_10.setObjectName("frame_associazione_10")
+        self.horizontalLayout_54 = QtWidgets.QHBoxLayout(self.frame_associazione_10)
+        self.horizontalLayout_54.setObjectName("horizontalLayout_54")
+        self.label_273 = QtWidgets.QLabel(self.frame_associazione_10)
+        self.label_273.setMinimumSize(QtCore.QSize(30, 32))
+        self.label_273.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_273.setFont(font)
+        self.label_273.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_273.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_273.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_273.setObjectName("label_273")
+        self.horizontalLayout_54.addWidget(self.label_273)
+        self.carico_concentrato_fx = QtWidgets.QLineEdit(self.frame_associazione_10)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.carico_concentrato_fx.sizePolicy().hasHeightForWidth())
+        self.carico_concentrato_fx.setSizePolicy(sizePolicy)
+        self.carico_concentrato_fx.setMinimumSize(QtCore.QSize(85, 32))
+        self.carico_concentrato_fx.setMaximumSize(QtCore.QSize(16777215, 32))
+        self.carico_concentrato_fx.setStyleSheet("background-color: rgb(50,50,50);\n"
+"border: 1px solid rgb(90,90,90);\n"
+"font: 10pt \"Segoe UI\";\n"
+"color: rgb(255, 255, 255);\n"
+"padding-left: 5px;\n"
+"border-radius:4px")
+        self.carico_concentrato_fx.setObjectName("carico_concentrato_fx")
+        self.horizontalLayout_54.addWidget(self.carico_concentrato_fx)
+        self.gridLayout_22.addWidget(self.frame_associazione_10, 0, 0, 1, 1)
+        self.frame_associazione_11 = QtWidgets.QFrame(self.frame_32)
+        self.frame_associazione_11.setMinimumSize(QtCore.QSize(120, 0))
+        self.frame_associazione_11.setMaximumSize(QtCore.QSize(10000000, 16777215))
+        self.frame_associazione_11.setStyleSheet("background-color: rgb(40,40,40);\n"
+"")
+        self.frame_associazione_11.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_associazione_11.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_associazione_11.setObjectName("frame_associazione_11")
+        self.horizontalLayout_55 = QtWidgets.QHBoxLayout(self.frame_associazione_11)
+        self.horizontalLayout_55.setObjectName("horizontalLayout_55")
+        self.label_289 = QtWidgets.QLabel(self.frame_associazione_11)
+        self.label_289.setMinimumSize(QtCore.QSize(30, 32))
+        self.label_289.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_289.setFont(font)
+        self.label_289.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_289.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_289.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_289.setObjectName("label_289")
+        self.horizontalLayout_55.addWidget(self.label_289)
+        self.carico_concentrato_fy = QtWidgets.QLineEdit(self.frame_associazione_11)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.carico_concentrato_fy.sizePolicy().hasHeightForWidth())
+        self.carico_concentrato_fy.setSizePolicy(sizePolicy)
+        self.carico_concentrato_fy.setMinimumSize(QtCore.QSize(85, 32))
+        self.carico_concentrato_fy.setMaximumSize(QtCore.QSize(16777215, 32))
+        self.carico_concentrato_fy.setStyleSheet("background-color: rgb(50,50,50);\n"
+"border: 1px solid rgb(90,90,90);\n"
+"font: 10pt \"Segoe UI\";\n"
+"color: rgb(255, 255, 255);\n"
+"padding-left: 5px;\n"
+"border-radius:4px")
+        self.carico_concentrato_fy.setObjectName("carico_concentrato_fy")
+        self.horizontalLayout_55.addWidget(self.carico_concentrato_fy)
+        self.gridLayout_22.addWidget(self.frame_associazione_11, 0, 1, 1, 1)
+        self.frame_associazione_12 = QtWidgets.QFrame(self.frame_32)
+        self.frame_associazione_12.setMinimumSize(QtCore.QSize(120, 0))
+        self.frame_associazione_12.setMaximumSize(QtCore.QSize(10000000, 16777215))
+        self.frame_associazione_12.setStyleSheet("background-color: rgb(40,40,40);")
+        self.frame_associazione_12.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_associazione_12.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_associazione_12.setObjectName("frame_associazione_12")
+        self.horizontalLayout_56 = QtWidgets.QHBoxLayout(self.frame_associazione_12)
+        self.horizontalLayout_56.setObjectName("horizontalLayout_56")
+        self.label_293 = QtWidgets.QLabel(self.frame_associazione_12)
+        self.label_293.setMinimumSize(QtCore.QSize(30, 32))
+        self.label_293.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_293.setFont(font)
+        self.label_293.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_293.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_293.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_293.setObjectName("label_293")
+        self.horizontalLayout_56.addWidget(self.label_293)
+        self.carico_concentrato_fz = QtWidgets.QLineEdit(self.frame_associazione_12)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.carico_concentrato_fz.sizePolicy().hasHeightForWidth())
+        self.carico_concentrato_fz.setSizePolicy(sizePolicy)
+        self.carico_concentrato_fz.setMinimumSize(QtCore.QSize(85, 32))
+        self.carico_concentrato_fz.setMaximumSize(QtCore.QSize(16777215, 32))
+        self.carico_concentrato_fz.setStyleSheet("background-color: rgb(50,50,50);\n"
+"border: 1px solid rgb(90,90,90);\n"
+"font: 10pt \"Segoe UI\";\n"
+"color: rgb(255, 255, 255);\n"
+"padding-left: 5px;\n"
+"border-radius:4px")
+        self.carico_concentrato_fz.setObjectName("carico_concentrato_fz")
+        self.horizontalLayout_56.addWidget(self.carico_concentrato_fz)
+        self.label_292 = QtWidgets.QLabel(self.frame_associazione_12)
+        self.label_292.setMinimumSize(QtCore.QSize(45, 32))
+        self.label_292.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_292.setFont(font)
+        self.label_292.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_292.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_292.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_292.setObjectName("label_292")
+        self.horizontalLayout_56.addWidget(self.label_292)
+        self.gridLayout_22.addWidget(self.frame_associazione_12, 0, 2, 1, 1)
+        self.frame_associazione_16 = QtWidgets.QFrame(self.frame_32)
+        self.frame_associazione_16.setMinimumSize(QtCore.QSize(120, 0))
+        self.frame_associazione_16.setMaximumSize(QtCore.QSize(10000000, 16777215))
+        self.frame_associazione_16.setStyleSheet("background-color: rgb(40,40,40);")
+        self.frame_associazione_16.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_associazione_16.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_associazione_16.setObjectName("frame_associazione_16")
+        self.horizontalLayout_59 = QtWidgets.QHBoxLayout(self.frame_associazione_16)
+        self.horizontalLayout_59.setObjectName("horizontalLayout_59")
+        self.label_299 = QtWidgets.QLabel(self.frame_associazione_16)
+        self.label_299.setMinimumSize(QtCore.QSize(30, 32))
+        self.label_299.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_299.setFont(font)
+        self.label_299.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_299.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_299.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_299.setObjectName("label_299")
+        self.horizontalLayout_59.addWidget(self.label_299)
+        self.carico_concentrato_mx = QtWidgets.QLineEdit(self.frame_associazione_16)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.carico_concentrato_mx.sizePolicy().hasHeightForWidth())
+        self.carico_concentrato_mx.setSizePolicy(sizePolicy)
+        self.carico_concentrato_mx.setMinimumSize(QtCore.QSize(85, 32))
+        self.carico_concentrato_mx.setMaximumSize(QtCore.QSize(16777215, 32))
+        self.carico_concentrato_mx.setStyleSheet("background-color: rgb(50,50,50);\n"
+"border: 1px solid rgb(90,90,90);\n"
+"font: 10pt \"Segoe UI\";\n"
+"color: rgb(255, 255, 255);\n"
+"padding-left: 5px;\n"
+"border-radius:4px")
+        self.carico_concentrato_mx.setObjectName("carico_concentrato_mx")
+        self.horizontalLayout_59.addWidget(self.carico_concentrato_mx)
+        self.gridLayout_22.addWidget(self.frame_associazione_16, 1, 0, 1, 1)
+        self.frame_associazione_14 = QtWidgets.QFrame(self.frame_32)
+        self.frame_associazione_14.setMinimumSize(QtCore.QSize(120, 0))
+        self.frame_associazione_14.setMaximumSize(QtCore.QSize(10000000, 16777215))
+        self.frame_associazione_14.setStyleSheet("background-color: rgb(40,40,40);")
+        self.frame_associazione_14.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_associazione_14.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_associazione_14.setObjectName("frame_associazione_14")
+        self.horizontalLayout_57 = QtWidgets.QHBoxLayout(self.frame_associazione_14)
+        self.horizontalLayout_57.setObjectName("horizontalLayout_57")
+        self.label_295 = QtWidgets.QLabel(self.frame_associazione_14)
+        self.label_295.setMinimumSize(QtCore.QSize(30, 32))
+        self.label_295.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_295.setFont(font)
+        self.label_295.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_295.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_295.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_295.setObjectName("label_295")
+        self.horizontalLayout_57.addWidget(self.label_295)
+        self.carico_concentrato_my = QtWidgets.QLineEdit(self.frame_associazione_14)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.carico_concentrato_my.sizePolicy().hasHeightForWidth())
+        self.carico_concentrato_my.setSizePolicy(sizePolicy)
+        self.carico_concentrato_my.setMinimumSize(QtCore.QSize(85, 32))
+        self.carico_concentrato_my.setMaximumSize(QtCore.QSize(16777215, 32))
+        self.carico_concentrato_my.setStyleSheet("background-color: rgb(50,50,50);\n"
+"border: 1px solid rgb(90,90,90);\n"
+"font: 10pt \"Segoe UI\";\n"
+"color: rgb(255, 255, 255);\n"
+"padding-left: 5px;\n"
+"border-radius:4px")
+        self.carico_concentrato_my.setObjectName("carico_concentrato_my")
+        self.horizontalLayout_57.addWidget(self.carico_concentrato_my)
+        self.gridLayout_22.addWidget(self.frame_associazione_14, 1, 1, 1, 1)
+        self.frame_associazione_15 = QtWidgets.QFrame(self.frame_32)
+        self.frame_associazione_15.setMinimumSize(QtCore.QSize(120, 0))
+        self.frame_associazione_15.setMaximumSize(QtCore.QSize(10000000, 16777215))
+        self.frame_associazione_15.setStyleSheet("background-color: rgb(40,40,40);\n"
+"")
+        self.frame_associazione_15.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_associazione_15.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_associazione_15.setObjectName("frame_associazione_15")
+        self.horizontalLayout_58 = QtWidgets.QHBoxLayout(self.frame_associazione_15)
+        self.horizontalLayout_58.setObjectName("horizontalLayout_58")
+        self.label_297 = QtWidgets.QLabel(self.frame_associazione_15)
+        self.label_297.setMinimumSize(QtCore.QSize(30, 32))
+        self.label_297.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_297.setFont(font)
+        self.label_297.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_297.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_297.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_297.setObjectName("label_297")
+        self.horizontalLayout_58.addWidget(self.label_297)
+        self.carico_concentrato_mz = QtWidgets.QLineEdit(self.frame_associazione_15)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.carico_concentrato_mz.sizePolicy().hasHeightForWidth())
+        self.carico_concentrato_mz.setSizePolicy(sizePolicy)
+        self.carico_concentrato_mz.setMinimumSize(QtCore.QSize(85, 32))
+        self.carico_concentrato_mz.setMaximumSize(QtCore.QSize(16777215, 32))
+        self.carico_concentrato_mz.setStyleSheet("background-color: rgb(50,50,50);\n"
+"border: 1px solid rgb(90,90,90);\n"
+"font: 10pt \"Segoe UI\";\n"
+"color: rgb(255, 255, 255);\n"
+"padding-left: 5px;\n"
+"border-radius:4px")
+        self.carico_concentrato_mz.setObjectName("carico_concentrato_mz")
+        self.horizontalLayout_58.addWidget(self.carico_concentrato_mz)
+        self.label_296 = QtWidgets.QLabel(self.frame_associazione_15)
+        self.label_296.setMinimumSize(QtCore.QSize(45, 32))
+        self.label_296.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_296.setFont(font)
+        self.label_296.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_296.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_296.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_296.setObjectName("label_296")
+        self.horizontalLayout_58.addWidget(self.label_296)
+        self.gridLayout_22.addWidget(self.frame_associazione_15, 1, 2, 1, 1)
+        self.verticalLayout_62.addLayout(self.gridLayout_22)
+        spacerItem130 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.verticalLayout_62.addItem(spacerItem130)
+        self.horizontalLayout_67 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_67.setObjectName("horizontalLayout_67")
+        spacerItem131 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_67.addItem(spacerItem131)
+        self.telaio_carico_concentrato_aggiungi = QtWidgets.QPushButton(self.frame_32)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.telaio_carico_concentrato_aggiungi.sizePolicy().hasHeightForWidth())
+        self.telaio_carico_concentrato_aggiungi.setSizePolicy(sizePolicy)
+        self.telaio_carico_concentrato_aggiungi.setMinimumSize(QtCore.QSize(180, 34))
+        self.telaio_carico_concentrato_aggiungi.setMaximumSize(QtCore.QSize(10000000, 34))
+        self.telaio_carico_concentrato_aggiungi.setStyleSheet("QPushButton{\n"
+"    background-color: rgb(70,70,70);\n"
+"    font:400 12pt \"Segoe UI\";\n"
+"    color: rgb(255,255,255);\n"
+"    padding-bottom: 4px;\n"
+"    border-radius:4px\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(40,40,40);\n"
+"    border: 1px solid rgb(120,120,120);\n"
+"}\n"
+"QPushButton:checked {\n"
+"    background-color: rgb(30,30,30);\n"
+"}\n"
+"\n"
+"")
+        self.telaio_carico_concentrato_aggiungi.setObjectName("telaio_carico_concentrato_aggiungi")
+        self.horizontalLayout_67.addWidget(self.telaio_carico_concentrato_aggiungi)
+        spacerItem132 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_67.addItem(spacerItem132)
+        self.verticalLayout_62.addLayout(self.horizontalLayout_67)
+        self.verticalLayout_59.addWidget(self.frame_32)
+        self.verticalLayout_60.addLayout(self.verticalLayout_59)
+        spacerItem133 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.verticalLayout_60.addItem(spacerItem133)
+        self.label_310 = QtWidgets.QLabel(self.carichi_page)
+        self.label_310.setMinimumSize(QtCore.QSize(90, 32))
+        self.label_310.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(57)
+        self.label_310.setFont(font)
+        self.label_310.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_310.setStyleSheet("font:460 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_310.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
+        self.label_310.setObjectName("label_310")
+        self.verticalLayout_60.addWidget(self.label_310)
+        self.verticalLayout_61 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_61.setSpacing(0)
+        self.verticalLayout_61.setObjectName("verticalLayout_61")
+        self.frame_associazione_17 = QtWidgets.QFrame(self.carichi_page)
+        self.frame_associazione_17.setMinimumSize(QtCore.QSize(120, 0))
+        self.frame_associazione_17.setMaximumSize(QtCore.QSize(10000000, 16777215))
+        self.frame_associazione_17.setStyleSheet("background-color: rgb(50,50,50);\n"
+"border-bottom-right-radius: no;\n"
+"border-bottom-left-radius: no;\n"
+"")
+        self.frame_associazione_17.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_associazione_17.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_associazione_17.setObjectName("frame_associazione_17")
+        self.horizontalLayout_75 = QtWidgets.QHBoxLayout(self.frame_associazione_17)
+        self.horizontalLayout_75.setContentsMargins(-1, 5, -1, 5)
+        self.horizontalLayout_75.setObjectName("horizontalLayout_75")
+        spacerItem134 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_75.addItem(spacerItem134)
+        self.label_287 = QtWidgets.QLabel(self.frame_associazione_17)
+        self.label_287.setMinimumSize(QtCore.QSize(60, 27))
+        self.label_287.setMaximumSize(QtCore.QSize(60, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_287.setFont(font)
+        self.label_287.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_287.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_287.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_287.setObjectName("label_287")
+        self.horizontalLayout_75.addWidget(self.label_287)
+        self.carico_distribuito_asta = QtWidgets.QLineEdit(self.frame_associazione_17)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.carico_distribuito_asta.sizePolicy().hasHeightForWidth())
+        self.carico_distribuito_asta.setSizePolicy(sizePolicy)
+        self.carico_distribuito_asta.setMinimumSize(QtCore.QSize(60, 32))
+        self.carico_distribuito_asta.setMaximumSize(QtCore.QSize(80, 32))
+        self.carico_distribuito_asta.setStyleSheet("background-color: rgb(50,50,50);\n"
+"border: 1px solid rgb(90,90,90);\n"
+"font: 10pt \"Segoe UI\";\n"
+"color: rgb(255, 255, 255);\n"
+"padding-left: 5px;\n"
+"border-radius:4px")
+        self.carico_distribuito_asta.setObjectName("carico_distribuito_asta")
+        self.horizontalLayout_75.addWidget(self.carico_distribuito_asta)
+        spacerItem135 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_75.addItem(spacerItem135)
+        self.verticalLayout_61.addWidget(self.frame_associazione_17)
+        self.frame_33 = QtWidgets.QFrame(self.carichi_page)
+        self.frame_33.setStyleSheet("background-color: rgb(40,40,40);\n"
+"border-top-right-radius: no;\n"
+"border-top-left-radius: no;\n"
+"")
+        self.frame_33.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_33.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_33.setObjectName("frame_33")
+        self.verticalLayout_63 = QtWidgets.QVBoxLayout(self.frame_33)
+        self.verticalLayout_63.setObjectName("verticalLayout_63")
+        spacerItem136 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.verticalLayout_63.addItem(spacerItem136)
+        self.gridLayout_24 = QtWidgets.QGridLayout()
+        self.gridLayout_24.setObjectName("gridLayout_24")
+        self.frame_associazione_18 = QtWidgets.QFrame(self.frame_33)
+        self.frame_associazione_18.setMinimumSize(QtCore.QSize(120, 0))
+        self.frame_associazione_18.setMaximumSize(QtCore.QSize(10000000, 16777215))
+        self.frame_associazione_18.setStyleSheet("background-color: rgb(40,40,40);")
+        self.frame_associazione_18.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_associazione_18.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_associazione_18.setObjectName("frame_associazione_18")
+        self.horizontalLayout_61 = QtWidgets.QHBoxLayout(self.frame_associazione_18)
+        self.horizontalLayout_61.setObjectName("horizontalLayout_61")
+        self.label_304 = QtWidgets.QLabel(self.frame_associazione_18)
+        self.label_304.setMinimumSize(QtCore.QSize(30, 32))
+        self.label_304.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_304.setFont(font)
+        self.label_304.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_304.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_304.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_304.setObjectName("label_304")
+        self.horizontalLayout_61.addWidget(self.label_304)
+        self.carico_distribuito_qx = QtWidgets.QLineEdit(self.frame_associazione_18)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.carico_distribuito_qx.sizePolicy().hasHeightForWidth())
+        self.carico_distribuito_qx.setSizePolicy(sizePolicy)
+        self.carico_distribuito_qx.setMinimumSize(QtCore.QSize(85, 32))
+        self.carico_distribuito_qx.setMaximumSize(QtCore.QSize(16777215, 32))
+        self.carico_distribuito_qx.setStyleSheet("background-color: rgb(50,50,50);\n"
+"border: 1px solid rgb(90,90,90);\n"
+"font: 10pt \"Segoe UI\";\n"
+"color: rgb(255, 255, 255);\n"
+"padding-left: 5px;\n"
+"border-radius:4px")
+        self.carico_distribuito_qx.setObjectName("carico_distribuito_qx")
+        self.horizontalLayout_61.addWidget(self.carico_distribuito_qx)
+        self.gridLayout_24.addWidget(self.frame_associazione_18, 2, 0, 1, 1)
+        self.frame_associazione_19 = QtWidgets.QFrame(self.frame_33)
+        self.frame_associazione_19.setMinimumSize(QtCore.QSize(120, 0))
+        self.frame_associazione_19.setMaximumSize(QtCore.QSize(10000000, 16777215))
+        self.frame_associazione_19.setStyleSheet("background-color: rgb(40,40,40);")
+        self.frame_associazione_19.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_associazione_19.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_associazione_19.setObjectName("frame_associazione_19")
+        self.horizontalLayout_62 = QtWidgets.QHBoxLayout(self.frame_associazione_19)
+        self.horizontalLayout_62.setObjectName("horizontalLayout_62")
+        self.label_306 = QtWidgets.QLabel(self.frame_associazione_19)
+        self.label_306.setMinimumSize(QtCore.QSize(30, 32))
+        self.label_306.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_306.setFont(font)
+        self.label_306.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_306.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_306.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_306.setObjectName("label_306")
+        self.horizontalLayout_62.addWidget(self.label_306)
+        self.carico_distribuito_qy = QtWidgets.QLineEdit(self.frame_associazione_19)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.carico_distribuito_qy.sizePolicy().hasHeightForWidth())
+        self.carico_distribuito_qy.setSizePolicy(sizePolicy)
+        self.carico_distribuito_qy.setMinimumSize(QtCore.QSize(85, 32))
+        self.carico_distribuito_qy.setMaximumSize(QtCore.QSize(16777215, 32))
+        self.carico_distribuito_qy.setStyleSheet("background-color: rgb(50,50,50);\n"
+"border: 1px solid rgb(90,90,90);\n"
+"font: 10pt \"Segoe UI\";\n"
+"color: rgb(255, 255, 255);\n"
+"padding-left: 5px;\n"
+"border-radius:4px")
+        self.carico_distribuito_qy.setObjectName("carico_distribuito_qy")
+        self.horizontalLayout_62.addWidget(self.carico_distribuito_qy)
+        self.gridLayout_24.addWidget(self.frame_associazione_19, 2, 1, 1, 1)
+        self.frame_associazione_20 = QtWidgets.QFrame(self.frame_33)
+        self.frame_associazione_20.setMinimumSize(QtCore.QSize(120, 0))
+        self.frame_associazione_20.setMaximumSize(QtCore.QSize(10000000, 16777215))
+        self.frame_associazione_20.setStyleSheet("background-color: rgb(40,40,40);")
+        self.frame_associazione_20.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_associazione_20.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_associazione_20.setObjectName("frame_associazione_20")
+        self.horizontalLayout_63 = QtWidgets.QHBoxLayout(self.frame_associazione_20)
+        self.horizontalLayout_63.setObjectName("horizontalLayout_63")
+        self.label_308 = QtWidgets.QLabel(self.frame_associazione_20)
+        self.label_308.setMinimumSize(QtCore.QSize(30, 32))
+        self.label_308.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_308.setFont(font)
+        self.label_308.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_308.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_308.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_308.setObjectName("label_308")
+        self.horizontalLayout_63.addWidget(self.label_308)
+        self.carico_distribuito_qz = QtWidgets.QLineEdit(self.frame_associazione_20)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.carico_distribuito_qz.sizePolicy().hasHeightForWidth())
+        self.carico_distribuito_qz.setSizePolicy(sizePolicy)
+        self.carico_distribuito_qz.setMinimumSize(QtCore.QSize(85, 32))
+        self.carico_distribuito_qz.setMaximumSize(QtCore.QSize(16777215, 32))
+        self.carico_distribuito_qz.setStyleSheet("background-color: rgb(50,50,50);\n"
+"border: 1px solid rgb(90,90,90);\n"
+"font: 10pt \"Segoe UI\";\n"
+"color: rgb(255, 255, 255);\n"
+"padding-left: 5px;\n"
+"border-radius:4px")
+        self.carico_distribuito_qz.setObjectName("carico_distribuito_qz")
+        self.horizontalLayout_63.addWidget(self.carico_distribuito_qz)
+        self.label_309 = QtWidgets.QLabel(self.frame_associazione_20)
+        self.label_309.setMinimumSize(QtCore.QSize(60, 32))
+        self.label_309.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_309.setFont(font)
+        self.label_309.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_309.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_309.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_309.setObjectName("label_309")
+        self.horizontalLayout_63.addWidget(self.label_309)
+        self.gridLayout_24.addWidget(self.frame_associazione_20, 2, 2, 1, 1)
+        self.verticalLayout_63.addLayout(self.gridLayout_24)
+        spacerItem137 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.verticalLayout_63.addItem(spacerItem137)
+        self.horizontalLayout_68 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_68.setObjectName("horizontalLayout_68")
+        spacerItem138 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_68.addItem(spacerItem138)
+        self.telaio_carico_distribuito_aggiungi = QtWidgets.QPushButton(self.frame_33)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.telaio_carico_distribuito_aggiungi.sizePolicy().hasHeightForWidth())
+        self.telaio_carico_distribuito_aggiungi.setSizePolicy(sizePolicy)
+        self.telaio_carico_distribuito_aggiungi.setMinimumSize(QtCore.QSize(180, 34))
+        self.telaio_carico_distribuito_aggiungi.setMaximumSize(QtCore.QSize(10000000, 34))
+        self.telaio_carico_distribuito_aggiungi.setStyleSheet("QPushButton{\n"
+"    background-color: rgb(70,70,70);\n"
+"    font:400 12pt \"Segoe UI\";\n"
+"    color: rgb(255,255,255);\n"
+"    padding-bottom: 4px;\n"
+"    border-radius:4px\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(40,40,40);\n"
+"    border: 1px solid rgb(120,120,120);\n"
+"}\n"
+"QPushButton:checked {\n"
+"    background-color: rgb(30,30,30);\n"
+"}\n"
+"\n"
+"")
+        self.telaio_carico_distribuito_aggiungi.setObjectName("telaio_carico_distribuito_aggiungi")
+        self.horizontalLayout_68.addWidget(self.telaio_carico_distribuito_aggiungi)
+        spacerItem139 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_68.addItem(spacerItem139)
+        self.verticalLayout_63.addLayout(self.horizontalLayout_68)
+        self.verticalLayout_61.addWidget(self.frame_33)
+        self.verticalLayout_60.addLayout(self.verticalLayout_61)
+        spacerItem140 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.verticalLayout_60.addItem(spacerItem140)
+        self.horizontalLayout_60 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_60.setObjectName("horizontalLayout_60")
+        self.widget_36 = QtWidgets.QWidget(self.carichi_page)
+        self.widget_36.setMinimumSize(QtCore.QSize(0, 6))
+        self.widget_36.setMaximumSize(QtCore.QSize(16777215, 6))
+        self.widget_36.setStyleSheet("background-color: rgb(80,80,80);\n"
+"border-radius:3px")
+        self.widget_36.setObjectName("widget_36")
+        self.horizontalLayout_60.addWidget(self.widget_36)
+        self.label_302 = QtWidgets.QLabel(self.carichi_page)
+        self.label_302.setMinimumSize(QtCore.QSize(90, 32))
+        self.label_302.setMaximumSize(QtCore.QSize(90, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(57)
+        self.label_302.setFont(font)
+        self.label_302.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_302.setStyleSheet("font:460 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);")
+        self.label_302.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
+        self.label_302.setObjectName("label_302")
+        self.horizontalLayout_60.addWidget(self.label_302)
+        self.widget_37 = QtWidgets.QWidget(self.carichi_page)
+        self.widget_37.setMinimumSize(QtCore.QSize(0, 6))
+        self.widget_37.setMaximumSize(QtCore.QSize(16777215, 6))
+        self.widget_37.setStyleSheet("background-color: rgb(80,80,80);\n"
+"border-radius:3px")
+        self.widget_37.setObjectName("widget_37")
+        self.horizontalLayout_60.addWidget(self.widget_37)
+        self.verticalLayout_60.addLayout(self.horizontalLayout_60)
+        self.tableView_carichi = QtWidgets.QTableView(self.carichi_page)
+        self.tableView_carichi.setStyleSheet("/* ---------- Variante B: Vertical header nascosto (nessuna colonna 0 visibile, niente quadratino) ---------- */\n"
+"\n"
+"QTableView {\n"
+"    background-color: rgb(40,40,40);\n"
+"    border-radius: 4px;\n"
+"    color: rgb(255,255,255);\n"
+"    gridline-color: rgb(70,70,70);\n"
+"    font: 400 10pt \"Segoe UI\";\n"
+"    selection-background-color: rgb(50, 50, 50);\n"
+"    selection-color: rgb(255, 255, 255);\n"
+"}\n"
+"\n"
+"/* Intestazioni colonne (orizzontali) */\n"
+"QHeaderView::section {\n"
+"    background-color: rgb(45,45,45);\n"
+"    color: rgb(255,255,255);\n"
+"    font: 400 10pt \"Segoe UI\";\n"
+"    padding: 4px;\n"
+"    border: 1px solid rgb(60,60,60);   /* bordo uniforme */\n"
+"}\n"
+"\n"
+"/* Prima sezione dell’header (colonna 0) con angolo in alto a sinistra stondato */\n"
+"QHeaderView::section:first {\n"
+"    border-top-left-radius: 4px;\n"
+"}\n"
+"\n"
+"/* Ultima sezione dell’header (ultima colonna) con angolo in alto a destra stondato */\n"
+"QHeaderView::section:last {\n"
+"    border-top-right-radius: 4px;\n"
+"}\n"
+"\n"
+"/* Rendo la vertical header (colonna 0) visivamente assente impostandone larghezza a 0 */\n"
+"QTableView::verticalHeader {\n"
+"    background: transparent;\n"
+"    width: 0px;       /* nasconde la colonna dei numeri */\n"
+"    margin: 0px;\n"
+"}\n"
+"\n"
+"/* Assicuro che le singole sezioni verticali non occupino spazio */\n"
+"QTableView QHeaderView::section:vertical {\n"
+"    background: transparent;\n"
+"    min-width: 0px;\n"
+"    max-width: 0px;\n"
+"    padding: 0px;\n"
+"    border: none;\n"
+"}\n"
+"\n"
+"/* Rimuovo / faccio sparire il corner button */\n"
+"QTableCornerButton::section {\n"
+"    background: transparent;\n"
+"    width: 0px;\n"
+"    height: 0px;\n"
+"    border: none;\n"
+"    margin: 0px;\n"
+"    padding: 0px;\n"
+"}\n"
+"\n"
+"/* Scrollbar verticale nascosta visivamente (scroll con rotellina rimane) */\n"
+"QScrollBar:vertical {\n"
+"    background: transparent;\n"
+"    width: 0px;\n"
+"    margin: 0px;\n"
+"    border: none;\n"
+"}\n"
+"QScrollBar::handle:vertical,\n"
+"QScrollBar::sub-line:vertical,\n"
+"QScrollBar::add-line:vertical,\n"
+"QScrollBar::up-arrow:vertical,\n"
+"QScrollBar::down-arrow:vertical,\n"
+"QScrollBar::add-page:vertical,\n"
+"QScrollBar::sub-page:vertical {\n"
+"    background: none;\n"
+"    border: none;\n"
+"    height: 0px;\n"
+"    min-height: 0px;\n"
+"}\n"
+"\n"
+"/* ComboBox (invariato) */\n"
+"QComboBox {\n"
+"    font: 400 10pt \"Segoe UI\";\n"
+"    color: rgb(255, 255, 255);\n"
+"    background-color: rgb(30, 30, 30);\n"
+"    border: 1px solid rgb(100, 100, 100);\n"
+"    border-radius: 4px;\n"
+"    padding: 4px 6px;\n"
+"    padding-right: 20px;\n"
+"}\n"
+"QComboBox:hover { background-color: rgb(40,40,40); border: 1px solid rgb(120,120,120); }\n"
+"QComboBox::drop-down { subcontrol-origin: padding; subcontrol-position: top right; width: 20px; border-left: 1px solid rgb(80,80,80); background-color: rgb(50,50,50); border-top-right-radius: 4px; border-bottom-right-radius: 4px; }\n"
+"QComboBox::down-arrow { image: url(:/icons/arrow-down-white.png); width: 12px; height: 12px; }\n"
+"QComboBox QAbstractItemView { background-color: rgb(30,30,30); color: white; border: 1px solid rgb(90,90,90); selection-background-color: rgb(60,60,60); selection-color: white; outline: 0; }\n"
+"")
+        self.tableView_carichi.setObjectName("tableView_carichi")
+        self.verticalLayout_60.addWidget(self.tableView_carichi)
+        self.stackedWidget_modello.addWidget(self.carichi_page)
+        self.verticalLayout_49.addWidget(self.stackedWidget_modello)
+        self.stackedWidget_modello.raise_()
+        self.stackedWidget_struttura.addWidget(self.modello_page)
+        self.verticalLayout_48.addWidget(self.stackedWidget_struttura)
+        self.horizontalLayout_71.addLayout(self.verticalLayout_48)
+        spacerItem141 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_71.addItem(spacerItem141)
+        self.verticalLayout_66 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_66.setSpacing(0)
+        self.verticalLayout_66.setObjectName("verticalLayout_66")
+        self.frame_35 = QtWidgets.QFrame(self.struttura_page)
+        self.frame_35.setStyleSheet("background-color: rgb(50,50,50);\n"
+"border-bottom: none; /* opzionale se vuoi solo il bordo in basso */\n"
+"border-top-left-radius: 4px;\n"
+"border-top-right-radius: 4px;\n"
+"")
+        self.frame_35.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_35.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_35.setObjectName("frame_35")
+        self.horizontalLayout_66 = QtWidgets.QHBoxLayout(self.frame_35)
+        self.horizontalLayout_66.setContentsMargins(7, 7, 7, 7)
+        self.horizontalLayout_66.setObjectName("horizontalLayout_66")
+        self.analisi_telaio = QtWidgets.QPushButton(self.frame_35)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.analisi_telaio.sizePolicy().hasHeightForWidth())
+        self.analisi_telaio.setSizePolicy(sizePolicy)
+        self.analisi_telaio.setMinimumSize(QtCore.QSize(180, 40))
+        self.analisi_telaio.setMaximumSize(QtCore.QSize(10000000, 40))
+        self.analisi_telaio.setStyleSheet("QPushButton{\n"
+"    background-color: rgb(80,80,80);\n"
+"    font:400 12pt \"Segoe UI\";\n"
+"    color: rgb(255,255,255);\n"
+"    padding-bottom: 4px;\n"
+"    border-radius:4px\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(40,40,40);\n"
+"    border: 1px solid rgb(120,120,120);\n"
+"}\n"
+"QPushButton:checked {\n"
+"    background-color: rgb(30,30,30);\n"
+"}\n"
+"\n"
+"")
+        self.analisi_telaio.setObjectName("analisi_telaio")
+        self.horizontalLayout_66.addWidget(self.analisi_telaio)
+        self.widget_54 = QtWidgets.QWidget(self.frame_35)
+        self.widget_54.setMinimumSize(QtCore.QSize(6, 32))
+        self.widget_54.setMaximumSize(QtCore.QSize(6, 32))
+        self.widget_54.setStyleSheet("background-color: rgb(80,80,80);\n"
+"border-radius:3px")
+        self.widget_54.setObjectName("widget_54")
+        self.horizontalLayout_66.addWidget(self.widget_54)
+        self.label_312 = QtWidgets.QLabel(self.frame_35)
+        self.label_312.setMinimumSize(QtCore.QSize(100, 32))
+        self.label_312.setMaximumSize(QtCore.QSize(100, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_312.setFont(font)
+        self.label_312.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_312.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);\n"
+"padding-bottom: 4px;")
+        self.label_312.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.label_312.setObjectName("label_312")
+        self.horizontalLayout_66.addWidget(self.label_312)
+        self.widget_44 = QtWidgets.QWidget(self.frame_35)
+        self.widget_44.setStyleSheet("background-color: rgb(30,30,30);\n"
+"border-radius: 4px")
+        self.widget_44.setObjectName("widget_44")
+        self.horizontalLayout_69 = QtWidgets.QHBoxLayout(self.widget_44)
+        self.horizontalLayout_69.setContentsMargins(4, 4, 4, 4)
+        self.horizontalLayout_69.setObjectName("horizontalLayout_69")
+        self.btn_telaio_indeformata = QtWidgets.QPushButton(self.widget_44)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.btn_telaio_indeformata.sizePolicy().hasHeightForWidth())
+        self.btn_telaio_indeformata.setSizePolicy(sizePolicy)
+        self.btn_telaio_indeformata.setMinimumSize(QtCore.QSize(120, 32))
+        self.btn_telaio_indeformata.setMaximumSize(QtCore.QSize(120, 32))
+        self.btn_telaio_indeformata.setStyleSheet("QPushButton{\n"
+"    font:400 12pt \"Segoe UI\";\n"
+"    color: rgb(255,255,255);\n"
+"    padding-bottom: 4px;\n"
+"    border-radius:4px;\n"
+"    border: none\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(40,40,40);\n"
+"    border: 1px solid rgb(120,120,120);\n"
+"}\n"
+"QPushButton:checked {\n"
+"    background-color: rgb(50,50,50);\n"
+"}")
+        self.btn_telaio_indeformata.setIconSize(QtCore.QSize(35, 35))
+        self.btn_telaio_indeformata.setObjectName("btn_telaio_indeformata")
+        self.horizontalLayout_69.addWidget(self.btn_telaio_indeformata)
+        self.btn_telaio_deformata = QtWidgets.QPushButton(self.widget_44)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.btn_telaio_deformata.sizePolicy().hasHeightForWidth())
+        self.btn_telaio_deformata.setSizePolicy(sizePolicy)
+        self.btn_telaio_deformata.setMinimumSize(QtCore.QSize(120, 32))
+        self.btn_telaio_deformata.setMaximumSize(QtCore.QSize(120, 32))
+        self.btn_telaio_deformata.setStyleSheet("QPushButton{\n"
+"    font:400 12pt \"Segoe UI\";\n"
+"    color: rgb(255,255,255);\n"
+"    padding-bottom: 4px;\n"
+"    border-radius:4px;\n"
+"    border: none\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(40,40,40);\n"
+"    border: 1px solid rgb(120,120,120);\n"
+"}\n"
+"QPushButton:checked {\n"
+"    background-color: rgb(50,50,50);\n"
+"}")
+        self.btn_telaio_deformata.setIconSize(QtCore.QSize(35, 35))
+        self.btn_telaio_deformata.setObjectName("btn_telaio_deformata")
+        self.horizontalLayout_69.addWidget(self.btn_telaio_deformata)
+        self.horizontalLayout_66.addWidget(self.widget_44)
+        self.widget_45 = QtWidgets.QWidget(self.frame_35)
+        self.widget_45.setMinimumSize(QtCore.QSize(6, 32))
+        self.widget_45.setMaximumSize(QtCore.QSize(6, 32))
+        self.widget_45.setStyleSheet("background-color: rgb(80,80,80);\n"
+"border-radius:3px")
+        self.widget_45.setObjectName("widget_45")
+        self.horizontalLayout_66.addWidget(self.widget_45)
+        self.label_313 = QtWidgets.QLabel(self.frame_35)
+        self.label_313.setMinimumSize(QtCore.QSize(110, 32))
+        self.label_313.setMaximumSize(QtCore.QSize(110, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_313.setFont(font)
+        self.label_313.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_313.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);\n"
+"padding-bottom: 4px;")
+        self.label_313.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.label_313.setObjectName("label_313")
+        self.horizontalLayout_66.addWidget(self.label_313)
+        self.widget_46 = QtWidgets.QWidget(self.frame_35)
+        self.widget_46.setStyleSheet("background-color: rgb(30,30,30);\n"
+"border-radius: 4px")
+        self.widget_46.setObjectName("widget_46")
+        self.horizontalLayout_70 = QtWidgets.QHBoxLayout(self.widget_46)
+        self.horizontalLayout_70.setContentsMargins(4, 4, 4, 4)
+        self.horizontalLayout_70.setObjectName("horizontalLayout_70")
+        self.btn_telaio_n = QtWidgets.QPushButton(self.widget_46)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.btn_telaio_n.sizePolicy().hasHeightForWidth())
+        self.btn_telaio_n.setSizePolicy(sizePolicy)
+        self.btn_telaio_n.setMinimumSize(QtCore.QSize(55, 32))
+        self.btn_telaio_n.setMaximumSize(QtCore.QSize(55, 32))
+        self.btn_telaio_n.setStyleSheet("QPushButton{\n"
+"    font:400 12pt \"Segoe UI\";\n"
+"    color: rgb(255,255,255);\n"
+"    padding-bottom: 4px;\n"
+"    border-radius:4px;\n"
+"    border: none\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(40,40,40);\n"
+"    border: 1px solid rgb(120,120,120);\n"
+"}\n"
+"QPushButton:checked {\n"
+"    background-color: rgb(50,50,50);\n"
+"}")
+        self.btn_telaio_n.setIconSize(QtCore.QSize(35, 35))
+        self.btn_telaio_n.setObjectName("btn_telaio_n")
+        self.horizontalLayout_70.addWidget(self.btn_telaio_n)
+        self.widget_49 = QtWidgets.QWidget(self.widget_46)
+        self.widget_49.setMinimumSize(QtCore.QSize(6, 32))
+        self.widget_49.setMaximumSize(QtCore.QSize(6, 32))
+        self.widget_49.setStyleSheet("background-color: rgb(80,80,80);\n"
+"border-radius:3px")
+        self.widget_49.setObjectName("widget_49")
+        self.horizontalLayout_70.addWidget(self.widget_49)
+        self.btn_telaio_ty = QtWidgets.QPushButton(self.widget_46)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.btn_telaio_ty.sizePolicy().hasHeightForWidth())
+        self.btn_telaio_ty.setSizePolicy(sizePolicy)
+        self.btn_telaio_ty.setMinimumSize(QtCore.QSize(55, 32))
+        self.btn_telaio_ty.setMaximumSize(QtCore.QSize(55, 32))
+        self.btn_telaio_ty.setStyleSheet("QPushButton{\n"
+"    font:400 12pt \"Segoe UI\";\n"
+"    color: rgb(255,255,255);\n"
+"    padding-bottom: 4px;\n"
+"    border-radius:4px;\n"
+"    border: none\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(40,40,40);\n"
+"    border: 1px solid rgb(120,120,120);\n"
+"}\n"
+"QPushButton:checked {\n"
+"    background-color: rgb(50,50,50);\n"
+"}")
+        self.btn_telaio_ty.setIconSize(QtCore.QSize(35, 35))
+        self.btn_telaio_ty.setObjectName("btn_telaio_ty")
+        self.horizontalLayout_70.addWidget(self.btn_telaio_ty)
+        self.btn_telaio_tz = QtWidgets.QPushButton(self.widget_46)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.btn_telaio_tz.sizePolicy().hasHeightForWidth())
+        self.btn_telaio_tz.setSizePolicy(sizePolicy)
+        self.btn_telaio_tz.setMinimumSize(QtCore.QSize(55, 32))
+        self.btn_telaio_tz.setMaximumSize(QtCore.QSize(55, 32))
+        self.btn_telaio_tz.setStyleSheet("QPushButton{\n"
+"    font:400 12pt \"Segoe UI\";\n"
+"    color: rgb(255,255,255);\n"
+"    padding-bottom: 4px;\n"
+"    border-radius:4px;\n"
+"    border: none\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(40,40,40);\n"
+"    border: 1px solid rgb(120,120,120);\n"
+"}\n"
+"QPushButton:checked {\n"
+"    background-color: rgb(50,50,50);\n"
+"}")
+        self.btn_telaio_tz.setIconSize(QtCore.QSize(35, 35))
+        self.btn_telaio_tz.setObjectName("btn_telaio_tz")
+        self.horizontalLayout_70.addWidget(self.btn_telaio_tz)
+        self.widget_47 = QtWidgets.QWidget(self.widget_46)
+        self.widget_47.setMinimumSize(QtCore.QSize(6, 32))
+        self.widget_47.setMaximumSize(QtCore.QSize(6, 32))
+        self.widget_47.setStyleSheet("background-color: rgb(80,80,80);\n"
+"border-radius:3px")
+        self.widget_47.setObjectName("widget_47")
+        self.horizontalLayout_70.addWidget(self.widget_47)
+        self.btn_telaio_my = QtWidgets.QPushButton(self.widget_46)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.btn_telaio_my.sizePolicy().hasHeightForWidth())
+        self.btn_telaio_my.setSizePolicy(sizePolicy)
+        self.btn_telaio_my.setMinimumSize(QtCore.QSize(55, 32))
+        self.btn_telaio_my.setMaximumSize(QtCore.QSize(55, 32))
+        self.btn_telaio_my.setStyleSheet("QPushButton{\n"
+"    font:400 12pt \"Segoe UI\";\n"
+"    color: rgb(255,255,255);\n"
+"    padding-bottom: 4px;\n"
+"    border-radius:4px;\n"
+"    border: none\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(40,40,40);\n"
+"    border: 1px solid rgb(120,120,120);\n"
+"}\n"
+"QPushButton:checked {\n"
+"    background-color: rgb(50,50,50);\n"
+"}")
+        self.btn_telaio_my.setIconSize(QtCore.QSize(35, 35))
+        self.btn_telaio_my.setObjectName("btn_telaio_my")
+        self.horizontalLayout_70.addWidget(self.btn_telaio_my)
+        self.btn_telaio_mz = QtWidgets.QPushButton(self.widget_46)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.btn_telaio_mz.sizePolicy().hasHeightForWidth())
+        self.btn_telaio_mz.setSizePolicy(sizePolicy)
+        self.btn_telaio_mz.setMinimumSize(QtCore.QSize(55, 32))
+        self.btn_telaio_mz.setMaximumSize(QtCore.QSize(55, 32))
+        self.btn_telaio_mz.setStyleSheet("QPushButton{\n"
+"    font:400 12pt \"Segoe UI\";\n"
+"    color: rgb(255,255,255);\n"
+"    padding-bottom: 4px;\n"
+"    border-radius:4px;\n"
+"    border: none\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(40,40,40);\n"
+"    border: 1px solid rgb(120,120,120);\n"
+"}\n"
+"QPushButton:checked {\n"
+"    background-color: rgb(50,50,50);\n"
+"}")
+        self.btn_telaio_mz.setIconSize(QtCore.QSize(35, 35))
+        self.btn_telaio_mz.setObjectName("btn_telaio_mz")
+        self.horizontalLayout_70.addWidget(self.btn_telaio_mz)
+        self.horizontalLayout_66.addWidget(self.widget_46)
+        spacerItem142 = QtWidgets.QSpacerItem(888, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_66.addItem(spacerItem142)
+        self.label_314 = QtWidgets.QLabel(self.frame_35)
+        self.label_314.setMinimumSize(QtCore.QSize(60, 32))
+        self.label_314.setMaximumSize(QtCore.QSize(60, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_314.setFont(font)
+        self.label_314.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_314.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);\n"
+"padding-bottom: 4px;")
+        self.label_314.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.label_314.setObjectName("label_314")
+        self.horizontalLayout_66.addWidget(self.label_314)
+        self.widget_50 = QtWidgets.QWidget(self.frame_35)
+        self.widget_50.setStyleSheet("background-color: rgb(30,30,30);\n"
+"border-radius: 4px")
+        self.widget_50.setObjectName("widget_50")
+        self.horizontalLayout_72 = QtWidgets.QHBoxLayout(self.widget_50)
+        self.horizontalLayout_72.setContentsMargins(4, 4, 4, 4)
+        self.horizontalLayout_72.setObjectName("horizontalLayout_72")
+        self.btn_telaio_3d = QtWidgets.QPushButton(self.widget_50)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.btn_telaio_3d.sizePolicy().hasHeightForWidth())
+        self.btn_telaio_3d.setSizePolicy(sizePolicy)
+        self.btn_telaio_3d.setMinimumSize(QtCore.QSize(45, 32))
+        self.btn_telaio_3d.setMaximumSize(QtCore.QSize(45, 32))
+        self.btn_telaio_3d.setStyleSheet("QPushButton{\n"
+"    font:400 12pt \"Segoe UI\";\n"
+"    color: rgb(255,255,255);\n"
+"    padding-bottom: 4px;\n"
+"    border-radius:4px;\n"
+"    border: none\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(40,40,40);\n"
+"    border: 1px solid rgb(120,120,120);\n"
+"}\n"
+"QPushButton:checked {\n"
+"    background-color: rgb(50,50,50);\n"
+"}")
+        self.btn_telaio_3d.setIconSize(QtCore.QSize(35, 35))
+        self.btn_telaio_3d.setObjectName("btn_telaio_3d")
+        self.horizontalLayout_72.addWidget(self.btn_telaio_3d)
+        self.widget_51 = QtWidgets.QWidget(self.widget_50)
+        self.widget_51.setMinimumSize(QtCore.QSize(6, 32))
+        self.widget_51.setMaximumSize(QtCore.QSize(6, 32))
+        self.widget_51.setStyleSheet("background-color: rgb(80,80,80);\n"
+"border-radius:3px")
+        self.widget_51.setObjectName("widget_51")
+        self.horizontalLayout_72.addWidget(self.widget_51)
+        self.btn_telaio_x = QtWidgets.QPushButton(self.widget_50)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.btn_telaio_x.sizePolicy().hasHeightForWidth())
+        self.btn_telaio_x.setSizePolicy(sizePolicy)
+        self.btn_telaio_x.setMinimumSize(QtCore.QSize(45, 32))
+        self.btn_telaio_x.setMaximumSize(QtCore.QSize(45, 32))
+        self.btn_telaio_x.setStyleSheet("QPushButton{\n"
+"    font:400 12pt \"Segoe UI\";\n"
+"    color: rgb(255,255,255);\n"
+"    padding-bottom: 4px;\n"
+"    border-radius:4px;\n"
+"    border: none\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(40,40,40);\n"
+"    border: 1px solid rgb(120,120,120);\n"
+"}\n"
+"QPushButton:checked {\n"
+"    background-color: rgb(50,50,50);\n"
+"}")
+        self.btn_telaio_x.setIconSize(QtCore.QSize(35, 35))
+        self.btn_telaio_x.setObjectName("btn_telaio_x")
+        self.horizontalLayout_72.addWidget(self.btn_telaio_x)
+        self.btn_telaio_y = QtWidgets.QPushButton(self.widget_50)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.btn_telaio_y.sizePolicy().hasHeightForWidth())
+        self.btn_telaio_y.setSizePolicy(sizePolicy)
+        self.btn_telaio_y.setMinimumSize(QtCore.QSize(45, 32))
+        self.btn_telaio_y.setMaximumSize(QtCore.QSize(45, 32))
+        self.btn_telaio_y.setStyleSheet("QPushButton{\n"
+"    font:400 12pt \"Segoe UI\";\n"
+"    color: rgb(255,255,255);\n"
+"    padding-bottom: 4px;\n"
+"    border-radius:4px;\n"
+"    border: none\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(40,40,40);\n"
+"    border: 1px solid rgb(120,120,120);\n"
+"}\n"
+"QPushButton:checked {\n"
+"    background-color: rgb(50,50,50);\n"
+"}")
+        self.btn_telaio_y.setIconSize(QtCore.QSize(35, 35))
+        self.btn_telaio_y.setObjectName("btn_telaio_y")
+        self.horizontalLayout_72.addWidget(self.btn_telaio_y)
+        self.btn_telaio_z = QtWidgets.QPushButton(self.widget_50)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.btn_telaio_z.sizePolicy().hasHeightForWidth())
+        self.btn_telaio_z.setSizePolicy(sizePolicy)
+        self.btn_telaio_z.setMinimumSize(QtCore.QSize(45, 32))
+        self.btn_telaio_z.setMaximumSize(QtCore.QSize(45, 32))
+        self.btn_telaio_z.setStyleSheet("QPushButton{\n"
+"    font:400 12pt \"Segoe UI\";\n"
+"    color: rgb(255,255,255);\n"
+"    padding-bottom: 4px;\n"
+"    border-radius:4px;\n"
+"    border: none\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(40,40,40);\n"
+"    border: 1px solid rgb(120,120,120);\n"
+"}\n"
+"QPushButton:checked {\n"
+"    background-color: rgb(50,50,50);\n"
+"}")
+        self.btn_telaio_z.setIconSize(QtCore.QSize(35, 35))
+        self.btn_telaio_z.setObjectName("btn_telaio_z")
+        self.horizontalLayout_72.addWidget(self.btn_telaio_z)
+        self.horizontalLayout_66.addWidget(self.widget_50)
+        self.widget_48 = QtWidgets.QWidget(self.frame_35)
+        self.widget_48.setMinimumSize(QtCore.QSize(6, 32))
+        self.widget_48.setMaximumSize(QtCore.QSize(6, 32))
+        self.widget_48.setStyleSheet("background-color: rgb(80,80,80);\n"
+"border-radius:3px")
+        self.widget_48.setObjectName("widget_48")
+        self.horizontalLayout_66.addWidget(self.widget_48)
+        self.btn_telaio_center = QtWidgets.QPushButton(self.frame_35)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.btn_telaio_center.sizePolicy().hasHeightForWidth())
+        self.btn_telaio_center.setSizePolicy(sizePolicy)
+        self.btn_telaio_center.setMinimumSize(QtCore.QSize(34, 32))
+        self.btn_telaio_center.setMaximumSize(QtCore.QSize(34, 32))
+        self.btn_telaio_center.setStyleSheet("QPushButton{\n"
+"    font:400 12pt \"Segoe UI\";\n"
+"    color: rgb(255,255,255);\n"
+"    border-radius:4px\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(40,40,40);\n"
+"    border: 1px solid rgb(120,120,120);\n"
+"}\n"
+"")
+        self.btn_telaio_center.setText("")
+        self.btn_telaio_center.setIcon(icon6)
+        self.btn_telaio_center.setIconSize(QtCore.QSize(35, 35))
+        self.btn_telaio_center.setObjectName("btn_telaio_center")
+        self.horizontalLayout_66.addWidget(self.btn_telaio_center)
+        self.verticalLayout_66.addWidget(self.frame_35)
+        self.telaio_spazio = QtWidgets.QWidget(self.struttura_page)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.telaio_spazio.sizePolicy().hasHeightForWidth())
+        self.telaio_spazio.setSizePolicy(sizePolicy)
+        self.telaio_spazio.setStyleSheet("border: 1px solid rgb(50,50,50);\n"
+"\n"
+"")
+        self.telaio_spazio.setObjectName("telaio_spazio")
+        self.verticalLayout_66.addWidget(self.telaio_spazio)
+        self.frame_sezioni_impostazioni_6 = QtWidgets.QFrame(self.struttura_page)
+        self.frame_sezioni_impostazioni_6.setMinimumSize(QtCore.QSize(0, 0))
+        self.frame_sezioni_impostazioni_6.setMaximumSize(QtCore.QSize(16777215, 55))
+        self.frame_sezioni_impostazioni_6.setStyleSheet("border: 1px solid rgb(50,50,50);\n"
+"background-color: rgb(30, 30, 30);\n"
+"border-top: none;\n"
+"border-bottom-left-radius: 4px;\n"
+"border-bottom-right-radius: 4px;\n"
+"")
+        self.frame_sezioni_impostazioni_6.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_sezioni_impostazioni_6.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_sezioni_impostazioni_6.setObjectName("frame_sezioni_impostazioni_6")
+        self.verticalLayout_67 = QtWidgets.QVBoxLayout(self.frame_sezioni_impostazioni_6)
+        self.verticalLayout_67.setContentsMargins(5, 5, 5, 5)
+        self.verticalLayout_67.setObjectName("verticalLayout_67")
+        self.horizontalLayout_52 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_52.setObjectName("horizontalLayout_52")
+        self.progressBar_telaio = QtWidgets.QProgressBar(self.frame_sezioni_impostazioni_6)
+        self.progressBar_telaio.setMinimumSize(QtCore.QSize(300, 25))
+        self.progressBar_telaio.setMaximumSize(QtCore.QSize(16777215, 25))
+        self.progressBar_telaio.setStyleSheet("QProgressBar {\n"
+"    background-color: rgb(30, 30, 30);\n"
+"    border: 1px solid rgb(70,70,70);\n"
+"    border-radius: 4px;\n"
+"    text-align: center;\n"
+"    color: white;\n"
+"    font: 400 10pt \"Segoe UI\";\n"
+"    height: 16px;\n"
+"}\n"
+"\n"
+"QProgressBar::chunk {\n"
+"    background-color: rgb(70,70,70); /* Colore della barra avanzata - puoi cambiarlo */\n"
+"    border-radius: 4px;\n"
+"}\n"
+"")
+        self.progressBar_telaio.setProperty("value", 24)
+        self.progressBar_telaio.setObjectName("progressBar_telaio")
+        self.horizontalLayout_52.addWidget(self.progressBar_telaio)
+        spacerItem143 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_52.addItem(spacerItem143)
+        self.label_315 = QtWidgets.QLabel(self.frame_sezioni_impostazioni_6)
+        self.label_315.setMinimumSize(QtCore.QSize(60, 32))
+        self.label_315.setMaximumSize(QtCore.QSize(60, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_315.setFont(font)
+        self.label_315.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_315.setStyleSheet("font:400 12pt \"Segoe UI\";\n"
+"color: rgb(255,255,255);\n"
+"padding-bottom: 4px;\n"
+"border: none;")
+        self.label_315.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.label_315.setObjectName("label_315")
+        self.horizontalLayout_52.addWidget(self.label_315)
+        self.telaio_deformazione_scala = QtWidgets.QLineEdit(self.frame_sezioni_impostazioni_6)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.telaio_deformazione_scala.sizePolicy().hasHeightForWidth())
+        self.telaio_deformazione_scala.setSizePolicy(sizePolicy)
+        self.telaio_deformazione_scala.setMinimumSize(QtCore.QSize(70, 27))
+        self.telaio_deformazione_scala.setMaximumSize(QtCore.QSize(70, 27))
+        self.telaio_deformazione_scala.setStyleSheet("background-color: rgb(50,50,50);\n"
+"border: 1px solid rgb(90,90,90);\n"
+"font: 10pt \"Segoe UI\";\n"
+"color: rgb(255, 255, 255);\n"
+"padding-left: 5px;\n"
+"border-radius:4px")
+        self.telaio_deformazione_scala.setObjectName("telaio_deformazione_scala")
+        self.horizontalLayout_52.addWidget(self.telaio_deformazione_scala)
+        self.widget_29 = QtWidgets.QWidget(self.frame_sezioni_impostazioni_6)
+        self.widget_29.setMinimumSize(QtCore.QSize(200, 0))
+        self.widget_29.setMaximumSize(QtCore.QSize(200, 16777215))
+        self.widget_29.setStyleSheet("background-color: rgb(30,30,30);\n"
+"border: none;\n"
+"border-radius: 4px")
+        self.widget_29.setObjectName("widget_29")
+        self.horizontalLayout_51 = QtWidgets.QHBoxLayout(self.widget_29)
+        self.horizontalLayout_51.setContentsMargins(4, 4, 4, 4)
+        self.horizontalLayout_51.setObjectName("horizontalLayout_51")
+        self.telaio_deformazione_slider = QtWidgets.QSlider(self.widget_29)
+        self.telaio_deformazione_slider.setMinimumSize(QtCore.QSize(160, 0))
+        self.telaio_deformazione_slider.setMaximumSize(QtCore.QSize(160, 16777215))
+        self.telaio_deformazione_slider.setStyleSheet("QSlider::groove:horizontal {\n"
+"    height: 8px;\n"
+"    background: #d0d0d0;\n"
+"    border-radius: 4px;\n"
+"}\n"
+"\n"
+"QSlider::sub-page:horizontal {\n"
+"    background: #9a9a9a;\n"
+"    border-radius: 4px;\n"
+"}\n"
+"\n"
+"QSlider::add-page:horizontal {\n"
+"    background: #d0d0d0;\n"
+"    border-radius: 4px;\n"
+"}\n"
+"\n"
+"QSlider::handle:horizontal {\n"
+"    background: #f5f5f5;\n"
+"    border: 2px solid #7a7a7a;\n"
+"    width: 18px;\n"
+"    height: 18px;\n"
+"    margin: -6px 0;\n"
+"    border-radius: 9px;\n"
+"}\n"
+"\n"
+"QSlider::handle:horizontal:hover {\n"
+"    background: #ffffff;\n"
+"    border: 2px solid #5a5a5a;\n"
+"}\n"
+"\n"
+"QSlider::handle:horizontal:pressed {\n"
+"    background: #b0b0b0;\n"
+"}\n"
+"")
+        self.telaio_deformazione_slider.setOrientation(QtCore.Qt.Horizontal)
+        self.telaio_deformazione_slider.setObjectName("telaio_deformazione_slider")
+        self.horizontalLayout_51.addWidget(self.telaio_deformazione_slider)
+        self.horizontalLayout_52.addWidget(self.widget_29)
+        self.verticalLayout_67.addLayout(self.horizontalLayout_52)
+        self.verticalLayout_66.addWidget(self.frame_sezioni_impostazioni_6)
+        self.horizontalLayout_71.addLayout(self.verticalLayout_66)
+        spacerItem144 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_71.addItem(spacerItem144)
+        self.stackedWidget_main.addWidget(self.struttura_page)
         self.verticalLayout_3.addWidget(self.stackedWidget_main)
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget_main.setCurrentIndex(4)
+        self.stackedWidget_main.setCurrentIndex(6)
         self.stackedWidget_materiali.setCurrentIndex(1)
+        self.stackedWidget_struttura.setCurrentIndex(0)
+        self.stackedWidget_modello.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -6512,6 +9803,8 @@ class Ui_MainWindow(object):
         self.btn_main_output.setText(_translate("MainWindow", "Dominio N-M"))
         self.btn_main_momentocurvatura.setText(_translate("MainWindow", "Momento-Curvatura"))
         self.btn_main_beam.setText(_translate("MainWindow", "Analisi FEM"))
+        self.label_257.setText(_translate("MainWindow", "Telaio:"))
+        self.btn_main_struttura.setText(_translate("MainWindow", "Struttura"))
         self.label_171.setText(_translate("MainWindow", "SectionCHECK"))
         self.label_157.setText(_translate("MainWindow", "Structural Analysis App\n"
 "Version 0.1"))
@@ -6739,3 +10032,113 @@ class Ui_MainWindow(object):
         self.btn_beam_rinforzo.setText(_translate("MainWindow", "rinforzo"))
         self.btn_beam_deformazioni.setText(_translate("MainWindow", "deformazioni"))
         self.btn_beam_sollecitazioni.setText(_translate("MainWindow", "sollecitazioni"))
+        self.btn_telaio_sezioni.setText(_translate("MainWindow", "SEZIONI"))
+        self.btn_telaio_modello.setText(_translate("MainWindow", "MODELLO"))
+        self.label_259.setText(_translate("MainWindow", "SEZIONI"))
+        self.btn_aggiungi_sezioni.setText(_translate("MainWindow", "+ Aggiungi"))
+        self.label_276.setText(_translate("MainWindow", "PARAMETRI"))
+        self.label_260.setText(_translate("MainWindow", "Area, A"))
+        self.label_263.setText(_translate("MainWindow", "Inerzia, Iy"))
+        self.telaio_sezione_inerzia_y.setText(_translate("MainWindow", "1.5"))
+        self.label_261.setText(_translate("MainWindow", "mm²"))
+        self.telaio_sezione_area.setText(_translate("MainWindow", "1.5"))
+        self.label_264.setText(_translate("MainWindow", "Inerzia, Iz"))
+        self.telaio_sezione_inerzia_z.setText(_translate("MainWindow", "1.5"))
+        self.label_262.setText(_translate("MainWindow", "mm⁴"))
+        self.label_267.setText(_translate("MainWindow", "mm⁴"))
+        self.label_265.setText(_translate("MainWindow", "mm⁴"))
+        self.telaio_sezione_torsione.setText(_translate("MainWindow", "1.5"))
+        self.label_266.setText(_translate("MainWindow", "Torsione, J"))
+        self.label_270.setText(_translate("MainWindow", "Materiale"))
+        self.label_286.setText(_translate("MainWindow", "MATERIALI"))
+        self.btn_aggiungi_materiali.setText(_translate("MainWindow", "+ Aggiungi"))
+        self.label_277.setText(_translate("MainWindow", "PARAMETRI"))
+        self.label_279.setText(_translate("MainWindow", "MPa"))
+        self.label_278.setText(_translate("MainWindow", "Modulo, E"))
+        self.telaio_materiali_elastico.setText(_translate("MainWindow", "1.5"))
+        self.label_280.setText(_translate("MainWindow", "Modulo, G"))
+        self.telaio_materiali_taglio.setText(_translate("MainWindow", "1.5"))
+        self.label_281.setText(_translate("MainWindow", "MPa"))
+        self.label_298.setText(_translate("MainWindow", "Densità, ρ"))
+        self.telaio_materiali_densita.setText(_translate("MainWindow", "1.5"))
+        self.label_300.setText(_translate("MainWindow", "kg/m³"))
+        self.btn_telaio_nodi.setText(_translate("MainWindow", "Nodi"))
+        self.btn_telaio_aste.setText(_translate("MainWindow", "Aste"))
+        self.btn_telaio_vincoli.setText(_translate("MainWindow", "Vincoli"))
+        self.btn_telaio_carichi.setText(_translate("MainWindow", "Carichi"))
+        self.nodo_posizione_x.setText(_translate("MainWindow", "0"))
+        self.label_272.setText(_translate("MainWindow", "m"))
+        self.label_268.setText(_translate("MainWindow", "Posizione X"))
+        self.label_282.setText(_translate("MainWindow", "Posizione Y"))
+        self.nodo_posizione_y.setText(_translate("MainWindow", "0"))
+        self.label_275.setText(_translate("MainWindow", "m"))
+        self.nodo_posizione_z.setText(_translate("MainWindow", "0"))
+        self.label_284.setText(_translate("MainWindow", "Posizione Z"))
+        self.label_283.setText(_translate("MainWindow", "m"))
+        self.telaio_aggiungi_nodo.setText(_translate("MainWindow", "Aggiungi Nodo"))
+        self.label_274.setText(_translate("MainWindow", "NODI"))
+        self.label_269.setText(_translate("MainWindow", "Nodo A"))
+        self.asta_nodo_a.setText(_translate("MainWindow", "0"))
+        self.label_285.setText(_translate("MainWindow", "Nodo B"))
+        self.asta_nodo_b.setText(_translate("MainWindow", "0"))
+        self.label_288.setText(_translate("MainWindow", "Suddivisione"))
+        self.telaio_asta_suddivisione.setText(_translate("MainWindow", "10"))
+        self.telaio_asta_aggiungi.setText(_translate("MainWindow", "Aggiungi Asta"))
+        self.label_290.setText(_translate("MainWindow", "ASTE"))
+        self.label_294.setText(_translate("MainWindow", "Nodo"))
+        self.vincolo_nodo.setText(_translate("MainWindow", "0"))
+        self.vincolo_tx.setText(_translate("MainWindow", "Tx"))
+        self.vincolo_ty.setText(_translate("MainWindow", "Ty"))
+        self.vincolo_ry.setText(_translate("MainWindow", "Ry"))
+        self.vincolo_rx.setText(_translate("MainWindow", "Rx"))
+        self.vincolo_tz.setText(_translate("MainWindow", "Tz"))
+        self.vincolo_rz.setText(_translate("MainWindow", "Rz"))
+        self.telaio_vincolo_aggiungi.setText(_translate("MainWindow", "Aggiungi Vincolo"))
+        self.label_291.setText(_translate("MainWindow", "VINCOLI"))
+        self.label_301.setText(_translate("MainWindow", "CONCENTRATO"))
+        self.label_271.setText(_translate("MainWindow", "Nodo"))
+        self.carico_concentrato_nodo.setText(_translate("MainWindow", "0"))
+        self.label_273.setText(_translate("MainWindow", "Fx"))
+        self.carico_concentrato_fx.setText(_translate("MainWindow", "0"))
+        self.label_289.setText(_translate("MainWindow", "Fy"))
+        self.carico_concentrato_fy.setText(_translate("MainWindow", "0"))
+        self.label_293.setText(_translate("MainWindow", "Fz"))
+        self.carico_concentrato_fz.setText(_translate("MainWindow", "0"))
+        self.label_292.setText(_translate("MainWindow", "kN"))
+        self.label_299.setText(_translate("MainWindow", "Mx"))
+        self.carico_concentrato_mx.setText(_translate("MainWindow", "0"))
+        self.label_295.setText(_translate("MainWindow", "My"))
+        self.carico_concentrato_my.setText(_translate("MainWindow", "0"))
+        self.label_297.setText(_translate("MainWindow", "Mz"))
+        self.carico_concentrato_mz.setText(_translate("MainWindow", "0"))
+        self.label_296.setText(_translate("MainWindow", "kNm"))
+        self.telaio_carico_concentrato_aggiungi.setText(_translate("MainWindow", "Aggiungi Carico"))
+        self.label_310.setText(_translate("MainWindow", "DISTRIBUITO"))
+        self.label_287.setText(_translate("MainWindow", "Asta"))
+        self.carico_distribuito_asta.setText(_translate("MainWindow", "0"))
+        self.label_304.setText(_translate("MainWindow", "Qx"))
+        self.carico_distribuito_qx.setText(_translate("MainWindow", "0"))
+        self.label_306.setText(_translate("MainWindow", "Qy"))
+        self.carico_distribuito_qy.setText(_translate("MainWindow", "0"))
+        self.label_308.setText(_translate("MainWindow", "Qz"))
+        self.carico_distribuito_qz.setText(_translate("MainWindow", "0"))
+        self.label_309.setText(_translate("MainWindow", "kN/m"))
+        self.telaio_carico_distribuito_aggiungi.setText(_translate("MainWindow", "Aggiungi Carico"))
+        self.label_302.setText(_translate("MainWindow", "CARICHI"))
+        self.analisi_telaio.setText(_translate("MainWindow", "ESEGUI ANALISI"))
+        self.label_312.setText(_translate("MainWindow", "Tipologia:"))
+        self.btn_telaio_indeformata.setText(_translate("MainWindow", "Indeformata"))
+        self.btn_telaio_deformata.setText(_translate("MainWindow", "Deformata"))
+        self.label_313.setText(_translate("MainWindow", "Diagrammi:"))
+        self.btn_telaio_n.setText(_translate("MainWindow", "N"))
+        self.btn_telaio_ty.setText(_translate("MainWindow", "Ty"))
+        self.btn_telaio_tz.setText(_translate("MainWindow", "Tz"))
+        self.btn_telaio_my.setText(_translate("MainWindow", "My"))
+        self.btn_telaio_mz.setText(_translate("MainWindow", "Mz"))
+        self.label_314.setText(_translate("MainWindow", "Viste:"))
+        self.btn_telaio_3d.setText(_translate("MainWindow", "3D"))
+        self.btn_telaio_x.setText(_translate("MainWindow", "X"))
+        self.btn_telaio_y.setText(_translate("MainWindow", "Y"))
+        self.btn_telaio_z.setText(_translate("MainWindow", "Z"))
+        self.label_315.setText(_translate("MainWindow", "Scala:"))
+        self.telaio_deformazione_scala.setText(_translate("MainWindow", "0"))

@@ -233,8 +233,8 @@ class MomentCurvatureCalculator(QThread):
     def run(self):
         # ---------------- INPUT UTENTE (Struttura Secondo Codice) ----------------
         try:
-            grid_step = float(self._get_ui_val('momentocurvatura_precisione', 5.0))
-            n_angoli = int(self._get_ui_val('momentocurvatura_angoli', 18))
+            grid_step = float(self._get_ui_val('momentocurvatura_precisione', 4.0))
+            n_angoli = int(self._get_ui_val('momentocurvatura_angoli', 36))
             n_step_curv = int(self._get_ui_val('momentocurvatura_step', 50))
             
             # Convenzione del Secondo Codice: Input Positivo = Compressione
