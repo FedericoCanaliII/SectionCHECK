@@ -14,6 +14,11 @@ class GestioneMateriali:
         self.ui = ui
         self.btn_group_materiali = QButtonGroup(self.ui.stackedWidget_materiali)
         self.btn_group_materiali.setExclusive(True)
+
+        # Lista dei materiali custom aggiunti dinamicamente:
+        # ogni elemento è un dict {'button': QPushButton, 'page': NuovoMaterialePage}
+        self._materiali_custom = []
+
         self.setup_materiali()
 #--------------------------------------------------------------------------------------- FUNZIONAMNTO DIAGRAMMA --------------------------------------------------------------------------------------
         
@@ -48,7 +53,7 @@ class GestioneMateriali:
         self.ui.stackedWidget_materiali.setCurrentIndex(0)
 
         # Collega il pulsante "+" alla funzione di aggiunta nuovi materiali
-        self.ui.btn_materiali_piu.clicked.connect(self.aggiungi_nuovo_materiale)
+        self.ui.btn_materiali_piu.clicked.connect(lambda: self.aggiungi_nuovo_materiale())
 
     def _setup_bottone_materiale(self, bottone, index_pagina):
         bottone.setCheckable(True)
@@ -61,9 +66,9 @@ class GestioneMateriali:
         bottone.clicked.connect(cambia_pagina_e_aggiorna)
 
 
-    def aggiungi_nuovo_materiale(self):
+    def aggiungi_nuovo_materiale(self, nome="Nuovo mat."):
         # Crea il nuovo pulsante
-        nuovo_bottone = QPushButton("Nuovo mat.")
+        nuovo_bottone = QPushButton(nome)
         nuovo_bottone.setCheckable(True)
         nuovo_bottone.setContextMenuPolicy(Qt.CustomContextMenu)  # Attiva menu contestuale
 
@@ -96,6 +101,9 @@ class GestioneMateriali:
         self.ui.stackedWidget_materiali.addWidget(nuova_pagina)
         nuovo_index = self.ui.stackedWidget_materiali.count() - 1
 
+        # Traccia il materiale custom
+        self._materiali_custom.append({'button': nuovo_bottone, 'page': nuova_pagina})
+
         # Collega il pulsante alla nuova pagina
         nuovo_bottone.clicked.connect(
             lambda _, b=nuovo_bottone, idx=nuovo_index: (
@@ -117,6 +125,12 @@ class GestioneMateriali:
 
                 self.ui.stackedWidget_materiali.removeWidget(nuova_pagina)
                 nuova_pagina.deleteLater()
+
+                # Rimuovi dalla lista custom
+                self._materiali_custom[:] = [
+                    m for m in self._materiali_custom
+                    if m['button'] is not nuovo_bottone
+                ]
 
             rimuovi_azione.triggered.connect(rimuovi)
             menu.exec_(nuovo_bottone.mapToGlobal(pos))
@@ -141,6 +155,64 @@ class GestioneMateriali:
             line_edit.editingFinished.connect(conferma_modifica)
 
         nuovo_bottone.mouseDoubleClickEvent = lambda event: modifica_testo()
+
+        return nuova_pagina
+
+    # ------------------------------------------------------------------ SALVATAGGIO
+    def get_dati_salvataggio(self):
+        """Raccoglie tutti i dati dei materiali (standard + custom) per il salvataggio."""
+        custom = []
+        for m in self._materiali_custom:
+            btn  = m['button']
+            page = m['page']
+            custom.append({
+                'nome':  btn.text(),
+                'dati':  page.get_dati(),
+            })
+        return {
+            'calcestruzzo':    self.ui.calcestruzzo.get_dati(),
+            'acciaio_barre':   self.ui.acciaio_barre.get_dati(),
+            'acciaio_profili': self.ui.acciaio_profili.get_dati(),
+            'frp':             self.ui.frp.get_dati(),
+            'custom':          custom,
+        }
+
+    def carica_dati(self, dati):
+        """Ripristina tutti i dati dei materiali (standard + custom) da un dict salvato."""
+        if 'calcestruzzo' in dati:
+            try: self.ui.calcestruzzo.carica_dati(dati['calcestruzzo'])
+            except Exception: pass
+        if 'acciaio_barre' in dati:
+            try: self.ui.acciaio_barre.carica_dati(dati['acciaio_barre'])
+            except Exception: pass
+        if 'acciaio_profili' in dati:
+            try: self.ui.acciaio_profili.carica_dati(dati['acciaio_profili'])
+            except Exception: pass
+        if 'frp' in dati:
+            try: self.ui.frp.carica_dati(dati['frp'])
+            except Exception: pass
+
+        # Rimuovi tutti i materiali custom esistenti prima di ricrearli
+        for m in list(self._materiali_custom):
+            try:
+                self.btn_group_materiali.removeButton(m['button'])
+                self.ui.layout_materiali.removeWidget(m['button'])
+                m['button'].deleteLater()
+                self.ui.stackedWidget_materiali.removeWidget(m['page'])
+                m['page'].deleteLater()
+            except Exception:
+                pass
+        self._materiali_custom.clear()
+
+        # Ricrea i materiali custom dal file
+        for mat_data in dati.get('custom', []):
+            nome  = mat_data.get('nome', 'Nuovo mat.')
+            dati_pagina = mat_data.get('dati', {})
+            try:
+                pagina = self.aggiungi_nuovo_materiale(nome=nome)
+                pagina.carica_dati(dati_pagina)
+            except Exception:
+                pass
 
     def rigenera_grafico_materiale_corrente(self):
         indice_corrente = self.ui.stackedWidget_materiali.currentIndex()

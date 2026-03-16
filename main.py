@@ -1,7 +1,10 @@
 import sys
+import json
 from PyQt5 import QtWidgets, QtCore, QtGui
 from PyQt5.QtGui import QIcon, QColor, QFont
-from PyQt5.QtWidgets import QApplication, QButtonGroup, QVBoxLayout, QTextEdit
+from PyQt5.QtWidgets import (
+    QApplication, QButtonGroup, QVBoxLayout, QTextEdit, QFileDialog, QMessageBox
+)
 
 from interfaccia.main_interfaccia import Ui_MainWindow
 from sezione.gestione_sezione import GestioneSezioni 
@@ -141,8 +144,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.btn_main_sc.setToolTip("SectionCHECK")
         self.ui.btn_main_lingua.setToolTip("Lingua")
         self.ui.btn_main_colore.setToolTip("Tema")
-        self.ui.btn_main_salva.setToolTip("Salva")
-        self.ui.btn_main_carica.setToolTip("Carica")
+        self.ui.btn_main_salva.setToolTip("Salva progetto")
+        self.ui.btn_main_carica.setToolTip("Carica progetto")
         self.ui.btn_main_stampa.setToolTip("Stampa")
 
         self.ui.progressBar_verifica.setValue(0)
@@ -151,6 +154,110 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # COLLEGAMENTO TASTO STAMPA
         self.ui.btn_main_stampa.clicked.connect(self.salva_screenshot)
+
+        # ==========================================================
+        # SALVATAGGIO / CARICAMENTO PROGETTO GLOBALE
+        # ==========================================================
+        self.ui.btn_main_salva.clicked.connect(self._salva_progetto)
+        self.ui.btn_main_carica.clicked.connect(self._carica_progetto)
+
+    # ------------------------------------------------------------------
+    # SALVATAGGIO PROGETTO GLOBALE
+    # ------------------------------------------------------------------
+
+    def _salva_progetto(self):
+        """Raccoglie i dati da tutti i moduli e li salva in un unico file .scprj."""
+        path, _ = QFileDialog.getSaveFileName(
+            self,
+            "Salva progetto SectionCHECK",
+            "",
+            "Progetto SectionCHECK (*.scprj);;JSON (*.json);;Tutti (*)"
+        )
+        if not path:
+            return
+
+        dati_progetto = {}
+
+        # --- Materiali ---
+        try:
+            dati_progetto['materiali'] = self.sezioni.gestione_materiali.get_dati_salvataggio()
+        except Exception as e:
+            print(f">> Avviso: impossibile salvare materiali: {e}")
+            dati_progetto['materiali'] = {}
+
+        # --- Sezioni ---
+        try:
+            dati_progetto['sezioni'] = self.sezioni.get_dati_salvataggio()
+        except Exception as e:
+            print(f">> Avviso: impossibile salvare sezioni: {e}")
+            dati_progetto['sezioni'] = {}
+
+        # --- Telaio ---
+        try:
+            dati_progetto['telaio'] = self.telaio.get_dati_salvataggio()
+        except Exception as e:
+            print(f">> Avviso: impossibile salvare telaio: {e}")
+            dati_progetto['telaio'] = {}
+
+        try:
+            with open(path, 'w', encoding='utf-8') as f:
+                json.dump(dati_progetto, f, indent=2, ensure_ascii=False)
+            print(f">> Progetto salvato: {path}")
+            QMessageBox.information(self, "Salvato", f"Progetto salvato:\n{path}")
+        except Exception as e:
+            QMessageBox.critical(self, "Errore", f"Impossibile salvare il progetto:\n{e}")
+
+    def _carica_progetto(self):
+        """Legge un file .scprj e ripristina tutti i moduli."""
+        path, _ = QFileDialog.getOpenFileName(
+            self,
+            "Carica progetto SectionCHECK",
+            "",
+            "Progetto SectionCHECK (*.scprj);;JSON (*.json);;Tutti (*)"
+        )
+        if not path:
+            return
+
+        try:
+            with open(path, 'r', encoding='utf-8') as f:
+                dati_progetto = json.load(f)
+        except Exception as e:
+            QMessageBox.critical(self, "Errore", f"Impossibile leggere il file:\n{e}")
+            return
+
+        errori = []
+
+        # --- Materiali ---
+        if 'materiali' in dati_progetto:
+            try:
+                self.sezioni.gestione_materiali.carica_dati(dati_progetto['materiali'])
+            except Exception as e:
+                errori.append(f"Materiali: {e}")
+
+        # --- Sezioni ---
+        if 'sezioni' in dati_progetto:
+            try:
+                self.sezioni.carica_dati(dati_progetto['sezioni'])
+            except Exception as e:
+                errori.append(f"Sezioni: {e}")
+
+        # --- Telaio ---
+        if 'telaio' in dati_progetto:
+            try:
+                self.telaio.carica_dati(dati_progetto['telaio'])
+            except Exception as e:
+                errori.append(f"Telaio: {e}")
+
+        if errori:
+            msg = "\n".join(errori)
+            print(f">> Avvisi durante il caricamento:\n{msg}")
+            QMessageBox.warning(self, "Caricato con avvisi",
+                                f"Progetto caricato con alcuni avvisi:\n{msg}")
+        else:
+            print(f">> Progetto caricato: {path}")
+            QMessageBox.information(self, "Caricato", f"Progetto caricato:\n{path}")
+
+    # ------------------------------------------------------------------
 
     def append_terminal_text(self, text):
         """Funzione chiamata ogni volta che c'è un print()"""

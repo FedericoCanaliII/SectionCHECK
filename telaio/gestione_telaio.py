@@ -21,7 +21,7 @@ import numpy as np
 
 from PyQt5.QtWidgets import (
     QButtonGroup, QMenu, QAction,
-    QVBoxLayout, QMessageBox, QFileDialog, QHeaderView,
+    QVBoxLayout, QMessageBox, QHeaderView,
     QComboBox, QStyledItemDelegate, QAbstractItemView,
 )
 from PyQt5.QtCore import Qt, QTimer, QThread, pyqtSignal, QObject
@@ -789,15 +789,17 @@ class GestioneTelaio:
     # ------------------------------------------------------------------
 
     def _setup_salvataggio(self):
-        self.ui.btn_main_salva.clicked.connect(self._salva)
-        self.ui.btn_main_carica.clicked.connect(self._carica)
+        # I bottoni btn_main_salva / btn_main_carica sono collegati centralmente
+        # da main.py tramite get_dati_salvataggio() e carica_dati().
+        pass
 
-    def _salva(self):
-        path, _ = QFileDialog.getSaveFileName(
-            None, "Salva modello telaio", "",
-            "File FEM (*.fem);;JSON (*.json);;Tutti (*)")
-        if not path: return
-        dati = {
+    # ------------------------------------------------------------------
+    # API PUBBLICA SALVATAGGIO (usata da main.py)
+    # ------------------------------------------------------------------
+
+    def get_dati_salvataggio(self):
+        """Restituisce un dict serializzabile con tutto il modello telaio."""
+        return {
             'materiali':    self.materiali,
             'sezioni':      self.sezioni,
             'nodi':         {str(k): v for k, v in self.nodi.items()},
@@ -810,43 +812,28 @@ class GestioneTelaio:
                 'vinc': self._cnt_vinc, 'cn':   self._cnt_cn, 'ca': self._cnt_ca,
             },
         }
-        try:
-            with open(path, 'w', encoding='utf-8') as f:
-                json.dump(dati, f, indent=2, ensure_ascii=False)
-            QMessageBox.information(None, "Salvato", f"Modello salvato:\n{path}")
-        except Exception as e:
-            QMessageBox.critical(None, "Errore", f"Impossibile salvare:\n{e}")
 
-    def _carica(self):
-        path, _ = QFileDialog.getOpenFileName(
-            None, "Carica modello telaio", "",
-            "File FEM (*.fem);;JSON (*.json);;Tutti (*)")
-        if not path: return
-        try:
-            with open(path, 'r', encoding='utf-8') as f:
-                dati = json.load(f)
-            self.materiali.clear(); self.materiali.update(dati.get('materiali', {}))
-            self.sezioni.clear();   self.sezioni.update(dati.get('sezioni', {}))
-            self.nodi         = {int(k): v for k, v in dati.get('nodi', {}).items()}
-            self.aste         = {int(k): v for k, v in dati.get('aste', {}).items()}
-            self.vincoli      = {int(k): v for k, v in dati.get('vincoli', {}).items()}
-            self.carichi_nodi = {int(k): v for k, v in dati.get('carichi_nodi', {}).items()}
-            self.carichi_aste = {int(k): v for k, v in dati.get('carichi_aste', {}).items()}
-            cnt = dati.get('contatori', {})
-            self._cnt_nodi = cnt.get('nodi', 0); self._cnt_aste = cnt.get('aste', 0)
-            self._cnt_vinc = cnt.get('vinc', 0); self._cnt_cn   = cnt.get('cn', 0)
-            self._cnt_ca   = cnt.get('ca', 0)
-            self._risolto = False; self._u_vec = self._sforzi = None
-            self._ctrl_mat._ricostruisci_layout()
-            self._ctrl_mat.aggiorna_combobox(self.ui.combobox_teliaio_materiali)
-            self._ctrl_sez._ricostruisci_layout()
-            self._aggiorna_cb_sezioni_asta()
-            self._aggiorna_table_nodi(); self._aggiorna_table_aste()
-            self._aggiorna_table_vincoli(); self._aggiorna_table_carichi()
-            self._aggiorna_viewer()
-            QMessageBox.information(None, "Caricato", f"Modello caricato:\n{path}")
-        except Exception as e:
-            QMessageBox.critical(None, "Errore", f"Impossibile caricare:\n{e}")
+    def carica_dati(self, dati):
+        """Ripristina il modello telaio da un dict precedentemente salvato."""
+        self.materiali.clear(); self.materiali.update(dati.get('materiali', {}))
+        self.sezioni.clear();   self.sezioni.update(dati.get('sezioni', {}))
+        self.nodi         = {int(k): v for k, v in dati.get('nodi', {}).items()}
+        self.aste         = {int(k): v for k, v in dati.get('aste', {}).items()}
+        self.vincoli      = {int(k): v for k, v in dati.get('vincoli', {}).items()}
+        self.carichi_nodi = {int(k): v for k, v in dati.get('carichi_nodi', {}).items()}
+        self.carichi_aste = {int(k): v for k, v in dati.get('carichi_aste', {}).items()}
+        cnt = dati.get('contatori', {})
+        self._cnt_nodi = cnt.get('nodi', 0); self._cnt_aste = cnt.get('aste', 0)
+        self._cnt_vinc = cnt.get('vinc', 0); self._cnt_cn   = cnt.get('cn', 0)
+        self._cnt_ca   = cnt.get('ca', 0)
+        self._risolto = False; self._u_vec = self._sforzi = None
+        self._ctrl_mat._ricostruisci_layout()
+        self._ctrl_mat.aggiorna_combobox(self.ui.combobox_teliaio_materiali)
+        self._ctrl_sez._ricostruisci_layout()
+        self._aggiorna_cb_sezioni_asta()
+        self._aggiorna_table_nodi(); self._aggiorna_table_aste()
+        self._aggiorna_table_vincoli(); self._aggiorna_table_carichi()
+        self._aggiorna_viewer()
 
 
 # ======================================================================

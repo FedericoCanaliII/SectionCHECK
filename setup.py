@@ -4,6 +4,8 @@ from pathlib import Path
 from cx_Freeze import setup, Executable
 import scipy
 
+#python setup.py build
+
 # -----------------------------------------------------------------------
 # 1. FIX CRITICI
 # -----------------------------------------------------------------------

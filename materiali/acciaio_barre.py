@@ -69,6 +69,57 @@ class Acciaio_Barre:
 
             self.contatore_righe -= 1
 
+    # ------------------------------------------------------------------ SALVATAGGIO
+    def get_dati(self):
+        """Restituisce un dict con tutti i valori dei campi (fissi + dinamici)."""
+        fissi = [
+            [self.ui.acciaiobarre_sigma_1.text(),
+             self.ui.acciaiobarre_epsilon_min_1.text(),
+             self.ui.acciaiobarre_epsilon_max_1.text()],
+            [self.ui.acciaiobarre_sigma_2.text(),
+             self.ui.acciaiobarre_epsilon_min_2.text(),
+             self.ui.acciaiobarre_epsilon_max_2.text()],
+            [self.ui.acciaiobarre_sigma_3.text(),
+             self.ui.acciaiobarre_epsilon_min_3.text(),
+             self.ui.acciaiobarre_epsilon_max_3.text()],
+        ]
+        dinamici = [
+            [s.text(), e_min.text(), e_max.text()]
+            for s, e_min, e_max in zip(
+                self.lista_sigma_extra,
+                self.lista_epsilon_min_extra,
+                self.lista_epsilon_max_extra,
+            )
+        ]
+        return {'fissi': fissi, 'dinamici': dinamici}
+
+    def carica_dati(self, dati):
+        """Ripristina i valori dei campi da un dict salvato."""
+        fissi = dati.get('fissi', [])
+        coppie_fissi = [
+            ('acciaiobarre_sigma_1', 'acciaiobarre_epsilon_min_1', 'acciaiobarre_epsilon_max_1'),
+            ('acciaiobarre_sigma_2', 'acciaiobarre_epsilon_min_2', 'acciaiobarre_epsilon_max_2'),
+            ('acciaiobarre_sigma_3', 'acciaiobarre_epsilon_min_3', 'acciaiobarre_epsilon_max_3'),
+        ]
+        for i, (ns, ne_min, ne_max) in enumerate(coppie_fissi):
+            if i < len(fissi):
+                try: getattr(self.ui, ns).setText(str(fissi[i][0]))
+                except Exception: pass
+                try: getattr(self.ui, ne_min).setText(str(fissi[i][1]))
+                except Exception: pass
+                try: getattr(self.ui, ne_max).setText(str(fissi[i][2]))
+                except Exception: pass
+        while self.contatore_righe > 0:
+            self.rimuovi_riga_acciaiobarre()
+        for riga in dati.get('dinamici', []):
+            self.aggiungi_riga_acciaiobarre()
+            try: self.lista_sigma_extra[-1].setText(str(riga[0]))
+            except Exception: pass
+            try: self.lista_epsilon_min_extra[-1].setText(str(riga[1]))
+            except Exception: pass
+            try: self.lista_epsilon_max_extra[-1].setText(str(riga[2]))
+            except Exception: pass
+
     def generatore_matrice_acciaiobarre(self):
         matrice = []
 

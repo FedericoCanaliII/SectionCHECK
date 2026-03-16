@@ -338,3 +338,69 @@ class GestioneSezioni:
         from sezione.manager import convert_bulk_rects
         canon = convert_bulk_rects(raw_rects_list)
         self.section_manager.attach_rects_bulk(index, canon)
+
+    # ------------------------------------------------------------------ SALVATAGGIO
+    def get_dati_salvataggio(self):
+        """Serializza tutte le sezioni come lista di dict."""
+        serial = []
+        for s in self.section_manager.sections:
+            serial.append({
+                'id':            s.id,
+                'name':          s.name,
+                'rects':         s.rects,
+                'circles':       s.circles,
+                'polys':         s.polys,
+                'bars':          s.bars,
+                'staffe':        s.staffe,
+                'reinforcements':s.reinforcements,
+                'meta':          s.meta,
+            })
+        return {
+            'sections':      serial,
+            'current_index': self.section_manager.current_index,
+        }
+
+    def carica_dati(self, dati):
+        """Ripristina tutte le sezioni e i bottoni UI da un dict salvato."""
+        from sezione.manager import SectionModel
+
+        sezioni_raw = dati.get('sections', [])
+        current_index = dati.get('current_index', 0)
+
+        # Rimuovi tutti i bottoni sezione esistenti
+        for btn in list(self.section_buttons):
+            self.btn_group_sezioni.removeButton(btn)
+            try:
+                self.ui.layout_sezioni.removeWidget(btn)
+            except Exception:
+                pass
+            btn.deleteLater()
+        self.section_buttons.clear()
+        self.section_manager.sections.clear()
+        self.section_manager.current_index = None
+
+        # Ricrea sezioni e bottoni
+        for s_data in sezioni_raw:
+            sec = SectionModel(
+                id=s_data.get('id', len(self.section_manager.sections) + 1),
+                name=s_data.get('name', f"Sezione {len(self.section_manager.sections)+1}"),
+                rects=s_data.get('rects', []),
+                circles=s_data.get('circles', []),
+                polys=s_data.get('polys', []),
+                bars=s_data.get('bars', []),
+                staffe=s_data.get('staffe', []),
+                reinforcements=s_data.get('reinforcements', []),
+                meta=s_data.get('meta', {}),
+            )
+            self.section_manager.sections.append(sec)
+            self._create_section_button_for_index(len(self.section_manager.sections) - 1)
+
+        # Crea almeno una sezione se il file era vuoto
+        if not self.section_manager.sections:
+            idx0 = self.section_manager.create_section("Sezione 1")
+            self._create_section_button_for_index(idx0)
+            current_index = 0
+
+        # Attiva la sezione corretta
+        target = current_index if 0 <= current_index < len(self.section_manager.sections) else 0
+        self._switch_to_section(target)

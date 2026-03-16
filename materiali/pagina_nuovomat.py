@@ -175,6 +175,52 @@ class NuovoMaterialePage(QtWidgets.QWidget):
             eps_max_le.deleteLater()
             self.contatore_righe -= 1
 
+    # ------------------------------------------------------------------ SALVATAGGIO
+    def get_dati(self):
+        """Serializza gamma, riga fissa e righe dinamiche."""
+        base = [
+            self.nuovomat_sigma.text(),
+            self.nuovomat_epsilon_min.text(),
+            self.nuovomat_epsilon_max.text(),
+        ]
+        dinamici = [
+            [s.text(), e_min.text(), e_max.text()]
+            for s, e_min, e_max in zip(
+                self.lista_sigma_extra,
+                self.lista_epsilon_min_extra,
+                self.lista_epsilon_max_extra,
+            )
+        ]
+        return {
+            'gamma':    self.nuovomat_gamma.text(),
+            'base':     base,
+            'dinamici': dinamici,
+        }
+
+    def carica_dati(self, dati):
+        """Ripristina i valori da un dict precedentemente salvato."""
+        try: self.nuovomat_gamma.setText(str(dati.get('gamma', '1')))
+        except Exception: pass
+        base = dati.get('base', ['', '', ''])
+        try: self.nuovomat_sigma.setText(str(base[0]))
+        except Exception: pass
+        try: self.nuovomat_epsilon_min.setText(str(base[1]))
+        except Exception: pass
+        try: self.nuovomat_epsilon_max.setText(str(base[2]))
+        except Exception: pass
+        # Rimuovi righe dinamiche esistenti
+        while self.contatore_righe > 0:
+            self.rimuovi_riga_nuovomat()
+        # Ricrea righe dinamiche
+        for riga in dati.get('dinamici', []):
+            self.aggiungi_riga_nuovomat()
+            try: self.lista_sigma_extra[-1].setText(str(riga[0]))
+            except Exception: pass
+            try: self.lista_epsilon_min_extra[-1].setText(str(riga[1]))
+            except Exception: pass
+            try: self.lista_epsilon_max_extra[-1].setText(str(riga[2]))
+            except Exception: pass
+
     def generatore_matrice_diagramma(self):
         matrice = []
         try:
