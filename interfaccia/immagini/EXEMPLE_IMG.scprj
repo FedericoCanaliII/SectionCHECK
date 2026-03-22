@@ -1,0 +1,409 @@
+{
+  "materiali": {
+    "calcestruzzo": {
+      "fissi": [
+        [
+          "14.17 * (1 - (1 - x / 0.002)**2)",
+          "0",
+          "0.002"
+        ],
+        [
+          "14.17",
+          "0.002",
+          "0.0035"
+        ]
+      ],
+      "dinamici": []
+    },
+    "acciaio_barre": {
+      "fissi": [
+        [
+          "210000*x",
+          "-0.001863",
+          "0.001863"
+        ],
+        [
+          "391.30",
+          "0.001863",
+          "0.075000"
+        ],
+        [
+          "-391.30",
+          "-0.075000",
+          "-0.001863"
+        ]
+      ],
+      "dinamici": []
+    },
+    "acciaio_profili": {
+      "fissi": [
+        [
+          "210000*x",
+          "-0.001310",
+          "0.001310"
+        ],
+        [
+          "1042.43 * x + 273.63",
+          "0.001310",
+          "0.15"
+        ],
+        [
+          "1042.43 * x - 273.63",
+          "-0.15",
+          "-0.001310"
+        ]
+      ],
+      "dinamici": []
+    },
+    "frp": {
+      "fissi": [
+        [
+          "77272.73 * x",
+          "0",
+          "-0.045000"
+        ]
+      ],
+      "dinamici": []
+    },
+    "custom": []
+  },
+  "sezioni": {
+    "sections": [
+      {
+        "id": 1,
+        "name": "Sezione 1",
+        "rects": [],
+        "circles": [
+          {
+            "center": [
+              0,
+              0
+            ],
+            "radius_point": [
+              150,
+              0
+            ],
+            "name": "CERCHIO 1"
+          }
+        ],
+        "polys": [],
+        "bars": [
+          {
+            "center": [
+              0,
+              120
+            ],
+            "diam": 16.0,
+            "name": "B1"
+          },
+          {
+            "center": [
+              120,
+              0
+            ],
+            "diam": 16.0,
+            "name": "B2"
+          },
+          {
+            "center": [
+              0,
+              -120
+            ],
+            "diam": 16.0,
+            "name": "B3"
+          },
+          {
+            "center": [
+              -120,
+              0
+            ],
+            "diam": 16.0,
+            "name": "B4"
+          },
+          {
+            "center": [
+              -85,
+              85
+            ],
+            "diam": 16,
+            "name": "B5"
+          },
+          {
+            "center": [
+              -85,
+              -85
+            ],
+            "diam": 16,
+            "name": "B6"
+          },
+          {
+            "center": [
+              85,
+              -85
+            ],
+            "diam": 16,
+            "name": "B7"
+          },
+          {
+            "center": [
+              85,
+              85
+            ],
+            "diam": 16,
+            "name": "B8"
+          }
+        ],
+        "staffe": [],
+        "reinforcements": [],
+        "meta": {}
+      },
+      {
+        "id": 2,
+        "name": "Sezione 2",
+        "rects": [],
+        "circles": [],
+        "polys": [
+          {
+            "vertices": [
+              [
+                -250,
+                200
+              ],
+              [
+                250,
+                200
+              ],
+              [
+                250,
+                50
+              ],
+              [
+                100,
+                50
+              ],
+              [
+                100,
+                -200
+              ],
+              [
+                -100,
+                -200
+              ],
+              [
+                -100,
+                50
+              ],
+              [
+                -250,
+                50
+              ]
+            ],
+            "name": "POLIGONO 1"
+          }
+        ],
+        "bars": [
+          {
+            "center": [
+              -220,
+              170
+            ],
+            "diam": 16.0,
+            "name": "B9"
+          },
+          {
+            "center": [
+              220,
+              170
+            ],
+            "diam": 16.0,
+            "name": "B10"
+          },
+          {
+            "center": [
+              220,
+              80
+            ],
+            "diam": 16.0,
+            "name": "B11"
+          },
+          {
+            "center": [
+              -220,
+              80
+            ],
+            "diam": 16.0,
+            "name": "B12"
+          },
+          {
+            "center": [
+              -70,
+              170
+            ],
+            "diam": 16.0,
+            "name": "B13"
+          },
+          {
+            "center": [
+              70,
+              170
+            ],
+            "diam": 16.0,
+            "name": "B14"
+          },
+          {
+            "center": [
+              -70,
+              80
+            ],
+            "diam": 16.0,
+            "name": "B15"
+          },
+          {
+            "center": [
+              70,
+              80
+            ],
+            "diam": 16.0,
+            "name": "B16"
+          },
+          {
+            "center": [
+              -70,
+              -170
+            ],
+            "diam": 20,
+            "name": "B17"
+          },
+          {
+            "center": [
+              0,
+              -170
+            ],
+            "diam": 20,
+            "name": "B18"
+          },
+          {
+            "center": [
+              70,
+              -170
+            ],
+            "diam": 20,
+            "name": "B19"
+          }
+        ],
+        "staffe": [],
+        "reinforcements": [],
+        "meta": {}
+      },
+      {
+        "id": 3,
+        "name": "Sezione 3",
+        "rects": [
+          {
+            "v1": [
+              -200,
+              200
+            ],
+            "v2": [
+              200,
+              180
+            ],
+            "name": "RETTANGOLO 1",
+            "material": "Acciaio per profili"
+          },
+          {
+            "v1": [
+              -200,
+              -200
+            ],
+            "v2": [
+              200,
+              -180
+            ],
+            "name": "RETTANGOLO 2",
+            "material": "Acciaio per profili"
+          },
+          {
+            "v1": [
+              -5,
+              180
+            ],
+            "v2": [
+              5,
+              -180
+            ],
+            "name": "RETTANGOLO 3",
+            "material": "Acciaio per profili"
+          }
+        ],
+        "circles": [],
+        "polys": [],
+        "bars": [],
+        "staffe": [],
+        "reinforcements": [],
+        "meta": {}
+      }
+    ],
+    "current_index": 0
+  },
+  "telaio": {
+    "materiali": {
+      "mat_0": {
+        "nome": "Acciaio S275",
+        "E": 210000.0,
+        "G": 81000.0,
+        "rho": 7850.0
+      },
+      "mat_1": {
+        "nome": "Acciaio S355",
+        "E": 210000.0,
+        "G": 81000.0,
+        "rho": 7850.0
+      },
+      "mat_2": {
+        "nome": "Cls C25/30",
+        "E": 31000.0,
+        "G": 12900.0,
+        "rho": 2500.0
+      }
+    },
+    "sezioni": {
+      "sez_0": {
+        "nome": "HEB 200",
+        "A": 7810.0,
+        "Iy": 57000000.0,
+        "Iz": 20000000.0,
+        "J": 123000.0,
+        "materiale": "mat_0"
+      },
+      "sez_1": {
+        "nome": "IPE 200",
+        "A": 2848.0,
+        "Iy": 19430000.0,
+        "Iz": 512700.0,
+        "J": 6920.0,
+        "materiale": "mat_0"
+      },
+      "sez_2": {
+        "nome": "IPE 300",
+        "A": 5381.0,
+        "Iy": 83560000.0,
+        "Iz": 2190000.0,
+        "J": 20100.0,
+        "materiale": "mat_0"
+      }
+    },
+    "nodi": {},
+    "aste": {},
+    "vincoli": {},
+    "carichi_nodi": {},
+    "carichi_aste": {},
+    "contatori": {
+      "nodi": 0,
+      "aste": 0,
+      "vinc": 0,
+      "cn": 0,
+      "ca": 0
+    }
+  }
+}

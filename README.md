@@ -4,20 +4,48 @@
   <img src="interfaccia/icone/logo.png" width="100">
 </p>
 
-Descrizione:
-
 Un software leggero e intuitivo sviluppato a scopo didattico per l'analisi strutturale di elementi strutturali. Progettato per gestire geometrie complesse e comportamenti non lineari con un'interfaccia utente semplificata.
 
-Funzionalità Principali:
+---
 
-- Materiali: Definizione tramite legami costitutivi non lineari.
+## 🏗️ Progettazione
 
-- Geometria Libera: Disegno di sezioni di qualunque forma, con barre longitudinali e staffe.
+- **Materiali:** Definizione dei materiali tramite legami costitutivi non lineari.
+- **Sezioni:** Disegno di sezioni di qualunque forma, con barre longitudinali e staffe.
+- **Struttura:** Definizione del telaio generale della struttura.
 
-- Domini di Interazione: Calcolo e visualizzazione dei domini di interazione tridimensionali M-N (Momento-Sforzo Normale).
+---
 
-- Diagramma Momento-Curvatura: Calcolo e visualizzazione dei diagrammi momento-curvatura tridimenzionali (360°)
+## 📐 Analisi Sezione
 
-- Analisi FEM: Solver agli elementi finiti con comportamento non lineare dei materiali.
+### Pressoflessione
+Calcolo della pressoflessione centrata e deviata.
 
-- UI Semplice: Interfaccia essenziale pensata per un utilizzo immediato senza configurazioni complesse.
+<p align="center">
+  <img src="interfaccia/immagini/img1.png" width="400">
+</p>
+
+### Dominio di Interazione
+Calcolo e visualizzazione dei domini di interazione tridimensionali M-N (Momento-Sforzo Normale).
+
+<p align="center">
+  <img src="interfaccia/immagini/img2.png" width="400">
+</p>
+
+### Diagramma Momento-Curvatura
+Calcolo e visualizzazione dei diagrammi momento-curvatura tridimensionali (360°).
+
+<p align="center">
+  <img src="interfaccia/immagini/img3.png" width="400">
+</p>
+
+---
+
+## 🔩 Analisi Elemento
+
+- **FEM:** Solver agli elementi finiti con comportamento non lineare dei materiali.
+
+---
+
+## ✨ UI Semplice
+Interfaccia essenziale pensata per un utilizzo immediato senza configurazioni complesse.
