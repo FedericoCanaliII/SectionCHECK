@@ -10,6 +10,7 @@ from PyQt5.QtWidgets import QOpenGLWidget
 from PyQt5.QtCore    import Qt, QPoint
 from PyQt5.QtGui     import QFont
 
+import math
 from OpenGL.GL  import *
 from OpenGL.GLU import *
 
@@ -206,16 +207,21 @@ class Spazio3D(QOpenGLWidget):
 
     def _disegna_griglia(self):
         """
-        Griglia in due livelli con alpha fade sulla distanza:
+        Griglia in due livelli con alpha fade radiale sulla distanza:
           - griglia fine  ogni 1 unità  (grigio scuro)
           - griglia grossa ogni 5 unità (grigio più chiaro)
-        Le linee lontane dal centro sfumano verso trasparente.
         """
-        DIM   = 50       # estensione della griglia (unità)
-        FADE  = 28.0     # distanza dal centro alla quale inizia il fade
+        DIM   = 100     # estensione della griglia (unità)
+        FADE  = 40    # distanza dal centro alla quale inizia il fade
+        SEG_L = 2       # lunghezza dei "pezzetti" di linea per una sfumatura fluida
 
         glLineWidth(1.0)
         glDepthMask(GL_FALSE)   # non sporcare il depth buffer con le linee
+
+        # Funzione helper per calcolare l'alpha radiale di un punto (x, y)
+        def get_alpha(x, y):
+            dist = math.hypot(x, y) / FADE
+            return max(0.0, 1.0 - dist * dist * 0.55)
 
         for step, cr, cg, cb in (
             (1, GRID_FINE_R,   GRID_FINE_G,   GRID_FINE_B),
@@ -226,14 +232,30 @@ class Spazio3D(QOpenGLWidget):
                 if step == 1 and (i % 5 == 0):
                     continue    # le linee di step=5 le disegna il secondo ciclo
 
-                dist = abs(i) / FADE
-                alpha = max(0.0, 1.0 - dist * dist * 0.55)
-                if alpha < 0.02:
-                    continue
+                # Spezzettiamo la linea in piccoli segmenti per sfumarla progressivamente
+                for j in range(-DIM, DIM, SEG_L):
+                    
+                    # --- LINEE VERTICALI (x = i fisso, y = j variabile) ---
+                    y1 = j
+                    y2 = j + SEG_L
+                    a1_v = get_alpha(i, y1)
+                    a2_v = get_alpha(i, y2)
 
-                glColor4f(cr, cg, cb, alpha)
-                glVertex3f(i, -DIM, 0); glVertex3f(i,  DIM, 0)
-                glVertex3f(-DIM, i, 0); glVertex3f( DIM, i, 0)
+                    # Disegniamo il segmentino solo se almeno uno dei due vertici è visibile
+                    if a1_v > 0.01 or a2_v > 0.01:
+                        glColor4f(cr, cg, cb, a1_v); glVertex3f(i, y1, 0)
+                        glColor4f(cr, cg, cb, a2_v); glVertex3f(i, y2, 0)
+
+                    # --- LINEE ORIZZONTALI (y = i fisso, x = j variabile) ---
+                    x1 = j
+                    x2 = j + SEG_L
+                    a1_h = get_alpha(x1, i)
+                    a2_h = get_alpha(x2, i)
+
+                    if a1_h > 0.01 or a2_h > 0.01:
+                        glColor4f(cr, cg, cb, a1_h); glVertex3f(x1, i, 0)
+                        glColor4f(cr, cg, cb, a2_h); glVertex3f(x2, i, 0)
+
             glEnd()
 
         glDepthMask(GL_TRUE)
@@ -248,7 +270,7 @@ class Spazio3D(QOpenGLWidget):
         La parte positiva è opaca, la negativa semi-trasparente (stilema Blender).
         Le linee sottili percorrono l'intera estensione con fade.
         """
-        EXT       = 1000.0    # estensione praticamente infinita
+        EXT       = 50    # estensione praticamente infinita
         EXT_NEG   = -50.0     # parte negativa più breve e sfumata
         THICK_POS = 1.8
         THICK_NEG = 1.0

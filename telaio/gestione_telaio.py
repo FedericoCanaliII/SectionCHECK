@@ -654,53 +654,56 @@ class GestioneTelaio:
     # ------------------------------------------------------------------
     # VISTE
     # ------------------------------------------------------------------
-
-    # Stile condiviso per tutti i bottoni vista/diagramma
-    _VISTA_BTN_STYLE = """
-        QPushButton {
-            font: 400 12pt "Segoe UI";
-            color: rgb(255, 255, 255);
-            padding-bottom: 4px;
-            border-radius: 4px;
-        }
-        QPushButton:hover {
-            background-color: rgb(40, 40, 40);
-            border: 1px solid rgb(120, 120, 120);
-        }
-        QPushButton:checked {
-            background-color: rgb(30, 30, 30);
-        }
-    """
-
+    
     def _setup_viste(self):
         ui = self.ui
 
-        # Tutti i bottoni vista+diagramma in un unico gruppo esclusivo
-        self._g_viste = QButtonGroup(ui.btn_telaio_indeformata)
-        self._g_viste.setExclusive(True)
-
-        tutti = [
+        # ── Gruppo 1: Vista (Indeformata / Deformata) ──────────────────
+        # Esclusivo: uno sempre selezionato
+        self._g_vista = QButtonGroup(ui.btn_telaio_indeformata)
+        self._g_vista.setExclusive(True)
+        for btn, mode in [
             (ui.btn_telaio_indeformata, "Indeformata"),
             (ui.btn_telaio_deformata,   "Deformata"),
-            (ui.btn_telaio_n,           "N"),
-            (ui.btn_telaio_ty,          "Vy"),
-            (ui.btn_telaio_tz,          "Vz"),
-            (ui.btn_telaio_my,          "My"),
-            (ui.btn_telaio_mz,          "Mz"),
-        ]
-        for btn, mode in tutti:
+        ]:
             btn.setCheckable(True)
-            btn.setStyleSheet(self._VISTA_BTN_STYLE)
-            self._g_viste.addButton(btn)
+            self._g_vista.addButton(btn)
             btn.clicked.connect(lambda _, m=mode: self._attiva_modo(m))
 
-        # Preset camera (non checkable, non fanno parte del gruppo)
-        for btn, preset in [(ui.btn_telaio_3d, "3d"), (ui.btn_telaio_x, "x"),
-                            (ui.btn_telaio_y, "y"), (ui.btn_telaio_z, "z")]:
-            btn.setStyleSheet(self._VISTA_BTN_STYLE)
+        # ── Gruppo 2: Diagrammi sollecitazioni (N, Vy, Vz, My, Mz) ────
+        # Esclusivo: uno sempre selezionato.
+        # Al click rimette anche "Indeformata" nel gruppo vista.
+        self._g_diag = QButtonGroup(ui.btn_telaio_n)
+        self._g_diag.setExclusive(True)
+        for btn, mode in [
+            (ui.btn_telaio_n,  "N"),
+            (ui.btn_telaio_ty, "Vy"),
+            (ui.btn_telaio_tz, "Vz"),
+            (ui.btn_telaio_my, "My"),
+            (ui.btn_telaio_mz, "Mz"),
+        ]:
+            btn.setCheckable(True)
+            self._g_diag.addButton(btn)
+            btn.clicked.connect(lambda _, m=mode: self._attiva_diagramma_con_reset(m))
+
+        # ── Gruppo 3: Preset camera (3D, X, Y, Z) ──────────────────────
+        # Esclusivo: uno sempre selezionato.
+        self._g_cam = QButtonGroup(ui.btn_telaio_3d)
+        self._g_cam.setExclusive(True)
+        for btn, preset in [
+            (ui.btn_telaio_3d, "3d"),
+            (ui.btn_telaio_x,  "x"),
+            (ui.btn_telaio_y,  "y"),
+            (ui.btn_telaio_z,  "z"),
+        ]:
+            btn.setCheckable(True)
+            self._g_cam.addButton(btn)
             btn.clicked.connect(lambda _, p=preset: self._viewer.imposta_vista(p))
 
-        QTimer.singleShot(0, ui.btn_telaio_indeformata.click)
+        # Selezioni iniziali di default
+        QTimer.singleShot(0, ui.btn_telaio_indeformata.click)            # gruppo vista
+        QTimer.singleShot(0, lambda: ui.btn_telaio_n.setChecked(True))   # gruppo diagrammi
+        QTimer.singleShot(0, lambda: ui.btn_telaio_3d.setChecked(True))  # gruppo camera
 
     def _attiva_modo(self, mode: str):
         """Punto unico di ingresso per tutti i bottoni vista/diagramma."""
@@ -721,6 +724,15 @@ class GestioneTelaio:
             self._viewer.aggiorna_risultati(self._u_vec, self._sforzi,
                                             self._t_nodi, self._t_aste,
                                             mode, self._scala_auto(mode))
+
+    def _attiva_diagramma_con_reset(self, mode: str):
+        """
+        Attiva un diagramma di sollecitazione.
+        Rimette sempre il gruppo Vista su 'Indeformata' (i diagrammi si
+        sovrappongono alla struttura indeformata, non a quella deformata).
+        """
+        self.ui.btn_telaio_indeformata.setChecked(True)
+        self._attiva_modo(mode)
 
     # Mantieni alias per compatibilità chiamate interne esistenti
     def _cambia_vista(self, mode):
