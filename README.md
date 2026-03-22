@@ -8,7 +8,7 @@ Un software leggero e intuitivo sviluppato a scopo didattico per l'analisi strut
 
 ---
 
-## 🏗️ Progettazione
+## Progettazione
 
 - **Materiali:** Definizione dei materiali tramite legami costitutivi non lineari.
 - **Sezioni:** Disegno di sezioni di qualunque forma, con barre longitudinali e staffe.
@@ -16,7 +16,7 @@ Un software leggero e intuitivo sviluppato a scopo didattico per l'analisi strut
 
 ---
 
-## 📐 Analisi Sezione
+## Analisi Sezione
 
 ### Pressoflessione
 Calcolo della pressoflessione centrata e deviata.
@@ -41,7 +41,7 @@ Calcolo e visualizzazione dei diagrammi momento-curvatura tridimensionali (360°
 
 ---
 
-## 🔩 Analisi Elemento
+## Analisi Elemento
 
 - **FEM:** Solver agli elementi finiti con comportamento non lineare dei materiali.
 
