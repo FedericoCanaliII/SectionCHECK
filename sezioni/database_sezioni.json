@@ -1,0 +1,4790 @@
+{
+  "__version__": 7,
+  "calcestruzzo_armato": {
+    "R 200×400": {
+      "tipo_categoria": "calcestruzzo_armato",
+      "standard": true,
+      "nome": "R 200×400",
+      "dimensioni": {
+        "b": 200,
+        "h": 400
+      },
+      "materiale_default": "C30/37",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "rettangolo",
+            "geometria": {
+              "x0": -100.0,
+              "y0": -200.0,
+              "x1": 100.0,
+              "y1": 200.0
+            },
+            "materiale": "C30/37"
+          }
+        ],
+        "barre": [
+          {
+            "id": "barra_1",
+            "tipo": "barra",
+            "geometria": {
+              "cx": -55.0,
+              "cy": -155.0,
+              "r": 7.0
+            },
+            "materiale": "B450C"
+          },
+          {
+            "id": "barra_2",
+            "tipo": "barra",
+            "geometria": {
+              "cx": 55.0,
+              "cy": -155.0,
+              "r": 7.0
+            },
+            "materiale": "B450C"
+          },
+          {
+            "id": "barra_3",
+            "tipo": "barra",
+            "geometria": {
+              "cx": -55.0,
+              "cy": 155.0,
+              "r": 7.0
+            },
+            "materiale": "B450C"
+          },
+          {
+            "id": "barra_4",
+            "tipo": "barra",
+            "geometria": {
+              "cx": 55.0,
+              "cy": 155.0,
+              "r": 7.0
+            },
+            "materiale": "B450C"
+          }
+        ],
+        "staffe": [
+          {
+            "id": "staffa_1",
+            "tipo": "staffa",
+            "geometria": {
+              "punti": [
+                [
+                  -66.0,
+                  -166.0
+                ],
+                [
+                  66.0,
+                  -166.0
+                ],
+                [
+                  66.0,
+                  166.0
+                ],
+                [
+                  -66.0,
+                  166.0
+                ],
+                [
+                  -66.0,
+                  -166.0
+                ]
+              ],
+              "r": 4.0
+            },
+            "materiale": "B450C"
+          }
+        ]
+      }
+    },
+    "R 400×600": {
+      "tipo_categoria": "calcestruzzo_armato",
+      "standard": true,
+      "nome": "R 400×600",
+      "dimensioni": {
+        "b": 400,
+        "h": 600
+      },
+      "materiale_default": "C30/37",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "rettangolo",
+            "geometria": {
+              "x0": -200.0,
+              "y0": -300.0,
+              "x1": 200.0,
+              "y1": 300.0
+            },
+            "materiale": "C30/37"
+          }
+        ],
+        "barre": [
+          {
+            "id": "barra_1",
+            "tipo": "barra",
+            "geometria": {
+              "cx": -151.0,
+              "cy": -251.0,
+              "r": 9.0
+            },
+            "materiale": "B450C"
+          },
+          {
+            "id": "barra_2",
+            "tipo": "barra",
+            "geometria": {
+              "cx": 0.0,
+              "cy": -251.0,
+              "r": 9.0
+            },
+            "materiale": "B450C"
+          },
+          {
+            "id": "barra_3",
+            "tipo": "barra",
+            "geometria": {
+              "cx": 151.0,
+              "cy": -251.0,
+              "r": 9.0
+            },
+            "materiale": "B450C"
+          },
+          {
+            "id": "barra_4",
+            "tipo": "barra",
+            "geometria": {
+              "cx": -151.0,
+              "cy": 251.0,
+              "r": 9.0
+            },
+            "materiale": "B450C"
+          },
+          {
+            "id": "barra_5",
+            "tipo": "barra",
+            "geometria": {
+              "cx": 0.0,
+              "cy": 251.0,
+              "r": 9.0
+            },
+            "materiale": "B450C"
+          },
+          {
+            "id": "barra_6",
+            "tipo": "barra",
+            "geometria": {
+              "cx": 151.0,
+              "cy": 251.0,
+              "r": 9.0
+            },
+            "materiale": "B450C"
+          },
+          {
+            "id": "barra_7",
+            "tipo": "barra",
+            "geometria": {
+              "cx": -151.0,
+              "cy": 0.0,
+              "r": 9.0
+            },
+            "materiale": "B450C"
+          },
+          {
+            "id": "barra_8",
+            "tipo": "barra",
+            "geometria": {
+              "cx": 151.0,
+              "cy": 0.0,
+              "r": 9.0
+            },
+            "materiale": "B450C"
+          }
+        ],
+        "staffe": [
+          {
+            "id": "staffa_1",
+            "tipo": "staffa",
+            "geometria": {
+              "punti": [
+                [
+                  -165.0,
+                  -265.0
+                ],
+                [
+                  165.0,
+                  -265.0
+                ],
+                [
+                  165.0,
+                  265.0
+                ],
+                [
+                  -165.0,
+                  265.0
+                ],
+                [
+                  -165.0,
+                  -265.0
+                ]
+              ],
+              "r": 5.0
+            },
+            "materiale": "B450C"
+          }
+        ]
+      }
+    },
+    "CIR Ø400": {
+      "tipo_categoria": "calcestruzzo_armato",
+      "standard": true,
+      "nome": "CIR Ø400",
+      "dimensioni": {
+        "D": 400,
+        "n_barre": 8
+      },
+      "materiale_default": "C30/37",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "cerchio",
+            "geometria": {
+              "cx": 0.0,
+              "cy": 0.0,
+              "rx": 200.0,
+              "ry": 200.0
+            },
+            "materiale": "C30/37"
+          }
+        ],
+        "barre": [
+          {
+            "id": "barra_1",
+            "tipo": "barra",
+            "geometria": {
+              "cx": 0.0,
+              "cy": 154.0,
+              "r": 8.0
+            },
+            "materiale": "B450C"
+          },
+          {
+            "id": "barra_2",
+            "tipo": "barra",
+            "geometria": {
+              "cx": 108.9,
+              "cy": 108.9,
+              "r": 8.0
+            },
+            "materiale": "B450C"
+          },
+          {
+            "id": "barra_3",
+            "tipo": "barra",
+            "geometria": {
+              "cx": 154.0,
+              "cy": 0.0,
+              "r": 8.0
+            },
+            "materiale": "B450C"
+          },
+          {
+            "id": "barra_4",
+            "tipo": "barra",
+            "geometria": {
+              "cx": 108.9,
+              "cy": -108.9,
+              "r": 8.0
+            },
+            "materiale": "B450C"
+          },
+          {
+            "id": "barra_5",
+            "tipo": "barra",
+            "geometria": {
+              "cx": 0.0,
+              "cy": -154.0,
+              "r": 8.0
+            },
+            "materiale": "B450C"
+          },
+          {
+            "id": "barra_6",
+            "tipo": "barra",
+            "geometria": {
+              "cx": -108.9,
+              "cy": -108.9,
+              "r": 8.0
+            },
+            "materiale": "B450C"
+          },
+          {
+            "id": "barra_7",
+            "tipo": "barra",
+            "geometria": {
+              "cx": -154.0,
+              "cy": -0.0,
+              "r": 8.0
+            },
+            "materiale": "B450C"
+          },
+          {
+            "id": "barra_8",
+            "tipo": "barra",
+            "geometria": {
+              "cx": -108.9,
+              "cy": 108.9,
+              "r": 8.0
+            },
+            "materiale": "B450C"
+          }
+        ],
+        "staffe": [
+          {
+            "id": "staffa_1",
+            "tipo": "staffa",
+            "geometria": {
+              "punti": [
+                [
+                  166.0,
+                  0.0
+                ],
+                [
+                  163.5,
+                  28.8
+                ],
+                [
+                  156.0,
+                  56.8
+                ],
+                [
+                  143.8,
+                  83.0
+                ],
+                [
+                  127.2,
+                  106.7
+                ],
+                [
+                  106.7,
+                  127.2
+                ],
+                [
+                  83.0,
+                  143.8
+                ],
+                [
+                  56.8,
+                  156.0
+                ],
+                [
+                  28.8,
+                  163.5
+                ],
+                [
+                  0.0,
+                  166.0
+                ],
+                [
+                  -28.8,
+                  163.5
+                ],
+                [
+                  -56.8,
+                  156.0
+                ],
+                [
+                  -83.0,
+                  143.8
+                ],
+                [
+                  -106.7,
+                  127.2
+                ],
+                [
+                  -127.2,
+                  106.7
+                ],
+                [
+                  -143.8,
+                  83.0
+                ],
+                [
+                  -156.0,
+                  56.8
+                ],
+                [
+                  -163.5,
+                  28.8
+                ],
+                [
+                  -166.0,
+                  0.0
+                ],
+                [
+                  -163.5,
+                  -28.8
+                ],
+                [
+                  -156.0,
+                  -56.8
+                ],
+                [
+                  -143.8,
+                  -83.0
+                ],
+                [
+                  -127.2,
+                  -106.7
+                ],
+                [
+                  -106.7,
+                  -127.2
+                ],
+                [
+                  -83.0,
+                  -143.8
+                ],
+                [
+                  -56.8,
+                  -156.0
+                ],
+                [
+                  -28.8,
+                  -163.5
+                ],
+                [
+                  -0.0,
+                  -166.0
+                ],
+                [
+                  28.8,
+                  -163.5
+                ],
+                [
+                  56.8,
+                  -156.0
+                ],
+                [
+                  83.0,
+                  -143.8
+                ],
+                [
+                  106.7,
+                  -127.2
+                ],
+                [
+                  127.2,
+                  -106.7
+                ],
+                [
+                  143.8,
+                  -83.0
+                ],
+                [
+                  156.0,
+                  -56.8
+                ],
+                [
+                  163.5,
+                  -28.8
+                ],
+                [
+                  166.0,
+                  0.0
+                ]
+              ],
+              "r": 4.0
+            },
+            "materiale": "B450C"
+          }
+        ]
+      }
+    },
+    "T 400x550": {
+      "tipo_categoria": "calcestruzzo_armato",
+      "standard": true,
+      "nome": "T 400x550",
+      "dimensioni": {},
+      "materiale_default": "C30/37",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -250.0,
+                  0.0
+                ],
+                [
+                  -250.0,
+                  200.0
+                ],
+                [
+                  250.0,
+                  200.0
+                ],
+                [
+                  250.0,
+                  0.0
+                ],
+                [
+                  100.0,
+                  0.0
+                ],
+                [
+                  100.0,
+                  -250.0
+                ],
+                [
+                  -100.0,
+                  -250.0
+                ],
+                [
+                  -100.0,
+                  0.0
+                ]
+              ]
+            },
+            "materiale": "C30/37"
+          }
+        ],
+        "barre": [
+          {
+            "id": "barra_1",
+            "tipo": "barra",
+            "geometria": {
+              "cx": -210.0,
+              "cy": 160.0,
+              "r": 7.0
+            },
+            "materiale": "B450C"
+          },
+          {
+            "id": "barra_2",
+            "tipo": "barra",
+            "geometria": {
+              "cx": 210.0,
+              "cy": 160.0,
+              "r": 7.0
+            },
+            "materiale": "B450C"
+          },
+          {
+            "id": "barra_3",
+            "tipo": "barra",
+            "geometria": {
+              "cx": 210.0,
+              "cy": 40.0,
+              "r": 7.0
+            },
+            "materiale": "B450C"
+          },
+          {
+            "id": "barra_4",
+            "tipo": "barra",
+            "geometria": {
+              "cx": -210.0,
+              "cy": 40.0,
+              "r": 7.0
+            },
+            "materiale": "B450C"
+          },
+          {
+            "id": "barra_5",
+            "tipo": "barra",
+            "geometria": {
+              "cx": -58.0,
+              "cy": 42.0,
+              "r": 7.0
+            },
+            "materiale": "B450C"
+          },
+          {
+            "id": "barra_6",
+            "tipo": "barra",
+            "geometria": {
+              "cx": 58.0,
+              "cy": 42.0,
+              "r": 7.0
+            },
+            "materiale": "B450C"
+          },
+          {
+            "id": "barra_7",
+            "tipo": "barra",
+            "geometria": {
+              "cx": -58.0,
+              "cy": 158.0,
+              "r": 7.0
+            },
+            "materiale": "B450C"
+          },
+          {
+            "id": "barra_8",
+            "tipo": "barra",
+            "geometria": {
+              "cx": 58.0,
+              "cy": 158.0,
+              "r": 7.0
+            },
+            "materiale": "B450C"
+          },
+          {
+            "id": "barra_9",
+            "tipo": "barra",
+            "geometria": {
+              "cx": 55.0,
+              "cy": -210.0,
+              "r": 10.0
+            },
+            "materiale": "B450C"
+          },
+          {
+            "id": "barra_10",
+            "tipo": "barra",
+            "geometria": {
+              "cx": 0.0,
+              "cy": -210.0,
+              "r": 10.0
+            },
+            "materiale": "B450C"
+          },
+          {
+            "id": "barra_11",
+            "tipo": "barra",
+            "geometria": {
+              "cx": -55.0,
+              "cy": -210.0,
+              "r": 10.0
+            },
+            "materiale": "B450C"
+          }
+        ],
+        "staffe": [
+          {
+            "id": "staffa_1",
+            "tipo": "staffa",
+            "geometria": {
+              "punti": [
+                [
+                  -220.0,
+                  170.0
+                ],
+                [
+                  220.0,
+                  170.0
+                ],
+                [
+                  220.0,
+                  30.0
+                ],
+                [
+                  -220.0,
+                  30.0
+                ],
+                [
+                  -220.0,
+                  170.0
+                ]
+              ],
+              "r": 3.0
+            },
+            "materiale": "B450C"
+          },
+          {
+            "id": "staffa_2",
+            "tipo": "staffa",
+            "geometria": {
+              "punti": [
+                [
+                  -70.0,
+                  170.0
+                ],
+                [
+                  -70.0,
+                  -225.0
+                ],
+                [
+                  70.0,
+                  -225.0
+                ],
+                [
+                  70.0,
+                  170.0
+                ],
+                [
+                  -70.0,
+                  170.0
+                ]
+              ],
+              "r": 4.0
+            },
+            "materiale": "B450C"
+          }
+        ]
+      }
+    }
+  },
+  "profili": {
+    "IPE80": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "IPE80",
+      "dimensioni": {
+        "h": 80,
+        "b": 46,
+        "tw": 3.8,
+        "tf": 5.2
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -23.0,
+                  -40.0
+                ],
+                [
+                  23.0,
+                  -40.0
+                ],
+                [
+                  23.0,
+                  -34.8
+                ],
+                [
+                  1.9,
+                  -34.8
+                ],
+                [
+                  1.9,
+                  34.8
+                ],
+                [
+                  23.0,
+                  34.8
+                ],
+                [
+                  23.0,
+                  40.0
+                ],
+                [
+                  -23.0,
+                  40.0
+                ],
+                [
+                  -23.0,
+                  34.8
+                ],
+                [
+                  -1.9,
+                  34.8
+                ],
+                [
+                  -1.9,
+                  -34.8
+                ],
+                [
+                  -23.0,
+                  -34.8
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "IPE100": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "IPE100",
+      "dimensioni": {
+        "h": 100,
+        "b": 55,
+        "tw": 4.1,
+        "tf": 5.7
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -27.5,
+                  -50.0
+                ],
+                [
+                  27.5,
+                  -50.0
+                ],
+                [
+                  27.5,
+                  -44.3
+                ],
+                [
+                  2.05,
+                  -44.3
+                ],
+                [
+                  2.05,
+                  44.3
+                ],
+                [
+                  27.5,
+                  44.3
+                ],
+                [
+                  27.5,
+                  50.0
+                ],
+                [
+                  -27.5,
+                  50.0
+                ],
+                [
+                  -27.5,
+                  44.3
+                ],
+                [
+                  -2.05,
+                  44.3
+                ],
+                [
+                  -2.05,
+                  -44.3
+                ],
+                [
+                  -27.5,
+                  -44.3
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "IPE120": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "IPE120",
+      "dimensioni": {
+        "h": 120,
+        "b": 64,
+        "tw": 4.4,
+        "tf": 6.3
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -32.0,
+                  -60.0
+                ],
+                [
+                  32.0,
+                  -60.0
+                ],
+                [
+                  32.0,
+                  -53.7
+                ],
+                [
+                  2.2,
+                  -53.7
+                ],
+                [
+                  2.2,
+                  53.7
+                ],
+                [
+                  32.0,
+                  53.7
+                ],
+                [
+                  32.0,
+                  60.0
+                ],
+                [
+                  -32.0,
+                  60.0
+                ],
+                [
+                  -32.0,
+                  53.7
+                ],
+                [
+                  -2.2,
+                  53.7
+                ],
+                [
+                  -2.2,
+                  -53.7
+                ],
+                [
+                  -32.0,
+                  -53.7
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "IPE140": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "IPE140",
+      "dimensioni": {
+        "h": 140,
+        "b": 73,
+        "tw": 4.7,
+        "tf": 6.9
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -36.5,
+                  -70.0
+                ],
+                [
+                  36.5,
+                  -70.0
+                ],
+                [
+                  36.5,
+                  -63.1
+                ],
+                [
+                  2.35,
+                  -63.1
+                ],
+                [
+                  2.35,
+                  63.1
+                ],
+                [
+                  36.5,
+                  63.1
+                ],
+                [
+                  36.5,
+                  70.0
+                ],
+                [
+                  -36.5,
+                  70.0
+                ],
+                [
+                  -36.5,
+                  63.1
+                ],
+                [
+                  -2.35,
+                  63.1
+                ],
+                [
+                  -2.35,
+                  -63.1
+                ],
+                [
+                  -36.5,
+                  -63.1
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "IPE160": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "IPE160",
+      "dimensioni": {
+        "h": 160,
+        "b": 82,
+        "tw": 5.0,
+        "tf": 7.4
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -41.0,
+                  -80.0
+                ],
+                [
+                  41.0,
+                  -80.0
+                ],
+                [
+                  41.0,
+                  -72.6
+                ],
+                [
+                  2.5,
+                  -72.6
+                ],
+                [
+                  2.5,
+                  72.6
+                ],
+                [
+                  41.0,
+                  72.6
+                ],
+                [
+                  41.0,
+                  80.0
+                ],
+                [
+                  -41.0,
+                  80.0
+                ],
+                [
+                  -41.0,
+                  72.6
+                ],
+                [
+                  -2.5,
+                  72.6
+                ],
+                [
+                  -2.5,
+                  -72.6
+                ],
+                [
+                  -41.0,
+                  -72.6
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "IPE180": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "IPE180",
+      "dimensioni": {
+        "h": 180,
+        "b": 91,
+        "tw": 5.3,
+        "tf": 8.0
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -45.5,
+                  -90.0
+                ],
+                [
+                  45.5,
+                  -90.0
+                ],
+                [
+                  45.5,
+                  -82.0
+                ],
+                [
+                  2.65,
+                  -82.0
+                ],
+                [
+                  2.65,
+                  82.0
+                ],
+                [
+                  45.5,
+                  82.0
+                ],
+                [
+                  45.5,
+                  90.0
+                ],
+                [
+                  -45.5,
+                  90.0
+                ],
+                [
+                  -45.5,
+                  82.0
+                ],
+                [
+                  -2.65,
+                  82.0
+                ],
+                [
+                  -2.65,
+                  -82.0
+                ],
+                [
+                  -45.5,
+                  -82.0
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "IPE200": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "IPE200",
+      "dimensioni": {
+        "h": 200,
+        "b": 100,
+        "tw": 5.6,
+        "tf": 8.5
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -50.0,
+                  -100.0
+                ],
+                [
+                  50.0,
+                  -100.0
+                ],
+                [
+                  50.0,
+                  -91.5
+                ],
+                [
+                  2.8,
+                  -91.5
+                ],
+                [
+                  2.8,
+                  91.5
+                ],
+                [
+                  50.0,
+                  91.5
+                ],
+                [
+                  50.0,
+                  100.0
+                ],
+                [
+                  -50.0,
+                  100.0
+                ],
+                [
+                  -50.0,
+                  91.5
+                ],
+                [
+                  -2.8,
+                  91.5
+                ],
+                [
+                  -2.8,
+                  -91.5
+                ],
+                [
+                  -50.0,
+                  -91.5
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "IPE220": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "IPE220",
+      "dimensioni": {
+        "h": 220,
+        "b": 110,
+        "tw": 5.9,
+        "tf": 9.2
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -55.0,
+                  -110.0
+                ],
+                [
+                  55.0,
+                  -110.0
+                ],
+                [
+                  55.0,
+                  -100.8
+                ],
+                [
+                  2.95,
+                  -100.8
+                ],
+                [
+                  2.95,
+                  100.8
+                ],
+                [
+                  55.0,
+                  100.8
+                ],
+                [
+                  55.0,
+                  110.0
+                ],
+                [
+                  -55.0,
+                  110.0
+                ],
+                [
+                  -55.0,
+                  100.8
+                ],
+                [
+                  -2.95,
+                  100.8
+                ],
+                [
+                  -2.95,
+                  -100.8
+                ],
+                [
+                  -55.0,
+                  -100.8
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "IPE240": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "IPE240",
+      "dimensioni": {
+        "h": 240,
+        "b": 120,
+        "tw": 6.2,
+        "tf": 9.8
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -60.0,
+                  -120.0
+                ],
+                [
+                  60.0,
+                  -120.0
+                ],
+                [
+                  60.0,
+                  -110.2
+                ],
+                [
+                  3.1,
+                  -110.2
+                ],
+                [
+                  3.1,
+                  110.2
+                ],
+                [
+                  60.0,
+                  110.2
+                ],
+                [
+                  60.0,
+                  120.0
+                ],
+                [
+                  -60.0,
+                  120.0
+                ],
+                [
+                  -60.0,
+                  110.2
+                ],
+                [
+                  -3.1,
+                  110.2
+                ],
+                [
+                  -3.1,
+                  -110.2
+                ],
+                [
+                  -60.0,
+                  -110.2
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "IPE270": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "IPE270",
+      "dimensioni": {
+        "h": 270,
+        "b": 135,
+        "tw": 6.6,
+        "tf": 10.2
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -67.5,
+                  -135.0
+                ],
+                [
+                  67.5,
+                  -135.0
+                ],
+                [
+                  67.5,
+                  -124.8
+                ],
+                [
+                  3.3,
+                  -124.8
+                ],
+                [
+                  3.3,
+                  124.8
+                ],
+                [
+                  67.5,
+                  124.8
+                ],
+                [
+                  67.5,
+                  135.0
+                ],
+                [
+                  -67.5,
+                  135.0
+                ],
+                [
+                  -67.5,
+                  124.8
+                ],
+                [
+                  -3.3,
+                  124.8
+                ],
+                [
+                  -3.3,
+                  -124.8
+                ],
+                [
+                  -67.5,
+                  -124.8
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "IPE300": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "IPE300",
+      "dimensioni": {
+        "h": 300,
+        "b": 150,
+        "tw": 7.1,
+        "tf": 10.7
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -75.0,
+                  -150.0
+                ],
+                [
+                  75.0,
+                  -150.0
+                ],
+                [
+                  75.0,
+                  -139.3
+                ],
+                [
+                  3.55,
+                  -139.3
+                ],
+                [
+                  3.55,
+                  139.3
+                ],
+                [
+                  75.0,
+                  139.3
+                ],
+                [
+                  75.0,
+                  150.0
+                ],
+                [
+                  -75.0,
+                  150.0
+                ],
+                [
+                  -75.0,
+                  139.3
+                ],
+                [
+                  -3.55,
+                  139.3
+                ],
+                [
+                  -3.55,
+                  -139.3
+                ],
+                [
+                  -75.0,
+                  -139.3
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "IPE330": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "IPE330",
+      "dimensioni": {
+        "h": 330,
+        "b": 160,
+        "tw": 7.5,
+        "tf": 11.5
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -80.0,
+                  -165.0
+                ],
+                [
+                  80.0,
+                  -165.0
+                ],
+                [
+                  80.0,
+                  -153.5
+                ],
+                [
+                  3.75,
+                  -153.5
+                ],
+                [
+                  3.75,
+                  153.5
+                ],
+                [
+                  80.0,
+                  153.5
+                ],
+                [
+                  80.0,
+                  165.0
+                ],
+                [
+                  -80.0,
+                  165.0
+                ],
+                [
+                  -80.0,
+                  153.5
+                ],
+                [
+                  -3.75,
+                  153.5
+                ],
+                [
+                  -3.75,
+                  -153.5
+                ],
+                [
+                  -80.0,
+                  -153.5
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "IPE360": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "IPE360",
+      "dimensioni": {
+        "h": 360,
+        "b": 170,
+        "tw": 8.0,
+        "tf": 12.7
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -85.0,
+                  -180.0
+                ],
+                [
+                  85.0,
+                  -180.0
+                ],
+                [
+                  85.0,
+                  -167.3
+                ],
+                [
+                  4.0,
+                  -167.3
+                ],
+                [
+                  4.0,
+                  167.3
+                ],
+                [
+                  85.0,
+                  167.3
+                ],
+                [
+                  85.0,
+                  180.0
+                ],
+                [
+                  -85.0,
+                  180.0
+                ],
+                [
+                  -85.0,
+                  167.3
+                ],
+                [
+                  -4.0,
+                  167.3
+                ],
+                [
+                  -4.0,
+                  -167.3
+                ],
+                [
+                  -85.0,
+                  -167.3
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "IPE400": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "IPE400",
+      "dimensioni": {
+        "h": 400,
+        "b": 180,
+        "tw": 8.6,
+        "tf": 13.5
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -90.0,
+                  -200.0
+                ],
+                [
+                  90.0,
+                  -200.0
+                ],
+                [
+                  90.0,
+                  -186.5
+                ],
+                [
+                  4.3,
+                  -186.5
+                ],
+                [
+                  4.3,
+                  186.5
+                ],
+                [
+                  90.0,
+                  186.5
+                ],
+                [
+                  90.0,
+                  200.0
+                ],
+                [
+                  -90.0,
+                  200.0
+                ],
+                [
+                  -90.0,
+                  186.5
+                ],
+                [
+                  -4.3,
+                  186.5
+                ],
+                [
+                  -4.3,
+                  -186.5
+                ],
+                [
+                  -90.0,
+                  -186.5
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "IPE450": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "IPE450",
+      "dimensioni": {
+        "h": 450,
+        "b": 190,
+        "tw": 9.4,
+        "tf": 14.6
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -95.0,
+                  -225.0
+                ],
+                [
+                  95.0,
+                  -225.0
+                ],
+                [
+                  95.0,
+                  -210.4
+                ],
+                [
+                  4.7,
+                  -210.4
+                ],
+                [
+                  4.7,
+                  210.4
+                ],
+                [
+                  95.0,
+                  210.4
+                ],
+                [
+                  95.0,
+                  225.0
+                ],
+                [
+                  -95.0,
+                  225.0
+                ],
+                [
+                  -95.0,
+                  210.4
+                ],
+                [
+                  -4.7,
+                  210.4
+                ],
+                [
+                  -4.7,
+                  -210.4
+                ],
+                [
+                  -95.0,
+                  -210.4
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "IPE500": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "IPE500",
+      "dimensioni": {
+        "h": 500,
+        "b": 200,
+        "tw": 10.2,
+        "tf": 16.0
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -100.0,
+                  -250.0
+                ],
+                [
+                  100.0,
+                  -250.0
+                ],
+                [
+                  100.0,
+                  -234.0
+                ],
+                [
+                  5.1,
+                  -234.0
+                ],
+                [
+                  5.1,
+                  234.0
+                ],
+                [
+                  100.0,
+                  234.0
+                ],
+                [
+                  100.0,
+                  250.0
+                ],
+                [
+                  -100.0,
+                  250.0
+                ],
+                [
+                  -100.0,
+                  234.0
+                ],
+                [
+                  -5.1,
+                  234.0
+                ],
+                [
+                  -5.1,
+                  -234.0
+                ],
+                [
+                  -100.0,
+                  -234.0
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "IPE550": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "IPE550",
+      "dimensioni": {
+        "h": 550,
+        "b": 210,
+        "tw": 11.1,
+        "tf": 17.2
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -105.0,
+                  -275.0
+                ],
+                [
+                  105.0,
+                  -275.0
+                ],
+                [
+                  105.0,
+                  -257.8
+                ],
+                [
+                  5.55,
+                  -257.8
+                ],
+                [
+                  5.55,
+                  257.8
+                ],
+                [
+                  105.0,
+                  257.8
+                ],
+                [
+                  105.0,
+                  275.0
+                ],
+                [
+                  -105.0,
+                  275.0
+                ],
+                [
+                  -105.0,
+                  257.8
+                ],
+                [
+                  -5.55,
+                  257.8
+                ],
+                [
+                  -5.55,
+                  -257.8
+                ],
+                [
+                  -105.0,
+                  -257.8
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "IPE600": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "IPE600",
+      "dimensioni": {
+        "h": 600,
+        "b": 220,
+        "tw": 12.0,
+        "tf": 19.0
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -110.0,
+                  -300.0
+                ],
+                [
+                  110.0,
+                  -300.0
+                ],
+                [
+                  110.0,
+                  -281.0
+                ],
+                [
+                  6.0,
+                  -281.0
+                ],
+                [
+                  6.0,
+                  281.0
+                ],
+                [
+                  110.0,
+                  281.0
+                ],
+                [
+                  110.0,
+                  300.0
+                ],
+                [
+                  -110.0,
+                  300.0
+                ],
+                [
+                  -110.0,
+                  281.0
+                ],
+                [
+                  -6.0,
+                  281.0
+                ],
+                [
+                  -6.0,
+                  -281.0
+                ],
+                [
+                  -110.0,
+                  -281.0
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "HEA100": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "HEA100",
+      "dimensioni": {
+        "h": 96,
+        "b": 100,
+        "tw": 5.0,
+        "tf": 8.0
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -50.0,
+                  -48.0
+                ],
+                [
+                  50.0,
+                  -48.0
+                ],
+                [
+                  50.0,
+                  -40.0
+                ],
+                [
+                  2.5,
+                  -40.0
+                ],
+                [
+                  2.5,
+                  40.0
+                ],
+                [
+                  50.0,
+                  40.0
+                ],
+                [
+                  50.0,
+                  48.0
+                ],
+                [
+                  -50.0,
+                  48.0
+                ],
+                [
+                  -50.0,
+                  40.0
+                ],
+                [
+                  -2.5,
+                  40.0
+                ],
+                [
+                  -2.5,
+                  -40.0
+                ],
+                [
+                  -50.0,
+                  -40.0
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "HEA120": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "HEA120",
+      "dimensioni": {
+        "h": 114,
+        "b": 120,
+        "tw": 5.0,
+        "tf": 8.0
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -60.0,
+                  -57.0
+                ],
+                [
+                  60.0,
+                  -57.0
+                ],
+                [
+                  60.0,
+                  -49.0
+                ],
+                [
+                  2.5,
+                  -49.0
+                ],
+                [
+                  2.5,
+                  49.0
+                ],
+                [
+                  60.0,
+                  49.0
+                ],
+                [
+                  60.0,
+                  57.0
+                ],
+                [
+                  -60.0,
+                  57.0
+                ],
+                [
+                  -60.0,
+                  49.0
+                ],
+                [
+                  -2.5,
+                  49.0
+                ],
+                [
+                  -2.5,
+                  -49.0
+                ],
+                [
+                  -60.0,
+                  -49.0
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "HEA140": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "HEA140",
+      "dimensioni": {
+        "h": 133,
+        "b": 140,
+        "tw": 5.5,
+        "tf": 8.5
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -70.0,
+                  -66.5
+                ],
+                [
+                  70.0,
+                  -66.5
+                ],
+                [
+                  70.0,
+                  -58.0
+                ],
+                [
+                  2.75,
+                  -58.0
+                ],
+                [
+                  2.75,
+                  58.0
+                ],
+                [
+                  70.0,
+                  58.0
+                ],
+                [
+                  70.0,
+                  66.5
+                ],
+                [
+                  -70.0,
+                  66.5
+                ],
+                [
+                  -70.0,
+                  58.0
+                ],
+                [
+                  -2.75,
+                  58.0
+                ],
+                [
+                  -2.75,
+                  -58.0
+                ],
+                [
+                  -70.0,
+                  -58.0
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "HEA160": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "HEA160",
+      "dimensioni": {
+        "h": 152,
+        "b": 160,
+        "tw": 6.0,
+        "tf": 9.0
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -80.0,
+                  -76.0
+                ],
+                [
+                  80.0,
+                  -76.0
+                ],
+                [
+                  80.0,
+                  -67.0
+                ],
+                [
+                  3.0,
+                  -67.0
+                ],
+                [
+                  3.0,
+                  67.0
+                ],
+                [
+                  80.0,
+                  67.0
+                ],
+                [
+                  80.0,
+                  76.0
+                ],
+                [
+                  -80.0,
+                  76.0
+                ],
+                [
+                  -80.0,
+                  67.0
+                ],
+                [
+                  -3.0,
+                  67.0
+                ],
+                [
+                  -3.0,
+                  -67.0
+                ],
+                [
+                  -80.0,
+                  -67.0
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "HEA180": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "HEA180",
+      "dimensioni": {
+        "h": 171,
+        "b": 180,
+        "tw": 6.0,
+        "tf": 9.5
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -90.0,
+                  -85.5
+                ],
+                [
+                  90.0,
+                  -85.5
+                ],
+                [
+                  90.0,
+                  -76.0
+                ],
+                [
+                  3.0,
+                  -76.0
+                ],
+                [
+                  3.0,
+                  76.0
+                ],
+                [
+                  90.0,
+                  76.0
+                ],
+                [
+                  90.0,
+                  85.5
+                ],
+                [
+                  -90.0,
+                  85.5
+                ],
+                [
+                  -90.0,
+                  76.0
+                ],
+                [
+                  -3.0,
+                  76.0
+                ],
+                [
+                  -3.0,
+                  -76.0
+                ],
+                [
+                  -90.0,
+                  -76.0
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "HEA200": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "HEA200",
+      "dimensioni": {
+        "h": 190,
+        "b": 200,
+        "tw": 6.5,
+        "tf": 10.0
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -100.0,
+                  -95.0
+                ],
+                [
+                  100.0,
+                  -95.0
+                ],
+                [
+                  100.0,
+                  -85.0
+                ],
+                [
+                  3.25,
+                  -85.0
+                ],
+                [
+                  3.25,
+                  85.0
+                ],
+                [
+                  100.0,
+                  85.0
+                ],
+                [
+                  100.0,
+                  95.0
+                ],
+                [
+                  -100.0,
+                  95.0
+                ],
+                [
+                  -100.0,
+                  85.0
+                ],
+                [
+                  -3.25,
+                  85.0
+                ],
+                [
+                  -3.25,
+                  -85.0
+                ],
+                [
+                  -100.0,
+                  -85.0
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "HEA220": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "HEA220",
+      "dimensioni": {
+        "h": 210,
+        "b": 220,
+        "tw": 7.0,
+        "tf": 11.0
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -110.0,
+                  -105.0
+                ],
+                [
+                  110.0,
+                  -105.0
+                ],
+                [
+                  110.0,
+                  -94.0
+                ],
+                [
+                  3.5,
+                  -94.0
+                ],
+                [
+                  3.5,
+                  94.0
+                ],
+                [
+                  110.0,
+                  94.0
+                ],
+                [
+                  110.0,
+                  105.0
+                ],
+                [
+                  -110.0,
+                  105.0
+                ],
+                [
+                  -110.0,
+                  94.0
+                ],
+                [
+                  -3.5,
+                  94.0
+                ],
+                [
+                  -3.5,
+                  -94.0
+                ],
+                [
+                  -110.0,
+                  -94.0
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "HEA240": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "HEA240",
+      "dimensioni": {
+        "h": 230,
+        "b": 240,
+        "tw": 7.5,
+        "tf": 12.0
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -120.0,
+                  -115.0
+                ],
+                [
+                  120.0,
+                  -115.0
+                ],
+                [
+                  120.0,
+                  -103.0
+                ],
+                [
+                  3.75,
+                  -103.0
+                ],
+                [
+                  3.75,
+                  103.0
+                ],
+                [
+                  120.0,
+                  103.0
+                ],
+                [
+                  120.0,
+                  115.0
+                ],
+                [
+                  -120.0,
+                  115.0
+                ],
+                [
+                  -120.0,
+                  103.0
+                ],
+                [
+                  -3.75,
+                  103.0
+                ],
+                [
+                  -3.75,
+                  -103.0
+                ],
+                [
+                  -120.0,
+                  -103.0
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "HEA260": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "HEA260",
+      "dimensioni": {
+        "h": 250,
+        "b": 260,
+        "tw": 7.5,
+        "tf": 12.5
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -130.0,
+                  -125.0
+                ],
+                [
+                  130.0,
+                  -125.0
+                ],
+                [
+                  130.0,
+                  -112.5
+                ],
+                [
+                  3.75,
+                  -112.5
+                ],
+                [
+                  3.75,
+                  112.5
+                ],
+                [
+                  130.0,
+                  112.5
+                ],
+                [
+                  130.0,
+                  125.0
+                ],
+                [
+                  -130.0,
+                  125.0
+                ],
+                [
+                  -130.0,
+                  112.5
+                ],
+                [
+                  -3.75,
+                  112.5
+                ],
+                [
+                  -3.75,
+                  -112.5
+                ],
+                [
+                  -130.0,
+                  -112.5
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "HEA280": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "HEA280",
+      "dimensioni": {
+        "h": 270,
+        "b": 280,
+        "tw": 8.0,
+        "tf": 13.0
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -140.0,
+                  -135.0
+                ],
+                [
+                  140.0,
+                  -135.0
+                ],
+                [
+                  140.0,
+                  -122.0
+                ],
+                [
+                  4.0,
+                  -122.0
+                ],
+                [
+                  4.0,
+                  122.0
+                ],
+                [
+                  140.0,
+                  122.0
+                ],
+                [
+                  140.0,
+                  135.0
+                ],
+                [
+                  -140.0,
+                  135.0
+                ],
+                [
+                  -140.0,
+                  122.0
+                ],
+                [
+                  -4.0,
+                  122.0
+                ],
+                [
+                  -4.0,
+                  -122.0
+                ],
+                [
+                  -140.0,
+                  -122.0
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "HEA300": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "HEA300",
+      "dimensioni": {
+        "h": 290,
+        "b": 300,
+        "tw": 8.5,
+        "tf": 14.0
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -150.0,
+                  -145.0
+                ],
+                [
+                  150.0,
+                  -145.0
+                ],
+                [
+                  150.0,
+                  -131.0
+                ],
+                [
+                  4.25,
+                  -131.0
+                ],
+                [
+                  4.25,
+                  131.0
+                ],
+                [
+                  150.0,
+                  131.0
+                ],
+                [
+                  150.0,
+                  145.0
+                ],
+                [
+                  -150.0,
+                  145.0
+                ],
+                [
+                  -150.0,
+                  131.0
+                ],
+                [
+                  -4.25,
+                  131.0
+                ],
+                [
+                  -4.25,
+                  -131.0
+                ],
+                [
+                  -150.0,
+                  -131.0
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "HEA320": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "HEA320",
+      "dimensioni": {
+        "h": 310,
+        "b": 300,
+        "tw": 9.0,
+        "tf": 15.5
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -150.0,
+                  -155.0
+                ],
+                [
+                  150.0,
+                  -155.0
+                ],
+                [
+                  150.0,
+                  -139.5
+                ],
+                [
+                  4.5,
+                  -139.5
+                ],
+                [
+                  4.5,
+                  139.5
+                ],
+                [
+                  150.0,
+                  139.5
+                ],
+                [
+                  150.0,
+                  155.0
+                ],
+                [
+                  -150.0,
+                  155.0
+                ],
+                [
+                  -150.0,
+                  139.5
+                ],
+                [
+                  -4.5,
+                  139.5
+                ],
+                [
+                  -4.5,
+                  -139.5
+                ],
+                [
+                  -150.0,
+                  -139.5
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "HEA340": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "HEA340",
+      "dimensioni": {
+        "h": 330,
+        "b": 300,
+        "tw": 9.5,
+        "tf": 16.5
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -150.0,
+                  -165.0
+                ],
+                [
+                  150.0,
+                  -165.0
+                ],
+                [
+                  150.0,
+                  -148.5
+                ],
+                [
+                  4.75,
+                  -148.5
+                ],
+                [
+                  4.75,
+                  148.5
+                ],
+                [
+                  150.0,
+                  148.5
+                ],
+                [
+                  150.0,
+                  165.0
+                ],
+                [
+                  -150.0,
+                  165.0
+                ],
+                [
+                  -150.0,
+                  148.5
+                ],
+                [
+                  -4.75,
+                  148.5
+                ],
+                [
+                  -4.75,
+                  -148.5
+                ],
+                [
+                  -150.0,
+                  -148.5
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "HEA360": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "HEA360",
+      "dimensioni": {
+        "h": 350,
+        "b": 300,
+        "tw": 10.0,
+        "tf": 17.5
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -150.0,
+                  -175.0
+                ],
+                [
+                  150.0,
+                  -175.0
+                ],
+                [
+                  150.0,
+                  -157.5
+                ],
+                [
+                  5.0,
+                  -157.5
+                ],
+                [
+                  5.0,
+                  157.5
+                ],
+                [
+                  150.0,
+                  157.5
+                ],
+                [
+                  150.0,
+                  175.0
+                ],
+                [
+                  -150.0,
+                  175.0
+                ],
+                [
+                  -150.0,
+                  157.5
+                ],
+                [
+                  -5.0,
+                  157.5
+                ],
+                [
+                  -5.0,
+                  -157.5
+                ],
+                [
+                  -150.0,
+                  -157.5
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "HEA400": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "HEA400",
+      "dimensioni": {
+        "h": 390,
+        "b": 300,
+        "tw": 11.0,
+        "tf": 19.0
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -150.0,
+                  -195.0
+                ],
+                [
+                  150.0,
+                  -195.0
+                ],
+                [
+                  150.0,
+                  -176.0
+                ],
+                [
+                  5.5,
+                  -176.0
+                ],
+                [
+                  5.5,
+                  176.0
+                ],
+                [
+                  150.0,
+                  176.0
+                ],
+                [
+                  150.0,
+                  195.0
+                ],
+                [
+                  -150.0,
+                  195.0
+                ],
+                [
+                  -150.0,
+                  176.0
+                ],
+                [
+                  -5.5,
+                  176.0
+                ],
+                [
+                  -5.5,
+                  -176.0
+                ],
+                [
+                  -150.0,
+                  -176.0
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "HEA450": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "HEA450",
+      "dimensioni": {
+        "h": 440,
+        "b": 300,
+        "tw": 11.5,
+        "tf": 21.0
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -150.0,
+                  -220.0
+                ],
+                [
+                  150.0,
+                  -220.0
+                ],
+                [
+                  150.0,
+                  -199.0
+                ],
+                [
+                  5.75,
+                  -199.0
+                ],
+                [
+                  5.75,
+                  199.0
+                ],
+                [
+                  150.0,
+                  199.0
+                ],
+                [
+                  150.0,
+                  220.0
+                ],
+                [
+                  -150.0,
+                  220.0
+                ],
+                [
+                  -150.0,
+                  199.0
+                ],
+                [
+                  -5.75,
+                  199.0
+                ],
+                [
+                  -5.75,
+                  -199.0
+                ],
+                [
+                  -150.0,
+                  -199.0
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "HEA500": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "HEA500",
+      "dimensioni": {
+        "h": 490,
+        "b": 300,
+        "tw": 12.0,
+        "tf": 23.0
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -150.0,
+                  -245.0
+                ],
+                [
+                  150.0,
+                  -245.0
+                ],
+                [
+                  150.0,
+                  -222.0
+                ],
+                [
+                  6.0,
+                  -222.0
+                ],
+                [
+                  6.0,
+                  222.0
+                ],
+                [
+                  150.0,
+                  222.0
+                ],
+                [
+                  150.0,
+                  245.0
+                ],
+                [
+                  -150.0,
+                  245.0
+                ],
+                [
+                  -150.0,
+                  222.0
+                ],
+                [
+                  -6.0,
+                  222.0
+                ],
+                [
+                  -6.0,
+                  -222.0
+                ],
+                [
+                  -150.0,
+                  -222.0
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "HEA550": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "HEA550",
+      "dimensioni": {
+        "h": 540,
+        "b": 300,
+        "tw": 12.5,
+        "tf": 24.0
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -150.0,
+                  -270.0
+                ],
+                [
+                  150.0,
+                  -270.0
+                ],
+                [
+                  150.0,
+                  -246.0
+                ],
+                [
+                  6.25,
+                  -246.0
+                ],
+                [
+                  6.25,
+                  246.0
+                ],
+                [
+                  150.0,
+                  246.0
+                ],
+                [
+                  150.0,
+                  270.0
+                ],
+                [
+                  -150.0,
+                  270.0
+                ],
+                [
+                  -150.0,
+                  246.0
+                ],
+                [
+                  -6.25,
+                  246.0
+                ],
+                [
+                  -6.25,
+                  -246.0
+                ],
+                [
+                  -150.0,
+                  -246.0
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "HEA600": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "HEA600",
+      "dimensioni": {
+        "h": 590,
+        "b": 300,
+        "tw": 13.0,
+        "tf": 25.0
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -150.0,
+                  -295.0
+                ],
+                [
+                  150.0,
+                  -295.0
+                ],
+                [
+                  150.0,
+                  -270.0
+                ],
+                [
+                  6.5,
+                  -270.0
+                ],
+                [
+                  6.5,
+                  270.0
+                ],
+                [
+                  150.0,
+                  270.0
+                ],
+                [
+                  150.0,
+                  295.0
+                ],
+                [
+                  -150.0,
+                  295.0
+                ],
+                [
+                  -150.0,
+                  270.0
+                ],
+                [
+                  -6.5,
+                  270.0
+                ],
+                [
+                  -6.5,
+                  -270.0
+                ],
+                [
+                  -150.0,
+                  -270.0
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "HEB100": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "HEB100",
+      "dimensioni": {
+        "h": 100,
+        "b": 100,
+        "tw": 6.0,
+        "tf": 10.0
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -50.0,
+                  -50.0
+                ],
+                [
+                  50.0,
+                  -50.0
+                ],
+                [
+                  50.0,
+                  -40.0
+                ],
+                [
+                  3.0,
+                  -40.0
+                ],
+                [
+                  3.0,
+                  40.0
+                ],
+                [
+                  50.0,
+                  40.0
+                ],
+                [
+                  50.0,
+                  50.0
+                ],
+                [
+                  -50.0,
+                  50.0
+                ],
+                [
+                  -50.0,
+                  40.0
+                ],
+                [
+                  -3.0,
+                  40.0
+                ],
+                [
+                  -3.0,
+                  -40.0
+                ],
+                [
+                  -50.0,
+                  -40.0
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "HEB120": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "HEB120",
+      "dimensioni": {
+        "h": 120,
+        "b": 120,
+        "tw": 6.5,
+        "tf": 11.0
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -60.0,
+                  -60.0
+                ],
+                [
+                  60.0,
+                  -60.0
+                ],
+                [
+                  60.0,
+                  -49.0
+                ],
+                [
+                  3.25,
+                  -49.0
+                ],
+                [
+                  3.25,
+                  49.0
+                ],
+                [
+                  60.0,
+                  49.0
+                ],
+                [
+                  60.0,
+                  60.0
+                ],
+                [
+                  -60.0,
+                  60.0
+                ],
+                [
+                  -60.0,
+                  49.0
+                ],
+                [
+                  -3.25,
+                  49.0
+                ],
+                [
+                  -3.25,
+                  -49.0
+                ],
+                [
+                  -60.0,
+                  -49.0
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "HEB140": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "HEB140",
+      "dimensioni": {
+        "h": 140,
+        "b": 140,
+        "tw": 7.0,
+        "tf": 12.0
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -70.0,
+                  -70.0
+                ],
+                [
+                  70.0,
+                  -70.0
+                ],
+                [
+                  70.0,
+                  -58.0
+                ],
+                [
+                  3.5,
+                  -58.0
+                ],
+                [
+                  3.5,
+                  58.0
+                ],
+                [
+                  70.0,
+                  58.0
+                ],
+                [
+                  70.0,
+                  70.0
+                ],
+                [
+                  -70.0,
+                  70.0
+                ],
+                [
+                  -70.0,
+                  58.0
+                ],
+                [
+                  -3.5,
+                  58.0
+                ],
+                [
+                  -3.5,
+                  -58.0
+                ],
+                [
+                  -70.0,
+                  -58.0
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "HEB160": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "HEB160",
+      "dimensioni": {
+        "h": 160,
+        "b": 160,
+        "tw": 8.0,
+        "tf": 13.0
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -80.0,
+                  -80.0
+                ],
+                [
+                  80.0,
+                  -80.0
+                ],
+                [
+                  80.0,
+                  -67.0
+                ],
+                [
+                  4.0,
+                  -67.0
+                ],
+                [
+                  4.0,
+                  67.0
+                ],
+                [
+                  80.0,
+                  67.0
+                ],
+                [
+                  80.0,
+                  80.0
+                ],
+                [
+                  -80.0,
+                  80.0
+                ],
+                [
+                  -80.0,
+                  67.0
+                ],
+                [
+                  -4.0,
+                  67.0
+                ],
+                [
+                  -4.0,
+                  -67.0
+                ],
+                [
+                  -80.0,
+                  -67.0
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "HEB180": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "HEB180",
+      "dimensioni": {
+        "h": 180,
+        "b": 180,
+        "tw": 8.5,
+        "tf": 14.0
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -90.0,
+                  -90.0
+                ],
+                [
+                  90.0,
+                  -90.0
+                ],
+                [
+                  90.0,
+                  -76.0
+                ],
+                [
+                  4.25,
+                  -76.0
+                ],
+                [
+                  4.25,
+                  76.0
+                ],
+                [
+                  90.0,
+                  76.0
+                ],
+                [
+                  90.0,
+                  90.0
+                ],
+                [
+                  -90.0,
+                  90.0
+                ],
+                [
+                  -90.0,
+                  76.0
+                ],
+                [
+                  -4.25,
+                  76.0
+                ],
+                [
+                  -4.25,
+                  -76.0
+                ],
+                [
+                  -90.0,
+                  -76.0
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "HEB200": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "HEB200",
+      "dimensioni": {
+        "h": 200,
+        "b": 200,
+        "tw": 9.0,
+        "tf": 15.0
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -100.0,
+                  -100.0
+                ],
+                [
+                  100.0,
+                  -100.0
+                ],
+                [
+                  100.0,
+                  -85.0
+                ],
+                [
+                  4.5,
+                  -85.0
+                ],
+                [
+                  4.5,
+                  85.0
+                ],
+                [
+                  100.0,
+                  85.0
+                ],
+                [
+                  100.0,
+                  100.0
+                ],
+                [
+                  -100.0,
+                  100.0
+                ],
+                [
+                  -100.0,
+                  85.0
+                ],
+                [
+                  -4.5,
+                  85.0
+                ],
+                [
+                  -4.5,
+                  -85.0
+                ],
+                [
+                  -100.0,
+                  -85.0
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "HEB220": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "HEB220",
+      "dimensioni": {
+        "h": 220,
+        "b": 220,
+        "tw": 9.5,
+        "tf": 16.0
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -110.0,
+                  -110.0
+                ],
+                [
+                  110.0,
+                  -110.0
+                ],
+                [
+                  110.0,
+                  -94.0
+                ],
+                [
+                  4.75,
+                  -94.0
+                ],
+                [
+                  4.75,
+                  94.0
+                ],
+                [
+                  110.0,
+                  94.0
+                ],
+                [
+                  110.0,
+                  110.0
+                ],
+                [
+                  -110.0,
+                  110.0
+                ],
+                [
+                  -110.0,
+                  94.0
+                ],
+                [
+                  -4.75,
+                  94.0
+                ],
+                [
+                  -4.75,
+                  -94.0
+                ],
+                [
+                  -110.0,
+                  -94.0
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "HEB240": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "HEB240",
+      "dimensioni": {
+        "h": 240,
+        "b": 240,
+        "tw": 10.0,
+        "tf": 17.0
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -120.0,
+                  -120.0
+                ],
+                [
+                  120.0,
+                  -120.0
+                ],
+                [
+                  120.0,
+                  -103.0
+                ],
+                [
+                  5.0,
+                  -103.0
+                ],
+                [
+                  5.0,
+                  103.0
+                ],
+                [
+                  120.0,
+                  103.0
+                ],
+                [
+                  120.0,
+                  120.0
+                ],
+                [
+                  -120.0,
+                  120.0
+                ],
+                [
+                  -120.0,
+                  103.0
+                ],
+                [
+                  -5.0,
+                  103.0
+                ],
+                [
+                  -5.0,
+                  -103.0
+                ],
+                [
+                  -120.0,
+                  -103.0
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "HEB260": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "HEB260",
+      "dimensioni": {
+        "h": 260,
+        "b": 260,
+        "tw": 10.0,
+        "tf": 17.5
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -130.0,
+                  -130.0
+                ],
+                [
+                  130.0,
+                  -130.0
+                ],
+                [
+                  130.0,
+                  -112.5
+                ],
+                [
+                  5.0,
+                  -112.5
+                ],
+                [
+                  5.0,
+                  112.5
+                ],
+                [
+                  130.0,
+                  112.5
+                ],
+                [
+                  130.0,
+                  130.0
+                ],
+                [
+                  -130.0,
+                  130.0
+                ],
+                [
+                  -130.0,
+                  112.5
+                ],
+                [
+                  -5.0,
+                  112.5
+                ],
+                [
+                  -5.0,
+                  -112.5
+                ],
+                [
+                  -130.0,
+                  -112.5
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "HEB280": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "HEB280",
+      "dimensioni": {
+        "h": 280,
+        "b": 280,
+        "tw": 10.5,
+        "tf": 18.0
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -140.0,
+                  -140.0
+                ],
+                [
+                  140.0,
+                  -140.0
+                ],
+                [
+                  140.0,
+                  -122.0
+                ],
+                [
+                  5.25,
+                  -122.0
+                ],
+                [
+                  5.25,
+                  122.0
+                ],
+                [
+                  140.0,
+                  122.0
+                ],
+                [
+                  140.0,
+                  140.0
+                ],
+                [
+                  -140.0,
+                  140.0
+                ],
+                [
+                  -140.0,
+                  122.0
+                ],
+                [
+                  -5.25,
+                  122.0
+                ],
+                [
+                  -5.25,
+                  -122.0
+                ],
+                [
+                  -140.0,
+                  -122.0
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "HEB300": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "HEB300",
+      "dimensioni": {
+        "h": 300,
+        "b": 300,
+        "tw": 11.0,
+        "tf": 19.0
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -150.0,
+                  -150.0
+                ],
+                [
+                  150.0,
+                  -150.0
+                ],
+                [
+                  150.0,
+                  -131.0
+                ],
+                [
+                  5.5,
+                  -131.0
+                ],
+                [
+                  5.5,
+                  131.0
+                ],
+                [
+                  150.0,
+                  131.0
+                ],
+                [
+                  150.0,
+                  150.0
+                ],
+                [
+                  -150.0,
+                  150.0
+                ],
+                [
+                  -150.0,
+                  131.0
+                ],
+                [
+                  -5.5,
+                  131.0
+                ],
+                [
+                  -5.5,
+                  -131.0
+                ],
+                [
+                  -150.0,
+                  -131.0
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "HEB320": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "HEB320",
+      "dimensioni": {
+        "h": 320,
+        "b": 300,
+        "tw": 11.5,
+        "tf": 20.5
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -150.0,
+                  -160.0
+                ],
+                [
+                  150.0,
+                  -160.0
+                ],
+                [
+                  150.0,
+                  -139.5
+                ],
+                [
+                  5.75,
+                  -139.5
+                ],
+                [
+                  5.75,
+                  139.5
+                ],
+                [
+                  150.0,
+                  139.5
+                ],
+                [
+                  150.0,
+                  160.0
+                ],
+                [
+                  -150.0,
+                  160.0
+                ],
+                [
+                  -150.0,
+                  139.5
+                ],
+                [
+                  -5.75,
+                  139.5
+                ],
+                [
+                  -5.75,
+                  -139.5
+                ],
+                [
+                  -150.0,
+                  -139.5
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "HEB340": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "HEB340",
+      "dimensioni": {
+        "h": 340,
+        "b": 300,
+        "tw": 12.0,
+        "tf": 21.5
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -150.0,
+                  -170.0
+                ],
+                [
+                  150.0,
+                  -170.0
+                ],
+                [
+                  150.0,
+                  -148.5
+                ],
+                [
+                  6.0,
+                  -148.5
+                ],
+                [
+                  6.0,
+                  148.5
+                ],
+                [
+                  150.0,
+                  148.5
+                ],
+                [
+                  150.0,
+                  170.0
+                ],
+                [
+                  -150.0,
+                  170.0
+                ],
+                [
+                  -150.0,
+                  148.5
+                ],
+                [
+                  -6.0,
+                  148.5
+                ],
+                [
+                  -6.0,
+                  -148.5
+                ],
+                [
+                  -150.0,
+                  -148.5
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "HEB360": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "HEB360",
+      "dimensioni": {
+        "h": 360,
+        "b": 300,
+        "tw": 12.5,
+        "tf": 22.5
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -150.0,
+                  -180.0
+                ],
+                [
+                  150.0,
+                  -180.0
+                ],
+                [
+                  150.0,
+                  -157.5
+                ],
+                [
+                  6.25,
+                  -157.5
+                ],
+                [
+                  6.25,
+                  157.5
+                ],
+                [
+                  150.0,
+                  157.5
+                ],
+                [
+                  150.0,
+                  180.0
+                ],
+                [
+                  -150.0,
+                  180.0
+                ],
+                [
+                  -150.0,
+                  157.5
+                ],
+                [
+                  -6.25,
+                  157.5
+                ],
+                [
+                  -6.25,
+                  -157.5
+                ],
+                [
+                  -150.0,
+                  -157.5
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "HEB400": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "HEB400",
+      "dimensioni": {
+        "h": 400,
+        "b": 300,
+        "tw": 13.5,
+        "tf": 24.0
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -150.0,
+                  -200.0
+                ],
+                [
+                  150.0,
+                  -200.0
+                ],
+                [
+                  150.0,
+                  -176.0
+                ],
+                [
+                  6.75,
+                  -176.0
+                ],
+                [
+                  6.75,
+                  176.0
+                ],
+                [
+                  150.0,
+                  176.0
+                ],
+                [
+                  150.0,
+                  200.0
+                ],
+                [
+                  -150.0,
+                  200.0
+                ],
+                [
+                  -150.0,
+                  176.0
+                ],
+                [
+                  -6.75,
+                  176.0
+                ],
+                [
+                  -6.75,
+                  -176.0
+                ],
+                [
+                  -150.0,
+                  -176.0
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "HEB450": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "HEB450",
+      "dimensioni": {
+        "h": 450,
+        "b": 300,
+        "tw": 14.0,
+        "tf": 26.0
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -150.0,
+                  -225.0
+                ],
+                [
+                  150.0,
+                  -225.0
+                ],
+                [
+                  150.0,
+                  -199.0
+                ],
+                [
+                  7.0,
+                  -199.0
+                ],
+                [
+                  7.0,
+                  199.0
+                ],
+                [
+                  150.0,
+                  199.0
+                ],
+                [
+                  150.0,
+                  225.0
+                ],
+                [
+                  -150.0,
+                  225.0
+                ],
+                [
+                  -150.0,
+                  199.0
+                ],
+                [
+                  -7.0,
+                  199.0
+                ],
+                [
+                  -7.0,
+                  -199.0
+                ],
+                [
+                  -150.0,
+                  -199.0
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    },
+    "HEB500": {
+      "tipo_categoria": "profili",
+      "standard": true,
+      "nome": "HEB500",
+      "dimensioni": {
+        "h": 500,
+        "b": 300,
+        "tw": 14.5,
+        "tf": 28.0
+      },
+      "materiale_default": "S355",
+      "elementi": {
+        "carpenteria": [
+          {
+            "id": "carp_1",
+            "tipo": "poligono",
+            "geometria": {
+              "punti": [
+                [
+                  -150.0,
+                  -250.0
+                ],
+                [
+                  150.0,
+                  -250.0
+                ],
+                [
+                  150.0,
+                  -222.0
+                ],
+                [
+                  7.25,
+                  -222.0
+                ],
+                [
+                  7.25,
+                  222.0
+                ],
+                [
+                  150.0,
+                  222.0
+                ],
+                [
+                  150.0,
+                  250.0
+                ],
+                [
+                  -150.0,
+                  250.0
+                ],
+                [
+                  -150.0,
+                  222.0
+                ],
+                [
+                  -7.25,
+                  222.0
+                ],
+                [
+                  -7.25,
+                  -222.0
+                ],
+                [
+                  -150.0,
+                  -222.0
+                ]
+              ]
+            },
+            "materiale": "S355"
+          }
+        ],
+        "barre": [],
+        "staffe": []
+      }
+    }
+  },
+  "precompresso": {},
+  "personalizzate": {}
+}

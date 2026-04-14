@@ -1,0 +1,28 @@
+{
+  "_version": 3,
+  "calcestruzzo": {
+    "Telaio RC 2 campate": {
+      "standard": true,
+      "testo": "# ═══════════════════════════════════════\n#  TELAIO IN C.A. – 2 campate, 2 piani\n# ═══════════════════════════════════════\n\n# ─── MATERIALI ───\n# Riferimento al database del programma (il nome diventa verde se riconosciuto).\nmaterial  1  'C25/30'\n\n# ─── SEZIONI ───\n# Sezioni inline: Area, Iy, Iz e materiale (id o nome, diventa verde se valido).\nsection  1  'Pilastro 30x30'  0.09  6.75e-4   6.75e-4   material: 'C25/30'\nsection  2  'Trave 30x50'     0.15  3.125e-3  1.125e-3  material: 1\n\n# ─── NODI ───\nnode  1    0.0    0.0    0.0\nnode  2    5.0    0.0    0.0\nnode  3   10.0    0.0    0.0\nnode  4    0.0    0.0    3.5\nnode  5    5.0    0.0    3.5\nnode  6   10.0    0.0    3.5\nnode  7    0.0    0.0    7.0\nnode  8    5.0    0.0    7.0\nnode  9   10.0    0.0    7.0\n\n# ─── ASTE ───\n# Le aste fanno riferimento alla sezione per id o per nome.\n# Pilastri piano terra\nbeam  1   1  4   section: 1\nbeam  2   2  5   section: 1\nbeam  3   3  6   section: 1\n# Travi piano 1\nbeam  4   4  5   section: 'Trave 30x50'\nbeam  5   5  6   section: 'Trave 30x50'\n# Pilastri piano 1\nbeam  6   4  7   section: 1\nbeam  7   5  8   section: 1\nbeam  8   6  9   section: 1\n# Travi piano 2\nbeam  9   7  8   section: 'Trave 30x50'\nbeam 10   8  9   section: 'Trave 30x50'\n\n# ─── VINCOLI ───\nfix  1   1 1 1  1 1 1\nfix  2   1 1 1  1 1 1\nfix  3   1 1 1  1 1 1\n\n# ─── CARICHI ───\nnodeLoad  7    10.0   0.0   0.0\nnodeLoad  8    10.0   0.0   0.0\nnodeLoad  9    10.0   0.0   0.0\nbeamLoad  4    0.0    0.0  -12.0\nbeamLoad  5    0.0    0.0  -12.0\nbeamLoad  9    0.0    0.0  -10.0\nbeamLoad 10    0.0    0.0  -10.0\n"
+    },
+    "Mensola RC": {
+      "standard": true,
+      "testo": "# ═══════════════════════════════════════\n#  MENSOLA IN C.A.\n# ═══════════════════════════════════════\n\n# ─── MATERIALI ───\nmaterial  1  'C25/30'\n\n# ─── SEZIONI ───\nsection  1  'Trave 30x50'  0.15  3.125e-3  1.125e-3  material: 'C25/30'\n\n# ─── NODI ───\nnode  1    0.0    0.0    0.0\nnode  2    3.0    0.0    0.0\n\n# ─── ASTE ───\nbeam  1   1  2   section: 'Trave 30x50'\n\n# ─── VINCOLI ───\nfix  1   1 1 1  1 1 1\n\n# ─── CARICHI ───\nnodeLoad  2    0.0   0.0  -20.0\n"
+    },
+    "Trave continua 3 appoggi": {
+      "standard": true,
+      "testo": "# ═══════════════════════════════════════\n#  TRAVE CONTINUA SU 3 APPOGGI\n# ═══════════════════════════════════════\n\n# ─── MATERIALI ───\nmaterial  1  'C25/30'\n\n# ─── SEZIONI ───\nsection  1  'Trave 30x50'  0.15  3.125e-3  1.125e-3  material: 'C25/30'\n\n# ─── NODI ───\nnode  1    0.0    0.0    0.0\nnode  2    5.0    0.0    0.0\nnode  3   10.0    0.0    0.0\n\n# ─── ASTE ───\nbeam  1   1  2   section: 1\nbeam  2   2  3   section: 'Trave 30x50'\n\n# ─── VINCOLI ───\nfix  1   1 1 1  0 0 0\nfix  2   0 1 1  0 0 0\nfix  3   0 1 1  0 0 0\n\n# ─── CARICHI ───\nbeamLoad  1    0.0   0.0  -15.0\nbeamLoad  2    0.0   0.0  -15.0\n"
+    },
+    "Telaio 3D": {
+      "standard": true,
+      "testo": "# ═══════════════════════════════════════\n#  TELAIO 3D – 1 campata per direzione\n# ═══════════════════════════════════════\n\n# ─── MATERIALI ───\nmaterial  1  'C25/30'\n# Esempio di materiale inline (densità, E, G, ν):\nmaterial  2  'ClsCustom'  2500  31476  13115  0.2\n\n# ─── SEZIONI ───\nsection  1  'Pilastro 30x30'  0.09  6.75e-4   6.75e-4   material: 'C25/30'\nsection  2  'Trave 30x50'     0.15  3.125e-3  1.125e-3  material: 1\nsection  3  'Trave 25x40'     0.10  1.333e-3  5.208e-4  material: 'C25/30'\n\n# ─── NODI ───\nnode  1    0.0    0.0    0.0\nnode  2    6.0    0.0    0.0\nnode  3    0.0    5.0    0.0\nnode  4    6.0    5.0    0.0\nnode  5    0.0    0.0    3.5\nnode  6    6.0    0.0    3.5\nnode  7    0.0    5.0    3.5\nnode  8    6.0    5.0    3.5\n\n# ─── ASTE ───\n# Pilastri\nbeam  1   1  5   section: 1\nbeam  2   2  6   section: 1\nbeam  3   3  7   section: 'Pilastro 30x30'\nbeam  4   4  8   section: 'Pilastro 30x30'\n# Travi X\nbeam  5   5  6   section: 'Trave 30x50'\nbeam  6   7  8   section: 2\n# Travi Y\nbeam  7   5  7   section: 'Trave 25x40'\nbeam  8   6  8   section: 3\n\n# ─── SHELL ───\n# Shell quadrilatera (4 nodi). Il materiale può essere id o nome.\nshell  1   5 6 8 7   thickness: 0.20   material: 'C25/30'\n\n# ─── VINCOLI ───\nfix  1   1 1 1  1 1 1\nfix  2   1 1 1  1 1 1\nfix  3   1 1 1  1 1 1\nfix  4   1 1 1  1 1 1\n\n# ─── CARICHI ───\nbeamLoad  5    0.0   0.0  -12.0\nbeamLoad  6    0.0   0.0  -12.0\nbeamLoad  7    0.0   0.0  -10.0\nbeamLoad  8    0.0   0.0  -10.0\n"
+    }
+  },
+  "acciaio": {
+    "Telaio acciaio": {
+      "standard": true,
+      "testo": "# ═══════════════════════════════════════\n#  TELAIO IN ACCIAIO – 1 campata, 1 piano\n# ═══════════════════════════════════════\n\n# ─── MATERIALI ───\nmaterial  1  'S355'\n\n# ─── SEZIONI ───\n# Riferimenti a profilari standard del database (HEA240, IPE300).\nsection  1  'HEA240'\nsection  2  'IPE300'\n\n# ─── NODI ───\nnode  1    0.0    0.0    0.0\nnode  2    8.0    0.0    0.0\nnode  3    0.0    0.0    4.0\nnode  4    8.0    0.0    4.0\n\n# ─── ASTE ───\nbeam  1   1  3   section: 'HEA240'\nbeam  2   2  4   section: 'HEA240'\nbeam  3   3  4   section: 'IPE300'\n\n# ─── VINCOLI ───\nfix  1   1 1 1  1 1 1\nfix  2   1 1 1  1 1 1\n\n# ─── CARICHI ───\nnodeLoad  3    5.0   0.0   0.0\nbeamLoad  3    0.0   0.0  -15.0\n"
+    }
+  },
+  "personalizzate": {}
+}

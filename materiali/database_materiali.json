@@ -1,0 +1,904 @@
+{
+  "_version": 2,
+  "calcestruzzo": {
+    "C16/20": {
+      "tipo": "calcestruzzo",
+      "standard": true,
+      "fck": 16,
+      "gamma": 1.5,
+      "alpha": 0.85,
+      "densita": 2500,
+      "poisson": 0.2,
+      "m_elastico": 28608,
+      "m_taglio": 11920,
+      "slu": [
+        {
+          "formula": "9.0667 * (1 - (1 - x / 0.002) ** 2.0)",
+          "eps_min": 0.0,
+          "eps_max": 0.002
+        },
+        {
+          "formula": "9.0667",
+          "eps_min": 0.002,
+          "eps_max": 0.0035
+        }
+      ],
+      "sle": [
+        {
+          "formula": "28608 * x",
+          "eps_min": -0.001,
+          "eps_max": 0.001
+        }
+      ]
+    },
+    "C20/25": {
+      "tipo": "calcestruzzo",
+      "standard": true,
+      "fck": 20,
+      "gamma": 1.5,
+      "alpha": 0.85,
+      "densita": 2500,
+      "poisson": 0.2,
+      "m_elastico": 29962,
+      "m_taglio": 12484,
+      "slu": [
+        {
+          "formula": "11.3333 * (1 - (1 - x / 0.002) ** 2.0)",
+          "eps_min": 0.0,
+          "eps_max": 0.002
+        },
+        {
+          "formula": "11.3333",
+          "eps_min": 0.002,
+          "eps_max": 0.0035
+        }
+      ],
+      "sle": [
+        {
+          "formula": "29962 * x",
+          "eps_min": -0.001,
+          "eps_max": 0.001
+        }
+      ]
+    },
+    "C25/30": {
+      "tipo": "calcestruzzo",
+      "standard": true,
+      "fck": 25,
+      "gamma": 1.5,
+      "alpha": 0.85,
+      "densita": 2500,
+      "poisson": 0.2,
+      "m_elastico": 31476,
+      "m_taglio": 13115,
+      "slu": [
+        {
+          "formula": "14.1667 * (1 - (1 - x / 0.002) ** 2.0)",
+          "eps_min": 0.0,
+          "eps_max": 0.002
+        },
+        {
+          "formula": "14.1667",
+          "eps_min": 0.002,
+          "eps_max": 0.0035
+        }
+      ],
+      "sle": [
+        {
+          "formula": "31476 * x",
+          "eps_min": -0.001,
+          "eps_max": 0.001
+        }
+      ]
+    },
+    "C28/35": {
+      "tipo": "calcestruzzo",
+      "standard": true,
+      "fck": 28,
+      "gamma": 1.5,
+      "alpha": 0.85,
+      "densita": 2500,
+      "poisson": 0.2,
+      "m_elastico": 32308,
+      "m_taglio": 13462,
+      "slu": [
+        {
+          "formula": "15.8667 * (1 - (1 - x / 0.002) ** 2.0)",
+          "eps_min": 0.0,
+          "eps_max": 0.002
+        },
+        {
+          "formula": "15.8667",
+          "eps_min": 0.002,
+          "eps_max": 0.0035
+        }
+      ],
+      "sle": [
+        {
+          "formula": "32308 * x",
+          "eps_min": -0.001,
+          "eps_max": 0.001
+        }
+      ]
+    },
+    "C30/37": {
+      "tipo": "calcestruzzo",
+      "standard": true,
+      "fck": 30,
+      "gamma": 1.5,
+      "alpha": 0.85,
+      "densita": 2500,
+      "poisson": 0.2,
+      "m_elastico": 32837,
+      "m_taglio": 13682,
+      "slu": [
+        {
+          "formula": "17.0 * (1 - (1 - x / 0.002) ** 2.0)",
+          "eps_min": 0.0,
+          "eps_max": 0.002
+        },
+        {
+          "formula": "17.0",
+          "eps_min": 0.002,
+          "eps_max": 0.0035
+        }
+      ],
+      "sle": [
+        {
+          "formula": "32837 * x",
+          "eps_min": -0.001,
+          "eps_max": 0.001
+        }
+      ]
+    },
+    "C32/40": {
+      "tipo": "calcestruzzo",
+      "standard": true,
+      "fck": 32,
+      "gamma": 1.5,
+      "alpha": 0.85,
+      "densita": 2500,
+      "poisson": 0.2,
+      "m_elastico": 33346,
+      "m_taglio": 13894,
+      "slu": [
+        {
+          "formula": "18.1333 * (1 - (1 - x / 0.002) ** 2.0)",
+          "eps_min": 0.0,
+          "eps_max": 0.002
+        },
+        {
+          "formula": "18.1333",
+          "eps_min": 0.002,
+          "eps_max": 0.0035
+        }
+      ],
+      "sle": [
+        {
+          "formula": "33346 * x",
+          "eps_min": -0.001,
+          "eps_max": 0.001
+        }
+      ]
+    },
+    "C35/45": {
+      "tipo": "calcestruzzo",
+      "standard": true,
+      "fck": 35,
+      "gamma": 1.5,
+      "alpha": 0.85,
+      "densita": 2500,
+      "poisson": 0.2,
+      "m_elastico": 34077,
+      "m_taglio": 14199,
+      "slu": [
+        {
+          "formula": "19.8333 * (1 - (1 - x / 0.002) ** 2.0)",
+          "eps_min": 0.0,
+          "eps_max": 0.002
+        },
+        {
+          "formula": "19.8333",
+          "eps_min": 0.002,
+          "eps_max": 0.0035
+        }
+      ],
+      "sle": [
+        {
+          "formula": "34077 * x",
+          "eps_min": -0.001,
+          "eps_max": 0.001
+        }
+      ]
+    },
+    "C40/50": {
+      "tipo": "calcestruzzo",
+      "standard": true,
+      "fck": 40,
+      "gamma": 1.5,
+      "alpha": 0.85,
+      "densita": 2500,
+      "poisson": 0.2,
+      "m_elastico": 35220,
+      "m_taglio": 14675,
+      "slu": [
+        {
+          "formula": "22.6667 * (1 - (1 - x / 0.002) ** 2.0)",
+          "eps_min": 0.0,
+          "eps_max": 0.002
+        },
+        {
+          "formula": "22.6667",
+          "eps_min": 0.002,
+          "eps_max": 0.0035
+        }
+      ],
+      "sle": [
+        {
+          "formula": "35220 * x",
+          "eps_min": -0.001,
+          "eps_max": 0.001
+        }
+      ]
+    },
+    "C45/55": {
+      "tipo": "calcestruzzo",
+      "standard": true,
+      "fck": 45,
+      "gamma": 1.5,
+      "alpha": 0.85,
+      "densita": 2500,
+      "poisson": 0.2,
+      "m_elastico": 36283,
+      "m_taglio": 15118,
+      "slu": [
+        {
+          "formula": "25.5 * (1 - (1 - x / 0.002) ** 2.0)",
+          "eps_min": 0.0,
+          "eps_max": 0.002
+        },
+        {
+          "formula": "25.5",
+          "eps_min": 0.002,
+          "eps_max": 0.0035
+        }
+      ],
+      "sle": [
+        {
+          "formula": "36283 * x",
+          "eps_min": -0.001,
+          "eps_max": 0.001
+        }
+      ]
+    },
+    "C50/60": {
+      "tipo": "calcestruzzo",
+      "standard": true,
+      "fck": 50,
+      "gamma": 1.5,
+      "alpha": 0.85,
+      "densita": 2500,
+      "poisson": 0.2,
+      "m_elastico": 37278,
+      "m_taglio": 15532,
+      "slu": [
+        {
+          "formula": "28.3333 * (1 - (1 - x / 0.002) ** 2.0)",
+          "eps_min": 0.0,
+          "eps_max": 0.002
+        },
+        {
+          "formula": "28.3333",
+          "eps_min": 0.002,
+          "eps_max": 0.0035
+        }
+      ],
+      "sle": [
+        {
+          "formula": "37278 * x",
+          "eps_min": -0.001,
+          "eps_max": 0.001
+        }
+      ]
+    },
+    "C55/67": {
+      "tipo": "calcestruzzo",
+      "standard": true,
+      "fck": 55,
+      "gamma": 1.5,
+      "alpha": 0.85,
+      "densita": 2500,
+      "poisson": 0.2,
+      "m_elastico": 38214,
+      "m_taglio": 15922,
+      "slu": [
+        {
+          "formula": "31.1667 * (1 - (1 - x / 0.002199) ** 1.751)",
+          "eps_min": 0.0,
+          "eps_max": 0.002199
+        },
+        {
+          "formula": "31.1667",
+          "eps_min": 0.002199,
+          "eps_max": 0.003125
+        }
+      ],
+      "sle": [
+        {
+          "formula": "38214 * x",
+          "eps_min": -0.001,
+          "eps_max": 0.001
+        }
+      ]
+    },
+    "C60/75": {
+      "tipo": "calcestruzzo",
+      "standard": true,
+      "fck": 60,
+      "gamma": 1.5,
+      "alpha": 0.85,
+      "densita": 2500,
+      "poisson": 0.2,
+      "m_elastico": 39100,
+      "m_taglio": 16292,
+      "slu": [
+        {
+          "formula": "34.0 * (1 - (1 - x / 0.002288) ** 1.59)",
+          "eps_min": 0.0,
+          "eps_max": 0.002288
+        },
+        {
+          "formula": "34.0",
+          "eps_min": 0.002288,
+          "eps_max": 0.002884
+        }
+      ],
+      "sle": [
+        {
+          "formula": "39100 * x",
+          "eps_min": -0.001,
+          "eps_max": 0.001
+        }
+      ]
+    },
+    "C70/85": {
+      "tipo": "calcestruzzo",
+      "standard": true,
+      "fck": 70,
+      "gamma": 1.5,
+      "alpha": 0.85,
+      "densita": 2500,
+      "poisson": 0.2,
+      "m_elastico": 40743,
+      "m_taglio": 16976,
+      "slu": [
+        {
+          "formula": "39.6667 * (1 - (1 - x / 0.002416) ** 1.437)",
+          "eps_min": 0.0,
+          "eps_max": 0.002416
+        },
+        {
+          "formula": "39.6667",
+          "eps_min": 0.002416,
+          "eps_max": 0.002656
+        }
+      ],
+      "sle": [
+        {
+          "formula": "40743 * x",
+          "eps_min": -0.001,
+          "eps_max": 0.001
+        }
+      ]
+    },
+    "C80/95": {
+      "tipo": "calcestruzzo",
+      "standard": true,
+      "fck": 80,
+      "gamma": 1.5,
+      "alpha": 0.85,
+      "densita": 2500,
+      "poisson": 0.2,
+      "m_elastico": 42244,
+      "m_taglio": 17602,
+      "slu": [
+        {
+          "formula": "45.3333 * (1 - (1 - x / 0.002516) ** 1.402)",
+          "eps_min": 0.0,
+          "eps_max": 0.002516
+        },
+        {
+          "formula": "45.3333",
+          "eps_min": 0.002516,
+          "eps_max": 0.002603
+        }
+      ],
+      "sle": [
+        {
+          "formula": "42244 * x",
+          "eps_min": -0.001,
+          "eps_max": 0.001
+        }
+      ]
+    },
+    "C90/105": {
+      "tipo": "calcestruzzo",
+      "standard": true,
+      "fck": 90,
+      "gamma": 1.5,
+      "alpha": 0.85,
+      "densita": 2500,
+      "poisson": 0.2,
+      "m_elastico": 43631,
+      "m_taglio": 18180,
+      "slu": [
+        {
+          "formula": "51.0 * (1 - (1 - x / 0.0026) ** 1.4)",
+          "eps_min": 0.0,
+          "eps_max": 0.0026
+        },
+        {
+          "formula": "51.0",
+          "eps_min": 0.0026,
+          "eps_max": 0.0026
+        }
+      ],
+      "sle": [
+        {
+          "formula": "43631 * x",
+          "eps_min": -0.001,
+          "eps_max": 0.001
+        }
+      ]
+    }
+  },
+  "barre": {
+    "B450C": {
+      "tipo": "barre",
+      "standard": true,
+      "classe": "B450C",
+      "fyk": 450,
+      "ftk": 540,
+      "gamma": 1.15,
+      "alpha": 1.0,
+      "densita": 7850,
+      "poisson": 0.3,
+      "m_elastico": 200000,
+      "m_taglio": 76923,
+      "slu": [
+        {
+          "formula": "-391.3043 + (1.2 - 1) * (-391.3043) * ((-x) - 0.00195652) / (0.075 - 0.00195652)",
+          "eps_min": -0.075,
+          "eps_max": -0.00195652
+        },
+        {
+          "formula": "200000 * x",
+          "eps_min": -0.00195652,
+          "eps_max": 0.00195652
+        },
+        {
+          "formula": "391.3043 + (1.2 - 1) * 391.3043 * (x - 0.00195652) / (0.075 - 0.00195652)",
+          "eps_min": 0.00195652,
+          "eps_max": 0.075
+        }
+      ],
+      "sle": [
+        {
+          "formula": "200000 * x",
+          "eps_min": -0.002,
+          "eps_max": 0.002
+        }
+      ]
+    },
+    "B450B": {
+      "tipo": "barre",
+      "standard": true,
+      "classe": "B450B",
+      "fyk": 450,
+      "ftk": 540,
+      "gamma": 1.15,
+      "alpha": 1.0,
+      "densita": 7850,
+      "poisson": 0.3,
+      "m_elastico": 200000,
+      "m_taglio": 76923,
+      "slu": [
+        {
+          "formula": "-391.3043 + (1.2 - 1) * (-391.3043) * ((-x) - 0.00195652) / (0.05 - 0.00195652)",
+          "eps_min": -0.05,
+          "eps_max": -0.00195652
+        },
+        {
+          "formula": "200000 * x",
+          "eps_min": -0.00195652,
+          "eps_max": 0.00195652
+        },
+        {
+          "formula": "391.3043 + (1.2 - 1) * 391.3043 * (x - 0.00195652) / (0.05 - 0.00195652)",
+          "eps_min": 0.00195652,
+          "eps_max": 0.05
+        }
+      ],
+      "sle": [
+        {
+          "formula": "200000 * x",
+          "eps_min": -0.002,
+          "eps_max": 0.002
+        }
+      ]
+    },
+    "B500B": {
+      "tipo": "barre",
+      "standard": true,
+      "classe": "B500B",
+      "fyk": 500,
+      "ftk": 550,
+      "gamma": 1.15,
+      "alpha": 1.0,
+      "densita": 7850,
+      "poisson": 0.3,
+      "m_elastico": 200000,
+      "m_taglio": 76923,
+      "slu": [
+        {
+          "formula": "-434.7826 + (1.1 - 1) * (-434.7826) * ((-x) - 0.00217391) / (0.05 - 0.00217391)",
+          "eps_min": -0.05,
+          "eps_max": -0.00217391
+        },
+        {
+          "formula": "200000 * x",
+          "eps_min": -0.00217391,
+          "eps_max": 0.00217391
+        },
+        {
+          "formula": "434.7826 + (1.1 - 1) * 434.7826 * (x - 0.00217391) / (0.05 - 0.00217391)",
+          "eps_min": 0.00217391,
+          "eps_max": 0.05
+        }
+      ],
+      "sle": [
+        {
+          "formula": "200000 * x",
+          "eps_min": -0.002,
+          "eps_max": 0.002
+        }
+      ]
+    },
+    "B500C": {
+      "tipo": "barre",
+      "standard": true,
+      "classe": "B500C",
+      "fyk": 500,
+      "ftk": 600,
+      "gamma": 1.15,
+      "alpha": 1.0,
+      "densita": 7850,
+      "poisson": 0.3,
+      "m_elastico": 200000,
+      "m_taglio": 76923,
+      "slu": [
+        {
+          "formula": "-434.7826 + (1.2 - 1) * (-434.7826) * ((-x) - 0.00217391) / (0.075 - 0.00217391)",
+          "eps_min": -0.075,
+          "eps_max": -0.00217391
+        },
+        {
+          "formula": "200000 * x",
+          "eps_min": -0.00217391,
+          "eps_max": 0.00217391
+        },
+        {
+          "formula": "434.7826 + (1.2 - 1) * 434.7826 * (x - 0.00217391) / (0.075 - 0.00217391)",
+          "eps_min": 0.00217391,
+          "eps_max": 0.075
+        }
+      ],
+      "sle": [
+        {
+          "formula": "200000 * x",
+          "eps_min": -0.002,
+          "eps_max": 0.002
+        }
+      ]
+    },
+    "B600B": {
+      "tipo": "barre",
+      "standard": true,
+      "classe": "B600B",
+      "fyk": 600,
+      "ftk": 660,
+      "gamma": 1.15,
+      "alpha": 1.0,
+      "densita": 7850,
+      "poisson": 0.3,
+      "m_elastico": 200000,
+      "m_taglio": 76923,
+      "slu": [
+        {
+          "formula": "-521.7391 + (1.1 - 1) * (-521.7391) * ((-x) - 0.0026087) / (0.05 - 0.0026087)",
+          "eps_min": -0.05,
+          "eps_max": -0.0026087
+        },
+        {
+          "formula": "200000 * x",
+          "eps_min": -0.0026087,
+          "eps_max": 0.0026087
+        },
+        {
+          "formula": "521.7391 + (1.1 - 1) * 521.7391 * (x - 0.0026087) / (0.05 - 0.0026087)",
+          "eps_min": 0.0026087,
+          "eps_max": 0.05
+        }
+      ],
+      "sle": [
+        {
+          "formula": "200000 * x",
+          "eps_min": -0.002,
+          "eps_max": 0.002
+        }
+      ]
+    },
+    "B700B": {
+      "tipo": "barre",
+      "standard": true,
+      "classe": "B700B",
+      "fyk": 700,
+      "ftk": 770,
+      "gamma": 1.15,
+      "alpha": 1.0,
+      "densita": 7850,
+      "poisson": 0.3,
+      "m_elastico": 200000,
+      "m_taglio": 76923,
+      "slu": [
+        {
+          "formula": "-608.6957 + (1.1 - 1) * (-608.6957) * ((-x) - 0.00304348) / (0.05 - 0.00304348)",
+          "eps_min": -0.05,
+          "eps_max": -0.00304348
+        },
+        {
+          "formula": "200000 * x",
+          "eps_min": -0.00304348,
+          "eps_max": 0.00304348
+        },
+        {
+          "formula": "608.6957 + (1.1 - 1) * 608.6957 * (x - 0.00304348) / (0.05 - 0.00304348)",
+          "eps_min": 0.00304348,
+          "eps_max": 0.05
+        }
+      ],
+      "sle": [
+        {
+          "formula": "200000 * x",
+          "eps_min": -0.002,
+          "eps_max": 0.002
+        }
+      ]
+    }
+  },
+  "acciaio": {
+    "S235": {
+      "tipo": "acciaio",
+      "standard": true,
+      "nome": "S235",
+      "fy": 235,
+      "fu": 360,
+      "gamma": 1.05,
+      "alpha": 1.0,
+      "densita": 7850,
+      "poisson": 0.3,
+      "m_elastico": 210000,
+      "m_taglio": 80769,
+      "slu": [
+        {
+          "formula": "-223.8095",
+          "eps_min": -0.15,
+          "eps_max": -0.00106576
+        },
+        {
+          "formula": "210000 * x",
+          "eps_min": -0.00106576,
+          "eps_max": 0.00106576
+        },
+        {
+          "formula": "223.8095",
+          "eps_min": 0.00106576,
+          "eps_max": 0.15
+        }
+      ],
+      "sle": [
+        {
+          "formula": "210000 * x",
+          "eps_min": -0.002,
+          "eps_max": 0.002
+        }
+      ]
+    },
+    "S275": {
+      "tipo": "acciaio",
+      "standard": true,
+      "nome": "S275",
+      "fy": 275,
+      "fu": 430,
+      "gamma": 1.05,
+      "alpha": 1.0,
+      "densita": 7850,
+      "poisson": 0.3,
+      "m_elastico": 210000,
+      "m_taglio": 80769,
+      "slu": [
+        {
+          "formula": "-261.9048",
+          "eps_min": -0.15,
+          "eps_max": -0.00124717
+        },
+        {
+          "formula": "210000 * x",
+          "eps_min": -0.00124717,
+          "eps_max": 0.00124717
+        },
+        {
+          "formula": "261.9048",
+          "eps_min": 0.00124717,
+          "eps_max": 0.15
+        }
+      ],
+      "sle": [
+        {
+          "formula": "210000 * x",
+          "eps_min": -0.002,
+          "eps_max": 0.002
+        }
+      ]
+    },
+    "S355": {
+      "tipo": "acciaio",
+      "standard": true,
+      "nome": "S355",
+      "fy": 355,
+      "fu": 510,
+      "gamma": 1.05,
+      "alpha": 1.0,
+      "densita": 7850,
+      "poisson": 0.3,
+      "m_elastico": 210000,
+      "m_taglio": 80769,
+      "slu": [
+        {
+          "formula": "-338.0952",
+          "eps_min": -0.15,
+          "eps_max": -0.00160998
+        },
+        {
+          "formula": "210000 * x",
+          "eps_min": -0.00160998,
+          "eps_max": 0.00160998
+        },
+        {
+          "formula": "338.0952",
+          "eps_min": 0.00160998,
+          "eps_max": 0.15
+        }
+      ],
+      "sle": [
+        {
+          "formula": "210000 * x",
+          "eps_min": -0.002,
+          "eps_max": 0.002
+        }
+      ]
+    },
+    "S420": {
+      "tipo": "acciaio",
+      "standard": true,
+      "nome": "S420",
+      "fy": 420,
+      "fu": 520,
+      "gamma": 1.05,
+      "alpha": 1.0,
+      "densita": 7850,
+      "poisson": 0.3,
+      "m_elastico": 210000,
+      "m_taglio": 80769,
+      "slu": [
+        {
+          "formula": "-400.0",
+          "eps_min": -0.15,
+          "eps_max": -0.00190476
+        },
+        {
+          "formula": "210000 * x",
+          "eps_min": -0.00190476,
+          "eps_max": 0.00190476
+        },
+        {
+          "formula": "400.0",
+          "eps_min": 0.00190476,
+          "eps_max": 0.15
+        }
+      ],
+      "sle": [
+        {
+          "formula": "210000 * x",
+          "eps_min": -0.002,
+          "eps_max": 0.002
+        }
+      ]
+    },
+    "S460": {
+      "tipo": "acciaio",
+      "standard": true,
+      "nome": "S460",
+      "fy": 460,
+      "fu": 550,
+      "gamma": 1.05,
+      "alpha": 1.0,
+      "densita": 7850,
+      "poisson": 0.3,
+      "m_elastico": 210000,
+      "m_taglio": 80769,
+      "slu": [
+        {
+          "formula": "-438.0952",
+          "eps_min": -0.15,
+          "eps_max": -0.00208617
+        },
+        {
+          "formula": "210000 * x",
+          "eps_min": -0.00208617,
+          "eps_max": 0.00208617
+        },
+        {
+          "formula": "438.0952",
+          "eps_min": 0.00208617,
+          "eps_max": 0.15
+        }
+      ],
+      "sle": [
+        {
+          "formula": "210000 * x",
+          "eps_min": -0.002,
+          "eps_max": 0.002
+        }
+      ]
+    },
+    "S690": {
+      "tipo": "acciaio",
+      "standard": true,
+      "nome": "S690",
+      "fy": 690,
+      "fu": 770,
+      "gamma": 1.05,
+      "alpha": 1.0,
+      "densita": 7850,
+      "poisson": 0.3,
+      "m_elastico": 210000,
+      "m_taglio": 80769,
+      "slu": [
+        {
+          "formula": "-657.1429",
+          "eps_min": -0.15,
+          "eps_max": -0.00312925
+        },
+        {
+          "formula": "210000 * x",
+          "eps_min": -0.00312925,
+          "eps_max": 0.00312925
+        },
+        {
+          "formula": "657.1429",
+          "eps_min": 0.00312925,
+          "eps_max": 0.15
+        }
+      ],
+      "sle": [
+        {
+          "formula": "210000 * x",
+          "eps_min": -0.002,
+          "eps_max": 0.002
+        }
+      ]
+    }
+  },
+  "personalizzati": {}
+}

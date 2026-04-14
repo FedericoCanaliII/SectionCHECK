@@ -1,0 +1,4500 @@
+{
+  "trave": [
+    {
+      "id": 1,
+      "nome": "Trave 0.30×0.50",
+      "tipo": "trave",
+      "standard": true,
+      "oggetti": [
+        {
+          "id": 1,
+          "nome": "Parallelepipedo.001",
+          "tipo": "parallelepipedo",
+          "geometria": {
+            "lunghezza": 5.0,
+            "base": 0.3,
+            "altezza": 0.5
+          },
+          "materiale": "C25/30",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 2,
+          "nome": "Barra.001",
+          "tipo": "barra",
+          "geometria": {
+            "diametro": 0.016,
+            "punti": [
+              [
+                0.0,
+                0.046,
+                0.046
+              ],
+              [
+                5.0,
+                0.046,
+                0.046
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 3,
+          "nome": "Barra.002",
+          "tipo": "barra",
+          "geometria": {
+            "diametro": 0.016,
+            "punti": [
+              [
+                0.0,
+                0.254,
+                0.046
+              ],
+              [
+                5.0,
+                0.254,
+                0.046
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 4,
+          "nome": "Barra.003",
+          "tipo": "barra",
+          "geometria": {
+            "diametro": 0.016,
+            "punti": [
+              [
+                0.0,
+                0.046,
+                0.454
+              ],
+              [
+                5.0,
+                0.046,
+                0.454
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 5,
+          "nome": "Barra.004",
+          "tipo": "barra",
+          "geometria": {
+            "diametro": 0.016,
+            "punti": [
+              [
+                0.0,
+                0.254,
+                0.454
+              ],
+              [
+                5.0,
+                0.254,
+                0.454
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 6,
+          "nome": "Staffa.001",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                0.1,
+                0.03,
+                0.03
+              ],
+              [
+                0.1,
+                0.27,
+                0.03
+              ],
+              [
+                0.1,
+                0.27,
+                0.47
+              ],
+              [
+                0.1,
+                0.03,
+                0.47
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 7,
+          "nome": "Staffa.002",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                0.3,
+                0.03,
+                0.03
+              ],
+              [
+                0.3,
+                0.27,
+                0.03
+              ],
+              [
+                0.3,
+                0.27,
+                0.47
+              ],
+              [
+                0.3,
+                0.03,
+                0.47
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 8,
+          "nome": "Staffa.003",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                0.5,
+                0.03,
+                0.03
+              ],
+              [
+                0.5,
+                0.27,
+                0.03
+              ],
+              [
+                0.5,
+                0.27,
+                0.47
+              ],
+              [
+                0.5,
+                0.03,
+                0.47
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 9,
+          "nome": "Staffa.004",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                0.7,
+                0.03,
+                0.03
+              ],
+              [
+                0.7,
+                0.27,
+                0.03
+              ],
+              [
+                0.7,
+                0.27,
+                0.47
+              ],
+              [
+                0.7,
+                0.03,
+                0.47
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 10,
+          "nome": "Staffa.005",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                0.9,
+                0.03,
+                0.03
+              ],
+              [
+                0.9,
+                0.27,
+                0.03
+              ],
+              [
+                0.9,
+                0.27,
+                0.47
+              ],
+              [
+                0.9,
+                0.03,
+                0.47
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 11,
+          "nome": "Staffa.006",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                1.1,
+                0.03,
+                0.03
+              ],
+              [
+                1.1,
+                0.27,
+                0.03
+              ],
+              [
+                1.1,
+                0.27,
+                0.47
+              ],
+              [
+                1.1,
+                0.03,
+                0.47
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 12,
+          "nome": "Staffa.007",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                1.3,
+                0.03,
+                0.03
+              ],
+              [
+                1.3,
+                0.27,
+                0.03
+              ],
+              [
+                1.3,
+                0.27,
+                0.47
+              ],
+              [
+                1.3,
+                0.03,
+                0.47
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 13,
+          "nome": "Staffa.008",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                1.5,
+                0.03,
+                0.03
+              ],
+              [
+                1.5,
+                0.27,
+                0.03
+              ],
+              [
+                1.5,
+                0.27,
+                0.47
+              ],
+              [
+                1.5,
+                0.03,
+                0.47
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 14,
+          "nome": "Staffa.009",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                1.7,
+                0.03,
+                0.03
+              ],
+              [
+                1.7,
+                0.27,
+                0.03
+              ],
+              [
+                1.7,
+                0.27,
+                0.47
+              ],
+              [
+                1.7,
+                0.03,
+                0.47
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 15,
+          "nome": "Staffa.010",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                1.9,
+                0.03,
+                0.03
+              ],
+              [
+                1.9,
+                0.27,
+                0.03
+              ],
+              [
+                1.9,
+                0.27,
+                0.47
+              ],
+              [
+                1.9,
+                0.03,
+                0.47
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 16,
+          "nome": "Staffa.011",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                2.1,
+                0.03,
+                0.03
+              ],
+              [
+                2.1,
+                0.27,
+                0.03
+              ],
+              [
+                2.1,
+                0.27,
+                0.47
+              ],
+              [
+                2.1,
+                0.03,
+                0.47
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 17,
+          "nome": "Staffa.012",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                2.3,
+                0.03,
+                0.03
+              ],
+              [
+                2.3,
+                0.27,
+                0.03
+              ],
+              [
+                2.3,
+                0.27,
+                0.47
+              ],
+              [
+                2.3,
+                0.03,
+                0.47
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 18,
+          "nome": "Staffa.013",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                2.5,
+                0.03,
+                0.03
+              ],
+              [
+                2.5,
+                0.27,
+                0.03
+              ],
+              [
+                2.5,
+                0.27,
+                0.47
+              ],
+              [
+                2.5,
+                0.03,
+                0.47
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 19,
+          "nome": "Staffa.014",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                2.7,
+                0.03,
+                0.03
+              ],
+              [
+                2.7,
+                0.27,
+                0.03
+              ],
+              [
+                2.7,
+                0.27,
+                0.47
+              ],
+              [
+                2.7,
+                0.03,
+                0.47
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 20,
+          "nome": "Staffa.015",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                2.9,
+                0.03,
+                0.03
+              ],
+              [
+                2.9,
+                0.27,
+                0.03
+              ],
+              [
+                2.9,
+                0.27,
+                0.47
+              ],
+              [
+                2.9,
+                0.03,
+                0.47
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 21,
+          "nome": "Staffa.016",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                3.1,
+                0.03,
+                0.03
+              ],
+              [
+                3.1,
+                0.27,
+                0.03
+              ],
+              [
+                3.1,
+                0.27,
+                0.47
+              ],
+              [
+                3.1,
+                0.03,
+                0.47
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 22,
+          "nome": "Staffa.017",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                3.3,
+                0.03,
+                0.03
+              ],
+              [
+                3.3,
+                0.27,
+                0.03
+              ],
+              [
+                3.3,
+                0.27,
+                0.47
+              ],
+              [
+                3.3,
+                0.03,
+                0.47
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 23,
+          "nome": "Staffa.018",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                3.5,
+                0.03,
+                0.03
+              ],
+              [
+                3.5,
+                0.27,
+                0.03
+              ],
+              [
+                3.5,
+                0.27,
+                0.47
+              ],
+              [
+                3.5,
+                0.03,
+                0.47
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 24,
+          "nome": "Staffa.019",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                3.7,
+                0.03,
+                0.03
+              ],
+              [
+                3.7,
+                0.27,
+                0.03
+              ],
+              [
+                3.7,
+                0.27,
+                0.47
+              ],
+              [
+                3.7,
+                0.03,
+                0.47
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 25,
+          "nome": "Staffa.020",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                3.9,
+                0.03,
+                0.03
+              ],
+              [
+                3.9,
+                0.27,
+                0.03
+              ],
+              [
+                3.9,
+                0.27,
+                0.47
+              ],
+              [
+                3.9,
+                0.03,
+                0.47
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 26,
+          "nome": "Staffa.021",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                4.1,
+                0.03,
+                0.03
+              ],
+              [
+                4.1,
+                0.27,
+                0.03
+              ],
+              [
+                4.1,
+                0.27,
+                0.47
+              ],
+              [
+                4.1,
+                0.03,
+                0.47
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 27,
+          "nome": "Staffa.022",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                4.3,
+                0.03,
+                0.03
+              ],
+              [
+                4.3,
+                0.27,
+                0.03
+              ],
+              [
+                4.3,
+                0.27,
+                0.47
+              ],
+              [
+                4.3,
+                0.03,
+                0.47
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 28,
+          "nome": "Staffa.023",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                4.5,
+                0.03,
+                0.03
+              ],
+              [
+                4.5,
+                0.27,
+                0.03
+              ],
+              [
+                4.5,
+                0.27,
+                0.47
+              ],
+              [
+                4.5,
+                0.03,
+                0.47
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 29,
+          "nome": "Staffa.024",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                4.7,
+                0.03,
+                0.03
+              ],
+              [
+                4.7,
+                0.27,
+                0.03
+              ],
+              [
+                4.7,
+                0.27,
+                0.47
+              ],
+              [
+                4.7,
+                0.03,
+                0.47
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 30,
+          "nome": "Staffa.025",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                4.9,
+                0.03,
+                0.03
+              ],
+              [
+                4.9,
+                0.27,
+                0.03
+              ],
+              [
+                4.9,
+                0.27,
+                0.47
+              ],
+              [
+                4.9,
+                0.03,
+                0.47
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "nome": "Trave 0.25×0.40",
+      "tipo": "trave",
+      "standard": true,
+      "oggetti": [
+        {
+          "id": 31,
+          "nome": "Parallelepipedo.001",
+          "tipo": "parallelepipedo",
+          "geometria": {
+            "lunghezza": 3.5,
+            "base": 0.25,
+            "altezza": 0.4
+          },
+          "materiale": "C25/30",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 32,
+          "nome": "Barra.001",
+          "tipo": "barra",
+          "geometria": {
+            "diametro": 0.014,
+            "punti": [
+              [
+                0.0,
+                0.045,
+                0.045
+              ],
+              [
+                3.5,
+                0.045,
+                0.045
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 33,
+          "nome": "Barra.002",
+          "tipo": "barra",
+          "geometria": {
+            "diametro": 0.014,
+            "punti": [
+              [
+                0.0,
+                0.20500000000000002,
+                0.045
+              ],
+              [
+                3.5,
+                0.20500000000000002,
+                0.045
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 34,
+          "nome": "Barra.003",
+          "tipo": "barra",
+          "geometria": {
+            "diametro": 0.014,
+            "punti": [
+              [
+                0.0,
+                0.045,
+                0.35500000000000004
+              ],
+              [
+                3.5,
+                0.045,
+                0.35500000000000004
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 35,
+          "nome": "Barra.004",
+          "tipo": "barra",
+          "geometria": {
+            "diametro": 0.014,
+            "punti": [
+              [
+                0.0,
+                0.20500000000000002,
+                0.35500000000000004
+              ],
+              [
+                3.5,
+                0.20500000000000002,
+                0.35500000000000004
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 36,
+          "nome": "Staffa.001",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                0.1,
+                0.03,
+                0.03
+              ],
+              [
+                0.1,
+                0.22,
+                0.03
+              ],
+              [
+                0.1,
+                0.22,
+                0.37
+              ],
+              [
+                0.1,
+                0.03,
+                0.37
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 37,
+          "nome": "Staffa.002",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                0.3,
+                0.03,
+                0.03
+              ],
+              [
+                0.3,
+                0.22,
+                0.03
+              ],
+              [
+                0.3,
+                0.22,
+                0.37
+              ],
+              [
+                0.3,
+                0.03,
+                0.37
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 38,
+          "nome": "Staffa.003",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                0.5,
+                0.03,
+                0.03
+              ],
+              [
+                0.5,
+                0.22,
+                0.03
+              ],
+              [
+                0.5,
+                0.22,
+                0.37
+              ],
+              [
+                0.5,
+                0.03,
+                0.37
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 39,
+          "nome": "Staffa.004",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                0.7,
+                0.03,
+                0.03
+              ],
+              [
+                0.7,
+                0.22,
+                0.03
+              ],
+              [
+                0.7,
+                0.22,
+                0.37
+              ],
+              [
+                0.7,
+                0.03,
+                0.37
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 40,
+          "nome": "Staffa.005",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                0.9,
+                0.03,
+                0.03
+              ],
+              [
+                0.9,
+                0.22,
+                0.03
+              ],
+              [
+                0.9,
+                0.22,
+                0.37
+              ],
+              [
+                0.9,
+                0.03,
+                0.37
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 41,
+          "nome": "Staffa.006",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                1.1,
+                0.03,
+                0.03
+              ],
+              [
+                1.1,
+                0.22,
+                0.03
+              ],
+              [
+                1.1,
+                0.22,
+                0.37
+              ],
+              [
+                1.1,
+                0.03,
+                0.37
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 42,
+          "nome": "Staffa.007",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                1.3,
+                0.03,
+                0.03
+              ],
+              [
+                1.3,
+                0.22,
+                0.03
+              ],
+              [
+                1.3,
+                0.22,
+                0.37
+              ],
+              [
+                1.3,
+                0.03,
+                0.37
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 43,
+          "nome": "Staffa.008",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                1.5,
+                0.03,
+                0.03
+              ],
+              [
+                1.5,
+                0.22,
+                0.03
+              ],
+              [
+                1.5,
+                0.22,
+                0.37
+              ],
+              [
+                1.5,
+                0.03,
+                0.37
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 44,
+          "nome": "Staffa.009",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                1.7,
+                0.03,
+                0.03
+              ],
+              [
+                1.7,
+                0.22,
+                0.03
+              ],
+              [
+                1.7,
+                0.22,
+                0.37
+              ],
+              [
+                1.7,
+                0.03,
+                0.37
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 45,
+          "nome": "Staffa.010",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                1.9,
+                0.03,
+                0.03
+              ],
+              [
+                1.9,
+                0.22,
+                0.03
+              ],
+              [
+                1.9,
+                0.22,
+                0.37
+              ],
+              [
+                1.9,
+                0.03,
+                0.37
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 46,
+          "nome": "Staffa.011",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                2.1,
+                0.03,
+                0.03
+              ],
+              [
+                2.1,
+                0.22,
+                0.03
+              ],
+              [
+                2.1,
+                0.22,
+                0.37
+              ],
+              [
+                2.1,
+                0.03,
+                0.37
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 47,
+          "nome": "Staffa.012",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                2.3,
+                0.03,
+                0.03
+              ],
+              [
+                2.3,
+                0.22,
+                0.03
+              ],
+              [
+                2.3,
+                0.22,
+                0.37
+              ],
+              [
+                2.3,
+                0.03,
+                0.37
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 48,
+          "nome": "Staffa.013",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                2.5,
+                0.03,
+                0.03
+              ],
+              [
+                2.5,
+                0.22,
+                0.03
+              ],
+              [
+                2.5,
+                0.22,
+                0.37
+              ],
+              [
+                2.5,
+                0.03,
+                0.37
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 49,
+          "nome": "Staffa.014",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                2.7,
+                0.03,
+                0.03
+              ],
+              [
+                2.7,
+                0.22,
+                0.03
+              ],
+              [
+                2.7,
+                0.22,
+                0.37
+              ],
+              [
+                2.7,
+                0.03,
+                0.37
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 50,
+          "nome": "Staffa.015",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                2.9,
+                0.03,
+                0.03
+              ],
+              [
+                2.9,
+                0.22,
+                0.03
+              ],
+              [
+                2.9,
+                0.22,
+                0.37
+              ],
+              [
+                2.9,
+                0.03,
+                0.37
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 51,
+          "nome": "Staffa.016",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                3.1,
+                0.03,
+                0.03
+              ],
+              [
+                3.1,
+                0.22,
+                0.03
+              ],
+              [
+                3.1,
+                0.22,
+                0.37
+              ],
+              [
+                3.1,
+                0.03,
+                0.37
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 52,
+          "nome": "Staffa.017",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                3.3,
+                0.03,
+                0.03
+              ],
+              [
+                3.3,
+                0.22,
+                0.03
+              ],
+              [
+                3.3,
+                0.22,
+                0.37
+              ],
+              [
+                3.3,
+                0.03,
+                0.37
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        }
+      ]
+    }
+  ],
+  "pilastro": [
+    {
+      "id": 3,
+      "nome": "Pilastro 0.30×0.30",
+      "tipo": "pilastro",
+      "standard": true,
+      "oggetti": [
+        {
+          "id": 53,
+          "nome": "Parallelepipedo.001",
+          "tipo": "parallelepipedo",
+          "geometria": {
+            "lunghezza": 0.3,
+            "base": 0.3,
+            "altezza": 3.0
+          },
+          "materiale": "C25/30",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 54,
+          "nome": "Barra.001",
+          "tipo": "barra",
+          "geometria": {
+            "diametro": 0.016,
+            "punti": [
+              [
+                0.046,
+                0.046,
+                0.0
+              ],
+              [
+                0.046,
+                0.046,
+                3.0
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 55,
+          "nome": "Barra.002",
+          "tipo": "barra",
+          "geometria": {
+            "diametro": 0.016,
+            "punti": [
+              [
+                0.254,
+                0.046,
+                0.0
+              ],
+              [
+                0.254,
+                0.046,
+                3.0
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 56,
+          "nome": "Barra.003",
+          "tipo": "barra",
+          "geometria": {
+            "diametro": 0.016,
+            "punti": [
+              [
+                0.046,
+                0.254,
+                0.0
+              ],
+              [
+                0.046,
+                0.254,
+                3.0
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 57,
+          "nome": "Barra.004",
+          "tipo": "barra",
+          "geometria": {
+            "diametro": 0.016,
+            "punti": [
+              [
+                0.254,
+                0.254,
+                0.0
+              ],
+              [
+                0.254,
+                0.254,
+                3.0
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 58,
+          "nome": "Staffa.001",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                0.03,
+                0.03,
+                0.1
+              ],
+              [
+                0.27,
+                0.03,
+                0.1
+              ],
+              [
+                0.27,
+                0.27,
+                0.1
+              ],
+              [
+                0.03,
+                0.27,
+                0.1
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 59,
+          "nome": "Staffa.002",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                0.03,
+                0.03,
+                0.3
+              ],
+              [
+                0.27,
+                0.03,
+                0.3
+              ],
+              [
+                0.27,
+                0.27,
+                0.3
+              ],
+              [
+                0.03,
+                0.27,
+                0.3
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 60,
+          "nome": "Staffa.003",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                0.03,
+                0.03,
+                0.5
+              ],
+              [
+                0.27,
+                0.03,
+                0.5
+              ],
+              [
+                0.27,
+                0.27,
+                0.5
+              ],
+              [
+                0.03,
+                0.27,
+                0.5
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 61,
+          "nome": "Staffa.004",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                0.03,
+                0.03,
+                0.7
+              ],
+              [
+                0.27,
+                0.03,
+                0.7
+              ],
+              [
+                0.27,
+                0.27,
+                0.7
+              ],
+              [
+                0.03,
+                0.27,
+                0.7
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 62,
+          "nome": "Staffa.005",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                0.03,
+                0.03,
+                0.9
+              ],
+              [
+                0.27,
+                0.03,
+                0.9
+              ],
+              [
+                0.27,
+                0.27,
+                0.9
+              ],
+              [
+                0.03,
+                0.27,
+                0.9
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 63,
+          "nome": "Staffa.006",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                0.03,
+                0.03,
+                1.1
+              ],
+              [
+                0.27,
+                0.03,
+                1.1
+              ],
+              [
+                0.27,
+                0.27,
+                1.1
+              ],
+              [
+                0.03,
+                0.27,
+                1.1
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 64,
+          "nome": "Staffa.007",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                0.03,
+                0.03,
+                1.3
+              ],
+              [
+                0.27,
+                0.03,
+                1.3
+              ],
+              [
+                0.27,
+                0.27,
+                1.3
+              ],
+              [
+                0.03,
+                0.27,
+                1.3
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 65,
+          "nome": "Staffa.008",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                0.03,
+                0.03,
+                1.5
+              ],
+              [
+                0.27,
+                0.03,
+                1.5
+              ],
+              [
+                0.27,
+                0.27,
+                1.5
+              ],
+              [
+                0.03,
+                0.27,
+                1.5
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 66,
+          "nome": "Staffa.009",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                0.03,
+                0.03,
+                1.7
+              ],
+              [
+                0.27,
+                0.03,
+                1.7
+              ],
+              [
+                0.27,
+                0.27,
+                1.7
+              ],
+              [
+                0.03,
+                0.27,
+                1.7
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 67,
+          "nome": "Staffa.010",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                0.03,
+                0.03,
+                1.9
+              ],
+              [
+                0.27,
+                0.03,
+                1.9
+              ],
+              [
+                0.27,
+                0.27,
+                1.9
+              ],
+              [
+                0.03,
+                0.27,
+                1.9
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 68,
+          "nome": "Staffa.011",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                0.03,
+                0.03,
+                2.1
+              ],
+              [
+                0.27,
+                0.03,
+                2.1
+              ],
+              [
+                0.27,
+                0.27,
+                2.1
+              ],
+              [
+                0.03,
+                0.27,
+                2.1
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 69,
+          "nome": "Staffa.012",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                0.03,
+                0.03,
+                2.3
+              ],
+              [
+                0.27,
+                0.03,
+                2.3
+              ],
+              [
+                0.27,
+                0.27,
+                2.3
+              ],
+              [
+                0.03,
+                0.27,
+                2.3
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 70,
+          "nome": "Staffa.013",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                0.03,
+                0.03,
+                2.5
+              ],
+              [
+                0.27,
+                0.03,
+                2.5
+              ],
+              [
+                0.27,
+                0.27,
+                2.5
+              ],
+              [
+                0.03,
+                0.27,
+                2.5
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 71,
+          "nome": "Staffa.014",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                0.03,
+                0.03,
+                2.7
+              ],
+              [
+                0.27,
+                0.03,
+                2.7
+              ],
+              [
+                0.27,
+                0.27,
+                2.7
+              ],
+              [
+                0.03,
+                0.27,
+                2.7
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 72,
+          "nome": "Staffa.015",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                0.03,
+                0.03,
+                2.9
+              ],
+              [
+                0.27,
+                0.03,
+                2.9
+              ],
+              [
+                0.27,
+                0.27,
+                2.9
+              ],
+              [
+                0.03,
+                0.27,
+                2.9
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        }
+      ]
+    }
+  ],
+  "fondazione": [
+    {
+      "id": 4,
+      "nome": "Plinto 1.20×1.20",
+      "tipo": "fondazione",
+      "standard": true,
+      "oggetti": [
+        {
+          "id": 73,
+          "nome": "Parallelepipedo.001",
+          "tipo": "parallelepipedo",
+          "geometria": {
+            "lunghezza": 1.2,
+            "base": 1.2,
+            "altezza": 0.6
+          },
+          "materiale": "C25/30",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 74,
+          "nome": "Barra.001",
+          "tipo": "barra",
+          "geometria": {
+            "diametro": 0.014,
+            "punti": [
+              [
+                0.04,
+                0.1,
+                0.047
+              ],
+              [
+                1.16,
+                0.1,
+                0.047
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 75,
+          "nome": "Barra.002",
+          "tipo": "barra",
+          "geometria": {
+            "diametro": 0.014,
+            "punti": [
+              [
+                0.04,
+                0.3,
+                0.047
+              ],
+              [
+                1.16,
+                0.3,
+                0.047
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 76,
+          "nome": "Barra.003",
+          "tipo": "barra",
+          "geometria": {
+            "diametro": 0.014,
+            "punti": [
+              [
+                0.04,
+                0.5,
+                0.047
+              ],
+              [
+                1.16,
+                0.5,
+                0.047
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 77,
+          "nome": "Barra.004",
+          "tipo": "barra",
+          "geometria": {
+            "diametro": 0.014,
+            "punti": [
+              [
+                0.04,
+                0.7,
+                0.047
+              ],
+              [
+                1.16,
+                0.7,
+                0.047
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 78,
+          "nome": "Barra.005",
+          "tipo": "barra",
+          "geometria": {
+            "diametro": 0.014,
+            "punti": [
+              [
+                0.04,
+                0.9,
+                0.047
+              ],
+              [
+                1.16,
+                0.9,
+                0.047
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 79,
+          "nome": "Barra.006",
+          "tipo": "barra",
+          "geometria": {
+            "diametro": 0.014,
+            "punti": [
+              [
+                0.04,
+                1.1,
+                0.047
+              ],
+              [
+                1.16,
+                1.1,
+                0.047
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 80,
+          "nome": "Barra.007",
+          "tipo": "barra",
+          "geometria": {
+            "diametro": 0.014,
+            "punti": [
+              [
+                0.1,
+                0.04,
+                0.061
+              ],
+              [
+                0.1,
+                1.16,
+                0.061
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 81,
+          "nome": "Barra.008",
+          "tipo": "barra",
+          "geometria": {
+            "diametro": 0.014,
+            "punti": [
+              [
+                0.3,
+                0.04,
+                0.061
+              ],
+              [
+                0.3,
+                1.16,
+                0.061
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 82,
+          "nome": "Barra.009",
+          "tipo": "barra",
+          "geometria": {
+            "diametro": 0.014,
+            "punti": [
+              [
+                0.5,
+                0.04,
+                0.061
+              ],
+              [
+                0.5,
+                1.16,
+                0.061
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 83,
+          "nome": "Barra.010",
+          "tipo": "barra",
+          "geometria": {
+            "diametro": 0.014,
+            "punti": [
+              [
+                0.7,
+                0.04,
+                0.061
+              ],
+              [
+                0.7,
+                1.16,
+                0.061
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 84,
+          "nome": "Barra.011",
+          "tipo": "barra",
+          "geometria": {
+            "diametro": 0.014,
+            "punti": [
+              [
+                0.9,
+                0.04,
+                0.061
+              ],
+              [
+                0.9,
+                1.16,
+                0.061
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 85,
+          "nome": "Barra.012",
+          "tipo": "barra",
+          "geometria": {
+            "diametro": 0.014,
+            "punti": [
+              [
+                1.1,
+                0.04,
+                0.061
+              ],
+              [
+                1.1,
+                1.16,
+                0.061
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 86,
+          "nome": "Staffa.001",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                0.04,
+                0.04,
+                0.04
+              ],
+              [
+                1.16,
+                0.04,
+                0.04
+              ],
+              [
+                1.16,
+                0.04,
+                0.5599999999999999
+              ],
+              [
+                0.04,
+                0.04,
+                0.5599999999999999
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 87,
+          "nome": "Staffa.002",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                0.04,
+                1.16,
+                0.04
+              ],
+              [
+                1.16,
+                1.16,
+                0.04
+              ],
+              [
+                1.16,
+                1.16,
+                0.5599999999999999
+              ],
+              [
+                0.04,
+                1.16,
+                0.5599999999999999
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 88,
+          "nome": "Staffa.003",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                0.04,
+                0.04,
+                0.04
+              ],
+              [
+                0.04,
+                1.16,
+                0.04
+              ],
+              [
+                0.04,
+                1.16,
+                0.5599999999999999
+              ],
+              [
+                0.04,
+                0.04,
+                0.5599999999999999
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 89,
+          "nome": "Staffa.004",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                1.16,
+                0.04,
+                0.04
+              ],
+              [
+                1.16,
+                1.16,
+                0.04
+              ],
+              [
+                1.16,
+                1.16,
+                0.5599999999999999
+              ],
+              [
+                1.16,
+                0.04,
+                0.5599999999999999
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        }
+      ]
+    }
+  ],
+  "solaio": [
+    {
+      "id": 5,
+      "nome": "Solaio 4.00×1.20",
+      "tipo": "solaio",
+      "standard": true,
+      "oggetti": [
+        {
+          "id": 90,
+          "nome": "Parallelepipedo.001",
+          "tipo": "parallelepipedo",
+          "geometria": {
+            "lunghezza": 4.0,
+            "base": 1.2,
+            "altezza": 0.2
+          },
+          "materiale": "C25/30",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 91,
+          "nome": "Barra.001",
+          "tipo": "barra",
+          "geometria": {
+            "diametro": 0.012,
+            "punti": [
+              [
+                0.0,
+                0.1,
+                0.031
+              ],
+              [
+                4.0,
+                0.1,
+                0.031
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 92,
+          "nome": "Barra.002",
+          "tipo": "barra",
+          "geometria": {
+            "diametro": 0.012,
+            "punti": [
+              [
+                0.0,
+                0.3,
+                0.031
+              ],
+              [
+                4.0,
+                0.3,
+                0.031
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 93,
+          "nome": "Barra.003",
+          "tipo": "barra",
+          "geometria": {
+            "diametro": 0.012,
+            "punti": [
+              [
+                0.0,
+                0.5,
+                0.031
+              ],
+              [
+                4.0,
+                0.5,
+                0.031
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 94,
+          "nome": "Barra.004",
+          "tipo": "barra",
+          "geometria": {
+            "diametro": 0.012,
+            "punti": [
+              [
+                0.0,
+                0.7,
+                0.031
+              ],
+              [
+                4.0,
+                0.7,
+                0.031
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 95,
+          "nome": "Barra.005",
+          "tipo": "barra",
+          "geometria": {
+            "diametro": 0.012,
+            "punti": [
+              [
+                0.0,
+                0.9,
+                0.031
+              ],
+              [
+                4.0,
+                0.9,
+                0.031
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 96,
+          "nome": "Barra.006",
+          "tipo": "barra",
+          "geometria": {
+            "diametro": 0.012,
+            "punti": [
+              [
+                0.0,
+                1.1,
+                0.031
+              ],
+              [
+                4.0,
+                1.1,
+                0.031
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 97,
+          "nome": "Barra.007",
+          "tipo": "barra",
+          "geometria": {
+            "diametro": 0.01,
+            "punti": [
+              [
+                0.2,
+                0.0,
+                0.043
+              ],
+              [
+                0.2,
+                1.2,
+                0.043
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 98,
+          "nome": "Barra.008",
+          "tipo": "barra",
+          "geometria": {
+            "diametro": 0.01,
+            "punti": [
+              [
+                0.6,
+                0.0,
+                0.043
+              ],
+              [
+                0.6,
+                1.2,
+                0.043
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 99,
+          "nome": "Barra.009",
+          "tipo": "barra",
+          "geometria": {
+            "diametro": 0.01,
+            "punti": [
+              [
+                1.0,
+                0.0,
+                0.043
+              ],
+              [
+                1.0,
+                1.2,
+                0.043
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 100,
+          "nome": "Barra.010",
+          "tipo": "barra",
+          "geometria": {
+            "diametro": 0.01,
+            "punti": [
+              [
+                1.4,
+                0.0,
+                0.043
+              ],
+              [
+                1.4,
+                1.2,
+                0.043
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 101,
+          "nome": "Barra.011",
+          "tipo": "barra",
+          "geometria": {
+            "diametro": 0.01,
+            "punti": [
+              [
+                1.8,
+                0.0,
+                0.043
+              ],
+              [
+                1.8,
+                1.2,
+                0.043
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 102,
+          "nome": "Barra.012",
+          "tipo": "barra",
+          "geometria": {
+            "diametro": 0.01,
+            "punti": [
+              [
+                2.2,
+                0.0,
+                0.043
+              ],
+              [
+                2.2,
+                1.2,
+                0.043
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 103,
+          "nome": "Barra.013",
+          "tipo": "barra",
+          "geometria": {
+            "diametro": 0.01,
+            "punti": [
+              [
+                2.6,
+                0.0,
+                0.043
+              ],
+              [
+                2.6,
+                1.2,
+                0.043
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 104,
+          "nome": "Barra.014",
+          "tipo": "barra",
+          "geometria": {
+            "diametro": 0.01,
+            "punti": [
+              [
+                3.0,
+                0.0,
+                0.043
+              ],
+              [
+                3.0,
+                1.2,
+                0.043
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 105,
+          "nome": "Barra.015",
+          "tipo": "barra",
+          "geometria": {
+            "diametro": 0.01,
+            "punti": [
+              [
+                3.4,
+                0.0,
+                0.043
+              ],
+              [
+                3.4,
+                1.2,
+                0.043
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 106,
+          "nome": "Barra.016",
+          "tipo": "barra",
+          "geometria": {
+            "diametro": 0.01,
+            "punti": [
+              [
+                3.8,
+                0.0,
+                0.043
+              ],
+              [
+                3.8,
+                1.2,
+                0.043
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 107,
+          "nome": "Staffa.001",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                0.5,
+                0.025,
+                0.025
+              ],
+              [
+                0.5,
+                1.175,
+                0.025
+              ],
+              [
+                0.5,
+                1.175,
+                0.17500000000000002
+              ],
+              [
+                0.5,
+                0.025,
+                0.17500000000000002
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 108,
+          "nome": "Staffa.002",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                1.5,
+                0.025,
+                0.025
+              ],
+              [
+                1.5,
+                1.175,
+                0.025
+              ],
+              [
+                1.5,
+                1.175,
+                0.17500000000000002
+              ],
+              [
+                1.5,
+                0.025,
+                0.17500000000000002
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 109,
+          "nome": "Staffa.003",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                2.5,
+                0.025,
+                0.025
+              ],
+              [
+                2.5,
+                1.175,
+                0.025
+              ],
+              [
+                2.5,
+                1.175,
+                0.17500000000000002
+              ],
+              [
+                2.5,
+                0.025,
+                0.17500000000000002
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        },
+        {
+          "id": 110,
+          "nome": "Staffa.004",
+          "tipo": "staffa",
+          "geometria": {
+            "diametro": 0.008,
+            "punti": [
+              [
+                3.5,
+                0.025,
+                0.025
+              ],
+              [
+                3.5,
+                1.175,
+                0.025
+              ],
+              [
+                3.5,
+                1.175,
+                0.17500000000000002
+              ],
+              [
+                3.5,
+                0.025,
+                0.17500000000000002
+              ]
+            ]
+          },
+          "materiale": "B450C",
+          "posizione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotazione": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "custom_geometry": false,
+          "visibile": true,
+          "selezionabile": true,
+          "vertice_ref": 0
+        }
+      ]
+    }
+  ]
+}

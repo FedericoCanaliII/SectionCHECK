@@ -1,0 +1,27 @@
+---------------------GIT-----------------------
+git add .
+git commit -m 'commento'
+git branch -M main
+git push -u origin main
+
+SE VOGLIO CAMBIARE BRANCH
+git add .
+git commit -m 'commento'
+git branch -M new name
+git push -u origin new name
+
+---------------------EXE----------------------
+
+pyinstaller --onefile --noconsole main.py
+pyinstaller --onefile --noconsole main.py --add-data "interfaccia;interfaccia" --icon=interfaccia/icone/logo.ico
+
+--------------------CONVERSIONE-------------------
+
+pyuic5 interfaccia\main_interfaccia.ui -o interfaccia\main_interfaccia.py   
+
+----------------NUOVO---------------
+git status
+git init
+
+-----------SETUP--------------
+python setup.py build
