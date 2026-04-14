@@ -3,4 +3,4 @@ build/
 QUANDO_HAI_DUBBI/
 qrcode_github_SectionCHECK.png
 analisi/fem_elemento/analisi_svolte/
-analisi/fem_elemento/mesh_calcolate/
+analisi/fem_elemento/mesh_create/
