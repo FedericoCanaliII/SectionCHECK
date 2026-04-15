@@ -12,7 +12,7 @@ import os
 _DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                         "database_struttura.json")
 
-_DB_VERSION = 3
+_DB_VERSION = 5
 
 
 # ================================================================
@@ -213,10 +213,8 @@ fix  3   1 1 1  1 1 1
 fix  4   1 1 1  1 1 1
 
 # ─── CARICHI ───
-beamLoad  5    0.0   0.0  -12.0
-beamLoad  6    0.0   0.0  -12.0
-beamLoad  7    0.0   0.0  -10.0
-beamLoad  8    0.0   0.0  -10.0
+# Carico distribuito di superficie sulla soletta (shell 1) – kN/m²
+shellLoad  1    0.0   0.0  -5.0
 """
 
 
@@ -281,8 +279,9 @@ _TEMPLATE_VUOTO = """\
 # fix  <nodo_id>   <dx> <dy> <dz>  [<rx> <ry> <rz>]
 
 # ─── CARICHI ───
-# nodeLoad  <nodo_id>   <Fx> <Fy> <Fz>
-# beamLoad  <asta_id>   <wx> <wy> <wz>
+# nodeLoad   <nodo_id>   <Fx> <Fy> <Fz>
+# beamLoad   <asta_id>   <wx> <wy> <wz>
+# shellLoad  <shell_id>  <qx> <qy> <qz>
 """
 
 

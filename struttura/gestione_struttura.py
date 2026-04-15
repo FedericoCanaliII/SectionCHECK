@@ -245,6 +245,9 @@ class GestioneStruttura:
         # Testo manager
         self._testo = TextoStrutturaManager(ui, main_window)
 
+        # Click 3D → evidenzia riga nell'editor
+        self._spazio.oggetto_selezionato.connect(self._testo.seleziona_oggetto)
+
         # Info dialog (lazy)
         self._info_dialog = None
 
@@ -255,6 +258,7 @@ class GestioneStruttura:
         self._setup_frame_strutture()
         self._setup_connessioni()
         self._setup_viste()
+        self._setup_visibilita()
 
         # Preview batch iniziale
         QTimer.singleShot(800, self._schedula_previews_tutti)
@@ -330,6 +334,36 @@ class GestioneStruttura:
         self._ui.struttura_btn_vista_z.clicked.connect(lambda: self._spazio.imposta_vista("z"))
 
     # ================================================================
+    #  BOTTONI VISIBILITÀ OGGETTI
+    # ================================================================
+
+    def _setup_visibilita(self):
+        """Rende checkable (non esclusivi) i bottoni di visibilità oggetti.
+        Ogni bottone controlla una porzione della struttura nel viewer 3D."""
+        self._vis_map = {
+            self._ui.struttura_btn_nodi:            ("show_nodi",       True),
+            self._ui.struttura_btn_beams:           ("show_beams",      True),
+            self._ui.struttura_btn_shells:          ("show_shells",     True),
+            self._ui.struttura_btn_vincoli:         ("show_vincoli",    True),
+            self._ui.struttura_btn_carichi:         ("show_carichi",    True),
+            self._ui.struttura_btn_identificazione: ("show_labels",     False),
+            self._ui.struttura_btn_direzione:       ("show_direzioni",  False),
+        }
+        for btn, (attr, default) in self._vis_map.items():
+            btn.setCheckable(True)
+            btn.setAutoExclusive(False)
+            btn.setChecked(default)
+            setattr(self._spazio, attr, default)
+            btn.toggled.connect(
+                lambda checked, a=attr: self._on_visibilita_toggle(a, checked))
+        # Applica lo stato iniziale al viewer
+        self._spazio.update()
+
+    def _on_visibilita_toggle(self, attr: str, checked: bool):
+        setattr(self._spazio, attr, bool(checked))
+        self._spazio.update()
+
+    # ================================================================
     #  BOTTONI LISTA (index 8)
     # ================================================================
 
@@ -339,12 +373,14 @@ class GestioneStruttura:
         self._btn_group.addButton(btn)
         self._bottoni[(cat, nome)] = btn
 
-        btn.clicked.connect(lambda _c, c=cat, n=nome: self._on_bottone_cliccato(c, n))
+        # NB: il nome può cambiare (rinomina). Risolviamo SEMPRE btn.nome/btn.cat
+        # al momento del callback per evitare closure stale.
+        btn.clicked.connect(lambda _c, b=btn: self._on_bottone_cliccato(b.cat, b.nome))
         if not standard:
-            btn.deleteRequested.connect(lambda c=cat, n=nome: self._elimina(c, n))
+            btn.deleteRequested.connect(lambda b=btn: self._elimina(b.cat, b.nome))
         btn.setContextMenuPolicy(Qt.CustomContextMenu)
         btn.customContextMenuRequested.connect(
-            lambda pos, b=btn, c=cat, n=nome: self._ctx_menu(b, c, n, pos))
+            lambda pos, b=btn: self._ctx_menu(b, b.cat, b.nome, pos))
 
     def _on_bottone_cliccato(self, cat, nome):
         """Apre la struttura selezionata nell'editor (index 9)."""
@@ -550,7 +586,12 @@ class GestioneStruttura:
     # ================================================================
 
     def _salva_corrente(self):
-        """Salva il testo corrente nel progetto."""
+        """Salva il testo corrente nel progetto.
+
+        Le modifiche a una struttura standard restano associate allo stesso
+        nome e mantengono il flag `standard` = True così che al re-import non
+        si generino duplicati. Le custom restano con flag `standard` = False.
+        """
         if not self._main.ha_progetto():
             return
         if self._cat_corrente is None or self._nome_corrente is None:
@@ -562,21 +603,23 @@ class GestioneStruttura:
         dati_sez = self._main.get_sezione("strutture")
         cat_dict = dati_sez.setdefault(cat, {})
 
+        is_std_db = nome in self._db.get(cat, {})
+
         if nome in cat_dict:
             if cat_dict[nome].get("testo", "") != testo:
                 self._main.push_undo("Modifica struttura", "struttura")
                 cat_dict[nome]["testo"] = testo
+                cat_dict[nome]["standard"] = is_std_db
                 self._main.set_sezione("strutture", dati_sez)
         else:
-            # Struttura standard modificata → salva come custom nel progetto
-            dati_base = self._leggi(cat, nome)
-            if dati_base:
-                nuovo = copy.deepcopy(dati_base)
-                nuovo["testo"] = testo
-                nuovo["standard"] = False
-                self._main.push_undo("Modifica struttura", "struttura")
-                cat_dict[nome] = nuovo
-                self._main.set_sezione("strutture", dati_sez)
+            # Primo salvataggio per questo nome in questo progetto.
+            dati_base = self._db.get(cat, {}).get(nome, {})
+            nuovo = copy.deepcopy(dati_base) if dati_base else {}
+            nuovo["testo"] = testo
+            nuovo["standard"] = is_std_db
+            self._main.push_undo("Modifica struttura", "struttura")
+            cat_dict[nome] = nuovo
+            self._main.set_sezione("strutture", dati_sez)
 
     # ================================================================
     #  AGGIORNA 3D
@@ -743,8 +786,15 @@ class GestioneStruttura:
     # ================================================================
 
     def ricarica_da_progetto(self):
-        """Ricarica la lista strutture dopo apertura/undo progetto."""
-        # Svuota i frame
+        """Ricarica la lista strutture dopo apertura/undo progetto.
+
+        Regole di merge:
+          • Gli standard del database sono sempre presenti (non cancellabili).
+          • Se il progetto ha una voce con lo stesso nome di uno standard,
+            quella è considerata un override (testo modificato) — NON si crea
+            un secondo bottone.
+          • Le voci custom (nome non presente nel database) vengono aggiunte.
+        """
         frames = {
             "calcestruzzo":   self._ui.struttura_frame_calcestruzzo,
             "acciaio":        self._ui.struttura_frame_acciaio,
@@ -754,16 +804,22 @@ class GestioneStruttura:
             self._btn_group.removeButton(btn)
         self._bottoni.clear()
 
+        dati_sez = self._main.get_sezione("strutture") or {}
+
         for cat, frame in frames.items():
             self._init_frame(frame)
-            # Standard dal database
-            for nome, dati in self._db.get(cat, {}).items():
+            standard_names = set(self._db.get(cat, {}).keys())
+
+            # Standard dal database (sempre presenti)
+            for nome in standard_names:
                 self._crea_bottone(frame, cat, nome, standard=True)
-            # Custom dal progetto
-            dati_sez = self._main.get_sezione("strutture")
+
+            # Voci del progetto che NON collidono con gli standard → custom
             for nome, dati in dati_sez.get(cat, {}).items():
-                if not dati.get("standard", False):
-                    self._crea_bottone(frame, cat, nome, standard=False)
+                if nome in standard_names:
+                    continue   # è un override: _leggi() lo pesca dal progetto
+                self._crea_bottone(frame, cat, nome,
+                                   standard=bool(dati.get("standard", False)))
 
         self._cat_corrente = None
         self._nome_corrente = None

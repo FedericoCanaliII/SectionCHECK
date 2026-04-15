@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c \"import ast; [ast.parse\\(open\\(f,encoding='utf-8'\\).read\\(\\)\\) for f in ['struttura/struttura_spazio_3d.py','struttura/gestione_struttura.py','struttura/testo_struttura.py','struttura/database_struttura.py','struttura/struttura_info.py']]; print\\('OK'\\)\")",
+      "Bash(python -c \"import json; d=json.load\\(open\\('struttura/database_struttura.json','r',encoding='utf-8'\\)\\); print\\('version:', d.get\\('_version'\\)\\)\")",
+      "Bash(python -c ':*)",
+      "Bash(wc -l C:/Users/canal/Desktop/Nuovo_SC/elementi/*.py)",
+      "Bash(python -c \"import ast, pathlib; [ast.parse\\(pathlib.Path\\(p\\).read_text\\(encoding='utf-8'\\)\\) or print\\(p, 'OK'\\) for p in ['struttura/struttura_spazio_3d.py','struttura/testo_struttura.py','struttura/gestione_struttura.py','elementi/gestione_elementi.py','elementi/controller_lista_elementi.py']]\")",
+      "Bash(python -c \"import ast,pathlib; ast.parse\\(pathlib.Path\\('struttura/struttura_spazio_3d.py'\\).read_text\\(encoding='utf-8'\\)\\); print\\('OK'\\)\")"
+    ]
+  }
+}

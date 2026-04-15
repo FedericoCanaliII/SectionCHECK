@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>2448</width>
+    <width>2386</width>
     <height>1184</height>
    </rect>
   </property>
@@ -2023,7 +2023,7 @@ QPushButton:checked {
          <string notr="true">background-color: rgb(40, 40, 40);</string>
         </property>
         <property name="currentIndex">
-         <number>8</number>
+         <number>9</number>
         </property>
         <widget class="QWidget" name="page_main">
          <layout class="QVBoxLayout" name="verticalLayout_27">
@@ -11811,8 +11811,8 @@ QScrollBar::sub-page:vertical {
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>2110</width>
-               <height>1044</height>
+               <width>1110</width>
+               <height>510</height>
               </rect>
              </property>
              <layout class="QHBoxLayout" name="horizontalLayout_90">
@@ -12865,6 +12865,282 @@ border:none;</string>
                    <number>4</number>
                   </property>
                   <item>
+                   <widget class="QPushButton" name="struttura_btn_nodi">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>34</width>
+                      <height>32</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>34</width>
+                      <height>32</height>
+                     </size>
+                    </property>
+                    <property name="toolTip">
+                     <string>aggiungi parallelepipedo</string>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">QPushButton{
+	border-radius:4px;
+}
+QPushButton:hover {
+    background-color: rgb(40,40,40);
+	border: 1px solid rgb(120,120,120);
+}
+QPushButton:checked {
+    background-color: rgb(50,50,50);
+	border: 1px solid rgb(120,120,120);
+}</string>
+                    </property>
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="icon">
+                     <iconset>
+                      <normaloff>icone/nodo.png</normaloff>icone/nodo.png</iconset>
+                    </property>
+                    <property name="iconSize">
+                     <size>
+                      <width>32</width>
+                      <height>32</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="struttura_btn_beams">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>34</width>
+                      <height>32</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>34</width>
+                      <height>32</height>
+                     </size>
+                    </property>
+                    <property name="toolTip">
+                     <string>aggiungi parallelepipedo</string>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">QPushButton{
+	border-radius:4px;
+}
+QPushButton:hover {
+    background-color: rgb(40,40,40);
+	border: 1px solid rgb(120,120,120);
+}
+QPushButton:checked {
+    background-color: rgb(50,50,50);
+	border: 1px solid rgb(120,120,120);
+}</string>
+                    </property>
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="icon">
+                     <iconset>
+                      <normaloff>icone/asta.png</normaloff>icone/asta.png</iconset>
+                    </property>
+                    <property name="iconSize">
+                     <size>
+                      <width>30</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="struttura_btn_shells">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>34</width>
+                      <height>32</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>34</width>
+                      <height>32</height>
+                     </size>
+                    </property>
+                    <property name="toolTip">
+                     <string>aggiungi parallelepipedo</string>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">QPushButton{
+	border-radius:4px;
+}
+QPushButton:hover {
+    background-color: rgb(40,40,40);
+	border: 1px solid rgb(120,120,120);
+}
+QPushButton:checked {
+    background-color: rgb(50,50,50);
+	border: 1px solid rgb(120,120,120);
+}</string>
+                    </property>
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="icon">
+                     <iconset>
+                      <normaloff>icone/shell.png</normaloff>icone/shell.png</iconset>
+                    </property>
+                    <property name="iconSize">
+                     <size>
+                      <width>30</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="struttura_btn_vincoli">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>34</width>
+                      <height>32</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>34</width>
+                      <height>32</height>
+                     </size>
+                    </property>
+                    <property name="toolTip">
+                     <string>aggiungi parallelepipedo</string>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">QPushButton{
+	border-radius:4px;
+}
+QPushButton:hover {
+    background-color: rgb(40,40,40);
+	border: 1px solid rgb(120,120,120);
+}
+QPushButton:checked {
+    background-color: rgb(50,50,50);
+	border: 1px solid rgb(120,120,120);
+}</string>
+                    </property>
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="icon">
+                     <iconset>
+                      <normaloff>icone/vincolo.png</normaloff>icone/vincolo.png</iconset>
+                    </property>
+                    <property name="iconSize">
+                     <size>
+                      <width>30</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="struttura_btn_carichi">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>34</width>
+                      <height>32</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>34</width>
+                      <height>32</height>
+                     </size>
+                    </property>
+                    <property name="toolTip">
+                     <string>aggiungi parallelepipedo</string>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">QPushButton{
+	border-radius:4px;
+}
+QPushButton:hover {
+    background-color: rgb(40,40,40);
+	border: 1px solid rgb(120,120,120);
+}
+QPushButton:checked {
+    background-color: rgb(50,50,50);
+	border: 1px solid rgb(120,120,120);
+}</string>
+                    </property>
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="icon">
+                     <iconset>
+                      <normaloff>icone/carico.png</normaloff>icone/carico.png</iconset>
+                    </property>
+                    <property name="iconSize">
+                     <size>
+                      <width>30</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QWidget" name="widget_49" native="true">
+                    <property name="minimumSize">
+                     <size>
+                      <width>4</width>
+                      <height>32</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>4</width>
+                      <height>32</height>
+                     </size>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">border:none;
+background-color: rgb(60,60,60);
+border-radius:2px</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
                    <widget class="QPushButton" name="struttura_btn_identificazione">
                     <property name="sizePolicy">
                      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -12890,8 +13166,6 @@ border:none;</string>
                     <property name="styleSheet">
                      <string notr="true">QPushButton{
 	border-radius:4px;
-	font:400 11pt &quot;Inter&quot;;
-    color: rgb(255,255,255);
 }
 QPushButton:hover {
     background-color: rgb(40,40,40);
@@ -12911,8 +13185,8 @@ QPushButton:checked {
                     </property>
                     <property name="iconSize">
                      <size>
-                      <width>32</width>
-                      <height>32</height>
+                      <width>30</width>
+                      <height>30</height>
                      </size>
                     </property>
                    </widget>
@@ -12943,8 +13217,6 @@ QPushButton:checked {
                     <property name="styleSheet">
                      <string notr="true">QPushButton{
 	border-radius:4px;
-	font:400 11pt &quot;Inter&quot;;
-    color: rgb(255,255,255);
 }
 QPushButton:hover {
     background-color: rgb(40,40,40);
@@ -13418,7 +13690,7 @@ QScrollBar::sub-page:vertical {
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>525</width>
+               <width>439</width>
                <height>1122</height>
               </rect>
              </property>
@@ -15087,8 +15359,8 @@ QScrollBar::sub-page:vertical {
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>544</width>
-               <height>1097</height>
+               <width>439</width>
+               <height>1093</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_28">
@@ -16862,8 +17134,8 @@ QScrollBar::sub-page:vertical {
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>544</width>
-               <height>1097</height>
+               <width>439</width>
+               <height>1054</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_40">
@@ -18596,8 +18868,8 @@ QScrollBar::sub-page:vertical {
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>544</width>
-               <height>1097</height>
+               <width>459</width>
+               <height>862</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_39">
@@ -21248,8 +21520,8 @@ QScrollBar::sub-page:vertical {
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>544</width>
-               <height>1097</height>
+               <width>449</width>
+               <height>540</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_43">

@@ -11,9 +11,11 @@ import re
 from PyQt5.QtCore import Qt, QRect, QSize, QRegularExpression, QTimer
 from PyQt5.QtGui import (
     QSyntaxHighlighter, QTextCharFormat, QColor, QFont,
-    QPainter, QPen,
+    QPainter, QPen, QTextCursor,
 )
-from PyQt5.QtWidgets import QPlainTextEdit, QWidget, QVBoxLayout, QLabel
+from PyQt5.QtWidgets import (
+    QPlainTextEdit, QWidget, QVBoxLayout, QLabel, QTextEdit,
+)
 
 
 # ================================================================
@@ -35,7 +37,7 @@ _KEYWORDS = {
     "material", "section",
     "node", "beam", "shell",
     "fix",
-    "nodeLoad", "beamLoad",
+    "nodeLoad", "beamLoad", "shellLoad",
 }
 
 # Parametri con sintassi "keyword:" (section:, material:, thickness:)
@@ -46,6 +48,17 @@ _SECTION_HEADERS = re.compile(
     r"^#\s*[═─]+\s*(NODI|ASTE|SHELL|VINCOLI|CARICHI|MATERIALI|SEZIONI).*$",
     re.IGNORECASE,
 )
+
+
+def _norm_nome(s: str) -> str:
+    """Normalizza un nome di materiale/sezione per il matching:
+    - sostituisce il segno di moltiplicazione unicode '×' (U+00D7) con 'x'
+    - toglie gli spazi iniziali/finali
+    - lowercase
+    Serve per riconoscere 'R 200x400' come 'R 200×400' del database."""
+    if s is None:
+        return ""
+    return s.replace("×", "x").replace("X", "x").strip().lower()
 
 
 # ================================================================
@@ -73,9 +86,13 @@ class StrutturaSyntaxHighlighter(QSyntaxHighlighter):
         # Nomi globali (database programma + progetto aperto)
         self._mat_nomi_globali: set = set()
         self._sez_nomi_globali: set = set()
+        self._mat_nomi_norm: set = set()
+        self._sez_nomi_norm: set = set()
         # Definizioni locali nel testo strutturale corrente: {id_str: nome_str}
         self._mat_definiti: dict = {}
         self._sez_definiti: dict = {}
+        self._mat_definiti_norm_values: set = set()
+        self._sez_definiti_norm_values: set = set()
         self._build_formats()
 
     def _build_formats(self):
@@ -108,6 +125,10 @@ class StrutturaSyntaxHighlighter(QSyntaxHighlighter):
         self._fmt_valid_ref.setForeground(_COL_VALID_REF)
         self._fmt_valid_ref.setFontWeight(QFont.Bold)
 
+    @staticmethod
+    def _norm_set(nomi) -> set:
+        return {_norm_nome(n) for n in nomi}
+
     def set_nomi_validi(self,
                         mat_nomi_globali: set, sez_nomi_globali: set,
                         mat_definiti: dict, sez_definiti: dict):
@@ -124,15 +145,20 @@ class StrutturaSyntaxHighlighter(QSyntaxHighlighter):
         """
         self._mat_nomi_globali = mat_nomi_globali
         self._sez_nomi_globali = sez_nomi_globali
+        # Set normalizzati per matching tollerante (x ↔ ×, case-insensitive)
+        self._mat_nomi_norm = self._norm_set(mat_nomi_globali)
+        self._sez_nomi_norm = self._norm_set(sez_nomi_globali)
         self._mat_definiti = mat_definiti
         self._sez_definiti = sez_definiti
+        self._mat_definiti_norm_values = {_norm_nome(v) for v in mat_definiti.values()}
+        self._sez_definiti_norm_values = {_norm_nome(v) for v in sez_definiti.values()}
         self.rehighlight()
 
     def _is_valid_material_ref(self, val: str) -> bool:
         """True se 'val' (id intero o nome) corrisponde a un materiale definito."""
         if val in self._mat_definiti:               # match per ID
             return True
-        if val in self._mat_definiti.values():      # match per nome
+        if _norm_nome(val) in self._mat_definiti_norm_values:  # match per nome
             return True
         return False
 
@@ -140,7 +166,7 @@ class StrutturaSyntaxHighlighter(QSyntaxHighlighter):
         """True se 'val' (id intero o nome) corrisponde a una sezione definita."""
         if val in self._sez_definiti:
             return True
-        if val in self._sez_definiti.values():
+        if _norm_nome(val) in self._sez_definiti_norm_values:
             return True
         return False
 
@@ -220,7 +246,7 @@ class StrutturaSyntaxHighlighter(QSyntaxHighlighter):
         if len(toks) == 3:
             nome_tok, nome_pos = toks[2]
             nome = _strip_quotes(nome_tok)
-            if nome in self._mat_nomi_globali:
+            if _norm_nome(nome) in self._mat_nomi_norm:
                 self.setFormat(nome_pos, len(nome_tok), self._fmt_valid_ref)
 
     def _highlight_section_line(self, code_part: str):
@@ -238,7 +264,7 @@ class StrutturaSyntaxHighlighter(QSyntaxHighlighter):
             if len(toks) == 3:
                 nome_tok, nome_pos = toks[2]
                 nome = _strip_quotes(nome_tok)
-                if nome in self._sez_nomi_globali:
+                if _norm_nome(nome) in self._sez_nomi_norm:
                     self.setFormat(nome_pos, len(nome_tok), self._fmt_valid_ref)
         else:
             # Inline: il valore dopo 'material:' è il riferimento
@@ -285,6 +311,7 @@ def parse_struttura(testo: str) -> tuple:
         "vincoli":            {nodo_id: [dx, dy, dz, rx, ry, rz], ...},
         "carichi_nodali":     [(nodo_id, fx, fy, fz), ...],
         "carichi_distribuiti": [(asta_id, wx, wy, wz), ...],
+        "carichi_shell":       [(shell_id, qx, qy, qz), ...],
     }
     errori = [(riga, messaggio), ...]
     """
@@ -297,6 +324,7 @@ def parse_struttura(testo: str) -> tuple:
         "vincoli": {},
         "carichi_nodali": [],
         "carichi_distribuiti": [],
+        "carichi_shell": [],
     }
     errori = []
 
@@ -343,6 +371,8 @@ def parse_struttura(testo: str) -> tuple:
                 _parse_node_load(tokens, dati, errori, lineno)
             elif cmd == "beamLoad":
                 _parse_beam_load(tokens, dati, errori, lineno)
+            elif cmd == "shellLoad":
+                _parse_shell_load(tokens, dati, errori, lineno)
             else:
                 errori.append((lineno, f"Comando sconosciuto: '{cmd}'"))
         except Exception as e:
@@ -501,6 +531,16 @@ def _parse_beam_load(tokens, dati, errori, lineno):
     dati["carichi_distribuiti"].append((bid, wx, wy, wz))
 
 
+def _parse_shell_load(tokens, dati, errori, lineno):
+    # shellLoad <shell_id> <qx> <qy> <qz>
+    if len(tokens) < 5:
+        errori.append((lineno, "shellLoad richiede: shellLoad <shell_id> <qx> <qy> <qz>"))
+        return
+    sid = int(tokens[1])
+    qx, qy, qz = float(tokens[2]), float(tokens[3]), float(tokens[4])
+    dati["carichi_shell"].append((sid, qx, qy, qz))
+
+
 def _parse_material(tokens, dati, errori, lineno):
     # Riferimento:  material <id> <nome>
     # Inline:       material <id> <nome> <densita> <E> <G> <J>
@@ -594,11 +634,14 @@ def _valida_riferimenti(dati, errori):
     mat_validi = set()
     for mid, m in dati["materiali"].items():
         mat_validi.add(str(mid))
-        mat_validi.add(m["nome"])
+        mat_validi.add(_norm_nome(m["nome"]))
     sez_validi = set()
     for sid, s in dati["sezioni"].items():
         sez_validi.add(str(sid))
-        sez_validi.add(s["nome"])
+        sez_validi.add(_norm_nome(s["nome"]))
+
+    def _ref_match(val: str, pool: set) -> bool:
+        return val in pool or _norm_nome(val) in pool
 
     for bid, asta in dati["aste"].items():
         if asta["nodo_i"] not in nodi_ids:
@@ -606,7 +649,7 @@ def _valida_riferimenti(dati, errori):
         if asta["nodo_j"] not in nodi_ids:
             errori.append((0, f"Asta {bid}: nodo_j={asta['nodo_j']} non definito"))
         sez = asta.get("sezione", "")
-        if sez and sez not in sez_validi:
+        if sez and not _ref_match(sez, sez_validi):
             errori.append((0, f"Asta {bid}: sezione '{sez}' non definita"))
 
     for sid, sh in dati["shell"].items():
@@ -614,13 +657,13 @@ def _valida_riferimenti(dati, errori):
             if nid not in nodi_ids:
                 errori.append((0, f"Shell {sid}: nodo {nid} non definito"))
         mat = sh.get("materiale", "")
-        if mat and mat not in mat_validi:
+        if mat and not _ref_match(mat, mat_validi):
             errori.append((0, f"Shell {sid}: materiale '{mat}' non definito"))
 
     for sid, s in dati["sezioni"].items():
         if s.get("tipo") == "inline":
             mat = s.get("materiale", "")
-            if mat and mat not in mat_validi:
+            if mat and not _ref_match(mat, mat_validi):
                 errori.append((0, f"Sezione {sid}: materiale '{mat}' non definito"))
 
     for nid in dati["vincoli"]:
@@ -634,6 +677,11 @@ def _valida_riferimenti(dati, errori):
     for (bid, *_) in dati["carichi_distribuiti"]:
         if bid not in aste_ids:
             errori.append((0, f"beamLoad: asta {bid} non definita"))
+
+    shell_ids = set(dati["shell"].keys())
+    for (sid, *_) in dati["carichi_shell"]:
+        if sid not in shell_ids:
+            errori.append((0, f"shellLoad: shell {sid} non definita"))
 
 
 # ================================================================
@@ -956,9 +1004,62 @@ class TextoStrutturaManager:
         self._editor.blockSignals(True)
         self._editor.setPlainText(testo)
         self._editor.blockSignals(False)
-        
+
         # AGGIUNTA: Forza il ricalcolo dei margini ora che il testo è caricato
         self._editor._update_line_area_width()
+
+    # ------------------------------------------------------------------
+    #  Selezione riga corrispondente ad un oggetto 3D
+    # ------------------------------------------------------------------
+
+    def seleziona_oggetto(self, kind: str, oid: int):
+        """Evidenzia la riga di definizione dell'oggetto (kind, oid) nell'editor.
+
+        kind ∈ {"nodo", "beam", "shell"}. L'id è quello numerico dichiarato
+        nel testo. La riga viene colorata di un soft blu e scrollata in vista.
+        """
+        patterns = {
+            "nodo":  rf"^\s*node\s+{oid}\b",
+            "beam":  rf"^\s*beam\s+{oid}\b",
+            "shell": rf"^\s*shell\s+{oid}\b",
+        }
+        pat = patterns.get(kind)
+        if pat is None:
+            self._clear_row_selection()
+            return
+
+        doc = self._editor.document()
+        testo = self._editor.toPlainText()
+        m = re.search(pat, testo, re.MULTILINE)
+        if m is None:
+            self._clear_row_selection()
+            return
+
+        # Converti indice carattere → riga
+        prefix = testo[:m.start()]
+        line_no = prefix.count("\n")
+
+        block = doc.findBlockByNumber(line_no)
+        if not block.isValid():
+            self._clear_row_selection()
+            return
+
+        cursor = QTextCursor(block)
+
+        sel = QTextEdit.ExtraSelection()
+        fmt = QTextCharFormat()
+        fmt.setBackground(QColor(80, 125, 180, 90))   # soft blu
+        fmt.setProperty(QTextCharFormat.FullWidthSelection, True)
+        sel.format = fmt
+        sel.cursor = cursor
+        self._editor.setExtraSelections([sel])
+
+        # Sposta il cursore e scrolla in vista (senza rubare il focus)
+        self._editor.setTextCursor(cursor)
+        self._editor.ensureCursorVisible()
+
+    def _clear_row_selection(self):
+        self._editor.setExtraSelections([])
 
     def parse_e_valida(self) -> tuple:
         """Esegue il parsing e aggiorna il widget text_control con i risultati."""

@@ -154,7 +154,8 @@ node 1  0.0  0.0  0.0   # commento inline
 <ul>
 <li>Lunghezze: <b>metri (m)</b></li>
 <li>Forze: <b>kN</b></li>
-<li>Carichi distribuiti: <b>kN/m</b></li>
+<li>Carichi distribuiti su asta: <b>kN/m</b></li>
+<li>Carichi distribuiti di superficie su shell: <b>kN/m²</b></li>
 </ul>
 
 <h3 style="color:#569cd6;">Integrazione con Materiali e Sezioni</h3>
@@ -385,6 +386,14 @@ _HTML_CARICHI = """
 <tr><td style="color:#9cdcfe;"><b>wx, wy, wz</b></td><td>Componenti del carico distribuito (kN/m)</td></tr>
 </table>
 
+<h3>Carico distribuito di superficie su shell</h3>
+<pre>
+<span style="color:#569cd6;">shellLoad</span>  <span style="color:#9cdcfe;">&lt;shell_id&gt;</span>  <span style="color:#b5cea8;">&lt;qx&gt;</span>  <span style="color:#b5cea8;">&lt;qy&gt;</span>  <span style="color:#b5cea8;">&lt;qz&gt;</span>
+</pre>
+<table style="color:#ddd; border-collapse:collapse;" cellpadding="6">
+<tr><td style="color:#9cdcfe;"><b>qx, qy, qz</b></td><td>Componenti del carico di superficie (kN/m²) applicato sull'intera shell</td></tr>
+</table>
+
 <h3>Esempi</h3>
 <pre>
 <span style="color:#6a9955;"># Forza orizzontale di 10 kN sul nodo 5</span>
@@ -398,10 +407,14 @@ _HTML_CARICHI = """
 
 <span style="color:#6a9955;"># Carico distribuito laterale (vento) su asta 1</span>
 <span style="color:#569cd6;">beamLoad</span>  <span style="color:#b5cea8;">1</span>    <span style="color:#b5cea8;">3.0</span>   <span style="color:#b5cea8;">0.0</span>   <span style="color:#b5cea8;">0.0</span>
+
+<span style="color:#6a9955;"># Carico di superficie verticale -5 kN/m² sulla shell 1 (es. soletta)</span>
+<span style="color:#569cd6;">shellLoad</span>  <span style="color:#b5cea8;">1</span>    <span style="color:#b5cea8;">0.0</span>   <span style="color:#b5cea8;">0.0</span>  <span style="color:#b5cea8;">-5.0</span>
 </pre>
 
-<p style="color:#ce9178;">Nota: le convenzioni di segno seguono il sistema di riferimento
-globale (X, Y, Z). I carichi verso il basso hanno componente Z negativa.</p>
+<p style="color:#ce9178;">Nota: le convenzioni di segno seguono gli assi globali (X, Y, Z).
+La freccia disegnata nel viewer 3D segue la direzione della componente:
+Fz positivo → freccia verso l'alto, Fz negativo → freccia verso il basso.</p>
 """
 
 # ================================================================
@@ -422,6 +435,7 @@ Il tuo compito è generare il codice di definizione di un modello strutturale ut
 - Vincoli: fix <nodo_id> <dx> <dy> <dz> [<rx> <ry> <rz>] (1=bloccato, 0=libero)
 - Carichi nodali: nodeLoad <nodo_id> <Fx> <Fy> <Fz>
 - Carichi distribuiti su asta: beamLoad <asta_id> <wx> <wy> <wz>
+- Carichi distribuiti di superficie su shell: shellLoad <shell_id> <qx> <qy> <qz>
 
 # LINEE GUIDA IMPORTANTI
 1. Utilizza i commenti (iniziando la riga con '#') per dividere chiaramente le sezioni: # --- MATERIALI ---, # --- SEZIONI ---, # --- NODI ---, # --- ASTE ---, # --- SHELL ---, # --- VINCOLI ---, # --- CARICHI ---.

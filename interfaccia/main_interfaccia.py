@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(2448, 1184)
+        MainWindow.resize(2383, 1184)
         MainWindow.setStyleSheet("background-color: rgb(40,40,40);\n"
 "color: rgb(255, 255, 255);")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -1647,7 +1647,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollArea_2.setObjectName("scrollArea_2")
         self.scrollAreaWidgetContents_2 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 305, 1154))
+        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 575, 1154))
         self.scrollAreaWidgetContents_2.setObjectName("scrollAreaWidgetContents_2")
         self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_5.setObjectName("verticalLayout_5")
@@ -2800,7 +2800,7 @@ class Ui_MainWindow(object):
         self.scrollArea_4.setWidgetResizable(True)
         self.scrollArea_4.setObjectName("scrollArea_4")
         self.scrollAreaWidgetContents_4 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_4.setGeometry(QtCore.QRect(0, 0, 139, 885))
+        self.scrollAreaWidgetContents_4.setGeometry(QtCore.QRect(0, 0, 625, 885))
         self.scrollAreaWidgetContents_4.setObjectName("scrollAreaWidgetContents_4")
         self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_4)
         self.verticalLayout_6.setObjectName("verticalLayout_6")
@@ -3938,7 +3938,7 @@ class Ui_MainWindow(object):
         self.scrollArea_7.setWidgetResizable(True)
         self.scrollArea_7.setObjectName("scrollArea_7")
         self.scrollAreaWidgetContents_7 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_7.setGeometry(QtCore.QRect(0, 0, 473, 816))
+        self.scrollAreaWidgetContents_7.setGeometry(QtCore.QRect(0, 0, 525, 816))
         self.scrollAreaWidgetContents_7.setObjectName("scrollAreaWidgetContents_7")
         self.verticalLayout_32 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_7)
         self.verticalLayout_32.setObjectName("verticalLayout_32")
@@ -4741,7 +4741,7 @@ class Ui_MainWindow(object):
         self.scrollArea_8.setWidgetResizable(True)
         self.scrollArea_8.setObjectName("scrollArea_8")
         self.scrollAreaWidgetContents_8 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_8.setGeometry(QtCore.QRect(0, 0, 244, 797))
+        self.scrollAreaWidgetContents_8.setGeometry(QtCore.QRect(0, 0, 574, 1097))
         self.scrollAreaWidgetContents_8.setObjectName("scrollAreaWidgetContents_8")
         self.verticalLayout_37 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_8)
         self.verticalLayout_37.setObjectName("verticalLayout_37")
@@ -5390,7 +5390,7 @@ class Ui_MainWindow(object):
         self.scrollArea_9.setWidgetResizable(True)
         self.scrollArea_9.setObjectName("scrollArea_9")
         self.scrollAreaWidgetContents_9 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_9.setGeometry(QtCore.QRect(0, 0, 2110, 1044))
+        self.scrollAreaWidgetContents_9.setGeometry(QtCore.QRect(0, 0, 2045, 1044))
         self.scrollAreaWidgetContents_9.setObjectName("scrollAreaWidgetContents_9")
         self.horizontalLayout_90 = QtWidgets.QHBoxLayout(self.scrollAreaWidgetContents_9)
         self.horizontalLayout_90.setObjectName("horizontalLayout_90")
@@ -5862,6 +5862,140 @@ class Ui_MainWindow(object):
         self.horizontalLayout_119 = QtWidgets.QHBoxLayout(self.widget_43)
         self.horizontalLayout_119.setContentsMargins(4, 4, 4, 4)
         self.horizontalLayout_119.setObjectName("horizontalLayout_119")
+        self.struttura_btn_nodi = QtWidgets.QPushButton(self.widget_43)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.struttura_btn_nodi.sizePolicy().hasHeightForWidth())
+        self.struttura_btn_nodi.setSizePolicy(sizePolicy)
+        self.struttura_btn_nodi.setMinimumSize(QtCore.QSize(34, 32))
+        self.struttura_btn_nodi.setMaximumSize(QtCore.QSize(34, 32))
+        self.struttura_btn_nodi.setStyleSheet("QPushButton{\n"
+"    border-radius:4px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(40,40,40);\n"
+"    border: 1px solid rgb(120,120,120);\n"
+"}\n"
+"QPushButton:checked {\n"
+"    background-color: rgb(50,50,50);\n"
+"    border: 1px solid rgb(120,120,120);\n"
+"}")
+        self.struttura_btn_nodi.setText("")
+        icon36 = QtGui.QIcon()
+        icon36.addPixmap(QtGui.QPixmap("interfaccia\\icone/nodo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.struttura_btn_nodi.setIcon(icon36)
+        self.struttura_btn_nodi.setIconSize(QtCore.QSize(32, 32))
+        self.struttura_btn_nodi.setObjectName("struttura_btn_nodi")
+        self.horizontalLayout_119.addWidget(self.struttura_btn_nodi)
+        self.struttura_btn_beams = QtWidgets.QPushButton(self.widget_43)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.struttura_btn_beams.sizePolicy().hasHeightForWidth())
+        self.struttura_btn_beams.setSizePolicy(sizePolicy)
+        self.struttura_btn_beams.setMinimumSize(QtCore.QSize(34, 32))
+        self.struttura_btn_beams.setMaximumSize(QtCore.QSize(34, 32))
+        self.struttura_btn_beams.setStyleSheet("QPushButton{\n"
+"    border-radius:4px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(40,40,40);\n"
+"    border: 1px solid rgb(120,120,120);\n"
+"}\n"
+"QPushButton:checked {\n"
+"    background-color: rgb(50,50,50);\n"
+"    border: 1px solid rgb(120,120,120);\n"
+"}")
+        self.struttura_btn_beams.setText("")
+        icon37 = QtGui.QIcon()
+        icon37.addPixmap(QtGui.QPixmap("interfaccia\\icone/asta.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.struttura_btn_beams.setIcon(icon37)
+        self.struttura_btn_beams.setIconSize(QtCore.QSize(30, 30))
+        self.struttura_btn_beams.setObjectName("struttura_btn_beams")
+        self.horizontalLayout_119.addWidget(self.struttura_btn_beams)
+        self.struttura_btn_shells = QtWidgets.QPushButton(self.widget_43)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.struttura_btn_shells.sizePolicy().hasHeightForWidth())
+        self.struttura_btn_shells.setSizePolicy(sizePolicy)
+        self.struttura_btn_shells.setMinimumSize(QtCore.QSize(34, 32))
+        self.struttura_btn_shells.setMaximumSize(QtCore.QSize(34, 32))
+        self.struttura_btn_shells.setStyleSheet("QPushButton{\n"
+"    border-radius:4px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(40,40,40);\n"
+"    border: 1px solid rgb(120,120,120);\n"
+"}\n"
+"QPushButton:checked {\n"
+"    background-color: rgb(50,50,50);\n"
+"    border: 1px solid rgb(120,120,120);\n"
+"}")
+        self.struttura_btn_shells.setText("")
+        icon38 = QtGui.QIcon()
+        icon38.addPixmap(QtGui.QPixmap("interfaccia\\icone/shell.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.struttura_btn_shells.setIcon(icon38)
+        self.struttura_btn_shells.setIconSize(QtCore.QSize(30, 30))
+        self.struttura_btn_shells.setObjectName("struttura_btn_shells")
+        self.horizontalLayout_119.addWidget(self.struttura_btn_shells)
+        self.struttura_btn_vincoli = QtWidgets.QPushButton(self.widget_43)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.struttura_btn_vincoli.sizePolicy().hasHeightForWidth())
+        self.struttura_btn_vincoli.setSizePolicy(sizePolicy)
+        self.struttura_btn_vincoli.setMinimumSize(QtCore.QSize(34, 32))
+        self.struttura_btn_vincoli.setMaximumSize(QtCore.QSize(34, 32))
+        self.struttura_btn_vincoli.setStyleSheet("QPushButton{\n"
+"    border-radius:4px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(40,40,40);\n"
+"    border: 1px solid rgb(120,120,120);\n"
+"}\n"
+"QPushButton:checked {\n"
+"    background-color: rgb(50,50,50);\n"
+"    border: 1px solid rgb(120,120,120);\n"
+"}")
+        self.struttura_btn_vincoli.setText("")
+        self.struttura_btn_vincoli.setIcon(icon34)
+        self.struttura_btn_vincoli.setIconSize(QtCore.QSize(30, 30))
+        self.struttura_btn_vincoli.setObjectName("struttura_btn_vincoli")
+        self.horizontalLayout_119.addWidget(self.struttura_btn_vincoli)
+        self.struttura_btn_carichi = QtWidgets.QPushButton(self.widget_43)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.struttura_btn_carichi.sizePolicy().hasHeightForWidth())
+        self.struttura_btn_carichi.setSizePolicy(sizePolicy)
+        self.struttura_btn_carichi.setMinimumSize(QtCore.QSize(34, 32))
+        self.struttura_btn_carichi.setMaximumSize(QtCore.QSize(34, 32))
+        self.struttura_btn_carichi.setStyleSheet("QPushButton{\n"
+"    border-radius:4px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(40,40,40);\n"
+"    border: 1px solid rgb(120,120,120);\n"
+"}\n"
+"QPushButton:checked {\n"
+"    background-color: rgb(50,50,50);\n"
+"    border: 1px solid rgb(120,120,120);\n"
+"}")
+        self.struttura_btn_carichi.setText("")
+        self.struttura_btn_carichi.setIcon(icon35)
+        self.struttura_btn_carichi.setIconSize(QtCore.QSize(30, 30))
+        self.struttura_btn_carichi.setObjectName("struttura_btn_carichi")
+        self.horizontalLayout_119.addWidget(self.struttura_btn_carichi)
+        self.widget_49 = QtWidgets.QWidget(self.widget_43)
+        self.widget_49.setMinimumSize(QtCore.QSize(4, 32))
+        self.widget_49.setMaximumSize(QtCore.QSize(4, 32))
+        self.widget_49.setStyleSheet("border:none;\n"
+"background-color: rgb(60,60,60);\n"
+"border-radius:2px")
+        self.widget_49.setObjectName("widget_49")
+        self.horizontalLayout_119.addWidget(self.widget_49)
         self.struttura_btn_identificazione = QtWidgets.QPushButton(self.widget_43)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -5872,8 +6006,6 @@ class Ui_MainWindow(object):
         self.struttura_btn_identificazione.setMaximumSize(QtCore.QSize(34, 32))
         self.struttura_btn_identificazione.setStyleSheet("QPushButton{\n"
 "    border-radius:4px;\n"
-"    font:400 11pt \"Inter\";\n"
-"    color: rgb(255,255,255);\n"
 "}\n"
 "QPushButton:hover {\n"
 "    background-color: rgb(40,40,40);\n"
@@ -5884,10 +6016,10 @@ class Ui_MainWindow(object):
 "    border: 1px solid rgb(120,120,120);\n"
 "}")
         self.struttura_btn_identificazione.setText("")
-        icon36 = QtGui.QIcon()
-        icon36.addPixmap(QtGui.QPixmap("interfaccia\\icone/identificazione.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.struttura_btn_identificazione.setIcon(icon36)
-        self.struttura_btn_identificazione.setIconSize(QtCore.QSize(32, 32))
+        icon39 = QtGui.QIcon()
+        icon39.addPixmap(QtGui.QPixmap("interfaccia\\icone/identificazione.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.struttura_btn_identificazione.setIcon(icon39)
+        self.struttura_btn_identificazione.setIconSize(QtCore.QSize(30, 30))
         self.struttura_btn_identificazione.setObjectName("struttura_btn_identificazione")
         self.horizontalLayout_119.addWidget(self.struttura_btn_identificazione)
         self.struttura_btn_direzione = QtWidgets.QPushButton(self.widget_43)
@@ -5900,8 +6032,6 @@ class Ui_MainWindow(object):
         self.struttura_btn_direzione.setMaximumSize(QtCore.QSize(34, 32))
         self.struttura_btn_direzione.setStyleSheet("QPushButton{\n"
 "    border-radius:4px;\n"
-"    font:400 11pt \"Inter\";\n"
-"    color: rgb(255,255,255);\n"
 "}\n"
 "QPushButton:hover {\n"
 "    background-color: rgb(40,40,40);\n"
@@ -5912,9 +6042,9 @@ class Ui_MainWindow(object):
 "    border: 1px solid rgb(120,120,120);\n"
 "}")
         self.struttura_btn_direzione.setText("")
-        icon37 = QtGui.QIcon()
-        icon37.addPixmap(QtGui.QPixmap("interfaccia\\icone/direzione.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.struttura_btn_direzione.setIcon(icon37)
+        icon40 = QtGui.QIcon()
+        icon40.addPixmap(QtGui.QPixmap("interfaccia\\icone/direzione.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.struttura_btn_direzione.setIcon(icon40)
         self.struttura_btn_direzione.setIconSize(QtCore.QSize(32, 32))
         self.struttura_btn_direzione.setObjectName("struttura_btn_direzione")
         self.horizontalLayout_119.addWidget(self.struttura_btn_direzione)
@@ -6947,7 +7077,7 @@ class Ui_MainWindow(object):
         self.scrollArea_6.setWidgetResizable(True)
         self.scrollArea_6.setObjectName("scrollArea_6")
         self.scrollAreaWidgetContents_6 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_6.setGeometry(QtCore.QRect(0, 0, 544, 1097))
+        self.scrollAreaWidgetContents_6.setGeometry(QtCore.QRect(0, 0, 525, 1093))
         self.scrollAreaWidgetContents_6.setObjectName("scrollAreaWidgetContents_6")
         self.verticalLayout_28 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_6)
         self.verticalLayout_28.setObjectName("verticalLayout_28")
@@ -7815,7 +7945,7 @@ class Ui_MainWindow(object):
         self.scrollArea_12.setWidgetResizable(True)
         self.scrollArea_12.setObjectName("scrollArea_12")
         self.scrollAreaWidgetContents_12 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_12.setGeometry(QtCore.QRect(0, 0, 544, 1097))
+        self.scrollAreaWidgetContents_12.setGeometry(QtCore.QRect(0, 0, 525, 1054))
         self.scrollAreaWidgetContents_12.setObjectName("scrollAreaWidgetContents_12")
         self.verticalLayout_40 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_12)
         self.verticalLayout_40.setObjectName("verticalLayout_40")
@@ -8670,7 +8800,7 @@ class Ui_MainWindow(object):
         self.scrollArea_11.setWidgetResizable(True)
         self.scrollArea_11.setObjectName("scrollArea_11")
         self.scrollAreaWidgetContents_11 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_11.setGeometry(QtCore.QRect(0, 0, 544, 1097))
+        self.scrollAreaWidgetContents_11.setGeometry(QtCore.QRect(0, 0, 525, 862))
         self.scrollAreaWidgetContents_11.setObjectName("scrollAreaWidgetContents_11")
         self.verticalLayout_39 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_11)
         self.verticalLayout_39.setObjectName("verticalLayout_39")
@@ -9495,9 +9625,9 @@ class Ui_MainWindow(object):
 "    border: 1px solid rgb(120,120,120);\n"
 "}")
         self.fem_elemento_btn_crack.setText("")
-        icon38 = QtGui.QIcon()
-        icon38.addPixmap(QtGui.QPixmap("interfaccia\\icone/crack.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.fem_elemento_btn_crack.setIcon(icon38)
+        icon41 = QtGui.QIcon()
+        icon41.addPixmap(QtGui.QPixmap("interfaccia\\icone/crack.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.fem_elemento_btn_crack.setIcon(icon41)
         self.fem_elemento_btn_crack.setIconSize(QtCore.QSize(30, 30))
         self.fem_elemento_btn_crack.setObjectName("fem_elemento_btn_crack")
         self.horizontalLayout_99.addWidget(self.fem_elemento_btn_crack)
@@ -9603,9 +9733,9 @@ class Ui_MainWindow(object):
 "    border: 1px solid rgb(120,120,120);\n"
 "}")
         self.fem_elemento_btn_play.setText("")
-        icon39 = QtGui.QIcon()
-        icon39.addPixmap(QtGui.QPixmap("interfaccia\\icone/play.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.fem_elemento_btn_play.setIcon(icon39)
+        icon42 = QtGui.QIcon()
+        icon42.addPixmap(QtGui.QPixmap("interfaccia\\icone/play.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.fem_elemento_btn_play.setIcon(icon42)
         self.fem_elemento_btn_play.setIconSize(QtCore.QSize(24, 24))
         self.fem_elemento_btn_play.setObjectName("fem_elemento_btn_play")
         self.horizontalLayout_104.addWidget(self.fem_elemento_btn_play)
@@ -9933,7 +10063,7 @@ class Ui_MainWindow(object):
         self.scrollArea_13.setWidgetResizable(True)
         self.scrollArea_13.setObjectName("scrollArea_13")
         self.scrollAreaWidgetContents_13 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_13.setGeometry(QtCore.QRect(0, 0, 544, 1097))
+        self.scrollAreaWidgetContents_13.setGeometry(QtCore.QRect(0, 0, 525, 540))
         self.scrollAreaWidgetContents_13.setObjectName("scrollAreaWidgetContents_13")
         self.verticalLayout_43 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_13)
         self.verticalLayout_43.setObjectName("verticalLayout_43")
@@ -10883,7 +11013,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget_main.setCurrentIndex(8)
+        self.stackedWidget_main.setCurrentIndex(9)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -11116,6 +11246,11 @@ class Ui_MainWindow(object):
         self.struttura_aggiorna.setToolTip(_translate("MainWindow", "centra diagramma"))
         self.struttura_layout.setToolTip(_translate("MainWindow", "centra diagramma"))
         self.label_367.setText(_translate("MainWindow", "Visualizzazione"))
+        self.struttura_btn_nodi.setToolTip(_translate("MainWindow", "aggiungi parallelepipedo"))
+        self.struttura_btn_beams.setToolTip(_translate("MainWindow", "aggiungi parallelepipedo"))
+        self.struttura_btn_shells.setToolTip(_translate("MainWindow", "aggiungi parallelepipedo"))
+        self.struttura_btn_vincoli.setToolTip(_translate("MainWindow", "aggiungi parallelepipedo"))
+        self.struttura_btn_carichi.setToolTip(_translate("MainWindow", "aggiungi parallelepipedo"))
         self.struttura_btn_identificazione.setToolTip(_translate("MainWindow", "aggiungi parallelepipedo"))
         self.struttura_btn_direzione.setToolTip(_translate("MainWindow", "aggiungi armatura"))
         self.label_342.setText(_translate("MainWindow", "Viste"))

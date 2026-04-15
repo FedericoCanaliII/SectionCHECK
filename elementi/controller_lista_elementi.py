@@ -667,16 +667,24 @@ class ControllerListaElementi(QObject):
         for tipo, frame in frames.items():
             self._init_frame(frame)
             self._elementi[tipo] = []
-            # sempre re-inserisce gli standard dal database
+
+            progetto_lista = sezione.get(tipo, [])
+            nomi_progetto = {d.get("nome") for d in progetto_lista}
+
+            # 1) Standard dal DB che NON sono stati salvati nel progetto
+            #    (quindi mai toccati → li prendo come baseline).
             for d in self._db_elem.get(tipo, []):
+                if d.get("nome") in nomi_progetto:
+                    continue   # override presente nel progetto
                 el = Elemento.from_dict(d)
                 self._elementi[tipo].append(el)
                 self._crea_bottone_elemento(el)
-            # poi aggiunge gli elementi custom salvati nel progetto
-            for d in sezione.get(tipo, []):
-                if not d.get("standard", False):
-                    el = Elemento.from_dict(d)
-                    self._elementi[tipo].append(el)
-                    self._crea_bottone_elemento(el)
+
+            # 2) Tutto ciò che è salvato nel progetto (standard modificati +
+            #    custom) — il progetto ha sempre la priorità.
+            for d in progetto_lista:
+                el = Elemento.from_dict(d)
+                self._elementi[tipo].append(el)
+                self._crea_bottone_elemento(el)
 
         self._elem_corrente = None

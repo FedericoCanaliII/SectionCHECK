@@ -337,7 +337,9 @@ class GestioneElementi:
         if not self._main.ha_progetto():
             return
         elementi = self._lista_ctrl.get_elementi()
-        dati = {tipo: [el.to_dict() for el in lista if not getattr(el, "standard", False)]
+        # NB: includiamo TUTTI gli elementi (anche quelli flaggati standard)
+        # così che le modifiche agli standard persistano nel progetto.
+        dati = {tipo: [el.to_dict() for el in lista]
                 for tipo, lista in elementi.items()}
         self._main.push_undo("Modifica elementi")
         self._main.set_sezione("elementi", dati)
