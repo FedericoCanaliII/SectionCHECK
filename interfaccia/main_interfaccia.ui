@@ -2023,7 +2023,7 @@ QPushButton:checked {
          <string notr="true">background-color: rgb(40, 40, 40);</string>
         </property>
         <property name="currentIndex">
-         <number>9</number>
+         <number>14</number>
         </property>
         <widget class="QWidget" name="page_main">
          <layout class="QVBoxLayout" name="verticalLayout_27">
@@ -13690,7 +13690,7 @@ QScrollBar::sub-page:vertical {
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>439</width>
+               <width>525</width>
                <height>1122</height>
               </rect>
              </property>
@@ -15359,8 +15359,8 @@ QScrollBar::sub-page:vertical {
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>439</width>
-               <height>1093</height>
+               <width>544</width>
+               <height>1097</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_28">
@@ -17134,8 +17134,8 @@ QScrollBar::sub-page:vertical {
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>439</width>
-               <height>1054</height>
+               <width>544</width>
+               <height>1097</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_40">
@@ -18868,8 +18868,8 @@ QScrollBar::sub-page:vertical {
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>459</width>
-               <height>862</height>
+               <width>544</width>
+               <height>1097</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_39">
@@ -21520,8 +21520,8 @@ QScrollBar::sub-page:vertical {
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>449</width>
-               <height>540</height>
+               <width>544</width>
+               <height>1097</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_43">

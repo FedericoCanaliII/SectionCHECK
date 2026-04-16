@@ -1015,22 +1015,35 @@ class TextoStrutturaManager:
     def seleziona_oggetto(self, kind: str, oid: int):
         """Evidenzia la riga di definizione dell'oggetto (kind, oid) nell'editor.
 
-        kind ∈ {"nodo", "beam", "shell"}. L'id è quello numerico dichiarato
-        nel testo. La riga viene colorata di un soft blu e scrollata in vista.
+        kind ∈ {"nodo", "beam", "shell", "vincolo",
+                "carico_n", "carico_d", "carico_s"}.
+        Per i carichi, `oid` è l'indice 1-based nell'ordine di dichiarazione.
+        Per gli altri è l'id numerico dichiarato nel testo.
         """
-        patterns = {
-            "nodo":  rf"^\s*node\s+{oid}\b",
-            "beam":  rf"^\s*beam\s+{oid}\b",
-            "shell": rf"^\s*shell\s+{oid}\b",
+        patterns_by_id = {
+            "nodo":    rf"^\s*node\s+{oid}\b",
+            "beam":    rf"^\s*beam\s+{oid}\b",
+            "shell":   rf"^\s*shell\s+{oid}\b",
+            "vincolo": rf"^\s*fix\s+{oid}\b",
         }
-        pat = patterns.get(kind)
-        if pat is None:
-            self._clear_row_selection()
-            return
+        keyword_by_nth = {
+            "carico_n": "nodeLoad",
+            "carico_d": "beamLoad",
+            "carico_s": "shellLoad",
+        }
 
-        doc = self._editor.document()
         testo = self._editor.toPlainText()
-        m = re.search(pat, testo, re.MULTILINE)
+        doc = self._editor.document()
+        m = None
+
+        if kind in patterns_by_id:
+            m = re.search(patterns_by_id[kind], testo, re.MULTILINE)
+        elif kind in keyword_by_nth:
+            kw = keyword_by_nth[kind]
+            matches = list(re.finditer(rf"^\s*{kw}\b", testo, re.MULTILINE))
+            if 1 <= oid <= len(matches):
+                m = matches[oid - 1]
+
         if m is None:
             self._clear_row_selection()
             return

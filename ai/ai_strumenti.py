@@ -322,6 +322,62 @@ TOOLS_SCHEMA: list[dict] = [
         },
     },
 
+    # ── STRUTTURE (TELAI) ─────────────────────────────────────────────
+    {
+        "name": "elenca_strutture",
+        "description": "Elenca tutte le strutture disponibili nel progetto corrente "
+                       "(calcestruzzo, acciaio, personalizzate), indicando nome e se sono standard.",
+        "params": {},
+    },
+    {
+        "name": "get_info_struttura",
+        "description": "Restituisce il testo completo di una struttura e un riepilogo "
+                       "(numero di nodi, aste, shell, vincoli, carichi).",
+        "params": {
+            "nome": "str – nome esatto della struttura",
+        },
+    },
+    {
+        "name": "crea_struttura",
+        "description": (
+            "Crea una nuova struttura personalizzata con il testo di definizione fornito. "
+            "Il testo deve seguire la sintassi del linguaggio strutturale: "
+            "material, section, node, beam, shell, fix, nodeLoad, beamLoad, shellLoad. "
+            "UNITÀ: m (coordinate), kN (forze), kN/m (carichi distribuiti), kN/m² (carichi shell), "
+            "MPa (moduli E, G), kg/m³ (densità). Z è l'asse verticale (verso l'alto). "
+            "IDs interi progressivi a partire da 1. "
+            "ORDINE: (1) materiali, (2) sezioni, (3) nodi, (4) aste/shell, (5) vincoli, (6) carichi. "
+            "I nomi di materiali/sezioni tra virgolette singole (es. 'C25/30'). "
+            "Riferimenti con 'section:' e 'material:' (keyword attaccata ai due punti, valore separato). "
+            "VINCOLI: fix <nodo_id> <dx> <dy> <dz> [<rx> <ry> <rz>] con 1=bloccato, 0=libero. "
+            "SHELL: ordine nodi antiorario visto dall'esterno."
+        ),
+        "params": {
+            "nome":      "str – nome univoco per la struttura",
+            "categoria": "str – calcestruzzo | acciaio | personalizzate (default: personalizzate)",
+            "testo":     "str – testo completo di definizione della struttura",
+        },
+    },
+    {
+        "name": "modifica_struttura",
+        "description": (
+            "Sostituisce il testo di una struttura personalizzata (non standard). "
+            "Fornire il testo COMPLETO aggiornato (sostituzione totale, non parziale). "
+            "Dopo la modifica il viewer 3D viene aggiornato automaticamente."
+        ),
+        "params": {
+            "nome":  "str – nome della struttura da modificare",
+            "testo": "str – nuovo testo completo di definizione",
+        },
+    },
+    {
+        "name": "elimina_struttura",
+        "description": "Elimina una struttura personalizzata (non standard) dal progetto.",
+        "params": {
+            "nome": "str – nome della struttura da eliminare",
+        },
+    },
+
     # ── MANIPOLAZIONE VERTICI ──────────────────────────────────────────
     {
         "name": "get_vertici_oggetto",
@@ -415,6 +471,12 @@ class AIStrumenti:
             "aggiungi_carico_vincolo":   lambda p: self.aggiungi_carico_vincolo(**p),
             "modifica_carico_vincolo":   lambda p: self.modifica_carico_vincolo(**p),
             "elimina_carico_vincolo":    lambda p: self.elimina_carico_vincolo(**p),
+            # Strutture (Telai)
+            "elenca_strutture":          lambda p: self.elenca_strutture(),
+            "get_info_struttura":        lambda p: self.get_info_struttura(**p),
+            "crea_struttura":            lambda p: self.crea_struttura(**p),
+            "modifica_struttura":        lambda p: self.modifica_struttura(**p),
+            "elimina_struttura":         lambda p: self.elimina_struttura(**p),
             # Manipolazione vertici
             "get_vertici_oggetto":       lambda p: self.get_vertici_oggetto(**p),
             "modifica_vertici_oggetto":  lambda p: self.modifica_vertici_oggetto(**p),
@@ -1347,6 +1409,223 @@ class AIStrumenti:
         self._salva_cv(cv_data)
         self._ricarica_cv()
         return True, f"Carico/vincolo '{nome_cv}' rimosso da '{nome_elemento}'.", None
+
+    # ------------------------------------------------------------------
+    #  STRUTTURE (TELAI) – HELPERS
+    # ------------------------------------------------------------------
+
+    _CATEGORIE_STRUTTURE = ("calcestruzzo", "acciaio", "personalizzate")
+
+    def _str_data(self) -> dict:
+        return self._main.get_sezione("strutture") or {}
+
+    def _salva_str(self, str_data: dict):
+        self._main.set_sezione("strutture", str_data)
+
+    def _ricarica_strutture(self):
+        if hasattr(self._main, "_struttura"):
+            try:
+                self._main._struttura.ricarica_da_progetto()
+            except Exception as e:
+                print(f"WARN  AI – ricarica strutture: {e}")
+
+    def _get_tutte_strutture(self) -> list[tuple[str, str, dict]]:
+        """Ritorna lista di (cat, nome, dati) per tutte le strutture disponibili."""
+        from struttura.database_struttura import carica_database
+        db = carica_database()
+        risultati = []
+        str_data = self._str_data()
+        nomi_visti = set()
+        # Prima dal progetto (prioritario)
+        for cat in self._CATEGORIE_STRUTTURE:
+            for nome, dati in str_data.get(cat, {}).items():
+                risultati.append((cat, nome, dati))
+                nomi_visti.add((cat, nome))
+        # Poi dal database (solo se non già nel progetto)
+        for cat in self._CATEGORIE_STRUTTURE:
+            for nome, dati in db.get(cat, {}).items():
+                if (cat, nome) not in nomi_visti:
+                    risultati.append((cat, nome, dati))
+        return risultati
+
+    def _leggi_struttura(self, nome: str) -> tuple[str | None, str | None, dict | None]:
+        """Trova una struttura per nome. Ritorna (cat, nome, dati) o (None, None, None)."""
+        str_data = self._str_data()
+        for cat in self._CATEGORIE_STRUTTURE:
+            if nome in str_data.get(cat, {}):
+                return cat, nome, str_data[cat][nome]
+        from struttura.database_struttura import carica_database
+        db = carica_database()
+        for cat in self._CATEGORIE_STRUTTURE:
+            if nome in db.get(cat, {}):
+                return cat, nome, db[cat][nome]
+        return None, None, None
+
+    def _aggiorna_viewer_struttura(self, cat: str, nome: str):
+        """Se la struttura è attualmente aperta nel viewer, aggiorna il 3D."""
+        if hasattr(self._main, "_struttura"):
+            try:
+                s = self._main._struttura
+                if s._cat_corrente == cat and s._nome_corrente == nome:
+                    dati = self._leggi_struttura(nome)[2]
+                    testo = dati.get("testo", "") if dati else ""
+                    s._testo.set_testo(testo)
+                    s._aggiorna_3d()
+            except Exception as e:
+                print(f"WARN  AI – aggiorna viewer struttura: {e}")
+
+    # ------------------------------------------------------------------
+    #  STRUTTURE (TELAI) – LETTURA
+    # ------------------------------------------------------------------
+
+    def elenca_strutture(self) -> tuple[bool, str, Any]:
+        if not self._main.ha_progetto():
+            return False, "Nessun progetto aperto.", None
+        tutte = self._get_tutte_strutture()
+        if not tutte:
+            return True, "Nessuna struttura trovata nel progetto.", {}
+        per_cat: dict[str, list] = {c: [] for c in self._CATEGORIE_STRUTTURE}
+        for cat, nome, dati in tutte:
+            flag = " [standard]" if dati.get("standard", False) else " [custom]"
+            per_cat[cat].append(nome + flag)
+        righe = ["Strutture nel progetto:"]
+        for cat, nomi in per_cat.items():
+            if nomi:
+                righe.append(f"  • {cat}: " + ", ".join(nomi))
+        return True, "\n".join(righe), per_cat
+
+    def get_info_struttura(self, nome: str) -> tuple[bool, str, Any]:
+        if not self._main.ha_progetto():
+            return False, "Nessun progetto aperto.", None
+        cat, _, dati = self._leggi_struttura(nome)
+        if dati is None:
+            return False, f"Struttura '{nome}' non trovata.", None
+        testo = dati.get("testo", "")
+        # Parse per riepilogo
+        from struttura.testo_struttura import parse_struttura
+        parsed, errori = parse_struttura(testo)
+        n_nodi = len(parsed.get("nodi", {}))
+        n_aste = len(parsed.get("aste", {}))
+        n_shell = len(parsed.get("shell", {}))
+        n_vincoli = len(parsed.get("vincoli", {}))
+        n_cn = len(parsed.get("carichi_nodali", []))
+        n_cd = len(parsed.get("carichi_distribuiti", []))
+        n_cs = len(parsed.get("carichi_shell", []))
+        n_mat = len(parsed.get("materiali", {}))
+        n_sez = len(parsed.get("sezioni", {}))
+        lines = [
+            f"Struttura: {nome}  [{cat}]",
+            f"  standard: {dati.get('standard', False)}",
+            f"  materiali: {n_mat}, sezioni: {n_sez}",
+            f"  nodi: {n_nodi}, aste: {n_aste}, shell: {n_shell}",
+            f"  vincoli: {n_vincoli}",
+            f"  carichi nodali: {n_cn}, distribuiti: {n_cd}, shell: {n_cs}",
+        ]
+        if errori:
+            lines.append(f"  errori parser: {len(errori)}")
+            for e in errori[:5]:
+                lines.append(f"    ⚠ {e}")
+        lines.append(f"\n--- TESTO ---\n{testo}")
+        return True, "\n".join(lines), dati
+
+    # ------------------------------------------------------------------
+    #  STRUTTURE (TELAI) – SCRITTURA
+    # ------------------------------------------------------------------
+
+    def crea_struttura(
+        self, nome: str, testo: str,
+        categoria: str = "personalizzate",
+    ) -> tuple[bool, str, Any]:
+        if not self._main.ha_progetto():
+            return False, "Nessun progetto aperto.", None
+        _alias = {
+            "calcestruzzo": "calcestruzzo", "rc": "calcestruzzo",
+            "cls": "calcestruzzo", "ca": "calcestruzzo",
+            "acciaio": "acciaio", "steel": "acciaio",
+            "personalizzate": "personalizzate", "personalizzata": "personalizzate",
+            "custom": "personalizzate",
+        }
+        cat = _alias.get(categoria.lower().strip(), "personalizzate")
+        # Unicità nome
+        for c, n, _ in self._get_tutte_strutture():
+            if n == nome:
+                return False, f"Nome '{nome}' già presente nella categoria '{c}'.", None
+        # Valida il testo
+        from struttura.testo_struttura import parse_struttura
+        parsed, errori = parse_struttura(testo)
+        n_nodi = len(parsed.get("nodi", {}))
+        n_aste = len(parsed.get("aste", {}))
+        n_shell = len(parsed.get("shell", {}))
+        # Salva
+        str_data = self._str_data()
+        if cat not in str_data:
+            str_data[cat] = {}
+        str_data[cat][nome] = {
+            "standard": False,
+            "testo": testo,
+        }
+        self._main.push_undo("AI: Crea struttura", "lista_strutture")
+        self._salva_str(str_data)
+        self._ricarica_strutture()
+        msg = f"Struttura '{nome}' creata in '{cat}' ({n_nodi} nodi, {n_aste} aste, {n_shell} shell)."
+        if errori:
+            msg += f"\n⚠ {len(errori)} avvisi dal parser:"
+            for e in errori[:5]:
+                msg += f"\n  - {e}"
+        return True, msg, str_data[cat][nome]
+
+    def modifica_struttura(
+        self, nome: str, testo: str,
+    ) -> tuple[bool, str, Any]:
+        if not self._main.ha_progetto():
+            return False, "Nessun progetto aperto.", None
+        cat, _, dati = self._leggi_struttura(nome)
+        if dati is None:
+            return False, f"Struttura '{nome}' non trovata.", None
+        if dati.get("standard", False):
+            return False, (
+                f"'{nome}' è una struttura standard e non può essere modificata direttamente. "
+                "Duplicala prima oppure crea una nuova struttura personalizzata."
+            ), None
+        # Valida
+        from struttura.testo_struttura import parse_struttura
+        parsed, errori = parse_struttura(testo)
+        n_nodi = len(parsed.get("nodi", {}))
+        n_aste = len(parsed.get("aste", {}))
+        n_shell = len(parsed.get("shell", {}))
+        # Salva
+        str_data = self._str_data()
+        str_data.setdefault(cat, {})[nome] = {
+            "standard": False,
+            "testo": testo,
+        }
+        self._main.push_undo("AI: Modifica struttura", "struttura")
+        self._salva_str(str_data)
+        self._ricarica_strutture()
+        self._aggiorna_viewer_struttura(cat, nome)
+        msg = f"Struttura '{nome}' aggiornata ({n_nodi} nodi, {n_aste} aste, {n_shell} shell)."
+        if errori:
+            msg += f"\n⚠ {len(errori)} avvisi dal parser:"
+            for e in errori[:5]:
+                msg += f"\n  - {e}"
+        return True, msg, str_data[cat][nome]
+
+    def elimina_struttura(self, nome: str) -> tuple[bool, str, Any]:
+        if not self._main.ha_progetto():
+            return False, "Nessun progetto aperto.", None
+        cat, _, dati = self._leggi_struttura(nome)
+        if dati is None:
+            return False, f"Struttura '{nome}' non trovata.", None
+        if dati.get("standard", False):
+            return False, f"'{nome}' è una struttura standard e non può essere eliminata.", None
+        str_data = self._str_data()
+        if cat in str_data and nome in str_data[cat]:
+            del str_data[cat][nome]
+            self._main.push_undo("AI: Elimina struttura", "lista_strutture")
+            self._salva_str(str_data)
+            self._ricarica_strutture()
+            return True, f"Struttura '{nome}' eliminata.", None
+        return False, f"Struttura '{nome}' non trovata nel progetto.", None
 
     # ------------------------------------------------------------------
     #  MANIPOLAZIONE VERTICI

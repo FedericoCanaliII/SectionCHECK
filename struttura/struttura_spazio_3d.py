@@ -12,6 +12,7 @@ Controlli camera (stile Blender):
 
 import math
 import numpy as np
+from ctypes import c_void_p
 
 from PyQt5.QtWidgets import QOpenGLWidget
 from PyQt5.QtCore import Qt, QPoint, pyqtSignal
@@ -25,9 +26,9 @@ from OpenGL.GL import (
     GL_LINE_SMOOTH_HINT, GL_POINT_SMOOTH_HINT, GL_NICEST,
     GL_MODELVIEW, GL_PROJECTION,
     GL_LINES, GL_LINE_LOOP, GL_LINE_STRIP,
-    GL_TRIANGLE_FAN, GL_QUADS,
+    GL_TRIANGLES, GL_TRIANGLE_FAN, GL_QUADS,
     GL_POINTS,
-    GL_FALSE, GL_TRUE,
+    GL_FALSE, GL_TRUE, GL_FLOAT,
     GL_PROJECTION_MATRIX, GL_MODELVIEW_MATRIX, GL_VIEWPORT,
     glClearColor, glClear, glEnable, glDisable,
     glBlendFunc, glDepthFunc, glDepthMask,
@@ -38,8 +39,18 @@ from OpenGL.GL import (
     glGetDoublev, glGetIntegerv,
     glPushMatrix, glPopMatrix,
     glHint,
+    # VBO
+    glGenBuffers, glDeleteBuffers, glBindBuffer, glBufferData,
+    GL_ARRAY_BUFFER, GL_STATIC_DRAW,
+    glEnableClientState, glDisableClientState,
+    GL_VERTEX_ARRAY, GL_COLOR_ARRAY,
+    glVertexPointer, glColorPointer,
+    glDrawArrays,
 )
 from OpenGL.GLU import gluPerspective, gluProject
+
+
+_VBO_0 = c_void_p(0)
 
 
 # ── Palette ──────────────────────────────────────────────────────
@@ -77,7 +88,7 @@ _COL_LOC_Z = (0.40, 0.65, 1.00)
 _NODE_SIZE   = 7.0
 _BEAM_WIDTH  = 2.5
 _ARROW_LEN   = 0.75
-_VINCOLO_SIZE = 0.25
+_VINCOLO_SIZE = 0.30
 _LOC_AXIS_LEN = 0.45
 
 
@@ -124,13 +135,73 @@ class StrutturaSpazio3D(QOpenGLWidget):
         self._sel_kind: str | None = None
         self._sel_id: int = -1
 
+        # ── GPU buffers ──
+        self._gpu: dict[str, tuple] = {}    # name -> (vbo_v, vbo_c, n_verts)
+        self._dirty_static = True            # griglia + assi
+        self._dirty_scena  = True            # nodi/beams/shells/vincoli/carichi
+        self._dirty_direzioni = True
+        self._gl_ready = False
+
         self.setFocusPolicy(Qt.StrongFocus)
+
+    # ================================================================
+    # GPU BUFFER MANAGEMENT
+    # ================================================================
+
+    def _gpu_upload(self, name: str, verts_f32: np.ndarray,
+                    colors_f32: np.ndarray) -> None:
+        self._gpu_release(name)
+        if verts_f32 is None:
+            return
+        verts_f32 = np.ascontiguousarray(verts_f32, dtype=np.float32)
+        colors_f32 = np.ascontiguousarray(colors_f32, dtype=np.float32)
+        n = verts_f32.size // 3
+        if n == 0:
+            return
+        vbo_v = int(glGenBuffers(1))
+        glBindBuffer(GL_ARRAY_BUFFER, vbo_v)
+        glBufferData(GL_ARRAY_BUFFER, verts_f32.nbytes, verts_f32, GL_STATIC_DRAW)
+        vbo_c = int(glGenBuffers(1))
+        glBindBuffer(GL_ARRAY_BUFFER, vbo_c)
+        glBufferData(GL_ARRAY_BUFFER, colors_f32.nbytes, colors_f32, GL_STATIC_DRAW)
+        glBindBuffer(GL_ARRAY_BUFFER, 0)
+        self._gpu[name] = (vbo_v, vbo_c, n)
+
+    def _gpu_draw(self, name: str, mode: int) -> None:
+        buf = self._gpu.get(name)
+        if not buf or buf[2] == 0:
+            return
+        vbo_v, vbo_c, n = buf
+        glEnableClientState(GL_VERTEX_ARRAY)
+        glEnableClientState(GL_COLOR_ARRAY)
+        glBindBuffer(GL_ARRAY_BUFFER, vbo_v)
+        glVertexPointer(3, GL_FLOAT, 0, _VBO_0)
+        glBindBuffer(GL_ARRAY_BUFFER, vbo_c)
+        glColorPointer(4, GL_FLOAT, 0, _VBO_0)
+        glDrawArrays(mode, 0, n)
+        glDisableClientState(GL_VERTEX_ARRAY)
+        glDisableClientState(GL_COLOR_ARRAY)
+        glBindBuffer(GL_ARRAY_BUFFER, 0)
+
+    def _gpu_release(self, name: str) -> None:
+        buf = self._gpu.pop(name, None)
+        if buf:
+            try:
+                glDeleteBuffers(2, [buf[0], buf[1]])
+            except Exception:
+                pass
+
+    def _gpu_release_group(self, prefix: str) -> None:
+        for name in [k for k in self._gpu if k.startswith(prefix)]:
+            self._gpu_release(name)
 
     # ------------------------------------------------------------------ public
 
     def aggiorna_dati(self, dati: dict):
         """Imposta i dati strutturali parsati e ridisegna."""
         self._dati = dati
+        self._dirty_scena = True
+        self._dirty_direzioni = True
         self.update()
 
     def imposta_vista(self, preset: str):
@@ -225,6 +296,402 @@ class StrutturaSpazio3D(QOpenGLWidget):
         arrow_len = base_len * (0.3 + 0.7 * (mag / max_mag))
         return arrow_len / mag
 
+    # ================================================================
+    #  BUILD VBO – STATIC (griglia + assi)
+    # ================================================================
+
+    def _build_griglia(self):
+        DIM, FADE, SEG_L = 100, 40, 2
+        parts_v, parts_c = [], []
+
+        for step, cr, cg, cb in ((1, _GF_R, _GF_G, _GF_B),
+                                 (5, _GC_R, _GC_G, _GC_B)):
+            ii = np.arange(-DIM, DIM + 1, step, dtype=np.float32)
+            if step == 1:
+                ii = ii[ii.astype(np.int32) % 5 != 0]
+            jj  = np.arange(-DIM, DIM, SEG_L, dtype=np.float32)
+            jj2 = jj + SEG_L
+            I, J  = np.meshgrid(ii, jj,  indexing='ij')
+            _, J2 = np.meshgrid(ii, jj2, indexing='ij')
+
+            # Linee verticali (x=I costante, y varia)
+            d1 = np.hypot(I, J ) / FADE
+            d2 = np.hypot(I, J2) / FADE
+            a1 = np.maximum(0.0, 1.0 - d1*d1*0.55).astype(np.float32)
+            a2 = np.maximum(0.0, 1.0 - d2*d2*0.55).astype(np.float32)
+            mask = (a1 > 0.01) | (a2 > 0.01)
+            n = int(mask.sum())
+            if n > 0:
+                v = np.zeros((n * 2, 3), dtype=np.float32)
+                v[0::2, 0] = I[mask];  v[0::2, 1] = J[mask]
+                v[1::2, 0] = I[mask];  v[1::2, 1] = J2[mask]
+                c = np.empty((n * 2, 4), dtype=np.float32)
+                c[0::2, 0] = cr; c[0::2, 1] = cg; c[0::2, 2] = cb; c[0::2, 3] = a1[mask]
+                c[1::2, 0] = cr; c[1::2, 1] = cg; c[1::2, 2] = cb; c[1::2, 3] = a2[mask]
+                parts_v.append(v.ravel()); parts_c.append(c.ravel())
+
+            # Linee orizzontali (y=I costante, x varia)
+            d1 = np.hypot(J,  I) / FADE
+            d2 = np.hypot(J2, I) / FADE
+            a1 = np.maximum(0.0, 1.0 - d1*d1*0.55).astype(np.float32)
+            a2 = np.maximum(0.0, 1.0 - d2*d2*0.55).astype(np.float32)
+            mask = (a1 > 0.01) | (a2 > 0.01)
+            n = int(mask.sum())
+            if n > 0:
+                v = np.zeros((n * 2, 3), dtype=np.float32)
+                v[0::2, 0] = J[mask];  v[0::2, 1] = I[mask]
+                v[1::2, 0] = J2[mask]; v[1::2, 1] = I[mask]
+                c = np.empty((n * 2, 4), dtype=np.float32)
+                c[0::2, 0] = cr; c[0::2, 1] = cg; c[0::2, 2] = cb; c[0::2, 3] = a1[mask]
+                c[1::2, 0] = cr; c[1::2, 1] = cg; c[1::2, 2] = cb; c[1::2, 3] = a2[mask]
+                parts_v.append(v.ravel()); parts_c.append(c.ravel())
+
+        if parts_v:
+            self._gpu_upload('griglia',
+                             np.concatenate(parts_v),
+                             np.concatenate(parts_c))
+
+    def _build_assi(self):
+        EXT, NEG = 40.0, -40.0
+        v_pos = np.array([
+            0, 0, 0, EXT, 0, 0,
+            0, 0, 0, 0, EXT, 0,
+            0, 0, 0, 0, 0, EXT,
+        ], dtype=np.float32)
+        c_pos = np.array([
+            *_AX_X, 1, *_AX_X, 1,
+            *_AX_Y, 1, *_AX_Y, 1,
+            *_AX_Z, 1, *_AX_Z, 1,
+        ], dtype=np.float32)
+        self._gpu_upload('assi_pos', v_pos, c_pos)
+
+        v_neg = np.array([
+            0, 0, 0, NEG, 0, 0,
+            0, 0, 0, 0, NEG, 0,
+            0, 0, 0, 0, 0, NEG,
+        ], dtype=np.float32)
+        c_neg = np.array([
+            *_AX_X, 0.28, *_AX_X, 0.28,
+            *_AX_Y, 0.28, *_AX_Y, 0.28,
+            *_AX_Z, 0.28, *_AX_Z, 0.28,
+        ], dtype=np.float32)
+        self._gpu_upload('assi_neg', v_neg, c_neg)
+
+        v_o = np.array([0, 0, 0], dtype=np.float32)
+        c_o = np.array([0.9, 0.9, 0.9, 0.85], dtype=np.float32)
+        self._gpu_upload('assi_orig', v_o, c_o)
+
+    # ================================================================
+    #  BUILD VBO – SCENA (nodi/beam/shell/vincoli/carichi)
+    # ================================================================
+
+    @staticmethod
+    def _arrows_to_lines(tails: np.ndarray, dirs: np.ndarray,
+                         color: tuple) -> tuple[np.ndarray, np.ndarray]:
+        """Vettorizza N frecce in (verts, colors) con 3 segmenti cad. (6 vtx).
+        tails, dirs: (N,3). Ritorna (verts (M,3) float32, colors (M,4) float32)."""
+        if len(tails) == 0:
+            return (np.zeros((0, 3), dtype=np.float32),
+                    np.zeros((0, 4), dtype=np.float32))
+        tails = np.asarray(tails, dtype=np.float32)
+        dirs  = np.asarray(dirs,  dtype=np.float32)
+        mag = np.linalg.norm(dirs, axis=1)
+        valid = mag > 1e-6
+        if not np.any(valid):
+            return (np.zeros((0, 3), dtype=np.float32),
+                    np.zeros((0, 4), dtype=np.float32))
+        t = tails[valid]
+        d = dirs[valid]
+        m = mag[valid]
+        tips = t + d
+        nd = d / m[:, None]
+
+        p = np.empty_like(nd)
+        small = np.abs(nd[:, 2]) < 0.9
+        p[small, 0] = -nd[small, 1]
+        p[small, 1] =  nd[small, 0]
+        p[small, 2] = 0.0
+        p[~small, 0] = 0.0
+        p[~small, 1] = -nd[~small, 2]
+        p[~small, 2] =  nd[~small, 1]
+        pmag = np.linalg.norm(p, axis=1, keepdims=True)
+        pmag[pmag < 1e-12] = 1.0
+        p = p / pmag
+
+        head = np.float32(0.15)
+        base = tips - nd * (m[:, None] * np.float32(0.25))
+
+        n_valid = len(t)
+        V = np.empty((n_valid * 6, 3), dtype=np.float32)
+        V[0::6] = t
+        V[1::6] = tips
+        V[2::6] = tips
+        V[3::6] = base + p * head
+        V[4::6] = tips
+        V[5::6] = base - p * head
+
+        C = np.tile(np.array(color, dtype=np.float32), (n_valid * 6, 1))
+        return V, C
+
+    def _build_scena(self):
+        """Rebuilda tutti i VBO dinamici (nodi/beams/shells/vincoli/carichi)."""
+        # Pulisci vecchi
+        self._gpu_release_group('scena_')
+        if self._dati is None:
+            return
+
+        nodi: dict = self._dati.get("nodi", {})
+        if not nodi:
+            return
+
+        # ── NODI (punti) ──────────────────────────────────────────
+        vincoli = self._dati.get("vincoli", {})
+        nids = list(nodi.keys())
+        coords = np.array([nodi[nid] for nid in nids], dtype=np.float32)
+        is_vinc = np.array([nid in vincoli for nid in nids], dtype=bool)
+
+        if np.any(~is_vinc):
+            pts = coords[~is_vinc]
+            col = np.tile(np.array(_COL_NODO, dtype=np.float32), (len(pts), 1))
+            self._gpu_upload('scena_nodi_free', pts, col)
+        if np.any(is_vinc):
+            pts = coords[is_vinc]
+            col = np.tile(np.array(_COL_NODO_VINC, dtype=np.float32), (len(pts), 1))
+            self._gpu_upload('scena_nodi_vinc', pts, col)
+
+        # ── BEAMS (lines) ─────────────────────────────────────────
+        aste = self._dati.get("aste", {})
+        if aste:
+            beam_verts = []
+            for asta in aste.values():
+                ni, nj = asta["nodo_i"], asta["nodo_j"]
+                if ni in nodi and nj in nodi:
+                    beam_verts.append(nodi[ni])
+                    beam_verts.append(nodi[nj])
+            if beam_verts:
+                V = np.array(beam_verts, dtype=np.float32)
+                C = np.tile(np.array(_COL_BEAM, dtype=np.float32), (len(V), 1))
+                self._gpu_upload('scena_beams', V, C)
+
+        # ── SHELLS (triangoli fill + LINE edges) ──────────────────
+        shells = self._dati.get("shell", {})
+        if shells:
+            tri_v, edge_v = [], []
+            for sh in shells.values():
+                pts = [nodi[n] for n in sh["nodi"] if n in nodi]
+                if len(pts) < 3: continue
+                tris = self._triangoli_shell(pts)
+                for (a, b, c) in tris:
+                    tri_v.append(a); tri_v.append(b); tri_v.append(c)
+                # Edge loop come segmenti di LINE (pairs consecutivi)
+                k = len(pts)
+                for i in range(k):
+                    edge_v.append(pts[i])
+                    edge_v.append(pts[(i + 1) % k])
+            if tri_v:
+                V = np.array(tri_v, dtype=np.float32)
+                C = np.tile(np.array(_COL_SHELL_FILL, dtype=np.float32), (len(V), 1))
+                self._gpu_upload('scena_shell_fill', V, C)
+            if edge_v:
+                V = np.array(edge_v, dtype=np.float32)
+                C = np.tile(np.array(_COL_SHELL_EDGE, dtype=np.float32), (len(V), 1))
+                self._gpu_upload('scena_shell_edge', V, C)
+
+        # ── VINCOLI (bordi + riempimento) ─────────────────────────
+        if vincoli:
+            s = _VINCOLO_SIZE
+            edge_verts = []   # GL_LINES  (bordi + hatch)
+            fill_verts = []   # GL_TRIANGLES (riempimento pieno)
+            col_fill = (*_COL_VINCOLO[:3], 0.35)  # riempimento semitrasparente
+
+            for nid, vals in vincoli.items():
+                if nid not in nodi: continue
+                x, y, z = nodi[nid]
+                is_incastro = all(v == 1 for v in vals[:6])
+                is_cerniera = (all(v == 1 for v in vals[:3])
+                               and all(v == 0 for v in vals[3:6]))
+
+                if is_incastro:
+                    # Quadrato
+                    p00 = (x - s, y - s, z - s * 0.5)
+                    p10 = (x + s, y - s, z - s * 0.5)
+                    p11 = (x + s, y + s, z - s * 0.5)
+                    p01 = (x - s, y + s, z - s * 0.5)
+                    # Bordo
+                    edge_verts += [p00, p10, p10, p11, p11, p01, p01, p00]
+                    # Hatch
+                    for i in range(5):
+                        t = -s + i * s * 0.5
+                        edge_verts.append((x + t, y, z - s * 0.5))
+                        edge_verts.append((x + t - s * 0.3, y, z - s * 0.8))
+                    # Fill (2 triangoli)
+                    fill_verts += [p00, p10, p11, p00, p11, p01]
+
+                elif is_cerniera:
+                    # Triangolo
+                    t0 = (x, y, z)
+                    t1 = (x - s, y, z - s)
+                    t2 = (x + s, y, z - s)
+                    # Bordo
+                    edge_verts += [t0, t1, t1, t2, t2, t0]
+                    # Cerchietto
+                    N = 12; r = s * 0.15
+                    circ = []
+                    for i in range(N):
+                        ang = 2.0 * math.pi * i / N
+                        circ.append((x + r * math.cos(ang), y,
+                                     z - s + r * math.sin(ang)))
+                    for i in range(N):
+                        edge_verts.append(circ[i])
+                        edge_verts.append(circ[(i + 1) % N])
+                    # Fill triangolo
+                    fill_verts += [t0, t1, t2]
+
+                else:
+                    # Rombo
+                    r0 = (x, y, z - s)
+                    r1 = (x - s * 0.5, y, z - s * 0.5)
+                    r2 = (x, y, z)
+                    r3 = (x + s * 0.5, y, z - s * 0.5)
+                    # Bordo
+                    edge_verts += [r0, r1, r1, r2, r2, r3, r3, r0]
+                    # Fill (2 triangoli)
+                    fill_verts += [r0, r1, r2, r0, r2, r3]
+
+            if edge_verts:
+                V = np.array(edge_verts, dtype=np.float32)
+                C = np.tile(np.array(_COL_VINCOLO, dtype=np.float32), (len(V), 1))
+                self._gpu_upload('scena_vincoli', V, C)
+            if fill_verts:
+                V = np.array(fill_verts, dtype=np.float32)
+                C = np.tile(np.array(col_fill, dtype=np.float32), (len(V), 1))
+                self._gpu_upload('scena_vincoli_fill', V, C)
+
+        # ── CARICHI NODALI (frecce) ───────────────────────────────
+        carichi_n = self._dati.get("carichi_nodali", [])
+        max_n, max_d, max_s = self._get_max_magnitudes()
+        if carichi_n:
+            tails, dirs = [], []
+            for (nid, fx, fy, fz) in carichi_n:
+                if nid not in nodi: continue
+                x, y, z = nodi[nid]
+                mag = math.sqrt(fx*fx + fy*fy + fz*fz)
+                if mag < 1e-12: continue
+                scale = self._calc_load_scale(mag, max_n)
+                dx, dy, dz = fx*scale, fy*scale, fz*scale
+                tails.append((x - dx, y - dy, z - dz))
+                dirs.append((dx, dy, dz))
+            if tails:
+                V, C = self._arrows_to_lines(np.array(tails), np.array(dirs),
+                                             _COL_CARICO_N)
+                self._gpu_upload('scena_carichi_n', V, C)
+
+        # ── CARICHI DISTRIBUITI ───────────────────────────────────
+        carichi_d = self._dati.get("carichi_distribuiti", [])
+        if carichi_d and aste:
+            tails, dirs = [], []
+            for (bid, wx, wy, wz) in carichi_d:
+                asta = aste.get(bid)
+                if asta is None: continue
+                ni, nj = asta["nodo_i"], asta["nodo_j"]
+                if ni not in nodi or nj not in nodi: continue
+                mag = math.sqrt(wx*wx + wy*wy + wz*wz)
+                if mag < 1e-12: continue
+                pi = np.array(nodi[ni], dtype=np.float32)
+                pj = np.array(nodi[nj], dtype=np.float32)
+                L = float(np.linalg.norm(pj - pi))
+                if L < 1e-6: continue
+                scale = self._calc_load_scale(mag, max_d, _ARROW_LEN * 0.8)
+                dx, dy, dz = wx*scale, wy*scale, wz*scale
+                n_arrows = max(3, int(L / 0.8))
+                ts = np.linspace(0.0, 1.0, n_arrows + 1, dtype=np.float32)
+                pts = pi[None, :] + ts[:, None] * (pj - pi)[None, :]
+                for p in pts:
+                    tails.append((p[0] - dx, p[1] - dy, p[2] - dz))
+                    dirs.append((dx, dy, dz))
+            if tails:
+                V, C = self._arrows_to_lines(np.array(tails), np.array(dirs),
+                                             _COL_CARICO_D)
+                self._gpu_upload('scena_carichi_d', V, C)
+
+        # ── CARICHI SHELL ─────────────────────────────────────────
+        carichi_s = self._dati.get("carichi_shell", [])
+        if carichi_s and shells:
+            tails, dirs = [], []
+            for (sid, qx, qy, qz) in carichi_s:
+                sh = shells.get(sid)
+                if sh is None: continue
+                pts = [nodi[n] for n in sh["nodi"] if n in nodi]
+                if len(pts) < 3: continue
+                mag = math.sqrt(qx*qx + qy*qy + qz*qz)
+                if mag < 1e-12: continue
+                scale = self._calc_load_scale(mag, max_s, _ARROW_LEN * 0.85)
+                dx, dy, dz = qx*scale, qy*scale, qz*scale
+                n_div = 3 if len(pts) == 4 else 4
+                sample_pts = self._campiona_punti_shell(pts, n=n_div)
+                for p in sample_pts:
+                    tails.append((float(p[0]) - dx,
+                                  float(p[1]) - dy,
+                                  float(p[2]) - dz))
+                    dirs.append((dx, dy, dz))
+            if tails:
+                V, C = self._arrows_to_lines(np.array(tails), np.array(dirs),
+                                             _COL_CARICO_S)
+                self._gpu_upload('scena_carichi_s', V, C)
+
+    def _build_direzioni(self):
+        """Costruisce i VBO delle terne locali (x,y,z) su beams e shells."""
+        self._gpu_release_group('dir_')
+        if self._dati is None:
+            return
+
+        nodi = self._dati.get("nodi", {})
+        if not nodi:
+            return
+        length = _LOC_AXIS_LEN
+
+        def _batch(prefix, tails, dirs, color):
+            if not tails: return
+            V, C = self._arrows_to_lines(np.array(tails, dtype=np.float32),
+                                         np.array(dirs, dtype=np.float32),
+                                         color)
+            self._gpu_upload(prefix, V, C)
+
+        tails_x, dirs_x = [], []
+        tails_y, dirs_y = [], []
+        tails_z, dirs_z = [], []
+
+        for asta in self._dati.get("aste", {}).values():
+            ni, nj = asta["nodo_i"], asta["nodo_j"]
+            if ni not in nodi or nj not in nodi: continue
+            pi, pj = nodi[ni], nodi[nj]
+            axes = self._beam_local_axes(pi, pj)
+            if axes is None: continue
+            ex, ey, ez = axes
+            cx = (pi[0] + pj[0]) * 0.5
+            cy = (pi[1] + pj[1]) * 0.5
+            cz = (pi[2] + pj[2]) * 0.5
+            tails_x.append((cx, cy, cz)); dirs_x.append(tuple(ex * length))
+            tails_y.append((cx, cy, cz)); dirs_y.append(tuple(ey * length))
+            tails_z.append((cx, cy, cz)); dirs_z.append(tuple(ez * length))
+
+        for sh in self._dati.get("shell", {}).values():
+            pts = [nodi[n] for n in sh["nodi"] if n in nodi]
+            if len(pts) < 3: continue
+            axes = self._shell_local_axes(pts)
+            if axes is None: continue
+            ex, ey, ez = axes
+            cx = sum(p[0] for p in pts) / len(pts)
+            cy = sum(p[1] for p in pts) / len(pts)
+            cz = sum(p[2] for p in pts) / len(pts)
+            tails_x.append((cx, cy, cz)); dirs_x.append(tuple(ex * length))
+            tails_y.append((cx, cy, cz)); dirs_y.append(tuple(ey * length))
+            tails_z.append((cx, cy, cz)); dirs_z.append(tuple(ez * length))
+
+        _batch('dir_x', tails_x, dirs_x, (*_COL_LOC_X, 0.95))
+        _batch('dir_y', tails_y, dirs_y, (*_COL_LOC_Y, 0.95))
+        _batch('dir_z', tails_z, dirs_z, (*_COL_LOC_Z, 0.95))
+
     # ------------------------------------------------------------------ GL
 
     def initializeGL(self):
@@ -233,11 +700,15 @@ class StrutturaSpazio3D(QOpenGLWidget):
         glEnable(GL_BLEND); glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
         glEnable(GL_LINE_SMOOTH); glHint(GL_LINE_SMOOTH_HINT, GL_NICEST)
         glEnable(GL_POINT_SMOOTH); glHint(GL_POINT_SMOOTH_HINT, GL_NICEST)
+        self._gl_ready = True
 
     def resizeGL(self, w, h):
         glViewport(0, 0, w, h)
 
     def paintGL(self):
+        if not self._gl_ready:
+            return
+
         painter = QPainter(self)
         painter.setRenderHint(QPainter.Antialiasing)
         painter.beginNativePainting()
@@ -283,35 +754,97 @@ class StrutturaSpazio3D(QOpenGLWidget):
         self._gl_proj  = glGetDoublev(GL_PROJECTION_MATRIX)
         self._gl_vp    = glGetIntegerv(GL_VIEWPORT)
 
+        # ── Rebuild VBO on dirty ──
+        if self._dirty_static:
+            self._build_griglia()
+            self._build_assi()
+            self._dirty_static = False
+
+        if self._dati and self._dirty_scena:
+            self._build_scena()
+            self._dirty_scena = False
+
+        if self._dati and self.show_direzioni and self._dirty_direzioni:
+            self._build_direzioni()
+            self._dirty_direzioni = False
+
+        # ── Draw ──
         if not self._preview_mode:
-            self._disegna_griglia()
-            self._disegna_assi()
+            # Griglia (senza scrivere depth)
+            glDepthMask(GL_FALSE)
+            glLineWidth(1.0)
+            self._gpu_draw('griglia', GL_LINES)
+            glDepthMask(GL_TRUE)
+
+            # Assi
+            glLineWidth(1.8)
+            self._gpu_draw('assi_pos', GL_LINES)
+            glLineWidth(1.0)
+            self._gpu_draw('assi_neg', GL_LINES)
+            glPointSize(5.0)
+            self._gpu_draw('assi_orig', GL_POINTS)
+            glPointSize(1.0)
 
         if self._dati:
-            if self._preview_mode or self.show_shells:
-                self._disegna_shell()
-            if self._preview_mode or self.show_beams:
-                self._disegna_aste()
-            if self._preview_mode or self.show_vincoli:
-                self._disegna_vincoli()
-            if self._preview_mode or self.show_carichi:
-                self._disegna_carichi_distribuiti()
-                self._disegna_carichi_shell()
-                self._disegna_carichi_nodali()
-            if self._preview_mode or self.show_nodi:
-                self._disegna_nodi()
-            if (not self._preview_mode) and self.show_direzioni:
-                self._disegna_direzioni_locali()
-
+            # Halo selezione: disegnato PRIMA degli oggetti così che il
+            # rendering normale (più fino) si sovrapponga al centro e lasci
+            # emergere solo un contorno arancio attorno all'oggetto.
             if (not self._preview_mode) and self._sel_kind is not None:
                 self._disegna_halo_selezione()
+
+            # Shell fill (senza depth write) + edges
+            if self._preview_mode or self.show_shells:
+                glDepthMask(GL_FALSE)
+                self._gpu_draw('scena_shell_fill', GL_TRIANGLES)
+                glDepthMask(GL_TRUE)
+                glLineWidth(1.5)
+                self._gpu_draw('scena_shell_edge', GL_LINES)
+                glLineWidth(1.0)
+
+            # Beams
+            if self._preview_mode or self.show_beams:
+                glLineWidth(_BEAM_WIDTH)
+                self._gpu_draw('scena_beams', GL_LINES)
+                glLineWidth(1.0)
+
+            # Vincoli (fill + bordi)
+            if self._preview_mode or self.show_vincoli:
+                glDepthMask(GL_FALSE)
+                self._gpu_draw('scena_vincoli_fill', GL_TRIANGLES)
+                glDepthMask(GL_TRUE)
+                glLineWidth(1.5)
+                self._gpu_draw('scena_vincoli', GL_LINES)
+                glLineWidth(1.0)
+
+            # Carichi
+            if self._preview_mode or self.show_carichi:
+                glLineWidth(2.0)
+                self._gpu_draw('scena_carichi_d', GL_LINES)
+                self._gpu_draw('scena_carichi_s', GL_LINES)
+                self._gpu_draw('scena_carichi_n', GL_LINES)
+                glLineWidth(1.0)
+
+            # Nodi
+            if self._preview_mode or self.show_nodi:
+                glPointSize(_NODE_SIZE)
+                self._gpu_draw('scena_nodi_free', GL_POINTS)
+                self._gpu_draw('scena_nodi_vinc', GL_POINTS)
+                glPointSize(1.0)
+
+            # Direzioni locali
+            if (not self._preview_mode) and self.show_direzioni:
+                glLineWidth(2.0)
+                self._gpu_draw('dir_x', GL_LINES)
+                self._gpu_draw('dir_y', GL_LINES)
+                self._gpu_draw('dir_z', GL_LINES)
+                glLineWidth(1.0)
 
         glDisable(GL_DEPTH_TEST)
         painter.endNativePainting()
 
         if self._dati and not self._preview_mode and self.show_labels:
             self._disegna_tutte_labels(painter)
-            
+
         painter.end()
 
     # ------------------------------------------------------------------ grid
@@ -471,7 +1004,8 @@ class StrutturaSpazio3D(QOpenGLWidget):
             if mag < 1e-12: continue
             scale = self._calc_load_scale(mag, max_n)
             # Punta della freccia (x + fx*scale, ...)
-            sx, sy = self._project(x + fx * scale, y + fy * scale, z + fz * scale)
+            # Tail (nuova convenzione): nodo - F*scale
+            sx, sy = self._project(x - fx * scale, y - fy * scale, z - fz * scale)
             if sx != -1000:
                 painter.drawText(sx + 6, sy - 6, f"F{idx}")
 
@@ -493,11 +1027,11 @@ class StrutturaSpazio3D(QOpenGLWidget):
 
             # La scala è moltiplicata per 0.8 nei distribuiti per tenerli proporzionalmente più corti
             scale = self._calc_load_scale(mag, max_d, _ARROW_LEN * 0.8)
-            
-            # Coda del carico (origine da cui parte verso l'asta)
-            tail_x = mx + wx * scale
-            tail_y = my + wy * scale
-            tail_z = mz + wz * scale
+
+            # Tail (nuova convenzione): midpoint - w*scale
+            tail_x = mx - wx * scale
+            tail_y = my - wy * scale
+            tail_z = mz - wz * scale
             
             sx, sy = self._project(tail_x, tail_y, tail_z)
             if sx != -1000:
@@ -519,12 +1053,8 @@ class StrutturaSpazio3D(QOpenGLWidget):
             if mag < 1e-12: continue
             scale = self._calc_load_scale(mag, max_s, _ARROW_LEN * 0.85)
             dx = qx * scale; dy = qy * scale; dz = qz * scale
-            # Coerente con _disegna_carichi_shell: la freccia sta sopra la shell
-            if qz < 0:
-                # tail sopra, head sulla shell
-                lx, ly, lz = cx - dx, cy - dy, cz - dz
-            else:
-                lx, ly, lz = cx + dx, cy + dy, cz + dz
+            # Tail (nuova convenzione): centroid - w*scale
+            lx, ly, lz = cx - dx, cy - dy, cz - dz
             sx, sy = self._project(lx, ly, lz)
             if sx != -1000:
                 painter.drawText(sx + 6, sy - 6, f"Qs{idx}")
@@ -644,9 +1174,11 @@ class StrutturaSpazio3D(QOpenGLWidget):
             x, y, z = nodi[nid]
             mag = math.sqrt(fx*fx + fy*fy + fz*fz)
             if mag < 1e-12: continue
-            
+
             scale = self._calc_load_scale(mag, max_n)
-            self._disegna_freccia(x, y, z, fx * scale, fy * scale, fz * scale)
+            dx, dy, dz = fx * scale, fy * scale, fz * scale
+            # La punta tocca sempre il nodo: tail = nodo - vec, tip = nodo.
+            self._disegna_freccia(x - dx, y - dy, z - dz, dx, dy, dz)
 
     def _disegna_carichi_distribuiti(self):
         nodi = self._dati.get("nodi", {})
@@ -673,28 +1205,21 @@ class StrutturaSpazio3D(QOpenGLWidget):
             if mag < 1e-12: continue
             
             scale = self._calc_load_scale(mag, max_d, _ARROW_LEN * 0.8)
-            
-            for i in range(n_arrows + 1):
-                t = i / n_arrows
-                pt = pi + t * (pj - pi)
-                self._disegna_freccia(float(pt[0]), float(pt[1]), float(pt[2]),
-                                      wx * scale, wy * scale, wz * scale)
-            
-            glLineWidth(1.2)
-            glBegin(GL_LINE_STRIP)
-            for i in range(n_arrows + 1):
-                t = i / n_arrows
-                pt = pi + t * (pj - pi)
-                glVertex3f(float(pt[0] + wx * scale),
-                           float(pt[1] + wy * scale),
-                           float(pt[2] + wz * scale))
-            glEnd()
-            glLineWidth(1.0)
+            dx, dy, dz = wx * scale, wy * scale, wz * scale
 
-    def _disegna_freccia(self, x, y, z, dx, dy, dz):
+            # La punta di ogni freccia tocca il beam: tail = pt - vec, tip = pt.
+            for i in range(n_arrows + 1):
+                t = i / n_arrows
+                pt = pi + t * (pj - pi)
+                self._disegna_freccia(float(pt[0] - dx),
+                                      float(pt[1] - dy),
+                                      float(pt[2] - dz),
+                                      dx, dy, dz)
+
+    def _disegna_freccia(self, x, y, z, dx, dy, dz, width: float = 2.0):
         """Freccia da (x,y,z) (coda) verso (x+dx,y+dy,z+dz) (punta).
         La direzione della punta segue quindi quella del vettore (dx,dy,dz)."""
-        glLineWidth(2.0)
+        glLineWidth(width)
         glBegin(GL_LINES)
         glVertex3f(x, y, z)                  # coda (applicazione)
         glVertex3f(x + dx, y + dy, z + dz)   # punta
@@ -772,10 +1297,9 @@ class StrutturaSpazio3D(QOpenGLWidget):
         return out
 
     def _disegna_carichi_shell(self):
-        """Disegna un reticolo di frecce sulla parte SUPERIORE della shell.
-        Convenzione segno: carico con qz<0 → punta della freccia sulla shell
-        (freccia sopra, testa in basso); qz>=0 → base della freccia sulla
-        shell (freccia sopra, testa in alto)."""
+        """Disegna un reticolo di frecce con la punta sulla shell.
+        Indipendentemente dal segno del carico, la punta della freccia
+        tocca sempre la superficie: tail = p - vec, tip = p."""
         nodi = self._dati.get("nodi", {})
         shells = self._dati.get("shell", {})
         carichi = self._dati.get("carichi_shell", [])
@@ -793,24 +1317,18 @@ class StrutturaSpazio3D(QOpenGLWidget):
             mag = math.sqrt(qx*qx + qy*qy + qz*qz)
             if mag < 1e-12: continue
 
-            # Scala dinamica
             scale = self._calc_load_scale(mag, max_s, _ARROW_LEN * 0.85)
             dx = qx * scale
             dy = qy * scale
             dz = qz * scale
 
-            # Le frecce stanno sempre sulla parte "superiore" della faccia:
-            # se qz < 0 la punta tocca la shell (tail = p - vec, head = p)
-            # se qz ≥ 0 la base tocca la shell (tail = p,       head = p + vec)
-            tail_offset = (-dx, -dy, -dz) if qz < 0 else (0.0, 0.0, 0.0)
-
             glColor4f(*_COL_CARICO_S)
             n_div = 3 if len(pts) == 4 else 4
             sample_pts = self._campiona_punti_shell(pts, n=n_div)
             for p in sample_pts:
-                tx = float(p[0]) + tail_offset[0]
-                ty = float(p[1]) + tail_offset[1]
-                tz = float(p[2]) + tail_offset[2]
+                tx = float(p[0]) - dx
+                ty = float(p[1]) - dy
+                tz = float(p[2]) - dz
                 self._disegna_freccia(tx, ty, tz, dx, dy, dz)
 
     # ------------------------------------------------------------------ direzioni locali
@@ -905,55 +1423,127 @@ class StrutturaSpazio3D(QOpenGLWidget):
     # ------------------------------------------------------------------ halo selezione
 
     def _disegna_halo_selezione(self):
-        """Disegna un evidenziatore arancio per l'oggetto correntemente
-        selezionato (nodo / beam / shell)."""
+        """Disegna un evidenziatore arancio SOTTO l'oggetto selezionato.
+
+        La tecnica: disegniamo una versione "più grande/più spessa" in arancio
+        PRIMA del rendering normale; il rendering normale (più fino) poi
+        sovrascrive il centro, lasciando visibile solo un bordo esterno.
+        """
         if self._sel_kind is None or self._dati is None:
             return
         nodi = self._dati.get("nodi", {})
+        glColor4f(*_COL_SEL_EDGE)
+
+        # Spessore freccia halo (usata per i tre carichi).
+        halo_arrow_w = 4.5
 
         if self._sel_kind == "nodo":
             if self._sel_id not in nodi:
                 return
             x, y, z = nodi[self._sel_id]
-            glPointSize(_NODE_SIZE + 8.0)
-            glBegin(GL_POINTS)
-            glColor4f(*_COL_SEL_EDGE)
-            glVertex3f(x, y, z)
-            glEnd()
+            glPointSize(_NODE_SIZE + 5.0)
+            glBegin(GL_POINTS); glVertex3f(x, y, z); glEnd()
             glPointSize(1.0)
 
         elif self._sel_kind == "beam":
-            aste = self._dati.get("aste", {})
-            asta = aste.get(self._sel_id)
+            asta = self._dati.get("aste", {}).get(self._sel_id)
             if asta is None: return
             ni, nj = asta["nodo_i"], asta["nodo_j"]
             if ni not in nodi or nj not in nodi: return
             pi, pj = nodi[ni], nodi[nj]
-            glLineWidth(_BEAM_WIDTH + 3.5)
+            glLineWidth(_BEAM_WIDTH + 2.5)
             glBegin(GL_LINES)
-            glColor4f(*_COL_SEL_EDGE)
             glVertex3f(*pi); glVertex3f(*pj)
             glEnd()
             glLineWidth(1.0)
 
         elif self._sel_kind == "shell":
-            shells = self._dati.get("shell", {})
-            sh = shells.get(self._sel_id)
+            sh = self._dati.get("shell", {}).get(self._sel_id)
             if sh is None: return
             pts = [nodi[n] for n in sh["nodi"] if n in nodi]
             if len(pts) < 3: return
-            glDepthMask(GL_FALSE)
-            glColor4f(*_COL_SEL_FILL)
-            glBegin(GL_TRIANGLE_FAN)
-            for p in pts: glVertex3f(*p)
-            glEnd()
-            glDepthMask(GL_TRUE)
-            glLineWidth(3.0)
-            glColor4f(*_COL_SEL_EDGE)
+            glLineWidth(3.5)
             glBegin(GL_LINE_LOOP)
             for p in pts: glVertex3f(*p)
             glEnd()
             glLineWidth(1.0)
+
+        elif self._sel_kind == "vincolo":
+            if self._sel_id not in nodi: return
+            x, y, z = nodi[self._sel_id]
+            s = _VINCOLO_SIZE
+            glLineWidth(2.5)
+            glBegin(GL_LINE_LOOP)
+            r = s * 1.25
+            N = 20
+            for i in range(N):
+                ang = 2.0 * math.pi * i / N
+                glVertex3f(x + r * math.cos(ang),
+                           y + r * math.sin(ang),
+                           z - s * 0.5)
+            glEnd()
+            glLineWidth(1.0)
+
+        elif self._sel_kind == "carico_n":
+            carichi = self._dati.get("carichi_nodali", [])
+            if not (1 <= self._sel_id <= len(carichi)): return
+            nid, fx, fy, fz = carichi[self._sel_id - 1]
+            if nid not in nodi: return
+            x, y, z = nodi[nid]
+            max_n, _, _ = self._get_max_magnitudes()
+            mag = math.sqrt(fx*fx + fy*fy + fz*fz)
+            if mag < 1e-12: return
+            scale = self._calc_load_scale(mag, max_n)
+            dx, dy, dz = fx * scale, fy * scale, fz * scale
+            self._disegna_freccia(x - dx, y - dy, z - dz, dx, dy, dz,
+                                  width=halo_arrow_w)
+
+        elif self._sel_kind == "carico_d":
+            carichi = self._dati.get("carichi_distribuiti", [])
+            if not (1 <= self._sel_id <= len(carichi)): return
+            bid, wx, wy, wz = carichi[self._sel_id - 1]
+            asta = self._dati.get("aste", {}).get(bid)
+            if asta is None: return
+            ni, nj = asta["nodo_i"], asta["nodo_j"]
+            if ni not in nodi or nj not in nodi: return
+            _, max_d, _ = self._get_max_magnitudes()
+            mag = math.sqrt(wx*wx + wy*wy + wz*wz)
+            if mag < 1e-12: return
+            pi = np.array(nodi[ni], dtype=float)
+            pj = np.array(nodi[nj], dtype=float)
+            L = float(np.linalg.norm(pj - pi))
+            if L < 1e-6: return
+            scale = self._calc_load_scale(mag, max_d, _ARROW_LEN * 0.8)
+            dx, dy, dz = wx * scale, wy * scale, wz * scale
+            n_arrows = max(3, int(L / 0.8))
+            for i in range(n_arrows + 1):
+                tp = i / n_arrows
+                pt = pi + tp * (pj - pi)
+                self._disegna_freccia(float(pt[0] - dx),
+                                      float(pt[1] - dy),
+                                      float(pt[2] - dz),
+                                      dx, dy, dz, width=halo_arrow_w)
+
+        elif self._sel_kind == "carico_s":
+            carichi = self._dati.get("carichi_shell", [])
+            if not (1 <= self._sel_id <= len(carichi)): return
+            sid, qx, qy, qz = carichi[self._sel_id - 1]
+            sh = self._dati.get("shell", {}).get(sid)
+            if sh is None: return
+            pts = [nodi[n] for n in sh["nodi"] if n in nodi]
+            if len(pts) < 3: return
+            _, _, max_s = self._get_max_magnitudes()
+            mag = math.sqrt(qx*qx + qy*qy + qz*qz)
+            if mag < 1e-12: return
+            scale = self._calc_load_scale(mag, max_s, _ARROW_LEN * 0.85)
+            dx = qx * scale; dy = qy * scale; dz = qz * scale
+            n_div = 3 if len(pts) == 4 else 4
+            sample_pts = self._campiona_punti_shell(pts, n=n_div)
+            for p in sample_pts:
+                self._disegna_freccia(float(p[0] - dx),
+                                      float(p[1] - dy),
+                                      float(p[2] - dz),
+                                      dx, dy, dz, width=halo_arrow_w)
 
     # ------------------------------------------------------------------ picking
 
@@ -1063,6 +1653,100 @@ class StrutturaSpazio3D(QOpenGLWidget):
                         best_t, best_id = t, bid
                 if best_id != -1:
                     return ("beam", best_id)
+
+            # --- Carichi nodali (gambo freccia) ---
+            if self.show_carichi:
+                carichi_n = self._dati.get("carichi_nodali", [])
+                if carichi_n:
+                    max_n, _, _ = self._get_max_magnitudes()
+                    tol_arrow = max(0.035, self.cam_dist * 0.006)
+                    best_t, best_idx = 1e10, -1
+                    for idx, (nid, fx, fy, fz) in enumerate(carichi_n, 1):
+                        if nid not in nodi: continue
+                        x, y, z = nodi[nid]
+                        mag = math.sqrt(fx*fx + fy*fy + fz*fz)
+                        if mag < 1e-12: continue
+                        scale = self._calc_load_scale(mag, max_n)
+                        dx, dy, dz = fx*scale, fy*scale, fz*scale
+                        # Gambo: tail=(nodo-vec) → tip=nodo
+                        q0 = np.array([x - dx, y - dy, z - dz], dtype=float)
+                        q1 = np.array([x, y, z], dtype=float)
+                        d, t = ray_segment_dist(q0, q1)
+                        if d < tol_arrow and t < best_t:
+                            best_t, best_idx = t, idx
+                    if best_idx != -1:
+                        return ("carico_n", best_idx)
+
+            # --- Vincoli (glifo attorno al nodo) ---
+            if self.show_vincoli:
+                best_t, best_id = 1e10, -1
+                tol_v = max(0.09, self.cam_dist * 0.014)
+                for nid in self._dati.get("vincoli", {}).keys():
+                    if nid not in nodi: continue
+                    x, y, z = nodi[nid]
+                    p = np.array([x, y, z - _VINCOLO_SIZE * 0.5], dtype=float)
+                    d, t = ray_point_dist(p)
+                    if d < tol_v and t < best_t:
+                        best_t, best_id = t, nid
+                if best_id != -1:
+                    return ("vincolo", best_id)
+
+            # --- Carichi distribuiti (testa ogni singolo gambo lungo il beam) ---
+            if self.show_carichi:
+                carichi_d = self._dati.get("carichi_distribuiti", [])
+                if carichi_d:
+                    _, max_d, _ = self._get_max_magnitudes()
+                    tol_arrow = max(0.035, self.cam_dist * 0.006)
+                    best_t, best_idx = 1e10, -1
+                    for idx, (bid, wx, wy, wz) in enumerate(carichi_d, 1):
+                        asta = self._dati.get("aste", {}).get(bid)
+                        if asta is None: continue
+                        ni, nj = asta["nodo_i"], asta["nodo_j"]
+                        if ni not in nodi or nj not in nodi: continue
+                        mag = math.sqrt(wx*wx + wy*wy + wz*wz)
+                        if mag < 1e-12: continue
+                        pi = np.array(nodi[ni], dtype=float)
+                        pj = np.array(nodi[nj], dtype=float)
+                        L = float(np.linalg.norm(pj - pi))
+                        if L < 1e-6: continue
+                        scale = self._calc_load_scale(mag, max_d, _ARROW_LEN * 0.8)
+                        off = np.array([wx*scale, wy*scale, wz*scale])
+                        n_arrows = max(3, int(L / 0.8))
+                        # Gambo: tail=(pt-off) → tip=pt (sul beam)
+                        for i in range(n_arrows + 1):
+                            tp = i / n_arrows
+                            pt = pi + tp * (pj - pi)
+                            d, t = ray_segment_dist(pt - off, pt)
+                            if d < tol_arrow and t < best_t:
+                                best_t, best_idx = t, idx
+                    if best_idx != -1:
+                        return ("carico_d", best_idx)
+
+                # --- Carichi shell (testa ogni gambo sulla griglia) ---
+                carichi_s = self._dati.get("carichi_shell", [])
+                if carichi_s:
+                    _, _, max_s = self._get_max_magnitudes()
+                    tol_arrow = max(0.04, self.cam_dist * 0.007)
+                    best_t, best_idx = 1e10, -1
+                    for idx, (sid, qx, qy, qz) in enumerate(carichi_s, 1):
+                        sh = self._dati.get("shell", {}).get(sid)
+                        if sh is None: continue
+                        pts = [nodi[n] for n in sh["nodi"] if n in nodi]
+                        if len(pts) < 3: continue
+                        mag = math.sqrt(qx*qx + qy*qy + qz*qz)
+                        if mag < 1e-12: continue
+                        scale = self._calc_load_scale(mag, max_s, _ARROW_LEN * 0.85)
+                        dx = qx * scale; dy = qy * scale; dz = qz * scale
+                        off = np.array([dx, dy, dz], dtype=float)
+                        n_div = 3 if len(pts) == 4 else 4
+                        sample_pts = self._campiona_punti_shell(pts, n=n_div)
+                        for p in sample_pts:
+                            tip = np.array(p, dtype=float)
+                            d, t = ray_segment_dist(tip - off, tip)
+                            if d < tol_arrow and t < best_t:
+                                best_t, best_idx = t, idx
+                    if best_idx != -1:
+                        return ("carico_s", best_idx)
 
             # --- Shell ---
             if self.show_shells:

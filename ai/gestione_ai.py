@@ -71,6 +71,9 @@ def _build_system_prompt() -> str:
           "con oggetti geometrici (parallelepipedo, cilindro, sfera) e armatura 3D (barre, staffe).\n"
         "- **Carichi/Vincoli**: aggiungi, modifica, elimina carichi e vincoli sugli elementi 3D. "
           "Ogni carico/vincolo è un parallelepipedo: i nodi mesh al suo interno ricevono forze/cedimenti.\n"
+        "- **Strutture (Telai)**: crea, modifica, elimina strutture complete (telai 2D/3D, travi continue, "
+          "mensole, ecc.) con nodi, aste (beam), shell, vincoli e carichi. "
+          "La struttura è definita da un testo con sintassi proprietaria e viene renderizzata in 3D.\n"
         "- **Manipolazione vertici**: ispeziona e modifica i vertici di qualsiasi oggetto 3D o carico/vincolo "
           "per alterare la forma (es. trasformare un parallelepipedo in tronco di piramide).\n"
         "- **Consulenza**: EC2, NTC2018, c.a., acciaio, pressoflessione, dominio N-M.\n\n"
@@ -122,6 +125,34 @@ def _build_system_prompt() -> str:
         "- Per vincolare un appoggio: creare un vincolo alle estremità dell'elemento (es. x=0 e x=L).\n"
         "- Per un carico distribuito: creare un carico che copra tutta la lunghezza dell'elemento.\n"
         "- La forma del parallelepipedo può essere alterata con modifica_vertici_oggetto (target='carico_vincolo').\n\n"
+
+        "## Regole per il disegno di strutture (telai)\n"
+        "- **Sintassi** del testo strutturale:\n"
+        "  • `material <id> '<nome>'` (riferimento al database) oppure "
+          "`material <id> '<nome>' <densità> <E> <G> <J>` (inline).\n"
+        "  • `section <id> '<nome>'` (riferimento) oppure "
+          "`section <id> '<nome>' <Area> <Iy> <Iz> material: <id_o_nome>` (inline).\n"
+        "  • `node <id> <x> <y> <z>` – coordinate in metri, Z verticale (verso l'alto).\n"
+        "  • `beam <id> <nodo_i> <nodo_j> section: <id_o_nome>` – asta/trave/pilastro.\n"
+        "  • `shell <id> <n1> <n2> <n3> [<n4>] thickness: <t> material: <id_o_nome>` – soletta/parete.\n"
+        "  • `fix <nodo_id> <dx> <dy> <dz> [<rx> <ry> <rz>]` – vincoli (1=bloccato, 0=libero).\n"
+        "  • `nodeLoad <nodo_id> <Fx> <Fy> <Fz>` – forze concentrate [kN].\n"
+        "  • `beamLoad <asta_id> <wx> <wy> <wz>` – carichi distribuiti [kN/m].\n"
+        "  • `shellLoad <shell_id> <qx> <qy> <qz>` – carichi di superficie [kN/m²].\n"
+        "- **Unità**: m (coordinate/spessori), kN (forze), kN/m (carichi lineari), "
+          "kN/m² (carichi superficiali), MPa (E, G), kg/m³ (densità).\n"
+        "- **Ordine nel testo**: (1) materiali, (2) sezioni, (3) nodi, (4) aste/shell, (5) vincoli, (6) carichi.\n"
+        "- IDs interi progressivi da 1. Nomi tra virgolette singole.\n"
+        "- `section:`, `material:`, `thickness:` → keyword attaccata ai due punti, valore separato da spazio.\n"
+        "- Commenti con `#`. Usare intestazioni: `# ─── MATERIALI ───`, `# ─── NODI ───`, ecc.\n"
+        "- **Vincoli tipici**: incastro = `1 1 1 1 1 1`, cerniera = `1 1 1 0 0 0`, "
+          "appoggio semplice = `0 0 1 0 0 0`.\n"
+        "- Shell: nodi in ordine antiorario visti dall'esterno. Possono essere triangolari (3 nodi) o quadrilatere (4 nodi).\n"
+        "- Materiali/sezioni del database del programma (C25/30, S355, IPE300, HEA240, ecc.) "
+          "possono essere usati come riferimento: il nome si illumina in verde se riconosciuto.\n"
+        "- La struttura standard NON è modificabile: duplicala o crea una nuova personalizzata.\n"
+        "- **Quando l'utente chiede un telaio/struttura**, usa `crea_struttura` con il testo completo. "
+          "NON usare tool separati per nodi/aste/vincoli: genera TUTTO il testo in un'unica chiamata.\n\n"
 
         "## Regole per la manipolazione dei vertici\n"
         "- Usare **get_vertici_oggetto** prima di modificare per conoscere la geometria attuale.\n"
@@ -277,7 +308,10 @@ class _HelpDialog(QDialog):
             "• Creare sezioni con carpenteria rettangolare, circolare/ellittica e poligonale.",
             "• Aggiungere fori rettangolari, circolari/ellittici e poligonali.",
             "• Aggiungere barre di armatura e staffe chiuse.",
-            "• Modificare ed eliminare materiali/sezioni personalizzati.",
+            "• Creare e gestire elementi 3D (travi, pilastri, fondazioni, solai) con armatura.",
+            "• Creare strutture complete: telai 2D/3D, travi continue, mensole, "
+              "con nodi, aste, shell, vincoli e carichi – visualizzate in 3D.",
+            "• Modificare ed eliminare materiali/sezioni/elementi/strutture personalizzati.",
             "• Fornire consulenza tecnica su EC2, NTC2018, c.a. e acciaio."
         ]
         for c in caps:

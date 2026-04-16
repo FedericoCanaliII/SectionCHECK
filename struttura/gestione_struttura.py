@@ -711,6 +711,7 @@ class GestioneStruttura:
             self._spazio.rot_x = 30.0
             self._spazio.rot_y = -45.0
             self._spazio._dati = dati
+            self._spazio._dirty_scena = True
 
             # Centra
             if dati.get("nodi"):
@@ -754,6 +755,7 @@ class GestioneStruttura:
             self._spazio.cam_dist = old_dist
             self._spazio._ortho  = old_ort
             self._spazio._dati   = old_dati
+            self._spazio._dirty_scena = True
             if self._spazio.isValid():
                 self._spazio.update()
 
