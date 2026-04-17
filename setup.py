@@ -69,9 +69,9 @@ if scipy_libs.exists():
 # -----------------------------------------------------------------------
 build_exe_options = {
     "packages": [
-        # Stdlib richieste esplicitamente da numpy/scipy
+        # Stdlib richieste esplicitamente
         "os", "sys", "unittest",
-        # Dipendenze runtime
+        # Dipendenze runtime di terze parti
         "numpy",
         "scipy",
         "shapely",
@@ -79,6 +79,7 @@ build_exe_options = {
         "requests",
         "PyQt5",
         "OpenGL",       # PyOpenGL
+        "openseespy",   # <-- AGGIUNTO OPENSEES QUI
         # Moduli dell'applicazione
         "interfaccia",
         "materiali",
@@ -89,7 +90,6 @@ build_exe_options = {
         "ai",
     ],
     "excludes": [
-        # Rimosso "http" da questa lista per permettere a requests di funzionare
         "tkinter", "email", "xmlrpc", "pydoc",
         "test", "distutils",
     ],
@@ -100,11 +100,8 @@ build_exe_options = {
 # -----------------------------------------------------------------------
 # 5. BASE (Gestione della console su Windows)
 # -----------------------------------------------------------------------
-# ATTENZIONE: Impostato su None per debugging. 
-# Quando hai corretto main.py e non vuoi più vedere la console nera,
-# commenta la riga "base = None" e scommenta quella sotto.
-base = None 
-# base = "Win32GUI" if sys.platform == "win32" else None
+# FIX: Attivando Win32GUI, il terminale nero in background non apparirà più.
+base = "Win32GUI" if sys.platform == "win32" else None
 
 # -----------------------------------------------------------------------
 # 6. ESECUZIONE

@@ -376,9 +376,11 @@ class FEMStrutturaSpazio3D(QOpenGLWidget):
         tensioni_attive = (self._mostra_tensioni and in_deformata
                            and self._risultati and self._risultati.successo)
 
-        # Shell base (verdi): nascoste nei diagrammi (non pertinenti alle aste)
-        # e quando le tensioni sono attive (sostituite dall'overlay colorato)
-        disegna_shell_base = (not in_diagramma) and (not tensioni_attive)
+        # Shell base (verdi): nascoste nei diagrammi (non pertinenti alle aste),
+        # quando le tensioni sono attive (sostituite dall'overlay colorato),
+        # e in modo deformata (sostituite dalle shell deformate verdoline)
+        disegna_shell_base = ((not in_diagramma) and (not tensioni_attive)
+                              and (not in_deformata))
         if disegna_shell_base:
             glDepthMask(GL_FALSE)
             self._gpu_draw('scena_shell_fill', GL_TRIANGLES)
@@ -402,11 +404,13 @@ class FEMStrutturaSpazio3D(QOpenGLWidget):
         self._gpu_draw('scena_vincoli', GL_LINES)
         glLineWidth(1.0)
 
-        # Nodi (sopra tutto)
-        glPointSize(_NODE_SIZE)
-        self._gpu_draw('scena_nodi_free', GL_POINTS)
-        self._gpu_draw('scena_nodi_vinc', GL_POINTS)
-        glPointSize(1.0)
+        # Nodi originali (sopra tutto): nascosti in modo deformata,
+        # dove sono sostituiti dai nodi deformati (blu)
+        if not in_deformata:
+            glPointSize(_NODE_SIZE)
+            self._gpu_draw('scena_nodi_free', GL_POINTS)
+            self._gpu_draw('scena_nodi_vinc', GL_POINTS)
+            glPointSize(1.0)
 
         # ── Draw: risultati ───────────────────────────────────────
         if self._risultati and self._risultati.successo:
@@ -418,6 +422,17 @@ class FEMStrutturaSpazio3D(QOpenGLWidget):
                 self._gpu_draw('diagramma_line', GL_LINES)
                 glLineWidth(1.0)
             elif in_deformata:
+                # Shell deformate (verdolino semitrasparente): disegnate prima
+                # dei beam quando le tensioni non sono attive. In caso contrario
+                # sono sostituite dall'overlay colorato (tensioni_fill/edge).
+                if not tensioni_attive:
+                    glDepthMask(GL_FALSE)
+                    self._gpu_draw('deformata_shell_fill', GL_TRIANGLES)
+                    glDepthMask(GL_TRUE)
+                    glLineWidth(1.5)
+                    self._gpu_draw('deformata_shell_edge', GL_LINES)
+                    glLineWidth(1.0)
+
                 # Beam deformati: colorati per tensione se attivo, altrimenti blu
                 glLineWidth(_BEAM_WIDTH)
                 if tensioni_attive:
@@ -882,6 +897,33 @@ class FEMStrutturaSpazio3D(QOpenGLWidget):
             self._gpu_upload('deformata_nodi',
                              np.array(nv, dtype=np.float32),
                              np.array(nc, dtype=np.float32))
+
+        # Shell deformate (verdolino uniforme semitrasparente):
+        # triangolazione sugli elementi shell della mesh, seguendo gli
+        # spostamenti dei nodi. Usate quando si visualizza la deformata
+        # senza l'overlay tensioni.
+        if mesh.elementi_shell:
+            tri_v, edge_v = [], []
+            for elem_shell in mesh.elementi_shell:
+                pts = [pos_def(t) for t in elem_shell.nodi]
+                if len(pts) < 3:
+                    continue
+                for (a, b, c) in self._triangoli_shell(pts):
+                    tri_v.append(a); tri_v.append(b); tri_v.append(c)
+                k = len(pts)
+                for i in range(k):
+                    edge_v.append(pts[i])
+                    edge_v.append(pts[(i + 1) % k])
+            if tri_v:
+                V = np.array(tri_v, dtype=np.float32)
+                C = np.tile(np.array(_COL_SHELL_FILL, dtype=np.float32),
+                            (len(V), 1))
+                self._gpu_upload('deformata_shell_fill', V, C)
+            if edge_v:
+                V = np.array(edge_v, dtype=np.float32)
+                C = np.tile(np.array(_COL_SHELL_EDGE, dtype=np.float32),
+                            (len(V), 1))
+                self._gpu_upload('deformata_shell_edge', V, C)
 
     # ── Beam deformati colorati per tensione ──────────────────────────
 

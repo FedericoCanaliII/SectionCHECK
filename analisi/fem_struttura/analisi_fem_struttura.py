@@ -492,6 +492,12 @@ class AnalisiStruttura:
                 pass
 
         # ---- Reazioni vincolari ----
+        # OpenSees calcola le reazioni solo se richiesto esplicitamente:
+        # senza questa chiamata, nodeReaction(tag) restituisce zeri.
+        try:
+            ops.reactions()
+        except Exception:
+            pass
         for tag in mesh.vincoli:
             try:
                 react = ops.nodeReaction(tag)

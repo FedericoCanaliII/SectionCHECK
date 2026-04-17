@@ -22,7 +22,6 @@ from analisi.fem_struttura.gestione_fem_struttura import GestioneFemStruttura
 from ai.gestione_ai import GestioneAI
 from elementi import GestioneElementi
 
-
 # ============================================================
 #  STREAM TERMINALE
 # ============================================================
@@ -36,8 +35,11 @@ class EmittingStream(QtCore.QObject):
         self._buffer   = ""
 
     def write(self, text: str):
-        self._original.write(text)
-        self._original.flush()
+        # FIX: Controlla se lo stream originale esiste (con Win32GUI è None)
+        if self._original is not None:
+            self._original.write(text)
+            self._original.flush()
+            
         self._buffer += text
         while "\n" in self._buffer:
             line, self._buffer = self._buffer.split("\n", 1)
@@ -45,7 +47,10 @@ class EmittingStream(QtCore.QObject):
                 self.textWritten.emit(line, self._classifica(line))
 
     def flush(self):
-        self._original.flush()
+        # FIX: Controlla se lo stream originale esiste prima del flush
+        if self._original is not None:
+            self._original.flush()
+            
         if self._buffer.strip():
             self.textWritten.emit(self._buffer, self._classifica(self._buffer))
             self._buffer = ""
