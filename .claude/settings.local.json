@@ -10,7 +10,12 @@
       "Bash(python -m py_compile struttura/struttura_spazio_3d.py)",
       "Bash(python -m py_compile struttura/gestione_struttura.py)",
       "Bash(python -c \"from ai.ai_strumenti import AIStrumenti, TOOLS_SCHEMA; print\\(f'Tools: {len\\(TOOLS_SCHEMA\\)}'\\); names = [t['name'] for t in TOOLS_SCHEMA]; strutture = [n for n in names if 'struttur' in n]; print\\(f'Strutture tools: {strutture}'\\)\")",
-      "Bash(python -c \"from ai.gestione_ai import _build_system_prompt; sp = _build_system_prompt\\(\\); assert 'crea_struttura' in sp; assert 'Regole per il disegno di strutture' in sp; print\\('System prompt OK'\\); print\\(f'Length: {len\\(sp\\)} chars'\\)\")"
+      "Bash(python -c \"from ai.gestione_ai import _build_system_prompt; sp = _build_system_prompt\\(\\); assert 'crea_struttura' in sp; assert 'Regole per il disegno di strutture' in sp; print\\('System prompt OK'\\); print\\(f'Length: {len\\(sp\\)} chars'\\)\")",
+      "Bash(xargs grep:*)",
+      "Bash(grep -E \"\\\\.\\(py\\)$\")",
+      "Bash(find /c/Users/canal/Desktop/Nuovo_SC/analisi -name \"raccolta_dati.py\" -exec head -100 {} \\\\;)",
+      "Bash(python -c ' *)",
+      "Bash(python -c \"import ast; ast.parse\\(open\\('analisi/fem_struttura/disegno_fem_struttura.py', encoding='utf-8'\\).read\\(\\)\\); print\\('OK'\\)\")"
     ]
   }
 }

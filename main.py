@@ -18,6 +18,7 @@ from analisi.pressoflessione.gestione_pressoflessione import GestionePressofless
 from analisi.dominio_nm.gestione_dominio import GestioneDominioNM
 from analisi.momentocurvatura.gestione_momentocurvatura import GestioneMomentoCurvatura
 from analisi.fem_elemento.gestione_mesh_elemento import GestioneMeshElemento
+from analisi.fem_struttura.gestione_fem_struttura import GestioneFemStruttura
 from ai.gestione_ai import GestioneAI
 from elementi import GestioneElementi
 
@@ -189,6 +190,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self._dominio_nm      = GestioneDominioNM(self.ui, self)
         self._momentocurvatura = GestioneMomentoCurvatura(self.ui, self)
         self._fem_elemento    = GestioneMeshElemento(self.ui, self)
+        self._fem_struttura   = GestioneFemStruttura(self.ui, self)
 
         # Aggiorna combobox sezioni quando si naviga nei pannelli di analisi
         self.ui.btn_main_pressoflessione.clicked.connect(
@@ -202,6 +204,12 @@ class MainWindow(QtWidgets.QMainWindow):
         )
         self.ui.btn_main_fem_elemento.clicked.connect(
             self._fem_elemento.aggiorna_combobox
+        )
+        self.ui.btn_main_struttura.clicked.connect(
+            self._fem_struttura.aggiorna_combobox
+        )
+        self.ui.btn_main_struttura_2.clicked.connect(
+            self._fem_struttura.aggiorna_combobox
         )
 
         # --- Finestra AI (creata una volta, riutilizzata) ---
@@ -628,6 +636,8 @@ class MainWindow(QtWidgets.QMainWindow):
             self._momentocurvatura.ricarica_da_progetto()
         if hasattr(self, "_fem_elemento"):
             self._fem_elemento.ricarica_da_progetto()
+        if hasattr(self, "_fem_struttura"):
+            self._fem_struttura.ricarica_da_progetto()
 
     def _ricarica_modulo(self, modulo: str):
         """Ricarica SOLO il modulo interessato dallo scope (usato dopo undo/redo)."""
