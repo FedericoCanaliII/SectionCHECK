@@ -1682,7 +1682,7 @@ QPushButton:checked {
          <string notr="true">background-color: rgb(40, 40, 40);</string>
         </property>
         <property name="currentIndex">
-         <number>2</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="page_main">
          <layout class="QVBoxLayout" name="verticalLayout_27">
@@ -2628,12 +2628,12 @@ QPushButton:hover {
                     <property name="minimumSize">
                      <size>
                       <width>1055</width>
-                      <height>155</height>
+                      <height>100</height>
                      </size>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true">background-color: rgb(30,30,30);
-border: 1px solid rgb(100,100,100);
+                     <string notr="true">border-top: 1px solid rgb(100,100,100);
+border-left: 1px solid rgb(100,100,100);
 border-radius:6px</string>
                     </property>
                     <property name="frameShape">
@@ -2672,12 +2672,12 @@ border-radius:6px</string>
                     <property name="minimumSize">
                      <size>
                       <width>1055</width>
-                      <height>155</height>
+                      <height>100</height>
                      </size>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true">background-color: rgb(30,30,30);
-border: 1px solid rgb(100,100,100);
+                     <string notr="true">border-top: 1px solid rgb(140,100,100);
+border-left: 1px solid rgb(140,100,100);
 border-radius:6px</string>
                     </property>
                     <property name="frameShape">
@@ -2821,12 +2821,12 @@ QPushButton:hover {
                     <property name="minimumSize">
                      <size>
                       <width>1055</width>
-                      <height>155</height>
+                      <height>100</height>
                      </size>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true">background-color: rgb(30,30,30);
-border: 1px solid rgb(100,100,100);
+                     <string notr="true">border-top: 1px solid rgb(65,95,135);
+border-left: 1px solid rgb(65,95,135);
 border-radius:6px</string>
                     </property>
                     <property name="frameShape">
@@ -2944,12 +2944,12 @@ QPushButton:hover {
                     <property name="minimumSize">
                      <size>
                       <width>1055</width>
-                      <height>155</height>
+                      <height>100</height>
                      </size>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true">background-color: rgb(30,30,30);
-border: 1px solid rgb(100,100,100);
+                     <string notr="true">border-top: 1px solid rgb(130,130,35);
+border-left: 1px solid rgb(130,130,35);
 border-radius:6px</string>
                     </property>
                     <property name="frameShape">
@@ -4967,8 +4967,8 @@ QScrollBar::sub-page:vertical {
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>1095</width>
-               <height>761</height>
+               <width>2051</width>
+               <height>1051</height>
               </rect>
              </property>
              <layout class="QHBoxLayout" name="horizontalLayout_82">
@@ -5075,10 +5075,8 @@ color: rgb(255,255,255);</string>
 }
 QPushButton:hover {
     background-color: rgb(30,30,30);
-	border: 1px solid rgb(120,120,120);
-}
-
-</string>
+	border: 1px solid rgb(100,100,100);
+}</string>
                     </property>
                     <property name="text">
                      <string>+</string>
@@ -5090,12 +5088,12 @@ QPushButton:hover {
                     <property name="minimumSize">
                      <size>
                       <width>1055</width>
-                      <height>120</height>
+                      <height>100</height>
                      </size>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true">border-top: 1px solid rgb(120,120,120);
-border-left: 3px solid rgb(120,120,120);
+                     <string notr="true">border-top: 1px solid rgb(100,100,100);
+border-left: 1px solid rgb(100,100,100);
 border-radius:6px</string>
                     </property>
                     <property name="frameShape">
@@ -5147,12 +5145,12 @@ border-radius:6px</string>
                     <property name="minimumSize">
                      <size>
                       <width>1055</width>
-                      <height>120</height>
+                      <height>100</height>
                      </size>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true">border-top: 1px solid rgb(120,120,120);
-border-left: 3px solid rgb(120,120,120);
+                     <string notr="true">border-top: 1px solid rgb(140,100,100);
+border-left: 1px solid rgb(140,100,100);
 border-radius:6px</string>
                     </property>
                     <property name="frameShape">
@@ -5233,10 +5231,8 @@ color: rgb(255,255,255);</string>
 }
 QPushButton:hover {
     background-color: rgb(30,30,30);
-	border: 1px solid rgb(120,120,120);
-}
-
-</string>
+	border: 1px solid rgb(100,100,100);
+}</string>
                     </property>
                     <property name="text">
                      <string>+</string>
@@ -5271,12 +5267,12 @@ QPushButton:hover {
                     <property name="minimumSize">
                      <size>
                       <width>1055</width>
-                      <height>120</height>
+                      <height>100</height>
                      </size>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true">border-top: 1px solid rgb(120,120,120);
-border-left: 3px solid rgb(120,120,120);
+                     <string notr="true">border-top: 1px solid rgb(130,130,35);
+border-left: 1px solid rgb(130,130,35);
 border-radius:6px</string>
                     </property>
                     <property name="frameShape">
@@ -5370,10 +5366,8 @@ color: rgb(255,255,255);</string>
 }
 QPushButton:hover {
     background-color: rgb(30,30,30);
-	border: 1px solid rgb(120,120,120);
-}
-
-</string>
+	border: 1px solid rgb(100,100,100);
+}</string>
                     </property>
                     <property name="text">
                      <string>+</string>
@@ -5486,10 +5480,8 @@ color: rgb(255,255,255);</string>
 }
 QPushButton:hover {
     background-color: rgb(30,30,30);
-	border: 1px solid rgb(120,120,120);
-}
-
-</string>
+	border: 1px solid rgb(100,100,100);
+}</string>
                     </property>
                     <property name="text">
                      <string>+</string>
@@ -5501,12 +5493,12 @@ QPushButton:hover {
                     <property name="minimumSize">
                      <size>
                       <width>1055</width>
-                      <height>120</height>
+                      <height>100</height>
                      </size>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true">border-top: 1px solid rgb(120,120,120);
-border-left: 3px solid rgb(120,120,120);
+                     <string notr="true">border-top: 1px solid rgb(65,95,135);
+border-left: 1px solid rgb(65,95,135);
 border-radius:6px</string>
                     </property>
                     <property name="frameShape">
@@ -5752,8 +5744,8 @@ QScrollBar::sub-page:vertical {
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>139</width>
-               <height>885</height>
+               <width>644</width>
+               <height>1104</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -7527,8 +7519,8 @@ QScrollBar::sub-page:vertical {
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>1095</width>
-               <height>1001</height>
+               <width>2051</width>
+               <height>1051</height>
               </rect>
              </property>
              <layout class="QHBoxLayout" name="horizontalLayout_91">
@@ -7650,12 +7642,12 @@ QPushButton:hover {
                     <property name="minimumSize">
                      <size>
                       <width>1055</width>
-                      <height>180</height>
+                      <height>100</height>
                      </size>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true">border-top: 1px solid rgb(120,120,120);
-border-left: 3px solid rgb(120,120,120);
+                     <string notr="true">border-top: 1px solid rgb(100,100,100);
+border-left: 1px solid rgb(100,100,100);
 border-radius:6px</string>
                     </property>
                     <property name="frameShape">
@@ -7694,12 +7686,12 @@ border-radius:6px</string>
                     <property name="minimumSize">
                      <size>
                       <width>1055</width>
-                      <height>180</height>
+                      <height>100</height>
                      </size>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true">border-top: 1px solid rgb(120,120,120);
-border-left: 3px solid rgb(120,120,120);
+                     <string notr="true">border-top: 1px solid rgb(65,95,135);
+border-left: 1px solid rgb(65,95,135);
 border-radius:6px</string>
                     </property>
                     <property name="frameShape">
@@ -7924,12 +7916,12 @@ QPushButton:hover {
                     <property name="minimumSize">
                      <size>
                       <width>1055</width>
-                      <height>180</height>
+                      <height>100</height>
                      </size>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true">border-top: 1px solid rgb(120,120,120);
-border-left: 3px solid rgb(120,120,120);
+                     <string notr="true">border-top: 1px solid rgb(140,100,100);
+border-left: 1px solid rgb(140,100,100);
 border-radius:6px</string>
                     </property>
                     <property name="frameShape">
@@ -8061,12 +8053,12 @@ QPushButton:hover {
                     <property name="minimumSize">
                      <size>
                       <width>1055</width>
-                      <height>180</height>
+                      <height>100</height>
                      </size>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true">border-top: 1px solid rgb(120,120,120);
-border-left: 3px solid rgb(120,120,120);
+                     <string notr="true">border-top: 1px solid rgb(130,130,35);
+border-left: 1px solid rgb(130,130,35);
 border-radius:6px</string>
                     </property>
                     <property name="frameShape">
@@ -8312,8 +8304,8 @@ QScrollBar::sub-page:vertical {
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>473</width>
-               <height>816</height>
+               <width>544</width>
+               <height>1104</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_32">
@@ -10043,8 +10035,8 @@ QScrollBar::sub-page:vertical {
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>244</width>
-               <height>797</height>
+               <width>574</width>
+               <height>1104</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_37">
@@ -11512,8 +11504,8 @@ QScrollBar::sub-page:vertical {
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>1110</width>
-               <height>510</height>
+               <width>2051</width>
+               <height>1051</height>
               </rect>
              </property>
              <layout class="QHBoxLayout" name="horizontalLayout_90">
@@ -11639,8 +11631,8 @@ QPushButton:hover {
                      </size>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true">border-top: 1px solid rgb(120,120,120);
-border-left: 3px solid rgb(120,120,120);
+                     <string notr="true">border-top: 1px solid rgb(100,100,100);
+border-left: 1px solid rgb(100,100,100);
 border-radius:6px</string>
                     </property>
                     <property name="frameShape">
@@ -11683,8 +11675,8 @@ border-radius:6px</string>
                      </size>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true">border-top: 1px solid rgb(120,120,120);
-border-left: 3px solid rgb(120,120,120);
+                     <string notr="true">border-top: 1px solid 	rgb(65,95,135);
+border-left: 1px solid 	rgb(65,95,135);
 border-radius:6px</string>
                     </property>
                     <property name="frameShape">
@@ -11913,8 +11905,8 @@ QPushButton:hover {
                      </size>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true">border-top: 1px solid rgb(120,120,120);
-border-left: 3px solid rgb(120,120,120);
+                     <string notr="true">border-top: 1px solid rgb(130,130,35);
+border-left: 1px solid rgb(130,130,35);
 border-radius:6px</string>
                     </property>
                     <property name="frameShape">

@@ -334,7 +334,7 @@ class Ui_btn_help(object):
         self.label_2.setMinimumSize(QtCore.QSize(250, 32))
         self.label_2.setMaximumSize(QtCore.QSize(220, 16777215))
         font = QtGui.QFont()
-        font.setFamily("Georgia")
+        font.setFamily("Inter")
         font.setPointSize(12)
         font.setBold(False)
         font.setItalic(False)
@@ -342,7 +342,7 @@ class Ui_btn_help(object):
         self.label_2.setFont(font)
         self.label_2.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.label_2.setStyleSheet("border: none;\n"
-"font:400 12pt \"Georgia\";\n"
+"font:400 12pt \"Inter\";\n"
 "color: rgb(255,255,255);\n"
 "padding-bottom: 4px;")
         self.label_2.setAlignment(QtCore.Qt.AlignCenter)

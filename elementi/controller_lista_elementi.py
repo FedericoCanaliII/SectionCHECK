@@ -49,30 +49,30 @@ _NAME_H = 28
 _SHEET_CAT = {
     "trave": """
         QAbstractButton{background-color:rgb(40,40,40);
-            border:1px solid rgb(120,120,120);border-top-left-radius:6px;border-bottom-left-radius:6px;border-top-right-radius:0;border-bottom-right-radius:0}
+            border:1px solid rgb(100,100,100);border-top-left-radius:6px;border-bottom-left-radius:6px;border-top-right-radius:0;border-bottom-right-radius:0}
         QAbstractButton:hover{background-color:rgb(30,30,30);
-            border:1px solid rgb(120,120,120)}
+            border:1px solid rgb(100,100,100)}
         QAbstractButton:checked{background-color:rgb(65,65,65);
             border:1px solid rgb(200,200,200)}""",
     "pilastro": """
         QAbstractButton{background-color:rgb(40,40,40);
-            border:1px solid rgb(80,110,150);border-top-left-radius:6px;border-bottom-left-radius:6px;border-top-right-radius:0;border-bottom-right-radius:0}
+            border:1px solid rgb(65,95,135);border-top-left-radius:6px;border-bottom-left-radius:6px;border-top-right-radius:0;border-bottom-right-radius:0}
         QAbstractButton:hover{background-color:rgb(30,30,30);
-            border:1px solid rgb(80,110,150)}
+            border:1px solid rgb(65,95,135)}
         QAbstractButton:checked{background-color:rgb(28,40,62);
             border:1px solid rgb(100,145,200)}""",
     "fondazione": """
         QAbstractButton{background-color:rgb(40,40,40);
-            border:1px solid rgb(160,120,120);border-top-left-radius:6px;border-bottom-left-radius:6px;border-top-right-radius:0;border-bottom-right-radius:0}
+            border:1px solid rgb(140,100,100);border-top-left-radius:6px;border-bottom-left-radius:6px;border-top-right-radius:0;border-bottom-right-radius:0}
         QAbstractButton:hover{background-color:rgb(30,30,30);
-            border:1px solid rgb(160,120,120)}
+            border:1px solid rgb(140,100,100)}
         QAbstractButton:checked{background-color:rgb(65,38,38);
             border:1px solid rgb(200,150,150)}""",
     "solaio": """
         QAbstractButton{background-color:rgb(40,40,40);
-            border:1px solid rgb(150,150,50);border-top-left-radius:6px;border-bottom-left-radius:6px;border-top-right-radius:0;border-bottom-right-radius:0}
+            border:1px solid rgb(130,130,35);border-top-left-radius:6px;border-bottom-left-radius:6px;border-top-right-radius:0;border-bottom-right-radius:0}
         QAbstractButton:hover{background-color:rgb(30,30,30);
-            border:1px solid rgb(150,150,50)}
+            border:1px solid rgb(130,130,35)}
         QAbstractButton:checked{background-color:rgb(50,50,18);
             border:1px solid rgb(195,195,75)}""",
 }
@@ -81,7 +81,7 @@ _FLOW_LAY_MARGIN = 8
 _FLOW_LAY_SPACE  = 18
 
 # Dimensioni pulsante laterale C/V
-_CV_BTN_W, _CV_BTN_H = 122, 160
+_CV_BTN_W, _CV_BTN_H = 127, 160
 _CV_PREV_W, _CV_PREV_H = 100, 110   # area preview interna
 _CV_NAME_H = 24                     # altezza riga testo "c-v"
 
@@ -89,12 +89,12 @@ _CV_NAME_H = 24                     # altezza riga testo "c-v"
 # Stylesheet laterale – bordo spesso sul lato DESTRO (esterno della coppia)
 def _cv_sheet(tipo: str) -> str:
     color_map = {
-        "trave":      "rgb(120,120,120)",
-        "pilastro":   "rgb(80,110,150)",
-        "fondazione": "rgb(160,120,120)",
-        "solaio":     "rgb(150,150,50)",
+        "trave":      "rgb(100,100,100)",
+        "pilastro":   "rgb(65,95,135)",
+        "fondazione": "rgb(140,100,100)",
+        "solaio":     "rgb(130,130,35)",
     }
-    c = color_map.get(tipo, "rgb(120,120,120)")
+    c = color_map.get(tipo, "rgb(100,100,100)")
     return (
         f"QAbstractButton{{background-color:rgb(35,35,35);"
         f"border-top:1px solid {c};border-right:1px solid {c};border-bottom:1px solid {c};"

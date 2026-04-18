@@ -688,7 +688,7 @@ QPushButton:hover {
         </property>
         <property name="font">
          <font>
-          <family>Georgia</family>
+          <family>Inter</family>
           <pointsize>12</pointsize>
           <weight>50</weight>
           <italic>false</italic>
@@ -700,7 +700,7 @@ QPushButton:hover {
         </property>
         <property name="styleSheet">
          <string notr="true">border: none;
-font:400 12pt &quot;Georgia&quot;;
+font:400 12pt &quot;Inter&quot;;
 color: rgb(255,255,255);
 padding-bottom: 4px;</string>
         </property>
