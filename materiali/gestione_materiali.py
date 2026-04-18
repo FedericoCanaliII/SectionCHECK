@@ -108,12 +108,11 @@ _STILE: dict[str, dict] = {
         "sheet": """
             QPushButton{background-color:rgb(40,40,40);font:400 12pt "Segoe UI";
                 color:#fff;padding-bottom:4px;
-                border:1px solid rgb(120,120,120);
-                border-left:4px solid rgb(120,120,120);border-radius:6px}
+                border:1px solid rgb(120,120,120);border-radius:6px}
             QPushButton:hover{background-color:rgb(30,30,30);
-                border:1px solid rgb(120,120,120);border-left:4px solid rgb(120,120,120)}
+                border:1px solid rgb(120,120,120)}
             QPushButton:checked{background-color:rgb(65,65,65);
-                border:1px solid rgb(200,200,200);border-left:4px solid rgb(210,210,210)}
+                border:1px solid rgb(200,200,200)}
         """,
     },
     "barre": {
@@ -121,12 +120,11 @@ _STILE: dict[str, dict] = {
         "sheet": """
             QPushButton{background-color:rgb(40,40,40);font:400 12pt "Segoe UI";
                 color:#fff;padding-bottom:4px;
-                border:1px solid rgb(160,120,120);
-                border-left:4px solid rgb(160,120,120);border-radius:6px}
+                border:1px solid rgb(160,120,120);border-radius:6px}
             QPushButton:hover{background-color:rgb(30,30,30);
-                border:1px solid rgb(160,120,120);border-left:4px solid rgb(160,120,120)}
+                border:1px solid rgb(160,120,120)}
             QPushButton:checked{background-color:rgb(65,38,38);
-                border:1px solid rgb(200,150,150);border-left:4px solid rgb(220,160,160)}
+                border:1px solid rgb(200,150,150)}
         """,
     },
     "acciaio": {
@@ -134,12 +132,11 @@ _STILE: dict[str, dict] = {
         "sheet": """
             QPushButton{background-color:rgb(40,40,40);font:400 12pt "Segoe UI";
                 color:#fff;padding-bottom:4px;
-                border:1px solid rgb(80,110,150);
-                border-left:4px solid rgb(80,110,150);border-radius:6px}
+                border:1px solid rgb(80,110,150);border-radius:6px}
             QPushButton:hover{background-color:rgb(30,30,30);
-                border:1px solid rgb(80,110,150);border-left:4px solid rgb(80,110,150)}
+                border:1px solid rgb(80,110,150)}
             QPushButton:checked{background-color:rgb(28,40,62);
-                border:1px solid rgb(100,145,200);border-left:4px solid rgb(120,165,215)}
+                border:1px solid rgb(100,145,200)}
         """,
     },
     "personalizzati": {
@@ -147,12 +144,11 @@ _STILE: dict[str, dict] = {
         "sheet": """
             QPushButton{background-color:rgb(40,40,40);font:400 12pt "Segoe UI";
                 color:#fff;padding-bottom:4px;
-                border:1px solid rgb(150,150,50);
-                border-left:4px solid rgb(150,150,50);border-radius:6px}
+                border:1px solid rgb(150,150,50);border-radius:6px}
             QPushButton:hover{background-color:rgb(30,30,30);
-                border:1px solid rgb(150,150,50);border-left:4px solid rgb(150,150,50)}
+                border:1px solid rgb(150,150,50)}
             QPushButton:checked{background-color:rgb(50,50,18);
-                border:1px solid rgb(195,195,75);border-left:4px solid rgb(215,215,85)}
+                border:1px solid rgb(195,195,75)}
         """,
     },
 }

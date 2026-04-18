@@ -17,7 +17,7 @@ class Ui_btn_help(object):
         btn_help.resize(1707, 1172)
         btn_help.setStyleSheet("background-color: rgb(40, 40, 40);")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(btn_help)
-        self.verticalLayout_2.setContentsMargins(0, 0, 0, -1)
+        self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.frame = QtWidgets.QFrame(btn_help)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
@@ -25,8 +25,8 @@ class Ui_btn_help(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.frame.sizePolicy().hasHeightForWidth())
         self.frame.setSizePolicy(sizePolicy)
-        self.frame.setStyleSheet("background-color: rgb(60,60,60);\n"
-"border-bottom: 2px solid rgb(120,120,120);")
+        self.frame.setStyleSheet("background-color: rgb(30,30,30);\n"
+"border-bottom: 1px solid rgb(100,100,100);")
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
@@ -39,82 +39,32 @@ class Ui_btn_help(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.ai_btn_help.sizePolicy().hasHeightForWidth())
         self.ai_btn_help.setSizePolicy(sizePolicy)
-        self.ai_btn_help.setMinimumSize(QtCore.QSize(35, 32))
-        self.ai_btn_help.setMaximumSize(QtCore.QSize(35, 32))
+        self.ai_btn_help.setMinimumSize(QtCore.QSize(38, 34))
+        self.ai_btn_help.setMaximumSize(QtCore.QSize(38, 34))
         self.ai_btn_help.setStyleSheet("QPushButton{\n"
-"    background-color: rgb(80,80,80);\n"
-"    font:600 12pt \"Segoe UI\";\n"
-"    color: rgb(255,255,255);\n"
-"    padding-bottom: 4px;\n"
-"    border: 1px solid rgb(120,120,120);\n"
-"    border-left: 3px solid rgb(120,120,120);\n"
+"    border:none;\n"
 "    border-radius:6px\n"
 "}\n"
 "QPushButton:hover {\n"
 "    background-color: rgb(50,50,50);\n"
-"    border: 1px solid rgb(120,120,120);\n"
 "}\n"
 "QPushButton:checked {\n"
 "    background-color: rgb(40,40,40);\n"
-"    border: 1px solid rgb(120,120,120);\n"
-"    border-left: 3px solid rgb(120,120,120);\n"
-"}")
+"    border: 1px solid rgb(100,100,100);\n"
+"}\n"
+"\n"
+"")
+        self.ai_btn_help.setText("")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("ai\\../interfaccia/icone/ai.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.ai_btn_help.setIcon(icon)
+        self.ai_btn_help.setIconSize(QtCore.QSize(28, 28))
+        self.ai_btn_help.setCheckable(True)
         self.ai_btn_help.setObjectName("ai_btn_help")
         self.horizontalLayout.addWidget(self.ai_btn_help)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
-        self.frame_2 = QtWidgets.QFrame(self.frame)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.frame_2.sizePolicy().hasHeightForWidth())
-        self.frame_2.setSizePolicy(sizePolicy)
-        self.frame_2.setMinimumSize(QtCore.QSize(810, 0))
-        self.frame_2.setMaximumSize(QtCore.QSize(810, 16777215))
-        self.frame_2.setStyleSheet("border: 1px solid rgb(120,120,120);\n"
-"background-color: rgb(60,60,60);\n"
-"border-radius: 4px")
-        self.frame_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame_2.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame_2.setObjectName("frame_2")
-        self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.frame_2)
-        self.horizontalLayout_4.setContentsMargins(4, 4, 4, 4)
-        self.horizontalLayout_4.setObjectName("horizontalLayout_4")
-        self.ai_btn_visibile = QtWidgets.QPushButton(self.frame_2)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.ai_btn_visibile.sizePolicy().hasHeightForWidth())
-        self.ai_btn_visibile.setSizePolicy(sizePolicy)
-        self.ai_btn_visibile.setMinimumSize(QtCore.QSize(35, 32))
-        self.ai_btn_visibile.setMaximumSize(QtCore.QSize(35, 32))
-        self.ai_btn_visibile.setStyleSheet("QPushButton{\n"
-"    background-color: rgb(80,80,80);\n"
-"    font:600 12pt \"Segoe UI\";\n"
-"    color: rgb(255,255,255);\n"
-"    border: 1px solid rgb(120,120,120);\n"
-"    border-left: 3px solid rgb(120,120,120);\n"
-"    border-radius:6px\n"
-"}\n"
-"QPushButton:hover {\n"
-"    background-color: rgb(50,50,50);\n"
-"    border: 1px solid rgb(120,120,120);\n"
-"}\n"
-"QPushButton:checked {\n"
-"    background-color: rgb(40,40,40);\n"
-"    border: 1px solid rgb(120,120,120);\n"
-"    border-left: 3px solid rgb(120,120,120);\n"
-"}")
-        self.ai_btn_visibile.setText("")
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("ai\\../interfaccia/icone/novisibile.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.ai_btn_visibile.setIcon(icon)
-        self.ai_btn_visibile.setIconSize(QtCore.QSize(35, 35))
-        self.ai_btn_visibile.setObjectName("ai_btn_visibile")
-        self.horizontalLayout_4.addWidget(self.ai_btn_visibile)
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_4.addItem(spacerItem1)
-        self.label_202 = QtWidgets.QLabel(self.frame_2)
+        self.label_202 = QtWidgets.QLabel(self.frame)
         self.label_202.setMinimumSize(QtCore.QSize(85, 32))
         self.label_202.setMaximumSize(QtCore.QSize(85, 16777215))
         font = QtGui.QFont()
@@ -131,15 +81,15 @@ class Ui_btn_help(object):
 "padding-bottom: 4px;")
         self.label_202.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.label_202.setObjectName("label_202")
-        self.horizontalLayout_4.addWidget(self.label_202)
-        self.ai_modello = QtWidgets.QLineEdit(self.frame_2)
+        self.horizontalLayout.addWidget(self.label_202)
+        self.ai_modello = QtWidgets.QLineEdit(self.frame)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.ai_modello.sizePolicy().hasHeightForWidth())
         self.ai_modello.setSizePolicy(sizePolicy)
-        self.ai_modello.setMinimumSize(QtCore.QSize(180, 30))
-        self.ai_modello.setMaximumSize(QtCore.QSize(180, 30))
+        self.ai_modello.setMinimumSize(QtCore.QSize(180, 34))
+        self.ai_modello.setMaximumSize(QtCore.QSize(180, 34))
         self.ai_modello.setStyleSheet("QLineEdit {\n"
 "    background-color: rgb(40, 40, 40);\n"
 "    font: 10pt \"Segoe UI\";\n"
@@ -158,16 +108,16 @@ class Ui_btn_help(object):
 "}")
         self.ai_modello.setText("")
         self.ai_modello.setObjectName("ai_modello")
-        self.horizontalLayout_4.addWidget(self.ai_modello)
-        self.widget_8 = QtWidgets.QWidget(self.frame_2)
-        self.widget_8.setMinimumSize(QtCore.QSize(6, 32))
-        self.widget_8.setMaximumSize(QtCore.QSize(6, 32))
-        self.widget_8.setStyleSheet("border: none;\n"
-"background-color: rgb(80,80,80);\n"
-"border-radius:3px")
-        self.widget_8.setObjectName("widget_8")
-        self.horizontalLayout_4.addWidget(self.widget_8)
-        self.label_203 = QtWidgets.QLabel(self.frame_2)
+        self.horizontalLayout.addWidget(self.ai_modello)
+        self.widget_52 = QtWidgets.QWidget(self.frame)
+        self.widget_52.setMinimumSize(QtCore.QSize(4, 34))
+        self.widget_52.setMaximumSize(QtCore.QSize(4, 34))
+        self.widget_52.setStyleSheet("border:none;\n"
+"background-color: rgb(50,50,50);\n"
+"border-radius:2px")
+        self.widget_52.setObjectName("widget_52")
+        self.horizontalLayout.addWidget(self.widget_52)
+        self.label_203 = QtWidgets.QLabel(self.frame)
         self.label_203.setMinimumSize(QtCore.QSize(45, 32))
         self.label_203.setMaximumSize(QtCore.QSize(45, 16777215))
         font = QtGui.QFont()
@@ -184,15 +134,15 @@ class Ui_btn_help(object):
 "padding-bottom: 4px;")
         self.label_203.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.label_203.setObjectName("label_203")
-        self.horizontalLayout_4.addWidget(self.label_203)
-        self.ai_key = QtWidgets.QLineEdit(self.frame_2)
+        self.horizontalLayout.addWidget(self.label_203)
+        self.ai_key = QtWidgets.QLineEdit(self.frame)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.ai_key.sizePolicy().hasHeightForWidth())
         self.ai_key.setSizePolicy(sizePolicy)
-        self.ai_key.setMinimumSize(QtCore.QSize(400, 30))
-        self.ai_key.setMaximumSize(QtCore.QSize(400, 30))
+        self.ai_key.setMinimumSize(QtCore.QSize(400, 34))
+        self.ai_key.setMaximumSize(QtCore.QSize(400, 34))
         self.ai_key.setStyleSheet("QLineEdit {\n"
 "    background-color: rgb(40, 40, 40);\n"
 "    font: 10pt \"Segoe UI\";\n"
@@ -211,20 +161,47 @@ class Ui_btn_help(object):
 "}")
         self.ai_key.setText("")
         self.ai_key.setObjectName("ai_key")
-        self.horizontalLayout_4.addWidget(self.ai_key)
-        self.horizontalLayout.addWidget(self.frame_2)
+        self.horizontalLayout.addWidget(self.ai_key)
+        self.ai_btn_visibile = QtWidgets.QPushButton(self.frame)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.ai_btn_visibile.sizePolicy().hasHeightForWidth())
+        self.ai_btn_visibile.setSizePolicy(sizePolicy)
+        self.ai_btn_visibile.setMinimumSize(QtCore.QSize(38, 34))
+        self.ai_btn_visibile.setMaximumSize(QtCore.QSize(38, 34))
+        self.ai_btn_visibile.setStyleSheet("QPushButton{\n"
+"    border:none;\n"
+"    border-radius:6px\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(50,50,50);\n"
+"}\n"
+"QPushButton:checked {\n"
+"    background-color: rgb(40,40,40);\n"
+"    border: 1px solid rgb(100,100,100);\n"
+"}\n"
+"\n"
+"")
+        self.ai_btn_visibile.setText("")
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap("ai\\../interfaccia/icone/novisibile.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.ai_btn_visibile.setIcon(icon1)
+        self.ai_btn_visibile.setIconSize(QtCore.QSize(35, 35))
+        self.ai_btn_visibile.setObjectName("ai_btn_visibile")
+        self.horizontalLayout.addWidget(self.ai_btn_visibile)
         self.verticalLayout_2.addWidget(self.frame)
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
-        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_5.addItem(spacerItem2)
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_5.addItem(spacerItem1)
         self.widget_chat = QtWidgets.QWidget(btn_help)
         self.widget_chat.setMinimumSize(QtCore.QSize(1000, 200))
         self.widget_chat.setMaximumSize(QtCore.QSize(1000, 16777215))
         self.widget_chat.setObjectName("widget_chat")
         self.horizontalLayout_5.addWidget(self.widget_chat)
-        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_5.addItem(spacerItem3)
+        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_5.addItem(spacerItem2)
         self.verticalLayout_2.addLayout(self.horizontalLayout_5)
         self.frame_prompt = QtWidgets.QFrame(btn_help)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
@@ -239,17 +216,17 @@ class Ui_btn_help(object):
         self.horizontalLayout_2.setContentsMargins(-1, 0, -1, 0)
         self.horizontalLayout_2.setSpacing(0)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem4)
+        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem3)
         self.frame_left_prompt = QtWidgets.QFrame(self.frame_prompt)
         self.frame_left_prompt.setMinimumSize(QtCore.QSize(16, 80))
         self.frame_left_prompt.setMaximumSize(QtCore.QSize(16, 80))
         self.frame_left_prompt.setStyleSheet("background-color: rgb(50,50,50);\n"
 "border-top-left-radius: 16px;\n"
 "border-bottom-left-radius: 16px;\n"
-"border-bottom: 1px solid rgb(120,120,120);\n"
-"border-top: 1px solid rgb(120,120,120);\n"
-"border-left: 1px solid rgb(120,120,120);")
+"border-bottom: 1px solid rgb(100,100,100);\n"
+"border-top: 1px solid rgb(100,100,100);\n"
+"border-left: 1px solid rgb(100,100,100);")
         self.frame_left_prompt.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_left_prompt.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_left_prompt.setObjectName("frame_left_prompt")
@@ -262,8 +239,8 @@ class Ui_btn_help(object):
 "    background-color: rgb(50,50,50);\n"
 "    font: 12pt \"Segoe UI\";\n"
 "    color: rgb(255, 255, 255);\n"
-"    border-bottom: 1px solid rgb(120,120,120);\n"
-"    border-top: 1px solid rgb(120,120,120);\n"
+"    border-bottom: 1px solid rgb(100,100,100);\n"
+"    border-top: 1px solid rgb(100,100,100);\n"
 "}\n"
 "\n"
 "QScrollBar:vertical {\n"
@@ -298,9 +275,9 @@ class Ui_btn_help(object):
         self.frame_right_prompt.setStyleSheet("background-color: rgb(50,50,50);\n"
 "border-top-right-radius: 8px;\n"
 "border-bottom-right-radius: 16px;\n"
-"border-bottom: 1px solid rgb(120,120,120);\n"
-"border-top: 1px solid rgb(120,120,120);\n"
-"border-right: 1px solid rgb(120,120,120);")
+"border-bottom: 1px solid rgb(100,100,100);\n"
+"border-top: 1px solid rgb(100,100,100);\n"
+"border-right: 1px solid rgb(100,100,100);")
         self.frame_right_prompt.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_right_prompt.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_right_prompt.setObjectName("frame_right_prompt")
@@ -317,27 +294,25 @@ class Ui_btn_help(object):
         self.ai_btn_invia.setMaximumSize(QtCore.QSize(45, 45))
         self.ai_btn_invia.setStyleSheet("QPushButton{\n"
 "    border:none;\n"
-"    font:400 12pt \"Segoe UI\";\n"
-"    color: rgb(255,255,255);\n"
 "    border-radius:16px\n"
 "}\n"
 "QPushButton:hover {\n"
 "    background-color: rgb(40,40,40);\n"
-"    border: 1px solid rgb(120,120,120);\n"
+"    border: 1px solid rgb(100,100,100);\n"
 "}")
         self.ai_btn_invia.setText("")
-        icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("ai\\../interfaccia/icone/invia.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.ai_btn_invia.setIcon(icon1)
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap("ai\\../interfaccia/icone/invia.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.ai_btn_invia.setIcon(icon2)
         self.ai_btn_invia.setIconSize(QtCore.QSize(27, 30))
         self.ai_btn_invia.setObjectName("ai_btn_invia")
         self.verticalLayout.addWidget(self.ai_btn_invia)
         self.horizontalLayout_2.addWidget(self.frame_right_prompt)
-        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem5)
+        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem4)
         self.verticalLayout_2.addWidget(self.frame_prompt)
-        spacerItem6 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
-        self.verticalLayout_2.addItem(spacerItem6)
+        spacerItem5 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.verticalLayout_2.addItem(spacerItem5)
         self.frame_5 = QtWidgets.QFrame(btn_help)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -348,18 +323,8 @@ class Ui_btn_help(object):
         self.frame_5.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_5.setObjectName("frame_5")
         self.gridLayout = QtWidgets.QGridLayout(self.frame_5)
+        self.gridLayout.setContentsMargins(-1, 0, -1, -1)
         self.gridLayout.setObjectName("gridLayout")
-        self.frame_42 = QtWidgets.QFrame(self.frame_5)
-        self.frame_42.setMinimumSize(QtCore.QSize(0, 4))
-        self.frame_42.setMaximumSize(QtCore.QSize(16777215, 4))
-        self.frame_42.setStyleSheet("background-color: rgb(180, 180, 180);\n"
-"border-radius:2px;")
-        self.frame_42.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame_42.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame_42.setObjectName("frame_42")
-        self.gridLayout.addWidget(self.frame_42, 0, 0, 1, 3)
-        spacerItem7 = QtWidgets.QSpacerItem(707, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.gridLayout.addItem(spacerItem7, 1, 0, 1, 1)
         self.label_2 = QtWidgets.QLabel(self.frame_5)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -383,8 +348,19 @@ class Ui_btn_help(object):
         self.label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_2.setObjectName("label_2")
         self.gridLayout.addWidget(self.label_2, 1, 1, 1, 1)
-        spacerItem8 = QtWidgets.QSpacerItem(706, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.gridLayout.addItem(spacerItem8, 1, 2, 1, 1)
+        spacerItem6 = QtWidgets.QSpacerItem(706, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.gridLayout.addItem(spacerItem6, 1, 2, 1, 1)
+        spacerItem7 = QtWidgets.QSpacerItem(707, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.gridLayout.addItem(spacerItem7, 1, 0, 1, 1)
+        self.frame_42 = QtWidgets.QFrame(self.frame_5)
+        self.frame_42.setMinimumSize(QtCore.QSize(0, 2))
+        self.frame_42.setMaximumSize(QtCore.QSize(16777215, 2))
+        self.frame_42.setStyleSheet("background-color: rgb(160, 160, 160);\n"
+"border-radius:1px;")
+        self.frame_42.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_42.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_42.setObjectName("frame_42")
+        self.gridLayout.addWidget(self.frame_42, 0, 0, 1, 3)
         self.verticalLayout_2.addWidget(self.frame_5)
 
         self.retranslateUi(btn_help)
@@ -393,9 +369,8 @@ class Ui_btn_help(object):
     def retranslateUi(self, btn_help):
         _translate = QtCore.QCoreApplication.translate
         btn_help.setWindowTitle(_translate("btn_help", "Form"))
-        self.ai_btn_help.setToolTip(_translate("btn_help", "pagina principale"))
-        self.ai_btn_help.setText(_translate("btn_help", "SC"))
-        self.ai_btn_visibile.setToolTip(_translate("btn_help", "pagina principale"))
+        self.ai_btn_help.setToolTip(_translate("btn_help", "impostazioni"))
         self.label_202.setText(_translate("btn_help", "Modello"))
         self.label_203.setText(_translate("btn_help", "Key"))
+        self.ai_btn_visibile.setToolTip(_translate("btn_help", "pagina principale"))
         self.label_2.setText(_translate("btn_help", "SectionCHECK_agente"))

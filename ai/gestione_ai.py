@@ -174,7 +174,7 @@ def _build_system_prompt() -> str:
 
 class _HelpDialog(QDialog):
     """
-    Finestrella di guida: mix elegante con titoli in Georgia, 
+    Finestrella di guida: mix elegante con titoli in Inter,
     spaziature moderne e palette scura rilassante.
     """
 
@@ -193,10 +193,10 @@ class _HelpDialog(QDialog):
         root.setContentsMargins(24, 24, 24, 16)
         root.setSpacing(16)
 
-        # Titolo principale - Georgia Bold
+        # Titolo principale - Inter Bold
         titolo = QLabel("SectionCHECK Agent – Guida rapida")
         titolo.setStyleSheet(
-            "color: #ffffff; font: 700 14pt 'Georgia'; border: none;"
+            "color: #ffffff; font: 700 14pt 'Inter'; border: none; background: transparent;"
         )
         root.addWidget(titolo)
 
@@ -239,9 +239,9 @@ class _HelpDialog(QDialog):
         
         for provider, lista in modelli.items():
             lp = QLabel(provider)
-            # Provider in Georgia Regular
+            # Provider in Inter Regular
             lp.setStyleSheet(
-                "color: #888888; font: 400 10pt 'Georgia'; "
+                "color: #888888; font: 400 10pt 'Inter'; "
                 "padding-top: 10px; margin-bottom: -4px;"
             )
             bl.addWidget(lp)
@@ -295,8 +295,8 @@ class _HelpDialog(QDialog):
         for p in passi:
             l = QLabel(p)
             l.setWordWrap(True)
-            # Corpo del testo mantenuto in Segoe UI per massima leggibilità
-            l.setStyleSheet("color: #bbbbbb; font: 400 10pt 'Segoe UI'; line-height: 1.4;")
+            # Corpo del testo in Inter per massima leggibilità
+            l.setStyleSheet("color: #bbbbbb; font: 400 10pt 'Inter'; line-height: 1.4;")
             bl.addWidget(l)
 
         # ── Capacità ──
@@ -317,7 +317,7 @@ class _HelpDialog(QDialog):
         for c in caps:
             l = QLabel(c)
             l.setWordWrap(True)
-            l.setStyleSheet("color: #bbbbbb; font: 400 10pt 'Segoe UI'; line-height: 1.4;")
+            l.setStyleSheet("color: #bbbbbb; font: 400 10pt 'Inter'; line-height: 1.4;")
             bl.addWidget(l)
 
         bl.addStretch()
@@ -334,7 +334,7 @@ class _HelpDialog(QDialog):
                 color: #ffffff;
                 border: 1px solid #444444; 
                 border-radius: 6px;
-                font: 400 10pt 'Segoe UI';
+                font: 400 10pt 'Inter';
             }
             QPushButton:hover {
                 background: #404040;
@@ -354,10 +354,10 @@ class _HelpDialog(QDialog):
 
     @staticmethod
     def _sep(testo: str) -> QLabel:
-        """Titoletto sezione in Georgia Regular."""
+        """Titoletto sezione in Inter Regular."""
         l = QLabel(testo)
         l.setStyleSheet(
-            "color: #e0e0e0; font: 400 11.5pt 'Georgia';"
+            "color: #e0e0e0; font: 400 11.5pt 'Inter';"
             "padding-bottom: 4px; border-bottom: 1px solid #3a3a3a;"
         )
         return l

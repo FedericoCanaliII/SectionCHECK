@@ -96,25 +96,25 @@ _NAME_H = 28
 _SHEET_CAT = {
     "calcestruzzo": """
         QAbstractButton{background-color:rgb(40,40,40);
-            border:1px solid rgb(120,120,120);border-left:4px solid rgb(120,120,120);border-radius:6px}
+            border:1px solid rgb(120,120,120);border-radius:6px}
         QAbstractButton:hover{background-color:rgb(30,30,30);
-            border:1px solid rgb(120,120,120);border-left:4px solid rgb(120,120,120)}
+            border:1px solid rgb(120,120,120)}
         QAbstractButton:checked{background-color:rgb(65,65,65);
-            border:1px solid rgb(200,200,200);border-left:4px solid rgb(210,210,210)}""",
+            border:1px solid rgb(200,200,200)}""",
     "acciaio": """
         QAbstractButton{background-color:rgb(40,40,40);
-            border:1px solid rgb(80,110,150);border-left:4px solid rgb(80,110,150);border-radius:6px}
+            border:1px solid rgb(80,110,150);border-radius:6px}
         QAbstractButton:hover{background-color:rgb(30,30,30);
-            border:1px solid rgb(80,110,150);border-left:4px solid rgb(80,110,150)}
+            border:1px solid rgb(80,110,150)}
         QAbstractButton:checked{background-color:rgb(28,40,62);
-            border:1px solid rgb(100,145,200);border-left:4px solid rgb(120,165,215)}""",
+            border:1px solid rgb(100,145,200)}""",
     "personalizzate": """
         QAbstractButton{background-color:rgb(40,40,40);
-            border:1px solid rgb(150,130,80);border-left:4px solid rgb(150,130,80);border-radius:6px}
+            border:1px solid rgb(150,130,80);border-radius:6px}
         QAbstractButton:hover{background-color:rgb(30,30,30);
-            border:1px solid rgb(150,130,80);border-left:4px solid rgb(150,130,80)}
+            border:1px solid rgb(150,130,80)}
         QAbstractButton:checked{background-color:rgb(50,45,22);
-            border:1px solid rgb(195,175,100);border-left:4px solid rgb(210,190,110)}""",
+            border:1px solid rgb(195,175,100)}""",
 }
 
 

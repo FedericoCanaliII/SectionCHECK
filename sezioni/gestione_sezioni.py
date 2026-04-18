@@ -78,32 +78,32 @@ class _FlowLayout(QtWidgets.QLayout):
 _SHEET_CAT = {
     "calcestruzzo_armato": {"border":"rgb(120,120,120)","sheet":"""
         QAbstractButton{background-color:rgb(40,40,40);
-            border:1px solid rgb(120,120,120);border-left:4px solid rgb(120,120,120);border-radius:6px}
+            border:1px solid rgb(120,120,120);border-radius:6px}
         QAbstractButton:hover{background-color:rgb(30,30,30);
-            border:1px solid rgb(120,120,120);border-left:4px solid rgb(120,120,120)}
+            border:1px solid rgb(120,120,120)}
         QAbstractButton:checked{background-color:rgb(65,65,65);
-            border:1px solid rgb(200,200,200);border-left:4px solid rgb(210,210,210)}"""},
+            border:1px solid rgb(200,200,200)}"""},
     "profili": {"border":"rgb(80,110,150)","sheet":"""
         QAbstractButton{background-color:rgb(40,40,40);
-            border:1px solid rgb(80,110,150);border-left:4px solid rgb(80,110,150);border-radius:6px}
+            border:1px solid rgb(80,110,150);border-radius:6px}
         QAbstractButton:hover{background-color:rgb(30,30,30);
-            border:1px solid rgb(80,110,150);border-left:4px solid rgb(80,110,150)}
+            border:1px solid rgb(80,110,150)}
         QAbstractButton:checked{background-color:rgb(28,40,62);
-            border:1px solid rgb(100,145,200);border-left:4px solid rgb(120,165,215)}"""},
+            border:1px solid rgb(100,145,200)}"""},
     "precompresso": {"border":"rgb(160,120,120)","sheet":"""
         QAbstractButton{background-color:rgb(40,40,40);
-            border:1px solid rgb(160,120,120);border-left:4px solid rgb(160,120,120);border-radius:6px}
+            border:1px solid rgb(160,120,120);border-radius:6px}
         QAbstractButton:hover{background-color:rgb(30,30,30);
-            border:1px solid rgb(160,120,120);border-left:4px solid rgb(160,120,120)}
+            border:1px solid rgb(160,120,120)}
         QAbstractButton:checked{background-color:rgb(65,38,38);
-            border:1px solid rgb(200,150,150);border-left:4px solid rgb(220,160,160)}"""},
+            border:1px solid rgb(200,150,150)}"""},
     "personalizzate": {"border":"rgb(150,150,50)","sheet":"""
         QAbstractButton{background-color:rgb(40,40,40);
-            border:1px solid rgb(150,150,50);border-left:4px solid rgb(150,150,50);border-radius:6px}
+            border:1px solid rgb(150,150,50);border-radius:6px}
         QAbstractButton:hover{background-color:rgb(30,30,30);
-            border:1px solid rgb(150,150,50);border-left:4px solid rgb(150,150,50)}
+            border:1px solid rgb(150,150,50)}
         QAbstractButton:checked{background-color:rgb(50,50,18);
-            border:1px solid rgb(195,195,75);border-left:4px solid rgb(215,215,85)}"""},
+            border:1px solid rgb(195,195,75)}"""},
 }
 _BTN_W, _BTN_H = 200, 100; _PREV_H = 62; _NAME_H = 28
 

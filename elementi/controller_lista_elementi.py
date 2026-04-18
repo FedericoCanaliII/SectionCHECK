@@ -49,32 +49,32 @@ _NAME_H = 28
 _SHEET_CAT = {
     "trave": """
         QAbstractButton{background-color:rgb(40,40,40);
-            border:1px solid rgb(120,120,120);border-left:4px solid rgb(120,120,120);border-radius:6px}
+            border:1px solid rgb(120,120,120);border-top-left-radius:6px;border-bottom-left-radius:6px;border-top-right-radius:0;border-bottom-right-radius:0}
         QAbstractButton:hover{background-color:rgb(30,30,30);
-            border:1px solid rgb(120,120,120);border-left:4px solid rgb(120,120,120)}
+            border:1px solid rgb(120,120,120)}
         QAbstractButton:checked{background-color:rgb(65,65,65);
-            border:1px solid rgb(200,200,200);border-left:4px solid rgb(210,210,210)}""",
+            border:1px solid rgb(200,200,200)}""",
     "pilastro": """
         QAbstractButton{background-color:rgb(40,40,40);
-            border:1px solid rgb(80,110,150);border-left:4px solid rgb(80,110,150);border-radius:6px}
+            border:1px solid rgb(80,110,150);border-top-left-radius:6px;border-bottom-left-radius:6px;border-top-right-radius:0;border-bottom-right-radius:0}
         QAbstractButton:hover{background-color:rgb(30,30,30);
-            border:1px solid rgb(80,110,150);border-left:4px solid rgb(80,110,150)}
+            border:1px solid rgb(80,110,150)}
         QAbstractButton:checked{background-color:rgb(28,40,62);
-            border:1px solid rgb(100,145,200);border-left:4px solid rgb(120,165,215)}""",
+            border:1px solid rgb(100,145,200)}""",
     "fondazione": """
         QAbstractButton{background-color:rgb(40,40,40);
-            border:1px solid rgb(160,120,120);border-left:4px solid rgb(160,120,120);border-radius:6px}
+            border:1px solid rgb(160,120,120);border-top-left-radius:6px;border-bottom-left-radius:6px;border-top-right-radius:0;border-bottom-right-radius:0}
         QAbstractButton:hover{background-color:rgb(30,30,30);
-            border:1px solid rgb(160,120,120);border-left:4px solid rgb(160,120,120)}
+            border:1px solid rgb(160,120,120)}
         QAbstractButton:checked{background-color:rgb(65,38,38);
-            border:1px solid rgb(200,150,150);border-left:4px solid rgb(220,160,160)}""",
+            border:1px solid rgb(200,150,150)}""",
     "solaio": """
         QAbstractButton{background-color:rgb(40,40,40);
-            border:1px solid rgb(150,150,50);border-left:4px solid rgb(150,150,50);border-radius:6px}
+            border:1px solid rgb(150,150,50);border-top-left-radius:6px;border-bottom-left-radius:6px;border-top-right-radius:0;border-bottom-right-radius:0}
         QAbstractButton:hover{background-color:rgb(30,30,30);
-            border:1px solid rgb(150,150,50);border-left:4px solid rgb(150,150,50)}
+            border:1px solid rgb(150,150,50)}
         QAbstractButton:checked{background-color:rgb(50,50,18);
-            border:1px solid rgb(195,195,75);border-left:4px solid rgb(215,215,85)}""",
+            border:1px solid rgb(195,195,75)}""",
 }
 
 _FLOW_LAY_MARGIN = 8
@@ -97,9 +97,13 @@ def _cv_sheet(tipo: str) -> str:
     c = color_map.get(tipo, "rgb(120,120,120)")
     return (
         f"QAbstractButton{{background-color:rgb(35,35,35);"
-        f"border:1px solid {c};border-right:4px solid {c};border-radius:6px}}"
+        f"border-top:1px solid {c};border-right:1px solid {c};border-bottom:1px solid {c};"
+        f"border-left:none;"
+        f"border-top-right-radius:6px;border-bottom-right-radius:6px;"
+        f"border-top-left-radius:0;border-bottom-left-radius:0}}"
         f"QAbstractButton:hover{{background-color:rgb(28,28,28);"
-        f"border:1px solid {c};border-right:4px solid {c}}}"
+        f"border-top:1px solid {c};border-right:1px solid {c};border-bottom:1px solid {c};"
+        f"border-left:none}}"
     )
 
 
@@ -362,7 +366,8 @@ class CariciVincoliButton(QAbstractButton):
 class ElementoBtnPair(QWidget):
     """
     Container widget that holds an ElementoButton (200×160) and a
-    CariciVincoliButton (50×160) side-by-side with 4 px spacing.
+    CariciVincoliButton (50×160) side-by-side with no spacing — the
+    main button has rounded left corners and the CV button rounded right corners.
     Forwarding signals:
       • deleteRequested  – from ElementoButton
       • apri_extra       – from CariciVincoliButton (emits the Elemento)
@@ -377,7 +382,7 @@ class ElementoBtnPair(QWidget):
 
         lay = QHBoxLayout(self)
         lay.setContentsMargins(0, 0, 0, 0)
-        lay.setSpacing(4)
+        lay.setSpacing(0)
 
         self.btn_elemento = ElementoButton(el.nome, tipo, self, standard=standard)
         self.btn_cv       = CariciVincoliButton(tipo, self)
@@ -385,7 +390,7 @@ class ElementoBtnPair(QWidget):
         lay.addWidget(self.btn_elemento)
         lay.addWidget(self.btn_cv)
 
-        self.setFixedSize(_BTN_W + 4 + _CV_BTN_W, _BTN_H)
+        self.setFixedSize(_BTN_W + _CV_BTN_W, _BTN_H)
 
         # Forward signals
         self.btn_elemento.deleteRequested.connect(self.deleteRequested)
@@ -398,7 +403,7 @@ class ElementoBtnPair(QWidget):
         self.btn_cv.set_preview(pixmap)
 
     def sizeHint(self):
-        return QtCore.QSize(_BTN_W + 4 + _CV_BTN_W, _BTN_H)
+        return QtCore.QSize(_BTN_W + _CV_BTN_W, _BTN_H)
 
 
 # ============================================================

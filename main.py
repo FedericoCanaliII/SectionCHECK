@@ -260,7 +260,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self._terminale.setReadOnly(True)
         self._terminale.setFont(QFont("Consolas", 9))
         self._terminale.setStyleSheet(
-            "background-color:rgb(50,50,50);color:#d4d4d4;border:none;"
+            "background-color:rgb(40,40,40);color:#d4d4d4;border:none;"
         )
 
         lay = contenitore.layout()

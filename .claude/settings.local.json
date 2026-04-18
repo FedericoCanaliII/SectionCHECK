@@ -15,7 +15,12 @@
       "Bash(grep -E \"\\\\.\\(py\\)$\")",
       "Bash(find /c/Users/canal/Desktop/Nuovo_SC/analisi -name \"raccolta_dati.py\" -exec head -100 {} \\\\;)",
       "Bash(python -c ' *)",
-      "Bash(python -c \"import ast; ast.parse\\(open\\('analisi/fem_struttura/disegno_fem_struttura.py', encoding='utf-8'\\).read\\(\\)\\); print\\('OK'\\)\")"
+      "Bash(python -c \"import ast; ast.parse\\(open\\('analisi/fem_struttura/disegno_fem_struttura.py', encoding='utf-8'\\).read\\(\\)\\); print\\('OK'\\)\")",
+      "Bash(python -c \"import ast; ast.parse\\(open\\('struttura/struttura_spazio_3d.py', encoding='utf-8'\\).read\\(\\)\\); print\\('OK'\\)\")",
+      "Bash(python -c \"import ast; ast.parse\\(open\\('struttura/gestione_struttura.py', encoding='utf-8'\\).read\\(\\)\\); print\\('OK'\\)\")",
+      "Bash(git checkout *)",
+      "Bash(where python *)",
+      "Bash(py -c ' *)"
     ]
   }
 }
